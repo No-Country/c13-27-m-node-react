@@ -5,3 +5,5 @@ const router = express.Router();
 const usersHandlers = require('../handlers/usersHandlers');
 
 router.get('/allUsers', usersHandlers); // Ruta para obtener todos los usuarios (actualmente es de prueba)
+
+module.exports = router;
