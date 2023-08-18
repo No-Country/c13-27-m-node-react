@@ -1,8 +1,8 @@
 const express = require('express');
-const usersRoutes = require('./usersRoutes');
-
 const app = express();
 
+// Importo rutas de usuarios
+const usersRoutes = require('./usersRoutes');
 
 // Middlewares
 app.use('users', usersRoutes);
