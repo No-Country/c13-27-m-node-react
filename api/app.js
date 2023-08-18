@@ -16,4 +16,3 @@ app.use('/', routes);
 app.listen(PORT, () => {
   console.log(`Servidor iniciado en puerto ${PORT}`);
 });
-
