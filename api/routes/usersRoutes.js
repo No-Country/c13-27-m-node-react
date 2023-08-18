@@ -3,11 +3,7 @@ const router = express.Router();
 const usersHandlers = require()
 
 router.get('/allUsers', (req, res) => {
-    try {
-        
-    } catch (error) {
-        res.status(500).json()
-    }
+   res.status(200).json("Ruta de prueba");
 })
 
 
