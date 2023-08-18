@@ -5,6 +5,6 @@ const app = express();
 const usersRoutes = require('./usersRoutes');
 
 // Middlewares
-app.use('users', usersRoutes);
+app.use('/users', usersRoutes);
 
 module.exports = app;
