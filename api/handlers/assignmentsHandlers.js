@@ -1,4 +1,7 @@
-const getAllAssignmentsController = require('../controllers/assignmentsController');
+const {
+  getAllAssignmentsController,
+  getAssignmentByIdController,
+} = require('../controllers/assignmentsController');
 
 const getAllAssignmentsHandler = async (req, res) => {
   try {
@@ -9,4 +12,13 @@ const getAllAssignmentsHandler = async (req, res) => {
   }
 };
 
-module.exports = getAllAssignmentsHandler;
+const getAssignmentByIdHandler = async (req, res) => {
+  try {
+    const assignment = await getAssignmentByIdController(req);
+    res.send(assignment);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+module.exports = { getAllAssignmentsHandler, getAssignmentByIdHandler };
