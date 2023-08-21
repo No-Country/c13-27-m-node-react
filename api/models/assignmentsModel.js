@@ -11,10 +11,12 @@ const AssignmentsSchema = new Schema({
     type: Schema.Types.ObjectId, //Conecta con modelo Teacher
     ref: 'Teacher',
   },
-  students: {
-    type: Schema.Types.ObjectId, //Conecta con modelo Student
-    ref: 'Student',
-  },
+  students: [
+    {
+      type: Schema.Types.ObjectId, //Conecta con modelo Student
+      ref: 'Student',
+    },
+  ],
   exams: {
     type: [String],
     required: true,
