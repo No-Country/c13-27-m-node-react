@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
 
-// Importo rutas de usuarios
-const usersRoutes = require('./usersRoutes');
+// Importo rutas de estudiantes
+const studentsRoutes = require('./studentsRoutes');
 
 // Middlewares
-app.use('/users', usersRoutes);
+app.use('/students', studentsRoutes);
 
 module.exports = app;

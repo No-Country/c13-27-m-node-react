@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('../models/usersModels');
+const Student = require('../models/studentModel');
 require('dotenv').config(); //Variables de entorno para MongoDB
 
 //Connect to mongoose
@@ -14,9 +14,10 @@ db.once('open', () => {
 });
 
 // Create a new User through the model
-const newUser = new User({
+const newStudent = new Student({
   firstName: 'Juan',
   lastName: 'Perez',
+  password: '123456',
   email: 'juanperez@hotmail.com',
   dni: 35000000,
   dob: 10 / 12 / 1990,
@@ -28,8 +29,8 @@ const newUser = new User({
 // Manipulate DB
 const seedDB = async () => {
   //Clear out the DB
-  await User.deleteMany({});
-  await newUser.save();
+  await Student.deleteMany({});
+  await newStudent.save();
 };
 
 //Run the seed function, then close after done
