@@ -8,25 +8,10 @@ const getAllAssignmentsController = async (req, res) => {
 
 const getAssignmentByIdController = async (req, res) => {
   const { id } = req.params;
-  const assignment = await AssignmentsModel.findById(id);
+  const assignment = await AssignmentsModel.findById(id).populate('students');
   if (!assignment) throw new Error('No se pudo encontrar la materia');
   return assignment;
 };
-
-// const getAssignmentByName = async (req, res, next) => {
-//   const { id } = req.params;
-//   const assignment = await AssignmentsModel.findById(id)
-//     .populate({
-//       path: 'reviews',
-//       populate: {
-//         path: 'author',
-//       },
-//     })
-//     .populate('author');
-// }
-// if (!assignment) throw new Error('No se pudieron encontrar la materia');
-// return assignment;
-// };
 
 module.exports = {
   getAllAssignmentsController,
