@@ -7,7 +7,8 @@ const User = require('../models/usersModels'); // Llama al modelo User
 
 const getAllUsersController = async (req, res) => {
   const users = await User.find({}); // Todos los resultados de la DB
-  res.send(users);
+  if(!users) throw new Error('No se pudieron obtener los usuarios');
+  return (users);
 };
 
 module.exports = getAllUsersController;
