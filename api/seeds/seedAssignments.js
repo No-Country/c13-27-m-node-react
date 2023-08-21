@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Assignment = require('../models/assignmentsModels');
+const Assignment = require('../models/assignmentsModel');
 require('dotenv').config(); //Variables de entorno para MongoDB
 
 //Conexion a DB
@@ -15,10 +15,12 @@ db.once('open', () => {
 const newAssignment = new Assignment({
   name: 'Matemática',
   exams: ['Algoritmos', 'Integrales', 'Funciones'],
+  students: ['64e3ed3b13ce0a444343a978'],
 });
 const newAssignment2 = new Assignment({
   name: 'Física',
   exams: ['Aceleración', 'Velocidad', 'Fuerza'],
+  students: ['64e3ed3b13ce0a444343a978'],
 });
 
 const seedDB = async () => {
