@@ -1,8 +1,9 @@
-###Plataformaa Universitaria
+###Plataforma Universitaria
 
 #Ruta:
 
-- GET: /users/:id 
+- GET: /allUsers
 {"name":string
     
 }
+
