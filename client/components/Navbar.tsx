@@ -3,10 +3,21 @@ import Link from 'next/link';
 const Navbar = () => {
   return (
     <nav>
-      <h1>Navbar</h1>
-
       <ul>
         <li>
+          <Link href="/ayuda"> Ayuda </Link>
+        </li>
+        <li>
+          <Link href="/info"> Información </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export default Navbar;
+
+    /* <li>
           <Link href="/">El Futuro es hoy</Link>
         </li>
         <li>
@@ -17,10 +28,4 @@ const Navbar = () => {
         </li>
         <li>
           <Link href="/signup">registro</Link>
-        </li>
-      </ul>
-    </nav>
-  );
-};
-
-export default Navbar;
+        </li>  */
