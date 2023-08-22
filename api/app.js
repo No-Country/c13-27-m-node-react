@@ -12,7 +12,7 @@ const routes = require('./routes/index');
 // Traigo variables de entorno
 require('dotenv').config();
 const PORT = process.env.PORT;
-
+ 
 //Conexion a MongoAtlas DB (.env)  VS  conexion a DB local
 const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/educapp';
 mongoose.connect(dbUrl);
