@@ -45,7 +45,7 @@ const registerStudentController = async (req, res) => {
     password: createHash(password),
     email,
     dni,
-    dob: new Date(dob),
+    dob,
     address,
     assignments,
     career,
