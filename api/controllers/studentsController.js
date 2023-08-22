@@ -1,7 +1,7 @@
 const StudentModel = require('../models/studentModel'); // Llama al modelo StudentModel
 const { createHash } = require('../utils/hashPassword'); // Llama a la funcion createHash
 
-const getAllStudentsController = async (req, res) => {
+const getAllStudentsController = async () => {
   const students = await StudentModel.find({}); // Todos los resultados de la DB
   if (!students) throw new Error('No se pudieron obtener los usuarios');
   return students;
@@ -15,54 +15,33 @@ const studentLoginController = async (email, password, check) => {
     email: email,
     password: password,
   });
-  
-  if(!foundStudent) throw new Error('Los datos ingresados son erróneos');
-  
+
+  if (!foundStudent) throw new Error('Los datos ingresados son erróneos');
+
   return foundStudent;
 };
-const registerStudentController = async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    password,
-    email,
-    dni,
-    dob,
-    address,
-    assignments,
-    career,
-  } = req.body;
-
+const registerStudentController = async (newStudent) => {
   // valido que esten ingresados todos los datos
   if (
-    !firstName ||
-    !lastName ||
-    !password ||
-    !email ||
-    !dni ||
-    !dob ||
-    !address ||
-    !assignments ||
-    !career
+    !newStudent.firstName ||
+    !newStudent.lastName ||
+    !newStudent.password ||
+    !newStudent.email ||
+    !newStudent.dni ||
+    !newStudent.dob ||
+    !newStudent.address ||
+    !newStudent.assignments ||
+    !newStudent.career
   )
     throw new Error('Ingrese todos los datos');
 
-  const studentExists = await StudentModel.findOne({ email: email }); // aca me devuelve el estudiante si existe
+  newStudent.password = createHash(newStudent.password); // encripto la contraseña
 
+  const studentExists = await StudentModel.findOne({ email: newStudent.email }); // aca me devuelve el estudiante si existe
   if (studentExists) throw new Error('El usuario ya existe');
 
   //guardao el nuevo estudiante en la DB
-  const response = await StudentModel.create({
-    firstName,
-    lastName,
-    password: createHash(password),
-    email,
-    dni,
-    dob,
-    address,
-    assignments,
-    career,
-  });
+  const response = await StudentModel.create(newStudent);
 
   return response;
 };
@@ -71,4 +50,4 @@ module.exports = {
   getAllStudentsController,
   studentLoginController,
   registerStudentController,
-}
+};
