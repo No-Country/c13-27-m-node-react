@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import '../styles/global.scss';
 
 export const metadata = {
   title: 'Plataforma Universitaria',
