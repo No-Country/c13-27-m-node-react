@@ -22,7 +22,10 @@ const newStudent = new Student({
   dni: 35000000,
   dob: 10 / 12 / 1990,
   address: 'Jujuy 1234',
-  assignments: ['Matemática', 'Física'],
+  assignments: [
+    '64e3ee47f320e0e862986c40', // Matematica
+    '64e3ee47f320e0e862986c41', // Fisica
+  ],
   career: 'Ingeniería',
 });
 
