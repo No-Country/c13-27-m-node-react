@@ -7,6 +7,6 @@ const teachersRoutes = require('./teachersRoutes');
 
 // Middlewares
 app.use('/users', usersRoutes);
-app.use('teachers', teachersRoutes);
+app.use('/teachers', teachersRoutes);
 
 module.exports = app;
