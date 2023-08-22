@@ -33,10 +33,12 @@ const TeacherSchema = new Schema({
     type: String,
     required: true,
   },
-  assignments: {
-    type: Schema.Types.ObjectId, //Conecta con modelo Assignments
-    ref: 'Assignments',
-  },
+  assignments: [
+    {
+      type: Schema.Types.ObjectId, //Conecta con modelo Assignments
+      ref: 'Assignments',
+    },
+  ],
 });
 
 const TeacherModel = mongoose.model('Teachers', TeacherSchema);

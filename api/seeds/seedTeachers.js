@@ -20,7 +20,10 @@ const newTeacher = new Teacher({
   dni: 25000000,
   dob: 10 / 12 / 1970,
   address: 'Salta 123',
-  assignments: ['Matemática', 'Física'],
+  assignments: [
+    '64e3ee47f320e0e862986c40', // Matematica
+    // Fisica
+  ],
 });
 
 const seedDB = async () => {
@@ -32,6 +35,6 @@ const seedDB = async () => {
 
 //Llena la DB, cierra conexión
 seedDB().then(() => {
-  console.log('Base de datos cargada correctamente');
+  console.log('Profesores creados en la DB');
   mongoose.connection.close();
 });
