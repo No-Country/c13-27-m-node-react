@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 // Importo el índex de rutas
 const routes = require('./routes/index');
@@ -21,6 +22,7 @@ db.once('open', () => {
 
 // Middlewares
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/', routes);
 
 // Inicio el servidor
