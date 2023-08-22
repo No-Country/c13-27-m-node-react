@@ -3,6 +3,9 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+// Configuración de cors
+app.use(cors());
+
 // Importo el índex de rutas
 const routes = require('./routes/index');
 
