@@ -1,5 +1,5 @@
 const StudentModel = require('../models/studentModel'); // Llama al modelo StudentModel
-const { createHash } = require('../utils/hashPassword'); // Llama a la funcion createHash
+const { createHash, validPassword } = require('../utils/hashPassword'); // Llama a la funcion createHash
 
 const getAllStudentsController = async () => {
   const students = await StudentModel.find({}); // Todos los resultados de la DB
@@ -11,12 +11,12 @@ const studentLoginController = async (email, password, check) => {
   if (!email || !password || !check) throw new Error('Dato faltante');
   if (check !== 'student') throw new Error('El usuario no es un estudiante');
 
-  const foundStudent = await StudentModel.findOne({
-    email: email,
-    password: password,
-  });
+  const foundStudent = await StudentModel.findOne({ email: email });
 
-  if (!foundStudent) throw new Error('Los datos ingresados son erróneos');
+  if (!foundStudent) throw new Error('No existe el estudiante');
+
+  if (!validPassword(foundStudent, password))
+    throw new Error('Contraseña incorrecta');
 
   return foundStudent;
 };
