@@ -1,1 +1,14 @@
-$primary-color: #64ff00;
+//COLORS
+$text1: #014e60;
+$text2: #000000;
+$background: #ffffff;
+$primary-color: #ff6b6b;
+$secondary-color: #d41d1d;
+
+:export {
+  text1: $text1;
+  text2: $text2;
+  background: $background;
+  primary-color: $primary-color;
+  secondary-color: $secondary-color;
+}
