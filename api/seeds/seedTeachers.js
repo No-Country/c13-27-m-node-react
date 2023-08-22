@@ -22,7 +22,7 @@ const newTeacher = new Teacher({
   address: 'Salta 123',
   assignments: [
     '64e3ee47f320e0e862986c40', // Matematica
-    // Fisica
+    '64e3ee47f320e0e862986c41', // Fisica
   ],
 });
 
