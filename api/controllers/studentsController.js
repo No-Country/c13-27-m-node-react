@@ -11,11 +11,21 @@ const getAllStudentsController = async (req, res) => {
   return students;
 };
 
-const studentLoginController = async (req, res) => {
-  return;
-}
+const studentLoginController = async (email, password, check) => {
+  if (!email || !password || !check) throw new Error('Dato faltante');
+  if (check !== 'student') throw new Error('El usuario no es un estudiante');
+
+  const foundStudent = await StudentModel.findOne({
+    email: email,
+    password: password,
+  });
+
+  if(!foundStudent) throw new Error('Los datos ingresados son erróneos');
+
+  return foundStudent;
+};
 
 module.exports = {
   getAllStudentsController,
-  studentLoginController
+  studentLoginController,
 };
