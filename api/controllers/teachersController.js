@@ -2,8 +2,8 @@ const TeacherModel = require('../models/teacherModel'); // Llama al modelo Teach
 const { createHash } = require('../utils/hashPassword'); // Llama a la funcion createHash
 
 const getAllTeachersController = async () => {
-  const teachers = await TeacherModel.find({}); // Todos los resultados de la DB
-  if (!teachers) throw new Error('No se pudieron obtener los usuarios');
+  const teachers = await TeacherModel.find({}); // Todos los profesores de la DB
+  if (!teachers) throw new Error('No se pudieron obtener resultados');
   return teachers;
 };
 
@@ -20,6 +20,7 @@ const teacherLoginController = async (email, password, check) => {
 
   return foundTeacher;
 };
+
 const registerTeacherController = async (newTeacher) => {
   // valido que esten ingresados todos los datos
   if (
@@ -30,8 +31,7 @@ const registerTeacherController = async (newTeacher) => {
     !newTeacher.dni ||
     !newTeacher.dob ||
     !newTeacher.address ||
-    !newTeacher.assignments ||
-    !newTeacher.career
+    !newTeacher.assignments
   )
     throw new Error('Ingrese todos los datos');
 
@@ -40,7 +40,7 @@ const registerTeacherController = async (newTeacher) => {
   const teacherExists = await TeacherModel.findOne({ email: newTeacher.email }); // aca me devuelve el profesor si existe
   if (teacherExists) throw new Error('El usuario ya existe');
 
-  //guardao el nuevo profesor en la DB
+  //guardo el nuevo profesor en la DB
   const response = await TeacherModel.create(newTeacher);
 
   return response;
@@ -48,6 +48,6 @@ const registerTeacherController = async (newTeacher) => {
 
 module.exports = {
   getAllTeachersController,
-  TeacherLoginController,
+  teacherLoginController,
   registerTeacherController,
 };
