@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: '400',
+  weight: ['300', '400', '700'],
 });
 
 export const metadata = {
@@ -20,9 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
+        {/*         <Navbar /> */}
         {children}
-        <Footer />
+        {/*         <Footer /> */}
       </body>
     </html>
   );
