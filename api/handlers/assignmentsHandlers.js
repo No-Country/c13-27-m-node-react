@@ -21,8 +21,4 @@ const getAssignmentByIdHandler = async (req, res) => {
   }
 };
 
-const studentLoginHandler = async(req, res) => {
-  return;
-}
-
 module.exports = { getAllAssignmentsHandler, getAssignmentByIdHandler };

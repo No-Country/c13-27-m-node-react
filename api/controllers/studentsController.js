@@ -11,4 +11,11 @@ const getAllStudentsController = async (req, res) => {
   return students;
 };
 
-module.exports = getAllStudentsController;
+const studentLoginController = async (req, res) => {
+  return;
+}
+
+module.exports = {
+  getAllStudentsController,
+  studentLoginController
+};
