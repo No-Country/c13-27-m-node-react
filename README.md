@@ -3,7 +3,11 @@
 #Ruta:
 
 - GET: /allUsers
-{"name":string
-    
+
+{"firtsName":string
+
 }
 
+- POST: /registerStudent
+
+Devuelve: "Usted se registró correctamente"
