@@ -27,14 +27,14 @@ const page = () => {
         </div>
       </div>
 
-          <Image
-            src="/assets/patron-inicio.svg"
-            alt="imagen de la home page"
-            className={styles.imageClass}
-            width={728}
-            height={719}
-            priority
-          />
+      <Image
+        src="/assets/patron-inicio.svg"
+        alt="imagen de la home page"
+        className={styles.imageClass}
+        width={728}
+        height={719}
+        priority
+      />
 
       <div className={styles.containerSubtitles}>
         <h2 className={styles.subtitleOne}>
