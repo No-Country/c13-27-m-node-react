@@ -7,12 +7,12 @@ const CareerSchema = new Schema({
     required: true,
     enum: {
       values: [
-        'Física',
-        'Matemática',
         'Ingeniería',
         'Derecho',
         'Arquitectura',
         'Medicina',
+        'Psicología',
+        'Literatura',
       ],
       message: 'No existe la carrera {VALUE}',
     },

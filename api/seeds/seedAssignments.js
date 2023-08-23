@@ -22,6 +22,24 @@ const newAssignment2 = new Assignment({
   exams: ['Aceleración', 'Velocidad', 'Fuerza'],
   students: ['64e3ed3b13ce0a444343a978'],
 });
+const newAssignment3 = new Assignment({
+  name: 'Ciencia Política',
+  exams: [
+    'Teoría Política',
+    'Sistema Política Nacional',
+    'Instituciones Políticas y Actores',
+  ],
+  students: [],
+});
+const newAssignment4 = new Assignment({
+  name: 'Derecho Penal',
+  exams: [
+    'Administración de la Justicia',
+    'Desalojos Forzosos',
+    'Estado de Derecho',
+  ],
+  students: [],
+});
 
 const seedDB = async () => {
   // Limpiar DB primero
@@ -29,6 +47,8 @@ const seedDB = async () => {
   // Popular la DB
   await newAssignment.save();
   await newAssignment2.save();
+  await newAssignment3.save();
+  await newAssignment4.save();
 };
 
 //Run the seed function, then close after done
