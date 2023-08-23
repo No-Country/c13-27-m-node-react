@@ -1,5 +1,6 @@
 'use client';
 import React, { ChangeEvent, useState } from 'react';
+import styles from '../styles/formregister.module.scss';
 
 interface UserRegister {
   'user-rol': 'alumno' | 'profesor';
@@ -45,7 +46,9 @@ export const FormRegister = () => {
 
   console.log(registerForm);
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className={styles.background}>
       <label htmlFor="user-rol">Alumno</label>
       <input
         type="radio"

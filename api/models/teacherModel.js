@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 
-const StudentSchema = new Schema({
+const TeacherSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -34,17 +34,15 @@ const StudentSchema = new Schema({
     type: String,
     required: true,
   },
-  assignments: {
-    type: [String],
-    required: true,
-  },
-  career: {
-    type: String,
-    required: true,
-  },
+  assignments: [
+    {
+      type: Schema.Types.ObjectId, //Conecta con modelo Assignments
+      ref: 'Assignments',
+    },
+  ],
 });
 
-StudentSchema.plugin(mongoosePaginate);
+TeacherModel.plugin(mongoosePaginate);
 
-const StudentModel = mongoose.model('Students', StudentSchema);
-module.exports = StudentModel;
+const TeacherModel = mongoose.model('Teachers', TeacherSchema);
+module.exports = TeacherModel;

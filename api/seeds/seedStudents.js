@@ -10,7 +10,7 @@ mongoose.connect(dbUrl);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-  console.log('Database Connected!');
+  console.log('Base de datos conectada');
 });
 
 // Create a new User through the model
@@ -22,7 +22,10 @@ const newStudent = new Student({
   dni: 35000000,
   dob: 10 / 12 / 1990,
   address: 'Jujuy 1234',
-  assignments: ['Matemática', 'Física'],
+  assignments: [
+    '64e3ee47f320e0e862986c40', // Matematica
+    '64e3ee47f320e0e862986c41', // Fisica
+  ],
   career: 'Ingeniería',
 });
 
@@ -35,6 +38,6 @@ const seedDB = async () => {
 
 //Run the seed function, then close after done
 seedDB().then(() => {
-  console.log('Database Seeded!');
+  console.log('Estudiantes creados en la DB');
   mongoose.connection.close();
 });
