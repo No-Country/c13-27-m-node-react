@@ -1,9 +1,4 @@
-$text1: #014e60;
-$text2: #000000;
-$background: #ffffff;
-$primary-color: #ff6b6b;
-$secondary-color: #d41d1d;
-$placeholder: #939393;
+@import 'variables.scss';
 
 .mainContainer {
   display: grid;
