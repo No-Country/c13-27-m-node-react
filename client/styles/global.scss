@@ -1,0 +1,65 @@
+//COLORS
+$text1: #014e60;
+$text2: #000000;
+$background: #ffffff;
+$primary-color: #ff6b6b;
+$secondary-color: #d41d1d;
+
+
+// TYPOGRAPHY
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: normal;
+  font-style: normal;
+  src: url('/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+
+
+//NORMALIZE
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  font-weight: 400;
+}
+html,
+body {
+  // height: 100%;
+
+  width: 1280px;
+  height: 800px;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+body {
+  background-color: $background;
+  padding-inline: 5rem;
+  min-height: 100vh;
+  width: 100%;
+}
+
+
+

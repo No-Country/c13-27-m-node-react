@@ -3,13 +3,17 @@ import styles from '../styles/page.module.scss';
 
 const Navbar = () => {
   return (
-    <nav>
-      <ul>
+    <nav className={styles.navBar}>
+      <ul className={styles.bulletless}>
         <li>
-          <Link href="/ayuda"> Ayuda </Link>
+          <Link href="/ayuda" className={styles.itemNav}>
+            Ayuda
+          </Link>
         </li>
         <li>
-          <Link href="/info"> Información </Link>
+          <Link href="/info" className={styles.itemNav}>
+            Información
+          </Link>
         </li>
       </ul>
     </nav>
@@ -18,7 +22,7 @@ const Navbar = () => {
 
 export default Navbar;
 
-    /* <li>
+/* <li>
           <Link href="/">El Futuro es hoy</Link>
         </li>
         <li>
