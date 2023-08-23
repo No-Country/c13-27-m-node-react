@@ -31,8 +31,8 @@ const page = () => {
             src="/assets/patron-inicio.svg"
             alt="imagen de la home page"
             className={styles.imageClass}
-            width={729}
-            height={628}
+            width={728}
+            height={719}
             priority
           />
 
