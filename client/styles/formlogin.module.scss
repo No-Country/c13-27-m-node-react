@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formcontainer {
+  width: 35rem;
+  height: 25rem;
+  color: #626262;
+  padding: 4rem 4rem;
+  border: 0.15rem solid #014e60;
+  border-radius: 1rem;
+  box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.3);
+}
+
+.formcontainer .inputbox {
+  width: 100%;
+  height: 2.8rem;
+  margin: 2rem 0;
+  color: #626262;
+}
+
+.label {
+  color: black;
+  margin-left: 0.6rem;
+  font-size: 1rem;
+}
+
+.input {
+  width: 100%;
+  height: 70%;
+  margin: 1rem 0rem;
+  color: #616161;
+  border: 0.15rem solid #002f3a;
+  border-radius: 0.7rem;
+  color: #616161;
+  font-size: 1rem;
+  padding: 0.7rem 1rem;
+}
+
+.btncontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  background-color: #014e60;
+  color: white;
+  font-weight: bold;
+  padding: 1rem 3rem;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease-out;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.btn:hover {
+  background: #002f3a;
+}
+
+.forgotpassword a {
+  color: red;
+  text-decoration: none;
+  margin-bottom: 1.4rem;
+}
+
+.forgotpassword a:hover {
+  text-decoration: underline;
+}
+
+.registerlink {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.registerlink a {
+  color: #626262;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.registerlink a:hover {
+  text-decoration: underline;
+}

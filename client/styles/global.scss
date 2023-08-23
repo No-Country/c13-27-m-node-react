@@ -22,30 +22,8 @@ $secondary-color: #d41d1d;
   box-sizing: border-box;
 }
 * {
+  box-sizing: border-box;
   margin: 0;
-  font-weight: 400;
-}
-html,
-body {
-  height: 100%;
-}
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-input,
-button,
-textarea,
-select {
-  font: inherit;
 }
 
 body {
