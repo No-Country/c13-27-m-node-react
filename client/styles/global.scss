@@ -15,7 +15,6 @@ $secondary-color: #d41d1d;
   src: url('/fonts/Roboto-Regular.ttf') format('truetype');
 }
 
-
 //NORMALIZE
 
 *,
@@ -52,7 +51,6 @@ select {
 
 body {
   background-color: $background;
-  // padding-inline: 5rem;
   min-height: 100vh;
   width: 100%;
 }
