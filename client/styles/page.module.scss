@@ -1,12 +1,6 @@
 @import 'variables.scss';
 
-
-.container {
-    padding-inline: 5rem;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-}
-
+// NAVBAR 
 .navBar {
     width: 100%;
     position: relative;
@@ -15,6 +9,13 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+.containerLogoNav {
+    background-color: $background;
+    filter: invert(1);
+    right: 48rem;
+    position: relative;
 }
 
 .ulNav {
@@ -32,6 +33,13 @@
     color: $background;
     text-decoration: none;
     font-size: 1rem;
+}
+
+// PAGE INIT 
+.container {
+    padding-inline: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }
 
 .containerPrincipal {
@@ -126,6 +134,9 @@
     height: auto;
 }
 
+
+// FOOTER 
+
 .containerFooter {
     color: $background;
     background-color: $text2;
@@ -135,10 +146,46 @@
     grid-template-columns: 2fr 2fr;
 }
 
+.footerInfo {
+    display: flex;
+    align-items: center;
+}
+
+.imageLogo {
+    background-color: $background;
+    filter: invert(1);
+    margin-left: 2.2rem;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.textUniversidad {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-left: 0.6rem;
+}
+
+.copyright {
+    font-weight: 500;
+    font-size: 11px;
+    margin-left: 2.5rem;
+    margin-bottom: 1.4rem;
+}
+
 .followUsText {
     font-weight: 400;
     font-size: 1rem;
     margin: 1rem;
     text-align: end;
+}
+
+.iconsSocialMedia {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10rem;
+    gap: 1rem;
 }
 
