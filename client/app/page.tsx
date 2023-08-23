@@ -1,8 +1,10 @@
+'use client';
 import React from 'react';
-import variables from '../styles/variables.module.scss';
+// import variables from '../styles/variables.module.scss';
 import { Inter } from 'next/font/google';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export const metadata = {
   title: 'Plataforma Universitaria',
@@ -14,6 +16,16 @@ const inter = Inter({
 });
 
 const page = () => {
+  const router = useRouter();
+
+  const handleLogin: React.MouseEventHandler<HTMLButtonElement> = () => {
+    router.push("/login");
+  };
+
+  const handleSignup: React.MouseEventHandler<HTMLButtonElement> = () => {
+  router.push('/signup');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.containerPrincipal}>
@@ -22,19 +34,20 @@ const page = () => {
         </div>
 
         <div className={styles.containerButtons}>
-          <button className={styles.registerButton}> REGISTRO </button>
-          <button className={styles.loginButton}> INGRESAR </button>
+          <button className={styles.registerButton} onClick={handleSignup}> REGISTRO </button>
+          <button className={styles.loginButton} onClick={handleLogin}> INGRESAR </button>
         </div>
       </div>
 
-      <Image
-        src="/assets/patron-inicio.svg"
-        alt="imagen de la home page"
-        className={styles.imageClass}
-        width={728}
-        height={719}
-        priority
-      />
+      <div className={styles.containerImage}>
+        <Image
+          src="/assets/patron-inicio.svg"
+          alt="imagen de la home page"
+          width={729}
+          height={728}
+          priority
+        />
+      </div>
 
       <div className={styles.containerSubtitles}>
         <h2 className={styles.subtitleOne}>
