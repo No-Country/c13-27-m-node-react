@@ -5,7 +5,7 @@
     padding-inline: 5rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 20px;
+    // gap: 20px;
 }
 
 .navBar {
@@ -13,7 +13,7 @@
     position: relative;
     background-color: $text2;
     // background-color: aquamarine;
-    height: 72px;
+    height: 4.5rem;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -21,53 +21,54 @@
 
 .ulNav {
     list-style: none;
-    width: 420px;
-    height: 51px;
+    width: 26.25rem;
+    height: 3.1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 8px, 16px, 8px, 16px;
-    gap: 32px;
+    gap: 2rem;
 }
 
 .itemNav {
     color: $background;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .containerPrincipal {
     // background-color: gold;
-    width: 574px;
-    height: 331px;
-    top: 136px;
-    left: 80px;
-    gap: 16px;
+    margin-top: 3rem;
+    width: 35.87rem;
+    height:20.6rem;
+    top: 8.5rem;
+    left: 5rem;
+    gap: 1rem;
 }
 
 .containerTitle {
-    height: 248px;
-    line-height: 116.18px;
+    height: 15.5rem;
+    line-height: 7.2rem;
     // background-color: aquamarine;
     padding: 8px;
     gap: 8px;
 }
 
-.title {
+.title { 
+    // font-family: 'Inter';
     font-weight: 600;
-    font-size: 96px;
-    // width: 558px;
+    font-size: 6rem;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
 }
 
 .containerButtons {
     // width: 574px;
-    height: 67px;
-    gap: 16px;
+    height: 4.1rem;
+    gap: 1rem;
     display: flex;
     // background-color: bisque;
     padding: 8px;
-    margin-top: 16px;
+    margin-top: 1rem;
 }
 
 .registerButton {
@@ -75,9 +76,9 @@
     font-weight: 600;
     border: 1px solid $text1;
     background-color: #014E6033;
-    border-radius: 16px;
-    width: 160px;
-    height: 51px;
+    border-radius: 1rem;
+    width: 10rem;
+    height: 3.1rem;
     padding: 16px, 8px, 16px, 8px;
     color: $text1;
     gap: 8px;
@@ -88,8 +89,8 @@
     background-color: $text1;
     border: 1px solid $text1;
     border-radius: 16px;
-    width: 160px;
-    height: 51px;
+    width: 10rem;
+    height: 3.1rem;
     padding: 16px, 8px, 16px, 8px;
     color: #F8F8F8;
     font-weight: 600;
@@ -98,27 +99,42 @@
 .containerSubtitles {
     position: absolute;
     font-family: 'Roboto';
-    width: 352px;
+    width: 21.9rem;
     height: 75px;
     // background-color: steelblue;
-    top: 595px;
-    left: 80px;
+    top: 37.5rem;
+    left: 5rem;
 }
 
 .subtitleOne {
     font-weight: 400;
-    font-size: 16px;
-    line-height: 18.75px;
+    font-size: 1rem;
+    line-height: 1.1rem;
+    text-align: center;
 }
 
 .subtitleTwo {
+    text-align: center;
+    margin-top: 1.3rem;
     font-weight: 600;
-    font-size: 16px;
-    line-height: 18.75px;
+    font-size: 1rem;
+    line-height: 1.1rem;
 }
 
 .imageClass {
     position: absolute;
-    top: 72px;
-    left: 596px;
+    top: 4.5rem;
+    left: 34.5rem;
+}
+
+
+.containerFooter {
+    width: 80rem;
+    height: 6.5rem;
+    position: fixed;
+    bottom: 0;
+    z-index: 5;
+    // top: 43.5rem;
+    color: $background;
+    background-color: $text2;
 }
