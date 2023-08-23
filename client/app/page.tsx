@@ -16,6 +16,16 @@ const inter = Inter({
 
 const page = () => {
 
+<<<<<<< HEAD
+=======
+  const handleLogin: React.MouseEventHandler<HTMLButtonElement> = () => {
+    router.push('/login');
+  };
+
+  const handleSignup: React.MouseEventHandler<HTMLButtonElement> = () => {
+    router.push('/signup');
+  };
+>>>>>>> a54415193680f0d21997c9dfcd782a36c712ee35
 
   return (
     <div className={styles.container}>
@@ -25,6 +35,7 @@ const page = () => {
         </div>
 
         <div className={styles.containerButtons}>
+<<<<<<< HEAD
           <Link href="/signup">
             <button className={styles.registerButton}>
               REGISTRO
@@ -36,6 +47,20 @@ const page = () => {
               INGRESAR
             </button>
           </Link>
+=======
+          <button
+            className={styles.registerButton}
+            onClick={handleSignup}>
+            {' '}
+            REGISTRO{' '}
+          </button>
+          <button
+            className={styles.loginButton}
+            onClick={handleLogin}>
+            {' '}
+            INGRESAR{' '}
+          </button>
+>>>>>>> a54415193680f0d21997c9dfcd782a36c712ee35
         </div>
       </div>
 

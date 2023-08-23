@@ -42,7 +42,7 @@ const TeacherSchema = new Schema({
   ],
 });
 
-TeacherModel.plugin(mongoosePaginate);
+TeacherSchema.plugin(mongoosePaginate);
 
 const TeacherModel = mongoose.model('Teacher', TeacherSchema);
 module.exports = TeacherModel;

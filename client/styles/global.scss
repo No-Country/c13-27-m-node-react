@@ -22,44 +22,20 @@ $secondary-color: #d41d1d;
   box-sizing: border-box;
 }
 * {
+  box-sizing: border-box;
   margin: 0;
-  font-weight: 400;
-}
-html,
-body {
-  height: 100%;
-}
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-input,
-button,
-textarea,
-select {
-  font: inherit;
 }
 
 body {
   background-color: $background;
   min-height: 100vh;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
   padding-inline: 5rem;
   padding-block: 2rem;
-}
-
-main {
-  padding-inline: 5rem;
-  padding-block: 2rem;
+  flex: 1;
 }

@@ -6,26 +6,18 @@ const {
 const getAllCareersHandler = async (req, res) => {
   try {
     const allCareers = await getAllCareersController();
-    if (!allCareers) {
-      return res.status(404).json({ error: 'No hay información disponible' });
-    }
-
-    res.json(allCareers);
+    res.send(allCareers);
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json(error.message);
   }
 };
 
 const getCareersByIdHandler = async (req, res) => {
   try {
     const career = await getCareerByIdController(req);
-    if (!careers) {
-      return res.status(404).json({ error: 'No hay información disponible' });
-    }
-
-    res.json(career);
+    res.send(career);
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json(error.message);
   }
 };
 
