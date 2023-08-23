@@ -5,14 +5,12 @@
     padding-inline: 5rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    // gap: 20px;
 }
 
 .navBar {
-    width: 80rem;
+    width: 100%;
     position: relative;
     background-color: $text2;
-    // background-color: aquamarine;
     height: 4.5rem;
     display: flex;
     justify-content: flex-end;
@@ -27,7 +25,7 @@
     justify-content: center;
     align-items: center;
     padding: 8px, 16px, 8px, 16px;
-    gap: 2rem;
+    gap: 4rem;
 }
 
 .itemNav {
@@ -37,8 +35,7 @@
 }
 
 .containerPrincipal {
-    // background-color: gold;
-    margin-top: 3rem;
+    margin-top: 1.6rem;
     width: 35.87rem;
     height:20.6rem;
     top: 8.5rem;
@@ -49,24 +46,20 @@
 .containerTitle {
     height: 15.5rem;
     line-height: 7.2rem;
-    // background-color: aquamarine;
     padding: 8px;
     gap: 8px;
 }
 
 .title { 
-    // font-family: 'Inter';
     font-weight: 600;
     font-size: 6rem;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
 }
 
 .containerButtons {
-    // width: 574px;
     height: 4.1rem;
     gap: 1rem;
     display: flex;
-    // background-color: bisque;
     padding: 8px;
     margin-top: 1rem;
 }
@@ -101,8 +94,7 @@
     font-family: 'Roboto';
     width: 21.9rem;
     height: 75px;
-    // background-color: steelblue;
-    top: 37.5rem;
+    top: 32rem;
     left: 5rem;
 }
 
@@ -121,20 +113,32 @@
     line-height: 1.1rem;
 }
 
-.imageClass {
-    position: absolute;
-    top: 4.5rem;
-    left: 34.5rem;
+.containerImage {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    position: relative;
+    left: 5rem;
 }
 
+.containerImage img {
+    width: 100%;
+    height: auto;
+}
 
 .containerFooter {
-    width: 80rem;
-    height: 6.5rem;
-    position: fixed;
-    bottom: 0;
-    z-index: 5;
-    // top: 43.5rem;
     color: $background;
     background-color: $text2;
+    width: 100%;
+    height: 6.5rem;
+    display: grid;
+    grid-template-columns: 2fr 2fr;
 }
+
+.followUsText {
+    font-weight: 400;
+    font-size: 1rem;
+    margin: 1rem;
+    text-align: end;
+}
+
