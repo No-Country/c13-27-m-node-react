@@ -1,8 +1,8 @@
 const page = () => {
   return (
-    <div>
-      <h1>este es el Home</h1>;
-    </div>
+    <main style={{ display: 'grid', placeItems: 'center' }}>
+      <h1>Aquí estará el Home de la plataforma</h1>;
+    </main>
   );
 };
 
