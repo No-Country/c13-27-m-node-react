@@ -16,7 +16,6 @@ $secondary-color: #d41d1d;
 }
 
 
-
 //NORMALIZE
 
 *,
@@ -30,10 +29,7 @@ $secondary-color: #d41d1d;
 }
 html,
 body {
-  // height: 100%;
-
-  width: 1280px;
-  height: 800px;
+  height: 100%;
 }
 body {
   line-height: 1.5;
@@ -56,10 +52,14 @@ select {
 
 body {
   background-color: $background;
-  padding-inline: 5rem;
+  // padding-inline: 5rem;
   min-height: 100vh;
   width: 100%;
 }
 
+main {
+  padding-inline: 5rem;
+  padding-block: 2rem;
+}
 
 

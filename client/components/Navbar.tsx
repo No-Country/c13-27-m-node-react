@@ -4,7 +4,7 @@ import styles from '../styles/page.module.scss';
 const Navbar = () => {
   return (
     <nav className={styles.navBar}>
-      <ul className={styles.bulletless}>
+      <ul className={styles.ulNav}>
         <li>
           <Link href="/ayuda" className={styles.itemNav}>
             Ayuda

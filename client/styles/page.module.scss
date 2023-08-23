@@ -2,22 +2,24 @@
 
 
 .container {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 20px;
+    padding-inline: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
 }
 
 .navBar {
+    width: 80rem;
     position: relative;
     background-color: $text2;
+    // background-color: aquamarine;
     height: 72px;
-    width: 1280px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
-.bulletless {
+.ulNav {
     list-style: none;
     width: 420px;
     height: 51px;
@@ -118,5 +120,5 @@
 .imageClass {
     position: absolute;
     top: 72px;
-    left: 676px;
+    left: 596px;
 }
