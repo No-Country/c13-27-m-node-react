@@ -5,7 +5,6 @@ $background: #ffffff;
 $primary-color: #ff6b6b;
 $secondary-color: #d41d1d;
 
-
 // TYPOGRAPHY
 
 @font-face {
@@ -60,4 +59,7 @@ main {
   padding-block: 2rem;
 }
 
-
+main {
+  padding-inline: 5rem;
+  padding-block: 2rem;
+}
