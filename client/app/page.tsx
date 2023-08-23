@@ -1,10 +1,9 @@
 'use client';
 import React from 'react';
-// import variables from '../styles/variables.module.scss';
 import { Inter } from 'next/font/google';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Plataforma Universitaria',
@@ -16,8 +15,9 @@ const inter = Inter({
 });
 
 const page = () => {
-  const router = useRouter();
 
+<<<<<<< HEAD
+=======
   const handleLogin: React.MouseEventHandler<HTMLButtonElement> = () => {
     router.push('/login');
   };
@@ -25,6 +25,7 @@ const page = () => {
   const handleSignup: React.MouseEventHandler<HTMLButtonElement> = () => {
     router.push('/signup');
   };
+>>>>>>> a54415193680f0d21997c9dfcd782a36c712ee35
 
   return (
     <div className={styles.container}>
@@ -34,6 +35,19 @@ const page = () => {
         </div>
 
         <div className={styles.containerButtons}>
+<<<<<<< HEAD
+          <Link href="/signup">
+            <button className={styles.registerButton}>
+              REGISTRO
+            </button>
+          </Link>
+
+          <Link href="/login">
+            <button className={styles.loginButton}>
+              INGRESAR
+            </button>
+          </Link>
+=======
           <button
             className={styles.registerButton}
             onClick={handleSignup}>
@@ -46,6 +60,7 @@ const page = () => {
             {' '}
             INGRESAR{' '}
           </button>
+>>>>>>> a54415193680f0d21997c9dfcd782a36c712ee35
         </div>
       </div>
 
