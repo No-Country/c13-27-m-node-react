@@ -2,9 +2,18 @@ const StudentModel = require('../models/studentModel'); // Llama al modelo Stude
 const { createHash, validPassword } = require('../utils/hashPassword'); // Llama a la funcion createHash
 
 const getAllStudentsController = async () => {
-  const students = await StudentModel.find({}); // Todos los resultados de la DB
-  if (!students) throw new Error('No se pudieron obtener los usuarios');
-  return students;
+  const { docs, hasPrevPage, hasNextPage, nextPage, prevPage, totalPages } =
+    await StudentModel.paginate({}, { page: 1, limit: 10, lean: true });
+
+  if (!docs) throw new Error('No se pudieron obtener los estudiantes');
+  return {
+    students: docs,
+    hasPrevPage,
+    hasNextPage,
+    nextPage,
+    prevPage,
+    totalPages,
+  };
 };
 
 const studentLoginController = async (email, password, check) => {
@@ -13,7 +22,7 @@ const studentLoginController = async (email, password, check) => {
 
   const foundStudent = await StudentModel.findOne({ email: email });
 
-  if (!foundStudent) throw new Error('No existe el estudiante');
+  if (!foundStudent) throw new Error('Usuario incorrecto');
 
   if (!validPassword(foundStudent, password))
     throw new Error('Contraseña incorrecta');

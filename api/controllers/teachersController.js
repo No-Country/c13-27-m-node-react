@@ -1,22 +1,31 @@
 const TeacherModel = require('../models/teacherModel'); // Llama al modelo TeacherModel
-const { createHash } = require('../utils/hashPassword'); // Llama a la funcion createHash
+const { createHash, validPassword } = require('../utils/hashPassword'); // Llama a la funcion createHash
 
 const getAllTeachersController = async () => {
-  const teachers = await TeacherModel.find({}); // Todos los profesores de la DB
-  if (!teachers) throw new Error('No se pudieron obtener resultados');
-  return teachers;
+  const { docs, hasPrevPage, hasNextPage, nextPage, prevPage, totalPages } =
+    await TeacherModel.paginate({}, { page: 1, limit: 10, lean: true });
+
+  if (!docs) throw new Error('No se pudieron obtener los profesores');
+  return {
+    teachers: docs,
+    hasPrevPage,
+    hasNextPage,
+    nextPage,
+    prevPage,
+    totalPages,
+  };
 };
 
 const teacherLoginController = async (email, password, check) => {
   if (!email || !password || !check) throw new Error('Dato faltante');
   if (check !== 'teacher') throw new Error('El usuario no es un profesor');
 
-  const foundTeacher = await TeacherModel.findOne({
-    email: email,
-    password: password,
-  });
+  const foundTeacher = await TeacherModel.findOne({ email: email });
 
-  if (!foundTeacher) throw new Error('Los datos ingresados son erróneos');
+  if (!foundTeacher) throw new Error('Usuario incorrecto');
+
+  if (!validPassword(foundTeacher, password))
+    throw new Error('Contraseña incorrecta');
 
   return foundTeacher;
 };
