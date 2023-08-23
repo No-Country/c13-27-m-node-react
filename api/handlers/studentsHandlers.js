@@ -6,8 +6,8 @@ const {
 
 const getAllStudentsHandler = async (req, res) => {
   try {
-    const allStudents = await getAllStudentsController();
-    res.send(allStudents);
+    const response = await getAllStudentsController();
+    res.send(response);
   } catch (error) {
     res.status(500).json(error.message);
   }

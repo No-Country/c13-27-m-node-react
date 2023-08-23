@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 
 const TeacherSchema = new Schema({
@@ -40,6 +41,8 @@ const TeacherSchema = new Schema({
     },
   ],
 });
+
+TeacherModel.plugin(mongoosePaginate);
 
 const TeacherModel = mongoose.model('Teachers', TeacherSchema);
 module.exports = TeacherModel;
