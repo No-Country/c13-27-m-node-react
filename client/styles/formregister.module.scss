@@ -59,6 +59,14 @@
   border: 1px solid $text1;
   background-color: rgba(1, 78, 96, 0.2);
   cursor: pointer;
+  transition: background-color 0.3s ease-in;
+}
+
+.btnSubmit:hover {
+  background-color: $text1;
+  color: $background;
+  border: 1px solid $text1;
+  font-weight: 700;
 }
 
 .checkboxContainer {
