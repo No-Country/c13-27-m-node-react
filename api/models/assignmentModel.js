@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const AssignmentsSchema = new Schema({
+const AssignmentSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -24,7 +24,7 @@ const AssignmentsSchema = new Schema({
   },
 });
 
-const AssignmentsModel = mongoose.model('Assignment', AssignmentsSchema);
-module.exports = AssignmentsModel;
+const AssignmentModel = mongoose.model('Assignment', AssignmentSchema);
+module.exports = AssignmentModel;
 
 /* modelo carrera: nombre materia alumnos cuales carreras hay: (ENUM) 4 carreras */

@@ -44,5 +44,5 @@ const TeacherSchema = new Schema({
 
 TeacherModel.plugin(mongoosePaginate);
 
-const TeacherModel = mongoose.model('Teachers', TeacherSchema);
+const TeacherModel = mongoose.model('Teacher', TeacherSchema);
 module.exports = TeacherModel;
