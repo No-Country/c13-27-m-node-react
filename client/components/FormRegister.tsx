@@ -39,31 +39,30 @@ export const FormRegister = () => {
 
     const newErrors: Partial<Record<keyof UserRegister, string>> = {};
 
-    if (!registerForm.firstname || !regexName.test(registerForm.firstname)) {
-      newErrors.firstname = 'Nombre inválido';
+    if (!value) {
+      newErrors[name] = 'Campo obligatorio';
+    } else {
+      if (
+        (name === 'firstname' || name === 'lastname') &&
+        !regexName.test(value)
+      ) {
+        newErrors[name] = 'Inválido';
+      } else if (name === 'dni' && !regexDni.test(value)) {
+        newErrors[name] = 'Inválido';
+      } else if (name === 'email' && !regexEmail.test(value)) {
+        newErrors[name] = 'Inválido';
+      }
     }
 
-    if (!registerForm.lastname || !regexName.test(registerForm.lastname)) {
-      newErrors.lastname = 'Apellido inválido';
-    }
-
-    if (!registerForm.dni || !regexDni.test(registerForm.dni)) {
-      newErrors.dni = 'DNI inválido';
-    }
-
-    if (!registerForm.email || regexEmail.test(registerForm.email)) {
-      newErrors.email = 'Email inválido';
-    }
-
-    if (!registerForm.password) {
+    if (name === 'password' && !value) {
       newErrors.password = 'Debes elegir una contraseña';
     }
 
-    if (registerForm.password !== registerForm.passwordConfirm) {
+    if (name === 'passwordConfirm' && value !== registerForm.password) {
       newErrors.passwordConfirm = 'Las contraseñas no coinciden';
     }
 
-    if (registerForm.termsandconditions) {
+    if (name === 'termsandconditions' && !checked) {
       newErrors.termsandconditions = 'Debes aceptar los términos y condiciones';
     }
 
@@ -71,8 +70,10 @@ export const FormRegister = () => {
       ...registerForm,
       [name]: inputValue,
     });
+
     setError(newErrors);
   };
+  console.log(error);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -82,7 +83,7 @@ export const FormRegister = () => {
 
   const handleRoute = () => {
     if (Object.keys(error).length === 0) {
-      router.push('/home');
+      router.push('/login');
     } else {
       return;
     }
@@ -181,12 +182,12 @@ export const FormRegister = () => {
         <input
           className={styles.checkbox}
           type="radio"
-          name="user-rol"
+          name="userRol"
           value="profesor"
           onChange={handleChange}
         />
         <label
-          htmlFor="user-rol"
+          htmlFor="userRol"
           className={styles.checkboxLabel}>
           Soy Profesor
         </label>

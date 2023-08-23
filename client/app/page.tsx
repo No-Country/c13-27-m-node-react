@@ -19,11 +19,11 @@ const page = () => {
   const router = useRouter();
 
   const handleLogin: React.MouseEventHandler<HTMLButtonElement> = () => {
-    router.push("/login");
+    router.push('/login');
   };
 
   const handleSignup: React.MouseEventHandler<HTMLButtonElement> = () => {
-  router.push('/signup');
+    router.push('/signup');
   };
 
   return (
@@ -34,8 +34,18 @@ const page = () => {
         </div>
 
         <div className={styles.containerButtons}>
-          <button className={styles.registerButton} onClick={handleSignup}> REGISTRO </button>
-          <button className={styles.loginButton} onClick={handleLogin}> INGRESAR </button>
+          <button
+            className={styles.registerButton}
+            onClick={handleSignup}>
+            {' '}
+            REGISTRO{' '}
+          </button>
+          <button
+            className={styles.loginButton}
+            onClick={handleLogin}>
+            {' '}
+            INGRESAR{' '}
+          </button>
         </div>
       </div>
 
