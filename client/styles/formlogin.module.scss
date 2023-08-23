@@ -1,23 +1,32 @@
-.container {
+.mainlogin {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 2rem;
+  padding-right: 0rem;
+  padding-block: 0rem;
+}
+
+.loginimagecontainer {
+  grid-column: 8/13;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
 }
 
 .formcontainer {
+  grid-column: 1/7;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  margin-left: 10rem;
   width: 35rem;
-  height: 25rem;
+  height: 28rem;
   color: #626262;
-  padding: 4rem 4rem;
-  border: 0.15rem solid #014e60;
-  border-radius: 1rem;
-  box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.3);
 }
 
 .formcontainer .inputbox {
-  width: 100%;
-  height: 2.8rem;
-  margin: 2rem 0;
+  width: 80%;
+  height: 3.2rem;
+  margin: 3.5rem 0;
   color: #626262;
 }
 
@@ -29,7 +38,7 @@
 
 .input {
   width: 100%;
-  height: 70%;
+  height: 75%;
   margin: 1rem 0rem;
   color: #616161;
   border: 0.15rem solid #002f3a;
@@ -40,12 +49,12 @@
 }
 
 .btncontainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
 }
 
 .btn {
+  position: absolute;
+  left: 8rem;
   border: none;
   outline: none;
   background-color: #014e60;
@@ -62,21 +71,26 @@
 .btn:hover {
   background: #002f3a;
 }
+.disabledbutton {
+  background-color: gray;
+}
+
+.disabledbutton:hover {
+  background-color: gray;
+  cursor: not-allowed;
+}
 
 .forgotpassword a {
   color: red;
   text-decoration: none;
-  margin-bottom: 1.4rem;
 }
 
 .forgotpassword a:hover {
   text-decoration: underline;
 }
 
-.registerlink {
-  text-align: center;
-  margin-top: 1rem;
-}
+// .registerlink {
+// }
 
 .registerlink a {
   color: #626262;
@@ -86,4 +100,11 @@
 
 .registerlink a:hover {
   text-decoration: underline;
+}
+
+.error {
+  color: red;
+  display: flex;
+  justify-content: center;
+  margin-top: -0.5rem;
 }
