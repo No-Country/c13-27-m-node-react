@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Assignment = require('../models/assignmentsModel');
+const Assignment = require('../models/assignmentModel');
 require('dotenv').config(); //Variables de entorno para MongoDB
 
 //Conexion a DB
