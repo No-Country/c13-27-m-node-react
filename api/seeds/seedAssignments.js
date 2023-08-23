@@ -29,7 +29,7 @@ const newAssignment3 = new Assignment({
     'Sistema Política Nacional',
     'Instituciones Políticas y Actores',
   ],
-  students: [],
+  students: ['64e658c0c2088908dd408c51'],
 });
 const newAssignment4 = new Assignment({
   name: 'Derecho Penal',
@@ -38,7 +38,7 @@ const newAssignment4 = new Assignment({
     'Desalojos Forzosos',
     'Estado de Derecho',
   ],
-  students: [],
+  students: ['64e658c0c2088908dd408c51'],
 });
 
 const seedDB = async () => {

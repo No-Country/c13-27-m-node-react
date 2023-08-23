@@ -14,7 +14,7 @@ db.once('open', () => {
 // Crea una nueva carrera
 const newCareer = new Career({
   name: 'Ingeniería',
-  students: ['64e3ed3b13ce0a444343a978'],
+  students: ['64e658c0c2088908dd408c50'],
   assignments: [
     '64e3ee47f320e0e862986c40', // Matematica
     '64e3ee47f320e0e862986c41', // Fisica
@@ -22,8 +22,11 @@ const newCareer = new Career({
 });
 const newCareer2 = new Career({
   name: 'Derecho',
-  students: [],
-  assignments: [],
+  students: ['64e658c0c2088908dd408c51'],
+  assignments: [
+    '64e657d99817b684985962bb', // Ciencia Política
+    '64e657d99817b684985962bc', // Derecho Penal
+  ],
 });
 
 const seedDB = async () => {
