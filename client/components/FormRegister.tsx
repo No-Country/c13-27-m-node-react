@@ -1,48 +1,91 @@
 'use client';
 import React, { ChangeEvent, useState } from 'react';
 import styles from '../styles/formregister.module.scss';
+import { useRouter } from 'next/navigation';
 
 interface UserRegister {
-  'user-rol': 'alumno' | 'profesor';
+  userRol: 'alumno' | 'profesor';
   firstname: string;
   lastname: string;
   dni: string;
   email: string;
   password: string;
-  'password-confirm': string;
+  passwordConfirm: string;
   termsandconditions: boolean;
 }
 
 const initialForm: UserRegister = {
-  'user-rol': 'alumno',
+  userRol: 'alumno',
   firstname: '',
   lastname: '',
   dni: '',
   email: '',
   password: '',
-  'password-confirm': '',
+  passwordConfirm: '',
   termsandconditions: false,
 };
 
 export const FormRegister = () => {
+  const router = useRouter();
   const [registerForm, setRegisterForm] = useState<UserRegister>(initialForm);
+  const [error, setError] = useState({});
 
-  const handleForm = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
-
-    // Special handling for checkboxes
     const inputValue = type === 'checkbox' ? checked : value;
+    const regexDni = /^[0-9]*$/;
+    const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+    const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+
+    const newErrors: Partial<Record<keyof UserRegister, string>> = {};
+
+    if (!registerForm.firstname || !regexName.test(registerForm.firstname)) {
+      newErrors.firstname = 'Nombre inválido';
+    }
+
+    if (!registerForm.lastname || !regexName.test(registerForm.lastname)) {
+      newErrors.lastname = 'Apellido inválido';
+    }
+
+    if (!registerForm.dni || !regexDni.test(registerForm.dni)) {
+      newErrors.dni = 'DNI inválido';
+    }
+
+    if (!registerForm.email || regexEmail.test(registerForm.email)) {
+      newErrors.email = 'Email inválido';
+    }
+
+    if (!registerForm.password) {
+      newErrors.password = 'Debes elegir una contraseña';
+    }
+
+    if (registerForm.password !== registerForm.passwordConfirm) {
+      newErrors.passwordConfirm = 'Las contraseñas no coinciden';
+    }
+
+    if (registerForm.termsandconditions) {
+      newErrors.termsandconditions = 'Debes aceptar los términos y condiciones';
+    }
 
     setRegisterForm({
       ...registerForm,
       [name]: inputValue,
     });
+    setError(newErrors);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(error);
+    console.log(registerForm);
+  };
 
-    //Validaciones
+  const handleRoute = () => {
+    if (Object.keys(error).length === 0) {
+      router.push('/home');
+    } else {
+      return;
+    }
   };
 
   return (
@@ -55,10 +98,12 @@ export const FormRegister = () => {
         Nombre
       </label>
       <input
-        className={styles.input}
+        className={`${styles.input} ${
+          error.firstname ? styles.inputError : ''
+        }`}
         type="text"
         name="firstname"
-        onChange={handleForm}
+        onChange={handleChange}
       />
       <label
         htmlFor="lastname"
@@ -66,10 +111,10 @@ export const FormRegister = () => {
         Apellido
       </label>
       <input
-        className={styles.input}
+        className={`${styles.input} ${error.lastname ? styles.inputError : ''}`}
         type="text"
         name="lastname"
-        onChange={handleForm}
+        onChange={handleChange}
       />
       <label
         className={styles.label}
@@ -77,21 +122,21 @@ export const FormRegister = () => {
         Nro. de Documento
       </label>
       <input
-        className={styles.input}
+        className={`${styles.input} ${error.dni ? styles.inputError : ''}`}
         type="text"
         name="dni"
-        onChange={handleForm}
+        onChange={handleChange}
       />
       <label
-        htmlFor="e-mail"
+        htmlFor="email"
         className={styles.label}>
         E-mail
       </label>
       <input
-        className={styles.input}
+        className={`${styles.input} ${error.email ? styles.inputError : ''}`}
         type="text"
-        name="e-mail"
-        onChange={handleForm}
+        name="email"
+        onChange={handleChange}
       />
       <label
         htmlFor="password"
@@ -99,34 +144,35 @@ export const FormRegister = () => {
         Contraseña
       </label>
       <input
-        className={styles.input}
+        className={`${styles.input} ${error.password ? styles.inputError : ''}`}
         type="password"
         name="password"
-        onChange={handleForm}
+        onChange={handleChange}
       />
       <label
-        htmlFor="password-confirm"
+        htmlFor="passwordConfirm"
         className={styles.label}>
         Confirmar Contraseña
       </label>
       <input
-        className={styles.input}
+        className={`${styles.input} ${
+          error.passwordConfirm ? styles.inputError : ''
+        }`}
         type="password"
-        name="password-confirm"
-        onChange={handleForm}
+        name="passwordConfirm"
+        onChange={handleChange}
       />
       <div className={styles.checkboxContainer}>
         <input
           className={styles.checkbox}
           type="radio"
-          name="user-rol"
+          name="userRol"
           value="alumno"
-          onChange={handleForm}
-          checked={registerForm['user-rol'] === 'alumno'}
+          onChange={handleChange}
           defaultChecked={true}
         />
         <label
-          htmlFor="user-rol"
+          htmlFor="userRol"
           className={styles.checkboxLabel}>
           Soy Alumno
         </label>
@@ -137,8 +183,7 @@ export const FormRegister = () => {
           type="radio"
           name="user-rol"
           value="profesor"
-          onChange={handleForm}
-          checked={registerForm['user-rol'] === 'profesor'}
+          onChange={handleChange}
         />
         <label
           htmlFor="user-rol"
@@ -151,7 +196,7 @@ export const FormRegister = () => {
           className={styles.checkbox}
           type="checkbox"
           name="termsandconditions"
-          onChange={handleForm}
+          onChange={handleChange}
         />
         <label
           htmlFor="termsandconditions"
@@ -164,7 +209,7 @@ export const FormRegister = () => {
           className={styles.btnSubmit}
           type="submit"
           value="Registrarse"
-          onChange={handleForm}
+          onClick={handleRoute}
         />
       </div>
     </form>

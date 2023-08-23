@@ -29,6 +29,7 @@ $placeholder: #939393;
 
 .label {
   margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
 .input {
@@ -39,6 +40,13 @@ $placeholder: #939393;
   height: 2rem;
   padding-inline: 0.5rem;
   color: $placeholder;
+}
+
+.inputError {
+  background-image: url(/assets/error.svg);
+  background-position: 95%;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .btnSubmitContainer {
