@@ -46,5 +46,5 @@ const StudentSchema = new Schema({
 
 StudentSchema.plugin(mongoosePaginate);
 
-const StudentModel = mongoose.model('Students', StudentSchema);
+const StudentModel = mongoose.model('Student', StudentSchema);
 module.exports = StudentModel;
