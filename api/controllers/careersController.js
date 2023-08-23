@@ -1,29 +1,19 @@
-const CareerModel = require('../models/careerModel'); // Llama al modelo AssignmentModel
+const CareerModel = require('../models/careerModel'); // Llama al modelo CareerModel
 
-const getAll = async (req, res) => {
-  try {
-    const careers = await CareerModel.find({}); // Todos las materias de la DB
-    if (!careers) throw new Error('No hay información disponible');
-    
-    res.status(200).json(careers);
-  } catch (error) {
-    res.status(404).json(error.message);
-  }
+const getAllCareersController = async (req, res) => {
+  const careers = await CareerModel.find({}); // Todos las carreras de la DB
+  if (!careers) throw new Error('No hay información disponible');
+  return careers;
 };
 
-const getById = async (req, res) => {
+const getCareerByIdController = async (req, res) => {
   const { id } = req.params;
-  try {
-    const careers = await CareerModel.findById(id).populate('students');
-    if (!careers) throw new Error('No hay información disponible');
-
-    res.status(200).json(careers);    
-  } catch (error) {
-        res.status(404).json(error.message);
-  }
+  const careers = await CareerModel.findById(id).populate('students');
+  if (!careers) throw new Error('No hay información disponible');
+  return careers;
 };
 
 module.exports = {
-  getAll,
-  getById
+  getAllCareersController,
+  getCareerByIdController,
 };
