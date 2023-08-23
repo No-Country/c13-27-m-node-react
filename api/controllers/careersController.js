@@ -5,7 +5,7 @@ const getAllCareersController = async (req, res) => {
     const careers = await CareerModel.find({}); // Todos las carreras de la DB
     if (!careers) throw new Error('No hay información disponible');
 
-    res.status(200).json(careers);
+    return careers;
   } catch (error) {
     res.status(404).json(error.message);
   }
@@ -17,7 +17,7 @@ const getCareerByIdController = async (req, res) => {
     const careers = await CareerModel.findById(id).populate('students');
     if (!careers) throw new Error('No hay información disponible');
 
-    res.status(200).json(careers);
+    return careers;
   } catch (error) {
     res.status(404).json(error.message);
   }
