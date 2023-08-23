@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
 import { BsFacebook, BsInstagram } from 'react-icons/bs';
-import { BiCopyright } from 'react-icons/bi';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -21,13 +21,16 @@ const Footer = () => {
           <h3 className={styles.textUniversidad}>Nacional</h3>
         </div>
       </div>
-      <div>     
-          <h3 className={styles.followUsText}> Seguinos en nuestras redes </h3>
-        
+      <div>
+        <h3 className={styles.followUsText}> Seguinos en nuestras redes </h3>
 
         <div className={styles.iconsSocialMedia}>
-          <BsFacebook size={25} />
-          <BsInstagram size={25} />
+          <Link href="https://www.facebook.com/" target="_blank">
+            <BsFacebook size={25} color="#FFFFFF" />
+          </Link>
+          <Link href="https://www.instagram.com/" target="_blank">
+            <BsInstagram size={25} color="#FFFFFF" />
+          </Link>
         </div>
       </div>
       <h3 className={styles.copyright}> © Todos los derechos reservados</h3>
