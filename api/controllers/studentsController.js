@@ -59,8 +59,15 @@ const registerStudentController = async (newStudent) => {
   return response;
 };
 
+const getStudentByIdController = async (id) => {
+  const student = await StudentModel.findById(id).populate('assignments');
+  if (!student) throw new Error('No existe el estudiante');
+  return student;
+};
+
 module.exports = {
   getAllStudentsController,
   studentLoginController,
   registerStudentController,
+  getStudentByIdController,
 };

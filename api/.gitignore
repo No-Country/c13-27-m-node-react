@@ -8,4 +8,4 @@
 .env
 
 #Ignora los archivos relacionados a peticiones http
-*.http
+/http
