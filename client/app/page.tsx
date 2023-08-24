@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import { Inter } from 'next/font/google';
 import styles from '../styles/page.module.scss';
