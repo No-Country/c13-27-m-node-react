@@ -28,7 +28,17 @@ const initialForm: UserRegister = {
 export const FormRegister = () => {
   const router = useRouter();
   const [registerForm, setRegisterForm] = useState<UserRegister>(initialForm);
-  const [error, setError] = useState({});
+  const [error, setError] = useState<
+    Partial<Record<keyof UserRegister, string>>
+  >({
+    firstname: '',
+    lastname: '',
+    dni: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+    termsandconditions: '',
+  });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
@@ -37,16 +47,27 @@ export const FormRegister = () => {
     const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
     const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
 
+    interface UserRegister {
+      name: string;
+      lastname: string;
+      passwordConfirm: string;
+      password: string;
+      dni: string;
+      email: string;
+      termsandconditions: string;
+      // ...other properties
+    }
+
     const newErrors: Partial<Record<keyof UserRegister, string>> = {};
 
     if (!value) {
-      newErrors[name] = 'Campo obligatorio';
+      newErrors.name = 'Campo obligatorio';
     } else {
       if (
         (name === 'firstname' || name === 'lastname') &&
         !regexName.test(value)
       ) {
-        newErrors[name] = 'Inválido';
+        newErrors.name = 'Inválido';
       } else if (name === 'dni' && !regexDni.test(value)) {
         newErrors[name] = 'Inválido';
       } else if (name === 'email' && !regexEmail.test(value)) {
@@ -90,12 +111,8 @@ export const FormRegister = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={styles.formContainer}>
-      <label
-        htmlFor="firstname"
-        className={styles.label}>
+    <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <label htmlFor="firstname" className={styles.label}>
         Nombre
       </label>
       <input
@@ -106,9 +123,7 @@ export const FormRegister = () => {
         name="firstname"
         onChange={handleChange}
       />
-      <label
-        htmlFor="lastname"
-        className={styles.label}>
+      <label htmlFor="lastname" className={styles.label}>
         Apellido
       </label>
       <input
@@ -117,9 +132,7 @@ export const FormRegister = () => {
         name="lastname"
         onChange={handleChange}
       />
-      <label
-        className={styles.label}
-        htmlFor="dni">
+      <label className={styles.label} htmlFor="dni">
         Nro. de Documento
       </label>
       <input
@@ -128,9 +141,7 @@ export const FormRegister = () => {
         name="dni"
         onChange={handleChange}
       />
-      <label
-        htmlFor="email"
-        className={styles.label}>
+      <label htmlFor="email" className={styles.label}>
         E-mail
       </label>
       <input
@@ -139,9 +150,7 @@ export const FormRegister = () => {
         name="email"
         onChange={handleChange}
       />
-      <label
-        htmlFor="password"
-        className={styles.label}>
+      <label htmlFor="password" className={styles.label}>
         Contraseña
       </label>
       <input
@@ -150,9 +159,7 @@ export const FormRegister = () => {
         name="password"
         onChange={handleChange}
       />
-      <label
-        htmlFor="passwordConfirm"
-        className={styles.label}>
+      <label htmlFor="passwordConfirm" className={styles.label}>
         Confirmar Contraseña
       </label>
       <input
@@ -172,9 +179,7 @@ export const FormRegister = () => {
           onChange={handleChange}
           defaultChecked={true}
         />
-        <label
-          htmlFor="userRol"
-          className={styles.checkboxLabel}>
+        <label htmlFor="userRol" className={styles.checkboxLabel}>
           Soy Alumno
         </label>
       </div>
@@ -186,9 +191,7 @@ export const FormRegister = () => {
           value="profesor"
           onChange={handleChange}
         />
-        <label
-          htmlFor="userRol"
-          className={styles.checkboxLabel}>
+        <label htmlFor="userRol" className={styles.checkboxLabel}>
           Soy Profesor
         </label>
       </div>
@@ -199,9 +202,7 @@ export const FormRegister = () => {
           name="termsandconditions"
           onChange={handleChange}
         />
-        <label
-          htmlFor="termsandconditions"
-          className={styles.checkboxLabel}>
+        <label htmlFor="termsandconditions" className={styles.checkboxLabel}>
           Acepto términos y condiciones
         </label>
       </div>
