@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 
-const UsersSchema = new Schema({
+const TeacherSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -9,6 +10,11 @@ const UsersSchema = new Schema({
   lastName: {
     type: String,
     required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    unique: true,
   },
   email: {
     type: String,
@@ -28,15 +34,15 @@ const UsersSchema = new Schema({
     type: String,
     required: true,
   },
-  assignments: {
-    type: [String],
-    required: true,
-  },
-  career: {
-    type: String,
-    required: true,
-  },
+  assignments: [
+    {
+      type: Schema.Types.ObjectId, //Conecta con modelo Assignments
+      ref: 'Assignments',
+    },
+  ],
 });
 
-const User = mongoose.model('User', UsersSchema);
-module.exports = User;
+TeacherSchema.plugin(mongoosePaginate);
+
+const TeacherModel = mongoose.model('Teacher', TeacherSchema);
+module.exports = TeacherModel;
