@@ -1,5 +1,5 @@
 #Ignora la carpeta node_modules
-node_modules
+/node_modules
 
 #Ignora todos los archivos de texto
 *.txt
@@ -8,4 +8,4 @@ node_modules
 .env
 
 #Ignora los archivos relacionados a peticiones http
-*.http
+/http

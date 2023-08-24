@@ -1,11 +1,15 @@
 const StudentModel = require('../models/studentModel'); // Llama al modelo StudentModel
 const { createHash, validPassword } = require('../utils/hashPassword'); // Llama a la funcion createHash
 
-const getAllStudentsController = async () => {
+const getAllStudentsController = async (page, limit) => {
+  page = page || 1;
+  limit = limit || 10;
   const { docs, hasPrevPage, hasNextPage, nextPage, prevPage, totalPages } =
-    await StudentModel.paginate({}, { page: 1, limit: 10, lean: true });
+    await StudentModel.paginate({}, { page: page, limit: limit, lean: true });
 
-  if (!docs) throw new Error('No se pudieron obtener los estudiantes');
+  if (docs.length === 0)
+    throw new Error('No hay mas estudiantes para esta pagina.');
+
   return {
     students: docs,
     hasPrevPage,
@@ -55,8 +59,15 @@ const registerStudentController = async (newStudent) => {
   return response;
 };
 
+const getStudentByIdController = async (id) => {
+  const student = await StudentModel.findById(id).populate('assignments');
+  if (!student) throw new Error('No existe el estudiante');
+  return student;
+};
+
 module.exports = {
   getAllStudentsController,
   studentLoginController,
   registerStudentController,
+  getStudentByIdController,
 };

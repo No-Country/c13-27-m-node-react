@@ -95,78 +95,79 @@ const FormLogin = () => {
 
   // const onSubmit = (data: any) => console.log(JSON.stringify(data));
   return (
-    <div className={styles.formcontainer}>
-      <form action="" onSubmit={handleSubmit}>
-        <div className={styles.inputbox}>
-          <label htmlFor="dni" className={styles.label}>
-            Número de documento
-          </label>
-          <input
-            className={styles.input}
-            type="text"
-            id="dni"
-            name="dni"
-            placeholder="Ingrese su DNI"
-            value={loginForm.dni}
-            onChange={handleInputDni}
-          />
-          {errorDni && (
-            <div className={styles.error}>
-              <p>El campo dni es obligatorio</p>
-            </div>
-          )}
-          {!errorDni && !validNumber && (
-            <div className={styles.error}>
-              <p>El campo dni no es válido</p>
-            </div>
-          )}
+    <form
+      className={styles.formcontainer}
+      action=""
+      onSubmit={handleSubmit}>
+      <label
+        htmlFor="dni"
+        className={styles.label}>
+        Número de documento
+      </label>
+      <input
+        className={styles.input}
+        type="text"
+        id="dni"
+        name="dni"
+        placeholder="Ingrese su DNI"
+        value={loginForm.dni}
+        onChange={handleInputDni}
+      />
+      {errorDni && (
+        <div className={styles.error}>
+          <p>El campo dni es obligatorio</p>
         </div>
+      )}
+      {!errorDni && !validNumber && (
+        <div className={styles.error}>
+          <p>El campo dni no es válido</p>
+        </div>
+      )}
+      <label
+        htmlFor="password"
+        className={styles.label}>
+        Contraseña
+      </label>
+      <input
+        className={styles.input}
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Ingrese su contraseña"
+        value={loginForm.password}
+        onChange={handleInputPassword}
+      />
+      {errorPassword && (
+        <div className={styles.error}>
+          <p>El campo Contraseña es obligatorio</p>
+        </div>
+      )}
+      <div className={styles.forgotpassword}>
+        <a
+          href=""
+          className={styles.forgottext}>
+          Olvidé mi contraseña
+        </a>
+      </div>
 
-        <div className={styles.inputbox}>
-          <label htmlFor="password" className={styles.label}>
-            Contraseña
-          </label>
-          <input
-            className={styles.input}
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Ingrese su contraseña"
-            value={loginForm.password}
-            onChange={handleInputPassword}
-          />
-          {errorPassword && (
-            <div className={styles.error}>
-              <p>El campo Contraseña es obligatorio</p>
-            </div>
-          )}
-        </div>
+      <div className={styles.registerlink}>
+        No tienes cuenta?
+        <Link href="/signup">
+          <span> Regístrate! </span>
+        </Link>
+      </div>
 
-        <div className={styles.forgotpassword}>
-          <a href="" className={styles.forgottext}>
-            Olvidé mi contraseña
-          </a>
-        </div>
-
-        <div className={styles.registerlink}>
-          No tienes cuenta?
-          <Link href="/signup">
-            <span> Regístrate! </span>
-          </Link>
-        </div>
-
-        <div className={styles.btncontainer}>
-          <input
-            type="submit"
-            value="Ingresar"
-            className={`${styles.btn} ${
-              isFormValid ? '' : styles.disabledbutton
-            }`}
-            disabled={!isFormValid || !isFormDirty}
-          />
-        </div>
-      </form>
-    </div>
+      <div className={styles.btncontainer}>
+        <input
+          type="submit"
+          value="Ingresar"
+          className={`${styles.btn} ${
+            isFormValid ? '' : styles.disabledbutton
+          }`}
+          disabled={!isFormValid || !isFormDirty}
+        />
+      </div>
+    </form>
   );
 };
 

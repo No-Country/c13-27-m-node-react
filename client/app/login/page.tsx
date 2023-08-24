@@ -11,8 +11,8 @@ const Login = () => {
         <Image
           className={styles.loginimage}
           src={login}
-          width={658}
-          height={800}
+          width={528}
+          height={600}
           alt="login"></Image>
       </aside>
     </main>
