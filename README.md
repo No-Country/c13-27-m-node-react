@@ -18,4 +18,4 @@
 
 - POST: /registerStudent
 
-Devuelve: "Usted se registró correctamente"
+En caso de éxito, devuelve: "Usted se registró correctamente"
