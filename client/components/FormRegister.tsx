@@ -30,15 +30,7 @@ export const FormRegister = () => {
   const [registerForm, setRegisterForm] = useState<UserRegister>(initialForm);
   const [error, setError] = useState<
     Partial<Record<keyof UserRegister, string>>
-  >({
-    firstname: '',
-    lastname: '',
-    dni: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-    termsandconditions: '',
-  });
+  >({});
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
@@ -47,27 +39,21 @@ export const FormRegister = () => {
     const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
     const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
 
-    interface UserRegister {
-      name: string;
-      lastname: string;
-      passwordConfirm: string;
-      password: string;
-      dni: string;
-      email: string;
-      termsandconditions: string;
-      // ...other properties
-    }
-
     const newErrors: Partial<Record<keyof UserRegister, string>> = {};
 
     if (!value) {
-      newErrors.name = 'Campo obligatorio';
+      newErrors.firstname = 'Campo obligatorio';
     } else {
       if (
-        (name === 'firstname' || name === 'lastname') &&
+        (name === 'firstname') &&
         !regexName.test(value)
       ) {
-        newErrors.name = 'Inválido';
+        newErrors.firstname = 'Inválido';
+      } else if (
+        (name === 'lastname') &&
+        !regexName.test(value)
+      ) {
+        newErrors.lastname = 'Inválido';
       } else if (name === 'dni' && !regexDni.test(value)) {
         newErrors[name] = 'Inválido';
       } else if (name === 'email' && !regexEmail.test(value)) {
