@@ -1,11 +1,14 @@
 const TeacherModel = require('../models/teacherModel'); // Llama al modelo TeacherModel
 const { createHash, validPassword } = require('../utils/hashPassword'); // Llama a la funcion createHash
 
-const getAllTeachersController = async () => {
+const getAllTeachersController = async (page, limit) => {
+  page = page || 1;
+  limit = limit || 10;
   const { docs, hasPrevPage, hasNextPage, nextPage, prevPage, totalPages } =
-    await TeacherModel.paginate({}, { page: 1, limit: 10, lean: true });
+    await TeacherModel.paginate({}, { page: page, limit: limit, lean: true });
 
-  if (!docs) throw new Error('No se pudieron obtener los profesores');
+  if (docs.length === 0)
+    throw new Error('No hay mas profesores para esta pagina.');
   return {
     teachers: docs,
     hasPrevPage,
