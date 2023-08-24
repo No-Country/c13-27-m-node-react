@@ -1,0 +1,193 @@
+@import 'variables.scss';
+
+// NAVBAR 
+.navBar {
+  width: 100%;
+  position: relative;
+  background-color: $text2;
+  height: 4.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.containerLogoNav {
+    background-color: $background;
+    filter: invert(1);
+    right: 48rem;
+    position: relative;
+}
+
+.ulNav {
+  list-style: none;
+  width: 26.25rem;
+  height: 3.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px, 16px, 8px, 16px;
+  gap: 4rem;
+}
+
+.itemNav {
+  color: $background;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+// PAGE INIT 
+.container {
+    padding-inline: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.containerPrincipal {
+  margin-top: 1.6rem;
+  width: 35.87rem;
+  height: 20.6rem;
+  top: 8.5rem;
+  left: 5rem;
+  gap: 1rem;
+}
+
+.containerTitle {
+  height: 15.5rem;
+  line-height: 7.2rem;
+  padding: 8px;
+  gap: 8px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 6rem;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.containerButtons {
+  height: 4.1rem;
+  gap: 1rem;
+  display: flex;
+  padding: 8px;
+  margin-top: 1rem;
+}
+
+.registerButton {
+  font-family: 'Roboto';
+  font-weight: 600;
+  border: 1px solid $text1;
+  background-color: #014e6033;
+  border-radius: 1rem;
+  width: 10rem;
+  height: 3.1rem;
+  padding: 16px, 8px, 16px, 8px;
+  color: $text1;
+  gap: 8px;
+}
+
+.loginButton {
+  font-family: 'Roboto';
+  background-color: $text1;
+  border: 1px solid $text1;
+  border-radius: 16px;
+  width: 10rem;
+  height: 3.1rem;
+  padding: 16px, 8px, 16px, 8px;
+  color: #f8f8f8;
+  font-weight: 600;
+}
+
+.containerSubtitles {
+  position: absolute;
+  font-family: 'Roboto';
+  width: 21.9rem;
+  height: 75px;
+  top: 32rem;
+  left: 5rem;
+}
+
+.subtitleOne {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.1rem;
+  text-align: center;
+}
+
+.subtitleTwo {
+  text-align: center;
+  margin-top: 1.3rem;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.1rem;
+}
+
+.containerImage {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: relative;
+  left: 5rem;
+}
+
+.containerImage img {
+  width: 100%;
+  height: auto;
+}
+
+
+// FOOTER 
+
+.containerFooter {
+  color: $background;
+  background-color: $text2;
+  width: 100%;
+  height: 6.5rem;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+}
+
+.footerInfo {
+    display: flex;
+    align-items: center;
+}
+
+.imageLogo {
+    background-color: $background;
+    filter: invert(1);
+    margin-left: 2.2rem;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.textUniversidad {
+    font-weight: 500;
+    font-size: 1rem;
+    margin-left: 0.6rem;
+}
+
+.copyright {
+    font-weight: 500;
+    font-size: 11px;
+    margin-left: 2.5rem;
+    margin-bottom: 1.4rem;
+}
+
+.followUsText {
+  font-weight: 400;
+  font-size: 1rem;
+  margin: 1rem;
+  text-align: end;
+}
+
+.iconsSocialMedia {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10rem;
+    gap: 1rem;
+    color: $background;
+    text-decoration: none;
+}
+

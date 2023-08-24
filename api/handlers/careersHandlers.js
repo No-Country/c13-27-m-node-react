@@ -1,33 +1,24 @@
 const {
-    getAll,
-    getById,
-  } = require('../controllers/careersController');
-  
-  const getAllCareersHandler = async (req, res) => {
-    try {
-      const allCareers = await getAll();
-      if(!allCareers) {
-        return res.status(404).json({ error: 'No hay información disponible' });
-      };
+  getAllCareersController,
+  getCareerByIdController,
+} = require('../controllers/careersController');
 
-      res.json(allCareers);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  };
-  
-  const getCareersByIdHandler = async (req, res) => {
-    try {
-      const career = await getById(req);
-      if(!careers) {
-        return res.status(404).json({ error: 'No hay información disponible' });
-      };
+const getAllCareersHandler = async (req, res) => {
+  try {
+    const allCareers = await getAllCareersController();
+    res.send(allCareers);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
 
-      res.json(career);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  };
-  
-  module.exports = { getAllCareersHandler, getCareersByIdHandler };
-  
+const getCareersByIdHandler = async (req, res) => {
+  try {
+    const career = await getCareerByIdController(req);
+    res.send(career);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+module.exports = { getAllCareersHandler, getCareersByIdHandler };

@@ -4,6 +4,7 @@ $text2: #000000;
 $background: #ffffff;
 $primary-color: #ff6b6b;
 $secondary-color: #d41d1d;
+$placeholder: #939393;
 
 :export {
   text1: $text1;
@@ -11,4 +12,5 @@ $secondary-color: #d41d1d;
   background: $background;
   primary-color: $primary-color;
   secondary-color: $secondary-color;
+  placeholder: $placeholder;
 }

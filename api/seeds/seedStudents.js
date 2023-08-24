@@ -28,12 +28,27 @@ const newStudent = new Student({
   ],
   career: 'Ingeniería',
 });
+const newStudent1 = new Student({
+  firstName: 'Michael',
+  lastName: 'Jackson Peralta',
+  password: '999999',
+  email: 'mjperalta@hotmail.com',
+  dni: 37000000,
+  dob: 08 / 02 / 1998,
+  address: 'Salta 123',
+  assignments: [
+    '64e657d99817b684985962bb', // Ciencia Política
+    '64e657d99817b684985962bc', // Derecho Penal
+  ],
+  career: 'Derecho',
+});
 
 // Manipulate DB
 const seedDB = async () => {
   //Clear out the DB
   await Student.deleteMany({});
   await newStudent.save();
+  await newStudent1.save();
 };
 
 //Run the seed function, then close after done

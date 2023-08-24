@@ -5,7 +5,17 @@ const CareerSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
+    enum: {
+      values: [
+        'Ingeniería',
+        'Derecho',
+        'Arquitectura',
+        'Medicina',
+        'Psicología',
+        'Literatura',
+      ],
+      message: 'No existe la carrera {VALUE}',
+    },
   },
   students: [
     {
@@ -13,11 +23,12 @@ const CareerSchema = new Schema({
       ref: 'Student',
     },
   ],
-  typeOfCareer: {
-    type: ENUM('psychology', 'architecture', 'music', 'software engineering'),
-    required: true,
-    unique: true,
-  },
+  assignments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Assignment',
+    },
+  ],
 });
 
 const CareerModel = mongoose.model('Career', CareerSchema);
