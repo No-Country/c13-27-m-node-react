@@ -1,47 +1,39 @@
 @import 'variables.scss';
 
-// NAVBAR 
+// NAVBAR
 .navBar {
   width: 100%;
-  position: relative;
   background-color: $text2;
   height: 4.5rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
-
 .containerLogoNav {
-    background-color: $background;
-    filter: invert(1);
-    right: 48rem;
-    position: relative;
+  background-color: $background;
+  filter: invert(1);
+  margin-left: 1.5rem;
 }
-
 .ulNav {
   list-style: none;
-  width: 26.25rem;
-  height: 3.1rem;
+  padding-right: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px, 16px, 8px, 16px;
   gap: 4rem;
 }
-
 .itemNav {
   color: $background;
   text-decoration: none;
   font-size: 1rem;
 }
 
-// PAGE INIT 
+// PAGE INIT
 .container {
-    padding-inline: 5rem;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+  padding-inline: 5rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
-
 .containerPrincipal {
   margin-top: 1.6rem;
   width: 35.87rem;
@@ -50,20 +42,17 @@
   left: 5rem;
   gap: 1rem;
 }
-
 .containerTitle {
   height: 15.5rem;
   line-height: 7.2rem;
   padding: 8px;
   gap: 8px;
 }
-
 .title {
   font-weight: 600;
   font-size: 6rem;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
 .containerButtons {
   height: 4.1rem;
   gap: 1rem;
@@ -71,7 +60,6 @@
   padding: 8px;
   margin-top: 1rem;
 }
-
 .registerButton {
   font-family: 'Roboto';
   font-weight: 600;
@@ -84,7 +72,6 @@
   color: $text1;
   gap: 8px;
 }
-
 .loginButton {
   font-family: 'Roboto';
   background-color: $text1;
@@ -96,7 +83,6 @@
   color: #f8f8f8;
   font-weight: 600;
 }
-
 .containerSubtitles {
   position: absolute;
   font-family: 'Roboto';
@@ -105,14 +91,12 @@
   top: 32rem;
   left: 5rem;
 }
-
 .subtitleOne {
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.1rem;
   text-align: center;
 }
-
 .subtitleTwo {
   text-align: center;
   margin-top: 1.3rem;
@@ -120,7 +104,6 @@
   font-size: 1rem;
   line-height: 1.1rem;
 }
-
 .containerImage {
   display: flex;
   justify-content: flex-end;
@@ -128,66 +111,65 @@
   position: relative;
   left: 5rem;
 }
-
 .containerImage img {
   width: 100%;
   height: auto;
 }
 
-
-// FOOTER 
+// FOOTER
 
 .containerFooter {
-  color: $background;
   background-color: $text2;
   width: 100%;
   height: 6.5rem;
-  display: grid;
-  grid-template-columns: 2fr 2fr;
+  margin-top: -1.3rem;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
 }
-
 .footerInfo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+  margin-left: 1.5rem;
 }
-
 .imageLogo {
-    background-color: $background;
-    filter: invert(1);
-    margin-left: 2.2rem;
+  background-color: $background;
+  filter: invert(1);
 }
-
 .textContainer {
-    display: flex;
-    flex-direction: column;
+  color: $background;
+  padding: 0.5rem;
 }
-
 .textUniversidad {
-    font-weight: 500;
-    font-size: 1rem;
-    margin-left: 0.6rem;
-}
-
-.copyright {
-    font-weight: 500;
-    font-size: 11px;
-    margin-left: 2.5rem;
-    margin-bottom: 1.4rem;
-}
-
-.followUsText {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 1rem;
-  margin: 1rem;
+}
+.copyright {
+  color: $background;
+  font-weight: 500;
+  font-size: 11px;
+  padding: 0.5rem 0rem;
   text-align: end;
 }
-
-.iconsSocialMedia {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 10rem;
-    gap: 1rem;
-    color: $background;
-    text-decoration: none;
+.containerFollowIn {
+  display: flex;
+  flex-direction: column;
 }
-
+.contentFollowText {
+  margin: 1rem;
+  padding: 0rem -1rem;
+  border-bottom: 1.4px solid $background;
+}
+.followText {
+  color: $background;
+  font-weight: 400;
+  font-size: 1rem;
+  margin: 0.4rem;
+}
+.iconsSocialMedia {
+  margin-left: 1.4rem;
+  display: flex;
+  gap: 1rem;
+}

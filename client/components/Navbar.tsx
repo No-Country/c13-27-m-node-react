@@ -5,15 +5,17 @@ import Image from 'next/image';
 const Navbar = () => {
   return (
     <nav className={styles.navBar}>
-      <div className={styles.containerLogoNav}>
-        <Image
-          src="/assets/logo.svg"
-          alt="logo de la universidad"
-          className={styles.imageLogoNav}
-          width={56}
-          height={56}
-        />
-      </div>
+      <Link href="/">
+        <div className={styles.containerLogoNav}>
+          <Image
+            src="/assets/logo.svg"
+            alt="logo de la universidad"
+            className={styles.imageLogoNav}
+            width={56}
+            height={56}
+          />
+        </div>
+      </Link>
 
       <ul className={styles.ulNav}>
         <li>
@@ -33,15 +35,3 @@ const Navbar = () => {
 
 export default Navbar;
 
-/* <li>
-          <Link href="/">El Futuro es hoy</Link>
-        </li>
-        <li>
-          <Link href="/home">Home</Link>
-        </li>
-        <li>
-          <Link href="/login">login</Link>
-        </li>
-        <li>
-          <Link href="/signup">registro</Link>
-        </li>  */
