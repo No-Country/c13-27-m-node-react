@@ -2,6 +2,7 @@ const {
   getAllStudentsController,
   studentLoginController,
   registerStudentController,
+  getStudentByIdController,
 } = require('../controllers/studentsController');
 
 const getAllStudentsHandler = async (req, res) => {
@@ -60,8 +61,19 @@ const registerStudentHandler = async (req, res) => {
   }
 };
 
+const getStudentByIdHandler = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const student = await getStudentByIdController(id);
+    res.send(student);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 module.exports = {
   getAllStudentsHandler,
   studentLoginHandler,
   registerStudentHandler,
+  getStudentByIdHandler,
 };
