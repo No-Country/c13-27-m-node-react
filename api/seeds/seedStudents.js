@@ -19,7 +19,7 @@ const newStudent = new Student({
   lastName: 'Perez',
   password: '123456',
   email: 'juanperez@hotmail.com',
-  dni: 35000000,
+  dni: 3500000,
   dob: 10 / 12 / 1990,
   address: 'Jujuy 1234',
   assignments: [

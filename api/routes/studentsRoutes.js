@@ -10,7 +10,7 @@ const {
 } = require('../handlers/studentsHandlers');
 
 router.get('/allStudents', getAllStudentsHandler); // Ruta para obtener todos los usuarios (actualmente es de prueba)
-router.get('/studentsLogin', studentLoginHandler);
+router.post('/studentsLogin', studentLoginHandler);
 router.get('/:id', getStudentByIdHandler);
 
 router.post('/registerStudent', registerStudentHandler); // Ruta para registrar un estudiante

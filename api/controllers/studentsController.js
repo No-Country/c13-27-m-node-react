@@ -21,6 +21,7 @@ const getAllStudentsController = async (page, limit) => {
 };
 
 const studentLoginController = async (email, password, check) => {
+  console.log(email, password, check);
   if (!email || !password || !check) throw new Error('Dato faltante');
   if (check !== 'student') throw new Error('El usuario no es un estudiante');
 
@@ -33,6 +34,7 @@ const studentLoginController = async (email, password, check) => {
 
   return foundStudent;
 };
+
 const registerStudentController = async (newStudent) => {
   // valido que esten ingresados todos los datos
   if (
