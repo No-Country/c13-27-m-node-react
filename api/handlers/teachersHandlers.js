@@ -17,9 +17,9 @@ const getAllTeachersHandler = async (req, res) => {
 };
 
 const teacherLoginHandler = async (req, res) => {
-  const { email, password, check } = req.body;
+  const { dni, password, check } = req.body;
   try {
-    const login = await teacherLoginController(email, password, check);
+    const login = await teacherLoginController(dni, password, check);
     res.send(login);
   } catch (error) {
     res.status(500).json(error.message);

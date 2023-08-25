@@ -20,7 +20,7 @@ const getAllStudentsController = async (page, limit) => {
   };
 };
 
-const studentLoginController = async (email, password, check) => {
+const studentLoginController = async (dni, password, check) => {
   if (!dni || !password || !check) throw new Error('Dato faltante');
   if (check !== 'student') throw new Error('El usuario no es un estudiante');
 
@@ -47,7 +47,7 @@ const registerStudentController = async (newStudent) => {
 
   newStudent.password = createHash(newStudent.password); // encripto la contraseña
 
-  const studentExists = await StudentModel.findOne({ email: newStudent.email }); // aca me devuelve el estudiante si existe
+  const studentExists = await StudentModel.findOne({ dni: newStudent.dni }); // aca me devuelve el estudiante si existe
   if (studentExists) throw new Error('El usuario ya existe');
 
   //guardao el nuevo estudiante en la DB

@@ -19,7 +19,7 @@ const getAllTeachersController = async (page, limit) => {
   };
 };
 
-const teacherLoginController = async (email, password, check) => {
+const teacherLoginController = async (dni, password, check) => {
   if (!dni || !password || !check) throw new Error('Dato faltante');
   if (check !== 'teacher') throw new Error('El usuario no es un profesor');
 
@@ -46,7 +46,7 @@ const registerTeacherController = async (newTeacher) => {
 
   newTeacher.password = createHash(newTeacher.password); // encripto la contraseña
 
-  const teacherExists = await TeacherModel.findOne({ email: newTeacher.email }); // aca me devuelve el profesor si existe
+  const teacherExists = await TeacherModel.findOne({ dni: newTeacher.dni }); // aca me devuelve el profesor si existe
   if (teacherExists) throw new Error('El usuario ya existe');
 
   //guardo el nuevo profesor en la DB
