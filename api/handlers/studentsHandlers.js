@@ -33,11 +33,7 @@ const registerStudentHandler = async (req, res) => {
     lastName,
     password,
     email,
-    dni,
-    dob,
-    address,
-    assignments,
-    career,
+    dni
   } = req.body;
 
   const newStudent = {

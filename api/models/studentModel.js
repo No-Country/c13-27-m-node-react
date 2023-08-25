@@ -28,19 +28,19 @@ const StudentSchema = new Schema({
   },
   dob: {
     type: Date,
-    required: true,
+    // required: true,
   },
   address: {
     type: String,
-    required: true,
+    // required: true,
   },
   assignments: {
     type: [String],
-    required: true,
+    // required: true,
   },
   career: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 
