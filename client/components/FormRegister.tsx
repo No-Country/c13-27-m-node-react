@@ -4,7 +4,7 @@ import styles from '../styles/formregister.module.scss';
 import { useRouter } from 'next/navigation';
 
 interface UserRegister {
-  userRol: 'alumno' | 'profesor';
+  userRol: 'student' | 'teacher';
   firstname: string;
   lastname: string;
   dni: string;
@@ -15,7 +15,7 @@ interface UserRegister {
 }
 
 const initialForm: UserRegister = {
-  userRol: 'alumno',
+  userRol: 'student',
   firstname: '',
   lastname: '',
   dni: '',
@@ -90,10 +90,30 @@ export const FormRegister = () => {
     setError(newErrors);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const url =
+      registerForm.userRol === 'student'
+        ? 'http://localhost:3001/students/registerStudent'
+        : 'http://localhost:3001/teachers/registerTeacher';
+
+    const res = await fetch(url, {
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify({
+        firstName: registerForm.firstname,
+        lastName: registerForm.lastname,
+        email: registerForm.email,
+        password: registerForm.password,
+        dni: registerForm.dni,
+        check: registerForm.userRol,
+      }),
+    });
+    const data = await res.json();
+
     console.log(error);
-    console.log(registerForm);
+    console.log(data);
   };
 
   const handleRoute = () => {
@@ -105,61 +125,81 @@ export const FormRegister = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.formContainer}>
-      <label htmlFor="firstname" className={styles.label}>
+    <form
+      onSubmit={handleSubmit}
+      className={styles.formContainer}>
+      <label
+        htmlFor="firstname"
+        className={styles.label}>
         Nombre
       </label>
       <input
         className={`${styles.input} ${
           error.firstname ? styles.inputError : ''
         }`}
+        placeholder="Nombre"
         type="text"
         name="firstname"
         onChange={handleChange}
       />
-      <label htmlFor="lastname" className={styles.label}>
+      <label
+        htmlFor="lastname"
+        className={styles.label}>
         Apellido
       </label>
       <input
         className={`${styles.input} ${error.lastname ? styles.inputError : ''}`}
+        placeholder="Apellido"
         type="text"
         name="lastname"
         onChange={handleChange}
       />
-      <label className={styles.label} htmlFor="dni">
+      <label
+        className={styles.label}
+        htmlFor="dni">
         Nro. de Documento
       </label>
       <input
         className={`${styles.input} ${error.dni ? styles.inputError : ''}`}
+        placeholder="N° de Documento"
         type="text"
         name="dni"
         onChange={handleChange}
       />
-      <label htmlFor="email" className={styles.label}>
+      <label
+        htmlFor="email"
+        className={styles.label}>
         E-mail
       </label>
       <input
         className={`${styles.input} ${error.email ? styles.inputError : ''}`}
+        placeholder="E-mail"
         type="text"
         name="email"
         onChange={handleChange}
       />
-      <label htmlFor="password" className={styles.label}>
+      <label
+        htmlFor="password"
+        className={styles.label}>
         Contraseña
       </label>
       <input
         className={`${styles.input} ${error.password ? styles.inputError : ''}`}
+        placeholder="Contraseña"
         type="password"
         name="password"
         onChange={handleChange}
       />
-      <label htmlFor="passwordConfirm" className={styles.label}>
+      <label
+        htmlFor="passwordConfirm"
+        className={styles.label}>
         Confirmar Contraseña
       </label>
       <input
         className={`${styles.input} ${
           error.passwordConfirm ? styles.inputError : ''
         }`}
+        placeholder="Confirmar contraseña"
         type="password"
         name="passwordConfirm"
         onChange={handleChange}
@@ -169,11 +209,13 @@ export const FormRegister = () => {
           className={styles.checkbox}
           type="radio"
           name="userRol"
-          value="alumno"
+          value="student"
           onChange={handleChange}
           defaultChecked={true}
         />
-        <label htmlFor="userRol" className={styles.checkboxLabel}>
+        <label
+          htmlFor="userRol"
+          className={styles.checkboxLabel}>
           Soy Alumno
         </label>
       </div>
@@ -182,10 +224,12 @@ export const FormRegister = () => {
           className={styles.checkbox}
           type="radio"
           name="userRol"
-          value="profesor"
+          value="teacher"
           onChange={handleChange}
         />
-        <label htmlFor="userRol" className={styles.checkboxLabel}>
+        <label
+          htmlFor="userRol"
+          className={styles.checkboxLabel}>
           Soy Profesor
         </label>
       </div>
@@ -197,7 +241,9 @@ export const FormRegister = () => {
           name="termsandconditions"
           onChange={handleChange}
         />
-        <label htmlFor="termsandconditions" className={styles.checkboxLabel}>
+        <label
+          htmlFor="termsandconditions"
+          className={styles.checkboxLabel}>
           Acepto términos y condiciones
         </label>
       </div>
