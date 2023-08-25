@@ -18,9 +18,9 @@ const getAllStudentsHandler = async (req, res) => {
 };
 
 const studentLoginHandler = async (req, res) => {
-  const { email, password, check } = req.body;
+  const { dni, password, check } = req.body;
   try {
-    const login = await studentLoginController(email, password, check);
+    const login = await studentLoginController(dni, password, check);
     res.send(login);
   } catch (error) {
     res.status(500).json(error.message);
