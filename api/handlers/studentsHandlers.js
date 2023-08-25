@@ -28,13 +28,7 @@ const studentLoginHandler = async (req, res) => {
 };
 
 const registerStudentHandler = async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    password,
-    email,
-    dni
-  } = req.body;
+  const { firstName, lastName, password, email, dni } = req.body;
 
   const newStudent = {
     firstName,
@@ -42,10 +36,6 @@ const registerStudentHandler = async (req, res) => {
     password,
     email,
     dni,
-    dob,
-    address,
-    assignments,
-    career,
   };
   try {
     const response = await registerStudentController(newStudent);
