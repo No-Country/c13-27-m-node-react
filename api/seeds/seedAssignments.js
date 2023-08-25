@@ -14,29 +14,49 @@ db.once('open', () => {
 // Crea una nueva materia
 const newAssignment = new Assignment({
   name: 'Matemática',
-  exams: ['Algoritmos', 'Integrales', 'Funciones'],
+  exams: [
+    {
+      date: new Date('2023-10-05'),
+      time: '10:30 AM',
+      duration: 180,
+      type: 'Parcial',
+    },
+  ],
   students: ['64e3ed3b13ce0a444343a978'],
 });
 const newAssignment2 = new Assignment({
   name: 'Física',
-  exams: ['Aceleración', 'Velocidad', 'Fuerza'],
+  exams: [
+    {
+      date: new Date('2023-09-01'),
+      time: '09:00 AM',
+      duration: 120,
+      type: 'Parcial',
+    }
+  ],
   students: ['64e3ed3b13ce0a444343a978'],
 });
 const newAssignment3 = new Assignment({
   name: 'Ciencia Política',
   exams: [
-    'Teoría Política',
-    'Sistema Política Nacional',
-    'Instituciones Políticas y Actores',
+    {
+      date: new Date('2023-09-15'),
+      time: '02:00 PM',
+      duration: 90,
+      type: 'Final',
+    },
   ],
   students: ['64e658c0c2088908dd408c51'],
 });
 const newAssignment4 = new Assignment({
   name: 'Derecho Penal',
   exams: [
-    'Administración de la Justicia',
-    'Desalojos Forzosos',
-    'Estado de Derecho',
+    {
+      date: new Date('2023-10-05'),
+      time: '10:30 AM',
+      duration: 180,
+      type: 'Parcial',
+    },
   ],
   students: ['64e658c0c2088908dd408c51'],
 });
