@@ -58,8 +58,21 @@ const registerTeacherController = async (newTeacher) => {
   return response;
 };
 
+const getTeacherById = async () => {
+  const { id } = req.params;
+  try {
+    const teacher = await TeacherModel.findById(id);
+    if (!teacher) throw new Error('No hay información disponible');
+    
+    res.send(teacher);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 module.exports = {
   getAllTeachersController,
   teacherLoginController,
   registerTeacherController,
+  getTeacherById
 };
