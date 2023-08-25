@@ -40,11 +40,7 @@ const registerStudentController = async (newStudent) => {
     !newStudent.lastName ||
     !newStudent.password ||
     !newStudent.email ||
-    !newStudent.dni ||
-    !newStudent.dob ||
-    !newStudent.address ||
-    !newStudent.assignments ||
-    !newStudent.career
+    !newStudent.dni 
   )
     throw new Error('Ingrese todos los datos');
 
