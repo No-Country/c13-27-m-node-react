@@ -28,11 +28,11 @@ const TeacherSchema = new Schema({
   },
   dob: {
     type: Date,
-    required: true,
+    // required: true,
   },
   address: {
     type: String,
-    required: true,
+    // required: true,
   },
   assignments: [
     {

@@ -32,10 +32,7 @@ const registerTeacherHandler = async (req, res) => {
     lastName,
     password,
     email,
-    dni,
-    dob,
-    address,
-    assignments,
+    dni
   } = req.body;
 
   const newTeacher = {
@@ -44,9 +41,6 @@ const registerTeacherHandler = async (req, res) => {
     password,
     email,
     dni,
-    dob,
-    address,
-    assignments,
   };
   try {
     const response = await registerTeacherController(newTeacher);
