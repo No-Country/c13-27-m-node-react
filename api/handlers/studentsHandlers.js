@@ -41,7 +41,7 @@ const registerStudentHandler = async (req, res) => {
     const response = await registerStudentController(newStudent);
     //valido que el estudiante se haya guardado correctamente en la DB
     if (!response) throw new Error('No se pudo registrar el usuario');
-    res.send('Usted se registró correctamente');
+    res.json('Usted se registró correctamente');
   } catch (error) {
     res.status(500).json(error.message);
   }
