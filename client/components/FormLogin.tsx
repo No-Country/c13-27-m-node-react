@@ -18,12 +18,28 @@ const FormLogin = () => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [validNumber, setValidNumber] = useState(true);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (isFormValid) {
-      const url = './home';
-      window.location.href = url;
+      const getData = await fetch(
+        'http://localhost:3001/teachers/teachersLogin',
+        {
+          headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
+          body: JSON.stringify({
+            email: 'batista@hotmail.com',
+            password: '123456',
+            check: 'teacher',
+          }),
+        }
+      );
+      const json = await getData.json();
+
+      console.log(json);
+
+      /*       const url = './home';
+      window.location.href = url; */
     }
   };
 

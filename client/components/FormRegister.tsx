@@ -1,5 +1,5 @@
 'use client';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/formregister.module.scss';
 import { useRouter } from 'next/navigation';
 
@@ -31,6 +31,25 @@ export const FormRegister = () => {
   const [error, setError] = useState<
     Partial<Record<keyof UserRegister, string>>
   >({});
+  const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (
+      registerForm.dni !== '' &&
+      registerForm.firstname !== '' &&
+      registerForm.email !== '' &&
+      registerForm.lastname !== '' &&
+      registerForm.password !== '' &&
+      registerForm.passwordConfirm !== '' &&
+      registerForm.termsandconditions !== false
+    ) {
+      if (Object.keys(error).length === 0) {
+        setSubmitDisabled(true);
+      } else {
+        setSubmitDisabled(false);
+      }
+    }
+  }, [error, registerForm]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
@@ -42,33 +61,24 @@ export const FormRegister = () => {
     const newErrors: Partial<Record<keyof UserRegister, string>> = {};
 
     if (!value) {
-      newErrors.firstname = 'Campo obligatorio';
+      newErrors[name as keyof UserRegister] = 'Campo obligatorio';
     } else {
-      if (
-        (name === 'firstname') &&
-        !regexName.test(value)
-      ) {
-        newErrors.firstname = 'Inválido';
-      } else if (
-        (name === 'lastname') &&
-        !regexName.test(value)
-      ) {
-        newErrors.lastname = 'Inválido';
+      if (name === 'firstname' && !regexName.test(value)) {
+        newErrors[name] = 'Inválido';
+      } else if (name === 'lastname' && !regexName.test(value)) {
+        newErrors[name] = 'Inválido';
       } else if (name === 'dni' && !regexDni.test(value)) {
         newErrors[name] = 'Inválido';
       } else if (name === 'email' && !regexEmail.test(value)) {
         newErrors[name] = 'Inválido';
       }
     }
-
     if (name === 'password' && !value) {
       newErrors.password = 'Debes elegir una contraseña';
     }
-
     if (name === 'passwordConfirm' && value !== registerForm.password) {
       newErrors.passwordConfirm = 'Las contraseñas no coinciden';
     }
-
     if (name === 'termsandconditions' && !checked) {
       newErrors.termsandconditions = 'Debes aceptar los términos y condiciones';
     }
@@ -77,10 +87,8 @@ export const FormRegister = () => {
       ...registerForm,
       [name]: inputValue,
     });
-
     setError(newErrors);
   };
-  console.log(error);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -185,6 +193,7 @@ export const FormRegister = () => {
         <input
           className={styles.checkbox}
           type="checkbox"
+          defaultChecked={false}
           name="termsandconditions"
           onChange={handleChange}
         />
@@ -195,6 +204,7 @@ export const FormRegister = () => {
       <div className={styles.btnSubmitContainer}>
         <input
           className={styles.btnSubmit}
+          disabled={!submitDisabled}
           type="submit"
           value="Registrarse"
           onClick={handleRoute}
