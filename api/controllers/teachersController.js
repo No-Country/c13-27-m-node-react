@@ -20,10 +20,10 @@ const getAllTeachersController = async (page, limit) => {
 };
 
 const teacherLoginController = async (email, password, check) => {
-  if (!email || !password || !check) throw new Error('Dato faltante');
+  if (!dni || !password || !check) throw new Error('Dato faltante');
   if (check !== 'teacher') throw new Error('El usuario no es un profesor');
 
-  const foundTeacher = await TeacherModel.findOne({ email: email });
+  const foundTeacher = await TeacherModel.findOne({ dni: dni });
 
   if (!foundTeacher) throw new Error('Usuario incorrecto');
 

@@ -21,10 +21,10 @@ const getAllStudentsController = async (page, limit) => {
 };
 
 const studentLoginController = async (email, password, check) => {
-  if (!email || !password || !check) throw new Error('Dato faltante');
+  if (!dni || !password || !check) throw new Error('Dato faltante');
   if (check !== 'student') throw new Error('El usuario no es un estudiante');
 
-  const foundStudent = await StudentModel.findOne({ email: email });
+  const foundStudent = await StudentModel.findOne({ dni: dni });
 
   if (!foundStudent) throw new Error('Usuario incorrecto');
 
