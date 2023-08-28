@@ -5,6 +5,10 @@ $background: #ffffff;
 $primary-color: #ff6b6b;
 $secondary-color: #d41d1d;
 $placeholder: #939393;
+$gradient1: #00c5df;
+$gradient2: #f2371f;
+$gradient3: #18a0fb;
+$gradient4: #ffc700;
 
 :export {
   text1: $text1;
@@ -13,4 +17,8 @@ $placeholder: #939393;
   primary-color: $primary-color;
   secondary-color: $secondary-color;
   placeholder: $placeholder;
+  gradient1: $gradient1;
+  gradient2: $gradient2;
+  gradient3: $gradient3;
+  gradient4: $gradient4;
 }
