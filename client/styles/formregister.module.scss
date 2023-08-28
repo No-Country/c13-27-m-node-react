@@ -37,6 +37,11 @@
   color: $placeholder;
 }
 
+.input:focus {
+  outline: none;
+  border: 2px solid $text1;
+}
+
 .inputError {
   background-image: url(/assets/error.svg);
   background-position: 95%;

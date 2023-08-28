@@ -35,11 +35,8 @@ const FormLogin = () => {
         }
       );
       const json = await getData.json();
-
-      console.log(json);
-
-      /*       const url = './home';
-      window.location.href = url; */
+      const url = './home';
+      window.location.href = url;
     }
   };
 

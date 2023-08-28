@@ -111,7 +111,6 @@ export const FormRegister = () => {
       }),
     });
     const data = await res.json();
-
     console.log(error);
     console.log(data);
   };
@@ -161,7 +160,7 @@ export const FormRegister = () => {
       </label>
       <input
         className={`${styles.input} ${error.dni ? styles.inputError : ''}`}
-        placeholder="N° de Documento"
+        placeholder="Nro. de Documento"
         type="text"
         name="dni"
         onChange={handleChange}
