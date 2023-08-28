@@ -17,8 +17,9 @@
 .containerImages {
     display: flex;
     flex-direction: column;
+    align-self: flex-start;
     overflow-y: auto;
-    height: 200vh;
+    margin: 1rem 0rem;
 }
 .imageGrid,
 .imageGridBottom {
@@ -26,9 +27,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin: 1rem;
-    
 }
-
 .imageGrid img,
 .imageGridBottom img {
     width: 100%;
