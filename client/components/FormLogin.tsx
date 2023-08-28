@@ -99,72 +99,71 @@ const FormLogin = () => {
   const validationNumber = (dni: string) => {
     dni = loginForm.dni;
     const characters = /^[0-9]+$/;
-    const valnumber = characters.test(dni) && dni.length >= 7;
+    const valnumber = characters.test(dni) && dni.length >= 5;
     return valnumber;
   };
 
   const isFormDirty = isDirty.dni && isDirty.password;
   const isFormValid = validNumber && !errorDni && !errorPassword;
 
-  // const onSubmit = (data: any) => console.log(JSON.stringify(data));
+  // const onSubmit = (data: any) => console.log(JSON.stringify(data))
   return (
-    <form
-      className={styles.formcontainer}
-      action=""
-      onSubmit={handleSubmit}>
-      <label
-        htmlFor="dni"
-        className={styles.label}>
-        Número de documento
-      </label>
-      <input
-        className={styles.input}
-        type="text"
-        id="dni"
-        name="dni"
-        placeholder="Ingrese su DNI"
-        value={loginForm.dni}
-        onChange={handleInputDni}
-      />
-      {errorDni && (
-        <div className={styles.error}>
-          <p>El campo dni es obligatorio</p>
+    <form className={styles.formcontainer} action="" onSubmit={handleSubmit}>
+      <div className={styles.containerbox}>
+        <label htmlFor="dni" className={styles.label}>
+          Número de documento
+        </label>
+        <div className={styles.inputbox}>
+          <input
+            className={styles.input}
+            type="text"
+            id="dni"
+            name="dni"
+            placeholder="Ingrese su DNI"
+            value={loginForm.dni}
+            onChange={handleInputDni}
+          />
+          {errorDni && (
+            <div className={styles.error}>
+              <p>El campo DNI es obligatorio</p>
+            </div>
+          )}
+          {!errorDni && !validNumber && (
+            <div className={styles.error}>
+              <p>El campo DNI no es válido</p>
+            </div>
+          )}
         </div>
-      )}
-      {!errorDni && !validNumber && (
-        <div className={styles.error}>
-          <p>El campo dni no es válido</p>
+      </div>
+      <div className={styles.containerbox}>
+        <label htmlFor="password" className={styles.label}>
+          Contraseña
+        </label>
+        <div className={styles.inputbox}>
+          <input
+            className={styles.input}
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Ingrese su contraseña"
+            value={loginForm.password}
+            onChange={handleInputPassword}
+          />
+          {errorPassword && (
+            <div className={styles.error}>
+              <p>El campo Contraseña es obligatorio</p>
+            </div>
+          )}
         </div>
-      )}
-      <label
-        htmlFor="password"
-        className={styles.label}>
-        Contraseña
-      </label>
-      <input
-        className={styles.input}
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Ingrese su contraseña"
-        value={loginForm.password}
-        onChange={handleInputPassword}
-      />
-      {errorPassword && (
-        <div className={styles.error}>
-          <p>El campo Contraseña es obligatorio</p>
-        </div>
-      )}
+      </div>
       <div className={styles.forgotpassword}>
-        <a
-          href=""
-          className={styles.forgottext}>
+        <a href="" className={styles.forgottext}>
           Olvidé mi contraseña
         </a>
       </div>
 
       <div className={styles.registerlink}>
-        No tienes cuenta?
+        ¿No tienes cuenta?
         <Link href="/signup">
           <span> Regístrate! </span>
         </Link>
