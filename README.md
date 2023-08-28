@@ -1,5 +1,7 @@
 # EDUCAPP - Plataforma Universitaria
 
+
+
 ## API DOCUMENTATION
 
 1. **Crear un archivo .env con las siguientes variables:**
