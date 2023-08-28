@@ -1,0 +1,26 @@
+@import 'variables.scss';
+
+.containerTitle {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start; 
+    justify-self: flex-start;
+    width: 352px;
+    border-bottom: 1.4px solid $text2;
+}
+.title {
+    padding: 0.5rem;
+    font-size: 24px;
+    font-weight: 600;
+    color: $text2;
+}
+.imageGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1rem; 
+    margin: 1rem;
+}
+
+.imageGrid img {
+    width: 100%;
+}
