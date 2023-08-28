@@ -6,12 +6,12 @@ import login from '../../public/assets/login.png';
 const Login = () => {
   return (
     <main className={styles.mainlogin}>
-      <FormLogin />;
+      <FormLogin />
       <aside className={styles.loginimagecontainer}>
         <Image
           className={styles.loginimage}
           src={login}
-          width={528}
+          width={500}
           height={600}
           alt="login"></Image>
       </aside>
