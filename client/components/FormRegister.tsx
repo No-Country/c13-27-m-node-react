@@ -2,17 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/formregister.module.scss';
 import { useRouter } from 'next/navigation';
-
-interface UserRegister {
-  userRol: 'student' | 'teacher';
-  firstname: string;
-  lastname: string;
-  dni: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-  termsandconditions: boolean;
-}
+import { UserRegister } from '../interfaces/interfaces';
 
 const initialForm: UserRegister = {
   userRol: 'student',
