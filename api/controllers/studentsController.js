@@ -33,6 +33,7 @@ const studentLoginController = async (dni, password, check) => {
 
   return foundStudent;
 };
+
 const registerStudentController = async (newStudent) => {
   // valido que esten ingresados todos los datos
   if (
@@ -40,7 +41,7 @@ const registerStudentController = async (newStudent) => {
     !newStudent.lastName ||
     !newStudent.password ||
     !newStudent.email ||
-    !newStudent.dni 
+    !newStudent.dni
   )
     throw new Error('Ingrese todos los datos');
 

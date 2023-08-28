@@ -1,9 +1,12 @@
-const page = () => {
+import styles from '../../styles/home.module.scss';
+import Landing from '../../components/Landing';
+
+const Home = () => {
   return (
-    <main style={{ display: 'grid', placeItems: 'center' }}>
-      <h1>Aquí estará el Home de la plataforma</h1>;
-    </main>
+    <div>
+      <Landing />
+    </div>
   );
 };
 
-export default page;
+export default Home;
