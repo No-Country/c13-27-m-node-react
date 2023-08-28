@@ -67,7 +67,7 @@ export const FormRegister = () => {
         newErrors[name] = 'Inválido';
       } else if (name === 'lastname' && !regexName.test(value)) {
         newErrors[name] = 'Inválido';
-      } else if (name === 'dni' && !regexDni.test(value)) {
+      } else if (name === 'dni' && !regexDni.test(value) && name.length >= 5) {
         newErrors[name] = 'Inválido';
       } else if (name === 'email' && !regexEmail.test(value)) {
         newErrors[name] = 'Inválido';
