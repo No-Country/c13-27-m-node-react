@@ -22,25 +22,25 @@ const StudentSchema = new Schema({
     unique: true,
   },
   dni: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
   },
   dob: {
     type: Date,
-    required: true,
+    // required: true,
   },
   address: {
     type: String,
-    required: true,
+    // required: true,
   },
   assignments: {
     type: [String],
-    required: true,
+    // required: true,
   },
   career: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 

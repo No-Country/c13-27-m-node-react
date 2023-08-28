@@ -18,9 +18,9 @@ const getAllStudentsHandler = async (req, res) => {
 };
 
 const studentLoginHandler = async (req, res) => {
-  const { email, password, check } = req.body;
+  const { dni, password, check } = req.body;
   try {
-    const login = await studentLoginController(email, password, check);
+    const login = await studentLoginController(dni, password, check);
     res.send(login);
   } catch (error) {
     res.status(500).json(error.message);
@@ -28,17 +28,7 @@ const studentLoginHandler = async (req, res) => {
 };
 
 const registerStudentHandler = async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    password,
-    email,
-    dni,
-    dob,
-    address,
-    assignments,
-    career,
-  } = req.body;
+  const { firstName, lastName, password, email, dni } = req.body;
 
   const newStudent = {
     firstName,
@@ -46,16 +36,12 @@ const registerStudentHandler = async (req, res) => {
     password,
     email,
     dni,
-    dob,
-    address,
-    assignments,
-    career,
   };
   try {
     const response = await registerStudentController(newStudent);
     //valido que el estudiante se haya guardado correctamente en la DB
     if (!response) throw new Error('No se pudo registrar el usuario');
-    res.send('Usted se registró correctamente');
+    res.json('Usted se registró correctamente');
   } catch (error) {
     res.status(500).json(error.message);
   }

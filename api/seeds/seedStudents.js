@@ -19,7 +19,7 @@ const newStudent = new Student({
   lastName: 'Perez',
   password: '123456',
   email: 'juanperez@hotmail.com',
-  dni: 35000000,
+  dni: '35000000',
   dob: 10 / 12 / 1990,
   address: 'Jujuy 1234',
   assignments: [
@@ -33,8 +33,8 @@ const newStudent1 = new Student({
   lastName: 'Jackson Peralta',
   password: '999999',
   email: 'mjperalta@hotmail.com',
-  dni: 37000000,
-  dob: 08 / 02 / 1998,
+  dni: '37000000',
+  dob: 8 / 2 / 1998,
   address: 'Salta 123',
   assignments: [
     '64e657d99817b684985962bb', // Ciencia Política

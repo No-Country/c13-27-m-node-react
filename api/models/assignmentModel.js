@@ -17,11 +17,17 @@ const AssignmentSchema = new Schema({
       ref: 'Student',
     },
   ],
-  exams: {
-    type: [String],
-    required: true,
-    unique: true,
-  },
+  exams: [
+    new Schema({
+      date: Date,
+      time: String,
+      duration: Number,
+      type: {
+        type: String,
+        enum: ['Parcial', 'Final'],
+      },
+    }),
+  ],
 });
 
 const AssignmentModel = mongoose.model('Assignment', AssignmentSchema);

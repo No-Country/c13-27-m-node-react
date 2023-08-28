@@ -9,6 +9,7 @@ const getAllTeachersController = async (page, limit) => {
 
   if (docs.length === 0)
     throw new Error('No hay mas profesores para esta pagina.');
+
   return {
     teachers: docs,
     hasPrevPage,
@@ -19,11 +20,11 @@ const getAllTeachersController = async (page, limit) => {
   };
 };
 
-const teacherLoginController = async (email, password, check) => {
-  if (!email || !password || !check) throw new Error('Dato faltante');
+const teacherLoginController = async (dni, password, check) => {
+  if (!dni || !password || !check) throw new Error('Dato faltante');
   if (check !== 'teacher') throw new Error('El usuario no es un profesor');
 
-  const foundTeacher = await TeacherModel.findOne({ email: email });
+  const foundTeacher = await TeacherModel.findOne({ dni: dni });
 
   if (!foundTeacher) throw new Error('Usuario incorrecto');
 
@@ -40,16 +41,13 @@ const registerTeacherController = async (newTeacher) => {
     !newTeacher.lastName ||
     !newTeacher.password ||
     !newTeacher.email ||
-    !newTeacher.dni ||
-    !newTeacher.dob ||
-    !newTeacher.address ||
-    !newTeacher.assignments
+    !newTeacher.dni
   )
     throw new Error('Ingrese todos los datos');
 
   newTeacher.password = createHash(newTeacher.password); // encripto la contraseña
 
-  const teacherExists = await TeacherModel.findOne({ email: newTeacher.email }); // aca me devuelve el profesor si existe
+  const teacherExists = await TeacherModel.findOne({ dni: newTeacher.dni }); // aca me devuelve el profesor si existe
   if (teacherExists) throw new Error('El usuario ya existe');
 
   //guardo el nuevo profesor en la DB
@@ -58,8 +56,15 @@ const registerTeacherController = async (newTeacher) => {
   return response;
 };
 
+const getTeacherByIdController = async (id) => {
+  const teacher = await TeacherModel.findById(id).populate('assignments');
+  if (!teacher) throw new Error('No existe el profesor');
+  return teacher;
+};
+
 module.exports = {
   getAllTeachersController,
   teacherLoginController,
   registerTeacherController,
+  getTeacherByIdController,
 };

@@ -22,22 +22,22 @@ const TeacherSchema = new Schema({
     unique: true,
   },
   dni: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
   },
   dob: {
     type: Date,
-    required: true,
+    // required: true,
   },
   address: {
     type: String,
-    required: true,
+    // required: true,
   },
   assignments: [
     {
       type: Schema.Types.ObjectId, //Conecta con modelo Assignments
-      ref: 'Assignments',
+      ref: 'Assignment',
     },
   ],
 });
