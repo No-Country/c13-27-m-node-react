@@ -2,6 +2,7 @@ const {
   getAllTeachersController,
   teacherLoginController,
   registerTeacherController,
+  getTeacherByIdController,
 } = require('../controllers/teachersController');
 
 const getAllTeachersHandler = async (req, res) => {
@@ -46,8 +47,19 @@ const registerTeacherHandler = async (req, res) => {
   }
 };
 
+const getTeacherByIdHandler = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const teacher = await getTeacherByIdController(id);
+    res.send(teacher);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 module.exports = {
   getAllTeachersHandler,
   teacherLoginHandler,
   registerTeacherHandler,
+  getTeacherByIdHandler,
 };

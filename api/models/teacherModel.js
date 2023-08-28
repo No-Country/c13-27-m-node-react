@@ -37,7 +37,7 @@ const TeacherSchema = new Schema({
   assignments: [
     {
       type: Schema.Types.ObjectId, //Conecta con modelo Assignments
-      ref: 'Assignments',
+      ref: 'Assignment',
     },
   ],
 });
