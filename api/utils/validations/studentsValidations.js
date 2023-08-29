@@ -1,13 +1,19 @@
 const joi = require('joi');
 
-const loginSchema = joi.object({
-  dni: joi
-    .string()
-    .pattern(new RegExp(/^[0-9]+$/i))
-    .min(5)
-    .required(),
-  password: joi.string().required(),
-});
+const loginSchema = joi
+  .object({
+    dni: joi
+      .string()
+      .pattern(new RegExp(/^[0-9]+$/i))
+      .min(5)
+      .required(),
+    password: joi.string().required(),
+  })
+  .messages({
+    required: 'El campo {key} es obligatorio',
+    min: 'El campo {key} debe tener al menos {min} caracteres',
+    pattern: 'El campo {key} debe cumplir con el patrón {pattern}',
+  });;
 
 const registrySchema = joi
   .object({
@@ -29,12 +35,19 @@ const registrySchema = joi
       .required(),
     password: joi.string().required(),
     passwordConfirm: joi.ref('password'),
-    termsandconditions: '',
+    // termsandconditions: '',
 
     email: joi.string().email().required(),
     password: joi.string().required(),
   })
-  .with('password', 'repeat_password');
+  .with('password', 'repeat_password')
+  .alias('passwordConfirm', 'repeat_password')
+  .messages({
+    required: 'El campo {key} es obligatorio',
+    min: 'El campo {key} debe tener al menos {min} caracteres',
+    pattern: 'El campo {key} debe cumplir con el patrón {pattern}',
+    email: 'El campo {key} no es un correo electrónico válido',
+  });;
 
 module.exports = {
   loginSchema,
