@@ -44,7 +44,7 @@ const FormLogin = () => {
           body: JSON.stringify({
             email: allData.email,
             password: allData.password,
-            userRol: allData.checked,
+            check: allData.checked,
           }),
         });
 
