@@ -101,8 +101,6 @@ export const FormRegister = () => {
       }),
     });
     const data = await res.json();
-    console.log(error);
-    console.log(data);
   };
 
   const handleRoute = () => {

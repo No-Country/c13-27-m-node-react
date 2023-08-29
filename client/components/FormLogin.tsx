@@ -6,8 +6,14 @@ import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import alumno from '../public/assets/alumno.png';
 import teacher from '../public/assets/profesor.jpg';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
+import { loginUser } from '../redux/slice';
 
 const FormLogin = () => {
+  const userLogged = useSelector((state: RootState) => state.user.loggedIn);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -52,8 +58,9 @@ const FormLogin = () => {
 
         if (response.ok) {
           const responseData = await response.json();
-
+          dispatch(loginUser);
           console.log(responseData);
+          console.log(userLogged);
         } else {
           console.error('Error connecting to the backend');
         }
@@ -84,8 +91,13 @@ const FormLogin = () => {
             <form onSubmit={handleSubmit(onSubmitView1)}>
               <div className={styles.containerview1}>
                 <div className={styles.inputs1}>
-                  <label htmlFor="student" className={styles.label1}>
-                    <Image src={alumno} alt="alumno" />
+                  <label
+                    htmlFor="student"
+                    className={styles.label1}>
+                    <Image
+                      src={alumno}
+                      alt="alumno"
+                    />
                     <input
                       type="radio"
                       value="student"
@@ -96,8 +108,13 @@ const FormLogin = () => {
                     <h3>Alumno</h3>
                   </label>
 
-                  <label htmlFor="teacher" className={styles.label1}>
-                    <Image src={teacher} alt="profesor" />
+                  <label
+                    htmlFor="teacher"
+                    className={styles.label1}>
+                    <Image
+                      src={teacher}
+                      alt="profesor"
+                    />
                     <input
                       type="radio"
                       value="teacher"
@@ -129,7 +146,9 @@ const FormLogin = () => {
             className={styles.formContainer}>
             <div className={styles.containerbox}>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="dni">
+                <label
+                  className={styles.label}
+                  htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -154,7 +173,9 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="password">
+                <label
+                  className={styles.label}
+                  htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -172,7 +193,9 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a href="" className={styles.forgottext}>
+                <a
+                  href=""
+                  className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>
