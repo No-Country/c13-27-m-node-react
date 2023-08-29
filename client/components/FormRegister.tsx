@@ -2,20 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/formregister.module.scss';
 import { useRouter } from 'next/navigation';
-
-interface UserRegister {
-  userRol: 'alumno' | 'profesor';
-  firstname: string;
-  lastname: string;
-  dni: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-  termsandconditions: boolean;
-}
+import { UserRegister } from '../interfaces/interfaces';
 
 const initialForm: UserRegister = {
-  userRol: 'alumno',
+  userRol: 'student',
   firstname: '',
   lastname: '',
   dni: '',
@@ -67,7 +57,7 @@ export const FormRegister = () => {
         newErrors[name] = 'Inválido';
       } else if (name === 'lastname' && !regexName.test(value)) {
         newErrors[name] = 'Inválido';
-      } else if (name === 'dni' && !regexDni.test(value)) {
+      } else if (name === 'dni' && !regexDni.test(value) && name.length >= 5) {
         newErrors[name] = 'Inválido';
       } else if (name === 'email' && !regexEmail.test(value)) {
         newErrors[name] = 'Inválido';
@@ -90,10 +80,29 @@ export const FormRegister = () => {
     setError(newErrors);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const url =
+      registerForm.userRol === 'student'
+        ? 'http://localhost:3001/students/registerStudent'
+        : 'http://localhost:3001/teachers/registerTeacher';
+
+    const res = await fetch(url, {
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify({
+        firstName: registerForm.firstname,
+        lastName: registerForm.lastname,
+        email: registerForm.email,
+        password: registerForm.password,
+        dni: registerForm.dni,
+        check: registerForm.userRol,
+      }),
+    });
+    const data = await res.json();
     console.log(error);
-    console.log(registerForm);
+    console.log(data);
   };
 
   const handleRoute = () => {
@@ -117,6 +126,7 @@ export const FormRegister = () => {
         className={`${styles.input} ${
           error.firstname ? styles.inputError : ''
         }`}
+        placeholder="Nombre"
         type="text"
         name="firstname"
         onChange={handleChange}
@@ -128,6 +138,7 @@ export const FormRegister = () => {
       </label>
       <input
         className={`${styles.input} ${error.lastname ? styles.inputError : ''}`}
+        placeholder="Apellido"
         type="text"
         name="lastname"
         onChange={handleChange}
@@ -139,6 +150,7 @@ export const FormRegister = () => {
       </label>
       <input
         className={`${styles.input} ${error.dni ? styles.inputError : ''}`}
+        placeholder="Nro. de Documento"
         type="text"
         name="dni"
         onChange={handleChange}
@@ -150,6 +162,7 @@ export const FormRegister = () => {
       </label>
       <input
         className={`${styles.input} ${error.email ? styles.inputError : ''}`}
+        placeholder="E-mail"
         type="text"
         name="email"
         onChange={handleChange}
@@ -161,6 +174,7 @@ export const FormRegister = () => {
       </label>
       <input
         className={`${styles.input} ${error.password ? styles.inputError : ''}`}
+        placeholder="Contraseña"
         type="password"
         name="password"
         onChange={handleChange}
@@ -174,6 +188,7 @@ export const FormRegister = () => {
         className={`${styles.input} ${
           error.passwordConfirm ? styles.inputError : ''
         }`}
+        placeholder="Confirmar contraseña"
         type="password"
         name="passwordConfirm"
         onChange={handleChange}
@@ -183,7 +198,7 @@ export const FormRegister = () => {
           className={styles.checkbox}
           type="radio"
           name="userRol"
-          value="alumno"
+          value="student"
           onChange={handleChange}
           defaultChecked={true}
         />
@@ -198,7 +213,7 @@ export const FormRegister = () => {
           className={styles.checkbox}
           type="radio"
           name="userRol"
-          value="profesor"
+          value="teacher"
           onChange={handleChange}
         />
         <label

@@ -2,6 +2,7 @@ const {
   getAllTeachersController,
   teacherLoginController,
   registerTeacherController,
+  getTeacherByIdController,
 } = require('../controllers/teachersController');
 
 const getAllTeachersHandler = async (req, res) => {
@@ -17,9 +18,9 @@ const getAllTeachersHandler = async (req, res) => {
 };
 
 const teacherLoginHandler = async (req, res) => {
-  const { email, password, check } = req.body;
+  const { dni, password, check } = req.body;
   try {
-    const login = await teacherLoginController(email, password, check);
+    const login = await teacherLoginController(dni, password, check);
     res.send(login);
   } catch (error) {
     res.status(500).json(error.message);
@@ -27,16 +28,7 @@ const teacherLoginHandler = async (req, res) => {
 };
 
 const registerTeacherHandler = async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    password,
-    email,
-    dni,
-    dob,
-    address,
-    assignments,
-  } = req.body;
+  const { firstName, lastName, password, email, dni } = req.body;
 
   const newTeacher = {
     firstName,
@@ -44,15 +36,22 @@ const registerTeacherHandler = async (req, res) => {
     password,
     email,
     dni,
-    dob,
-    address,
-    assignments,
   };
   try {
     const response = await registerTeacherController(newTeacher);
     //valido que el profesor se haya guardado correctamente en la DB
     if (!response) throw new Error('No se pudo registrar el usuario');
-    res.send('Usted se registró correctamente');
+    res.json('Usted se registró correctamente');
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+const getTeacherByIdHandler = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const teacher = await getTeacherByIdController(id);
+    res.send(teacher);
   } catch (error) {
     res.status(500).json(error.message);
   }

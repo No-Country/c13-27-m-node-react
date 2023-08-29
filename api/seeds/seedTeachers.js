@@ -17,7 +17,7 @@ const newTeacher = new Teacher({
   lastName: 'Batista',
   password: '123456',
   email: 'batista@hotmail.com',
-  dni: 25000000,
+  dni: '25000000',
   dob: 10 / 12 / 1970,
   address: 'Salta 123',
   assignments: [

@@ -12,8 +12,7 @@ const Signup = () => {
         <Image
           className={styles.registerImage}
           src={registroImg}
-          width={528}
-          height={800}
+          objectFit={'cover'}
           alt="register"></Image>
       </aside>
     </main>

@@ -28,9 +28,9 @@ obj (students OR teachers)
 | TIPO | DETALLES                                                               | RUTA                                           |
 | ---- | ---------------------------------------------------------------------- | ---------------------------------------------- |
 | GET  | Devuelve todos los estudiantes como array de objetos paginados de a 10 | http://localhost:PORT/students/allStudents     |
-| GET  | Inicia sesión, pide: (email, password, check)                          | http://localhost:PORT/students/studentsLogin   |
+| POST | Inicia sesión, pide: (email, password, check)                          | http://localhost:PORT/students/studentsLogin   |
 | GET  | Busca un estudiante por ID, devuelve el objeto                         | http://localhost:PORT/students/:id             |
-| POST | En caso de éxito, devuelve: "Usted se registró correctamente"          | http://localhost:PORT/students/registerStudent |
+| POST | Ruta para registro de un estudiante. Devuelve un mensaje (string) de éxito o error. Le llega la información en el body como objeto JSON          | http://localhost:PORT/students/registerStudent |
 
 **Student Schema**
 
@@ -51,10 +51,10 @@ obj (students OR teachers)
 
 | TIPO | DETALLES                                                              | RUTA                                           |
 | ---- | --------------------------------------------------------------------- | ---------------------------------------------- |
-| GET  | Devuelve todos los profesores como array de objetos paginados de a 10 | http://localhost:PORT/teachers/allTeachers     |
-| GET  | Inicia sesión, pide: (email, password, check)                         | http://localhost:PORT/teachers/teachersLogin   |
+| GET  | Devuelve todos los profesores como array de objetos (JSON) paginados de a 10 | http://localhost:PORT/teachers/allTeachers     |
+| POST | Inicia sesión, pide: (email, password, check)                         | http://localhost:PORT/teachers/teachersLogin   |
 | GET  | Devuelve un profesor a través del ID                                  | http://localhost:PORT/teachers/:id             |
-| POST | En caso de éxito, devuelve: "Usted se registró correctamente"         | http://localhost:PORT/teachers/registerTeacher |
+| POST | Ruta para registro de un profesor. Devuelve un mensaje (string) de éxito o error. Le llega la información en el body como objeto JSON         | http://localhost:PORT/teachers/registerTeacher |
 
 **Teacher Schema**
 
