@@ -34,26 +34,6 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 
-// Middleware para chequear si está logueado
-const requerirLogin = (req, res, next) => {
-  if (!req.session.dni) {
-    // Si no hay dni en sesion, enviar a login
-    return res.redirect('http://localhost:3000/login');
-  } else {
-    console.log(check);
-    next();
-  }
-};
-
-// Middleware para chequear permisos de profesor
-const verificarProfesor = (req, res, next) => {
-  if (req.session.role !== 'teacher') {
-    throw new Error('No tiene permiso para acceder a la ruta');
-  } else {
-    next();
-  }
-};
-
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
