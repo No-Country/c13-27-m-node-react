@@ -1,9 +1,9 @@
 import CarreerForm from '../../components/CarreerSelectionForm';
-import '../../styles/carreerselection.module.scss';
+import styles from '../../styles/carreerselection.module.scss';
 const SeleccionCarrera = () => {
   return (
     <main>
-      <p>Carreras</p>
+      <h2 className={styles.title}>Elije tu carrera</h2>
       <CarreerForm />
     </main>
   );
