@@ -50,7 +50,7 @@ const FormLogin = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            email: allData.email,
+            dni: allData.dni,
             password: allData.password,
             check: allData.checked,
           }),
