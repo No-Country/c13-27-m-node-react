@@ -28,6 +28,15 @@ const AssignmentSchema = new Schema({
       },
     }),
   ],
+  days: {
+    type: [String],
+  },
+  schedule: {
+    type: String,
+  },
+  classroom: {
+    type: String,
+  },
 });
 
 const AssignmentModel = mongoose.model('Assignment', AssignmentSchema);
