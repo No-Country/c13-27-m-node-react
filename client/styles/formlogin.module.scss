@@ -27,13 +27,28 @@
 .container1 {
   display: flex;
 }
-// .containerview1 {
-//   background-color: aqua;
-// }
+.inputs1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .input1 {
   margin: 5rem;
 }
 
+.label1 {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.hiddenradio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 // view 2
 .containerbox {
   margin: 10rem 0;
