@@ -53,10 +53,6 @@ const verificarProfesor = (req, res, next) => {
   }
 };
 
-app.get('/secreto', requerirLogin, (req, res) => {
-  res.send(`ok`);
-});
-
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
