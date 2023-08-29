@@ -6,13 +6,10 @@ import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import alumno from '../public/assets/alumno.png';
 import teacher from '../public/assets/profesor.jpg';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useDispatch } from 'react-redux';
-import { RootState } from '../redux/store';
 import { loginUser } from '../redux/slice';
 
 const FormLogin = () => {
-  const userLogged = useSelector((state: RootState) => state.user.loggedIn);
   const dispatch = useDispatch();
   const {
     register,
@@ -58,9 +55,14 @@ const FormLogin = () => {
 
         if (response.ok) {
           const responseData = await response.json();
-          dispatch(loginUser);
           console.log(responseData);
-          console.log(userLogged);
+          dispatch(
+            loginUser({
+              dni: allData.dni,
+              password: allData.password,
+              userRol: allData.checked,
+            })
+          );
         } else {
           console.error('Error connecting to the backend');
         }
