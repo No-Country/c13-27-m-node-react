@@ -23,13 +23,15 @@ const Navbar = () => {
       </Link>
 
       <ul className={styles.ulNav}>
-        <li>
-          <Link
-            href="/"
-            className={styles.itemNav}>
-            Home
-          </Link>
-        </li>
+        {userLogged && (
+          <li>
+            <Link
+              href="/"
+              className={styles.itemNav}>
+              Home
+            </Link>
+          </li>
+        )}
         <li>
           <Link
             href="/ayuda"
