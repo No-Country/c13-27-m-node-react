@@ -35,10 +35,6 @@ const registrySchema = joi
       .required(),
     password: joi.string().required(),
     passwordConfirm: joi.ref('password'),
-    // termsandconditions: '',
-
-    email: joi.string().email().required(),
-    password: joi.string().required(),
   })
   .with('password', 'repeat_password')
   .alias('passwordConfirm', 'repeat_password')
