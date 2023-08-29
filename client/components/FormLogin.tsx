@@ -127,7 +127,9 @@ const FormLogin = () => {
             className={styles.formContainer}>
             <div className={styles.containerbox}>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="dni">
+                <label
+                  className={styles.label}
+                  htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -152,7 +154,9 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="password">
+                <label
+                  className={styles.label}
+                  htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -170,7 +174,9 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a href="" className={styles.forgottext}>
+                <a
+                  href=""
+                  className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>

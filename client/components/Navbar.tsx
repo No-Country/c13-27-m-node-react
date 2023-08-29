@@ -1,8 +1,13 @@
+'use client';
 import Link from 'next/link';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import type { RootState } from '../redux/store';
 
 const Navbar = () => {
+  const userLogged = useSelector((state: RootState) => state.user.loggedIn);
+
   return (
     <nav className={styles.navBar}>
       <Link href="/">
@@ -19,19 +24,38 @@ const Navbar = () => {
 
       <ul className={styles.ulNav}>
         <li>
-          <Link href="/ayuda" className={styles.itemNav}>
+          <Link
+            href="/"
+            className={styles.itemNav}>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/ayuda"
+            className={styles.itemNav}>
             Ayuda
           </Link>
         </li>
         <li>
-          <Link href="/info" className={styles.itemNav}>
+          <Link
+            href="/info"
+            className={styles.itemNav}>
             Información
           </Link>
         </li>
+        {userLogged && (
+          <li>
+            <Link
+              href="/perfil-alumno"
+              className={styles.itemNav}>
+              Perfil
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );
 };
 
 export default Navbar;
-
