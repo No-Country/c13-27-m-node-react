@@ -9,6 +9,7 @@ const getAllTeachersController = async (page, limit) => {
 
   if (docs.length === 0)
     throw new Error('No hay mas profesores para esta pagina.');
+
   return {
     teachers: docs,
     hasPrevPage,
@@ -55,8 +56,15 @@ const registerTeacherController = async (newTeacher) => {
   return response;
 };
 
+const getTeacherByIdController = async (id) => {
+  const teacher = await TeacherModel.findById(id).populate('assignments');
+  if (!teacher) throw new Error('No existe el profesor');
+  return teacher;
+};
+
 module.exports = {
   getAllTeachersController,
   teacherLoginController,
   registerTeacherController,
+  getTeacherByIdController,
 };
