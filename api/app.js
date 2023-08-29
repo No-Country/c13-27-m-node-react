@@ -26,6 +26,7 @@ db.once('open', () => {
 
 //Configuración de sesión
 const sessionConfig = {
+  name: 'session',
   secret: 'secreto', // Si se utiliza, cambiar por variable de entorno
   resave: false,
   saveUninitialized: false,
