@@ -2,187 +2,202 @@
 import { ChangeEvent, useState } from 'react';
 import styles from '../styles/formlogin.module.scss';
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import Image from 'next/image';
 
 const FormLogin = () => {
-  const [loginForm, setLoginForm] = useState({
-    dni: '',
-    password: '',
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isDirty, isValid },
+  } = useForm({
+    mode: 'onChange',
   });
 
-  const [isDirty, setIsDirty] = useState({
-    dni: false,
-    password: false,
-  });
+  const [view1Data, setView1Data] = useState({});
 
-  const [errorDni, setErrorDni] = useState(false);
-  const [errorPassword, setErrorPassword] = useState(false);
-  const [validNumber, setValidNumber] = useState(true);
+  const onSubmitView1 = (data: any) => {
+    setView1Data(data.checked);
+    setView1(!view1);
+    setView2(!view2);
+  };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmitView2 = async (data: any) => {
+    const allData = { ...view1Data, ...data };
+    console.log(allData);
 
-    if (isFormValid) {
-      const getData = await fetch(
-        'http://localhost:3001/teachers/teachersLogin',
-        {
-          headers: { 'Content-Type': 'application/json' },
+    try {
+      let endpoint = '';
+      if (allData.checked === 'student') {
+        endpoint = 'http://localhost:3001/students/studentsLogin';
+      } else if (allData.checked === 'teacher') {
+        endpoint = 'http://localhost:3001/teachers/teachersLogin';
+      }
+
+      if (endpoint) {
+        const response = await fetch(endpoint, {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({
-            email: 'batista@hotmail.com',
-            password: '123456',
-            check: 'teacher',
+            email: allData.email,
+            password: allData.password,
+            userRol: allData.checked,
           }),
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+
+          console.log(responseData);
+        } else {
+          console.error('Error connecting to the backend');
         }
-      );
-      const json = await getData.json();
-
-      console.log(json);
-
-      /*       const url = './home';
-      window.location.href = url; */
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
     }
   };
 
-  const handleInputDni = (event: any) => {
-    event.preventDefault();
+  const [view1, setView1] = useState(true);
+  const [view2, setView2] = useState(false);
 
-    if (event.target.value.length === 0) {
-      setErrorDni(true);
-    }
+  // const handleView = () => {
+  //   setView1(false);
+  //   setView2(true);
+  // };
 
-    if (event.target.value.length > 0) {
-      setErrorDni(false);
-    }
+  //   /*       const url = './home';
+  //   window.location.href = url; */
+  // }
 
-    if (validationNumber(loginForm.dni)) {
-      setValidNumber(true);
-    }
-
-    if (!validationNumber(loginForm.dni)) {
-      setValidNumber(false);
-    }
-
-    setIsDirty({
-      ...isDirty,
-      dni: true,
-    });
-
-    const { name, value } = event.target;
-
-    setLoginForm({
-      ...loginForm,
-      [name]: value,
-    });
-  };
-
-  const handleInputPassword = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-
-    if (event.target.value.length === 0) {
-      setErrorPassword(true);
-    }
-
-    if (event.target.value.length > 0) {
-      setErrorPassword(false);
-    }
-
-    setIsDirty({
-      ...isDirty,
-      password: true,
-    });
-
-    const { name, value } = event.target;
-
-    setLoginForm({
-      ...loginForm,
-      [name]: value,
-    });
-  };
-
-  const validationNumber = (dni: string) => {
-    dni = loginForm.dni;
-    const characters = /^[0-9]+$/;
-    const valnumber = characters.test(dni) && dni.length >= 5;
-    return valnumber;
-  };
-
-  const isFormDirty = isDirty.dni && isDirty.password;
-  const isFormValid = validNumber && !errorDni && !errorPassword;
-
-  // const onSubmit = (data: any) => console.log(JSON.stringify(data))
   return (
-    <form className={styles.formcontainer} action="" onSubmit={handleSubmit}>
-      <div className={styles.containerbox}>
-        <label htmlFor="dni" className={styles.label}>
-          Número de documento
-        </label>
-        <div className={styles.inputbox}>
-          <input
-            className={styles.input}
-            type="text"
-            id="dni"
-            name="dni"
-            placeholder="Ingrese su DNI"
-            value={loginForm.dni}
-            onChange={handleInputDni}
-          />
-          {errorDni && (
-            <div className={styles.error}>
-              <p>El campo DNI es obligatorio</p>
-            </div>
-          )}
-          {!errorDni && !validNumber && (
-            <div className={styles.error}>
-              <p>El campo DNI no es válido</p>
-            </div>
-          )}
-        </div>
-      </div>
-      <div className={styles.containerbox}>
-        <label htmlFor="password" className={styles.label}>
-          Contraseña
-        </label>
-        <div className={styles.inputbox}>
-          <input
-            className={styles.input}
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Ingrese su contraseña"
-            value={loginForm.password}
-            onChange={handleInputPassword}
-          />
-          {errorPassword && (
-            <div className={styles.error}>
-              <p>El campo Contraseña es obligatorio</p>
-            </div>
-          )}
-        </div>
-      </div>
-      <div className={styles.forgotpassword}>
-        <a href="" className={styles.forgottext}>
-          Olvidé mi contraseña
-        </a>
-      </div>
+    <>
+      {view1 && (
+        <div className={styles.container1}>
+          <div>
+            <h2>Seleccione</h2>
+            <form onSubmit={handleSubmit(onSubmitView1)}>
+              <div className={styles.containerview1}>
+                <div>
+                  <label htmlFor="">Alumno</label>
+                  <input
+                    className={styles.input1}
+                    type="radio"
+                    value="student"
+                    {...register('check')}
+                  />
 
-      <div className={styles.registerlink}>
-        ¿No tienes cuenta?
-        <Link href="/signup">
-          <span> Regístrate! </span>
-        </Link>
-      </div>
+                  <label htmlFor="">Profesor</label>
+                  <input
+                    className={styles.input1}
+                    type="radio"
+                    value="teacher"
+                    {...register('check', {
+                      required: 'El rol es requerido',
+                    })}
+                  />
+                </div>
 
-      <div className={styles.btncontainer}>
-        <input
-          type="submit"
-          value="Ingresar"
-          className={`${styles.btn} ${
-            isFormValid ? '' : styles.disabledbutton
-          }`}
-          disabled={!isFormValid || !isFormDirty}
-        />
-      </div>
-    </form>
+                <div>
+                  <input
+                    type="submit"
+                    value="Siguiente"
+                    disabled={!isDirty || !isValid}
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          {/* <Image
+            src="/client/public/assets/profesor.svg"
+            alt="student"
+            width={100}
+            height={100}
+          /> */}
+        </div>
+      )}
+
+      {view2 && (
+        <div>
+          <form
+            onSubmit={handleSubmit(onSubmitView2)}
+            className={styles.formContainer}>
+            <div className={styles.containerbox}>
+              <div className={styles.inputbox}>
+                <label className={styles.label} htmlFor="dni">
+                  DNI
+                </label>
+                <input
+                  className={styles.input}
+                  type="text"
+                  {...register('dni', {
+                    required: 'El DNI es obligatorio',
+                    pattern: {
+                      value: /^[0-9]+$/i,
+                      message: 'El DNI no es válido',
+                    },
+                    minLength: {
+                      value: 5,
+                      message: 'Longitud mínima de 5 dígitos',
+                    },
+                  })}
+                />
+                {errors.dni && (
+                  <div className={styles.error}>
+                    <span>{errors?.dni?.message?.toString()}</span>
+                  </div>
+                )}
+              </div>
+              <div className={styles.inputbox}>
+                <label className={styles.label} htmlFor="password">
+                  Contraseña
+                </label>
+                <input
+                  className={styles.input}
+                  type="password"
+                  {...register('password', {
+                    required: 'La contraseña es obligatoria',
+                  })}
+                />
+                {errors.password && (
+                  <div className={styles.error}>
+                    <span>{errors?.password?.message?.toString()}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className={styles.forgotpassword}>
+                <a href="" className={styles.forgottext}>
+                  Olvidé mi contraseña
+                </a>
+              </div>
+
+              <div className={styles.registerlink}>
+                ¿No tienes cuenta?
+                <Link href="/signup">
+                  <span> Regístrate! </span>
+                </Link>
+              </div>
+
+              <div className={styles.btncontainer}>
+                <Link href="/home">
+                  <input
+                    type="button"
+                    className={styles.btn}
+                    value="Iniciar sesión"
+                    disabled={!isDirty || !isValid}
+                    onClick={() => onSubmitView2(watch())}
+                  />
+                </Link>
+              </div>
+            </div>
+          </form>
+        </div>
+      )}
+    </>
   );
 };
 
