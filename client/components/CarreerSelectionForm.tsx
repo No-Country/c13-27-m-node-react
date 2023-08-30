@@ -16,11 +16,25 @@ const initialCarrer: Carreer = {
   name: '',
 };
 
+const initialUser: UserRegister = {
+  id: '',
+  userRol: 'student',
+  firstname: '',
+  lastname: '',
+  dni: '',
+  email: '',
+  password: '',
+  passwordConfirm: '',
+  termsandconditions: false,
+  carreer: '',
+  assignments: [],
+};
+
 const CarreerForm = () => {
   const router = useRouter();
   const [carreers, setCarreers] = useState<Carreer[]>([]);
   const [selectedCarrer, setSelectedCarreer] = useState<Carreer>(initialCarrer);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<UserRegister>(initialUser);
 
   useEffect(() => {
     const getCarrers = async () => {
@@ -72,14 +86,16 @@ const CarreerForm = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (selectedCarrer) {
-      /* TODO */
-      /*       const url = 'url';
-
-      const res = await fetch(url, {
+      const id = localStorage.getItem('userId');
+      const url = `http://www.localhost:3001/students/careerSelection/${id}`;
+      fetch(url, {
         headers: { 'Content-Type': 'application/json' },
-        method: 'POST',
-        body: JSON.stringify({}),
-      }); */
+        method: 'PUT',
+        body: JSON.stringify({
+          ...user,
+          career: selectedCarrer.name,
+        }),
+      });
       router.push('/seleccion-materias');
       console.log(selectedCarrer);
       console.log(user);
