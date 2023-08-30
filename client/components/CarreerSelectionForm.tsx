@@ -4,16 +4,22 @@ import styles from '../styles/carreerselection.module.scss';
 import Image from 'next/image';
 import fotoCarrera from '../public/assets/Vector.png';
 import { useRouter } from 'next/navigation';
+import { UserRegister } from '../interfaces/interfaces';
 
 interface Carreer {
   _id: string;
   name: string;
 }
 
+/* interface DNI {
+  dni: string;
+}
+ */
 const CarreerForm = () => {
   const router = useRouter();
-  const [carreers, setCarreers] = useState([]);
-  const [selectedCarrer, setSelectedCarreer] = useState('');
+  const [carreers, setCarreers] = useState<Carreer[]>([]);
+  const [selectedCarrer, setSelectedCarreer] = useState<string>('');
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const getCarrers = async () => {
@@ -26,6 +32,19 @@ const CarreerForm = () => {
       }
     };
     getCarrers();
+
+    const getUser = async () => {
+      try {
+        const id = localStorage.getItem('userId');
+        const res = await fetch(`http://localhost:3001/students/${id}`);
+        const userList = await res.json();
+        setUser(userList);
+        console.log(user);
+      } catch (error) {
+        console.error('Error fetching Users:', error);
+      }
+    };
+    getUser();
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

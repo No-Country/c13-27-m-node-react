@@ -8,13 +8,13 @@ const loginSchema = joi
       .min(5)
       .required(),
     password: joi.string().required(),
-    check:joi.string().required()
+    check: joi.string().required(),
   })
   .messages({
     required: 'El campo {key} es obligatorio',
     min: 'El campo {key} debe tener al menos {min} caracteres',
     pattern: 'El campo {key} debe cumplir con el patrón {pattern}',
-  });;
+  });
 
 const registrySchema = joi
   .object({
@@ -37,6 +37,7 @@ const registrySchema = joi
     password: joi.string().required(),
     check: joi.string().required()
     // passwordConfirm: joi.ref('password'),
+    check: joi.string().required(),
   })
   // .with('password', 'repeat_password')
   // .alias('passwordConfirm', 'repeat_password')
@@ -45,7 +46,7 @@ const registrySchema = joi
     min: 'El campo {key} debe tener al menos {min} caracteres',
     pattern: 'El campo {key} debe cumplir con el patrón {pattern}',
     email: 'El campo {key} no es un correo electrónico válido',
-  });;
+  });
 
 module.exports = {
   loginSchema,
