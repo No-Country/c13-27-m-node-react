@@ -36,7 +36,8 @@ const teacherLoginHandler = async (req, res) => {
 
 const registerTeacherHandler = async (req, res) => {
   const { firstName, lastName, password, email, dni } = req.body;
-  const { error } = registrySchema.validate(req.body)
+  const { error } = registrySchema.validate(req.body);
+  if (error) throw new Error(error);
   const newTeacher = {
     firstName,
     lastName,
