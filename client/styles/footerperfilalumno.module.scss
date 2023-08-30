@@ -1,7 +1,22 @@
 @import 'variables.scss';
 
-.titleFooter {
+.containerBtnTitle {
     padding-inline: 5rem;
+    display: flex;
+    gap: 1rem;
+}
+.btn { 
+    color: $secondary-color;
+    background-color: $primary-color;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+}
+.titleFooter {
     color: $text2;
     font-size: 24px;
 }
@@ -54,6 +69,7 @@
 }
 // ESTILOS "EXAMENES PARCIALES Y FINALES" 
 .containerBox {
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
 }
