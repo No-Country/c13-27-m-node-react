@@ -33,6 +33,7 @@ const MateriasSelectionForm = () => {
   const [selectedAssignments, setSelectedAssignments] = useState<string[]>([]);
   const [carrerId, setCarrerId] = useState<string | null>(null);
   const [user, setUser] = useState<UserRegister>(initialUser);
+  const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
 
   useEffect(() => {
     const storedCarrerId = localStorage.getItem('carrerId'); // Recuperar el carrerId
@@ -73,6 +74,14 @@ const MateriasSelectionForm = () => {
     };
     getUser();
   }, [carrerId]);
+
+  useEffect(() => {
+    if (selectedAssignments.length !== 0) {
+      setSubmitDisabled(true);
+    } else {
+      setSubmitDisabled(false);
+    }
+  });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -131,6 +140,7 @@ const MateriasSelectionForm = () => {
           className={styles.btnSubmit}
           type="submit"
           value="Ingresar"
+          disabled={!submitDisabled}
         />
       </div>
     </form>

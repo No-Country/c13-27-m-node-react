@@ -35,6 +35,7 @@ const CarreerForm = () => {
   const [carreers, setCarreers] = useState<Carreer[]>([]);
   const [selectedCarrer, setSelectedCarreer] = useState<Carreer>(initialCarrer);
   const [user, setUser] = useState<UserRegister>(initialUser);
+  const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
 
   useEffect(() => {
     const getCarrers = async () => {
@@ -67,6 +68,12 @@ const CarreerForm = () => {
     getUser();
   }, [selectedCarrer]);
 
+  useEffect(() => {
+    if (selectedCarrer._id) {
+      localStorage.setItem('carrerId', selectedCarrer._id);
+    }
+  }, [selectedCarrer]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = event.target;
     if (value) {
@@ -75,13 +82,11 @@ const CarreerForm = () => {
         _id: id,
       });
     }
-  };
 
-  useEffect(() => {
-    if (selectedCarrer._id) {
-      localStorage.setItem('carrerId', selectedCarrer._id);
+    if (selectedCarrer.name === '') {
+      setSubmitDisabled(true);
     }
-  }, [selectedCarrer]);
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -139,6 +144,7 @@ const CarreerForm = () => {
           className={styles.btnSubmit}
           type="submit"
           value="Siguiente"
+          disabled={!submitDisabled}
         />
       </div>
     </form>
