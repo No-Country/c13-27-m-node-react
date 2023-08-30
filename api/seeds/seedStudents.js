@@ -25,8 +25,8 @@ const newStudent = new Student({
   dob: 10 / 12 / 1990,
   address: 'Jujuy 1234',
   assignments: [
-    '64e3ee47f320e0e862986c40', // Matematica
-    '64e3ee47f320e0e862986c41', // Fisica
+    // '64e3ee47f320e0e862986c40', // Matematica
+    // '64e3ee47f320e0e862986c41', // Fisica
   ],
   career: 'Ingeniería',
 });
@@ -39,8 +39,8 @@ const newStudent1 = new Student({
   dob: 8 / 2 / 1998,
   address: 'Salta 123',
   assignments: [
-    '64e657d99817b684985962bb', // Ciencia Política
-    '64e657d99817b684985962bc', // Derecho Penal
+    // '64e657d99817b684985962bb', // Ciencia Política
+    // '64e657d99817b684985962bc', // Derecho Penal
   ],
   career: 'Derecho',
 });

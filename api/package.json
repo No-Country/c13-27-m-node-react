@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "seed": "node seeds/seedAssignments && node seeds/seedCareers && node seeds/seedTeachers && node seeds/seedStudents",
+    "seed": "node seeds/seedAssignments && node seeds/seedCareers && node seeds/seedTeachers && node seeds/seedStudents && node seeds/populateSeeds",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
