@@ -22,7 +22,7 @@ const registrySchema = joi
       .string()
       .pattern(new RegExp(/^[0-9]*$/))
       .required(),
-    firstname: joi
+    firstName: joi
       .string()
       .pattern(new RegExp(/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/))
       .required(),
@@ -30,11 +30,12 @@ const registrySchema = joi
       .string()
       .pattern(new RegExp(/^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/))
       .required(),
-    lastname: joi
+    lastName: joi
       .string()
       .pattern(new RegExp(/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/))
       .required(),
     password: joi.string().required(),
+    check: joi.string().required()
     // passwordConfirm: joi.ref('password'),
   })
   // .with('password', 'repeat_password')

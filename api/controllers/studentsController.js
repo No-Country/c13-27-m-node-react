@@ -52,8 +52,9 @@ const registerStudentController = async (newStudent) => {
 
   //guardao el nuevo estudiante en la DB
   const response = await StudentModel.create(newStudent);
+  const student = await StudentModel.findOne({ dni: newStudent.dni });
 
-  return response;
+  return student;
 };
 
 const getStudentByIdController = async (id) => {
