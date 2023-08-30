@@ -23,8 +23,8 @@ const newTeacher = new Teacher({
   dob: 10 / 12 / 1970,
   address: 'Salta 123',
   assignments: [
-    '64e3ee47f320e0e862986c40', // Matematica
-    '64e3ee47f320e0e862986c41', // Fisica
+    //    '64e3ee47f320e0e862986c40', // Matematica
+    //    '64e3ee47f320e0e862986c41', // Fisica
   ],
 });
 
