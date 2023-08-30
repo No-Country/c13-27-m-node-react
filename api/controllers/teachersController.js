@@ -56,7 +56,7 @@ const registerTeacherController = async (newTeacher) => {
   return response;
 };
 
-const getTeacherById = async () => {
+const getTeacherByIdController = async () => {
   const { id } = req.params;
   try {
     const teacher = await TeacherModel.findById(id);
@@ -72,5 +72,5 @@ module.exports = {
   getAllTeachersController,
   teacherLoginController,
   registerTeacherController,
-  getTeacherById
+  getTeacherByIdController
 };
