@@ -87,7 +87,7 @@ const MateriasSelectionForm = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (selectedAssignments.length > 0) {
+    if (selectedAssignments.length < 1) {
       const id = localStorage.getItem('userId');
       const url = `http://www.localhost:3001/students/careerSelection/${id}`;
       fetch(url, {
