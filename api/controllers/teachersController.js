@@ -56,15 +56,21 @@ const registerTeacherController = async (newTeacher) => {
   return response;
 };
 
-const getTeacherByIdController = async (id) => {
-  const teacher = await TeacherModel.findById(id).populate('assignments');
-  if (!teacher) throw new Error('No existe el profesor');
-  return teacher;
+const getTeacherByIdController = async () => {
+  const { id } = req.params;
+  try {
+    const teacher = await TeacherModel.findById(id);
+    if (!teacher) throw new Error('No hay información disponible');
+    
+    res.send(teacher);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
 };
 
 module.exports = {
   getAllTeachersController,
   teacherLoginController,
   registerTeacherController,
-  getTeacherByIdController,
+  getTeacherByIdController
 };

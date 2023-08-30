@@ -42,4 +42,4 @@ const AssignmentSchema = new Schema({
 const AssignmentModel = mongoose.model('Assignment', AssignmentSchema);
 module.exports = AssignmentModel;
 
-/* modelo carrera: nombre materia alumnos cuales carreras hay: (ENUM) 4 carreras */
+

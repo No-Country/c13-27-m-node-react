@@ -1,4 +1,5 @@
 const AssignmentModel = require('../models/assignmentModel'); // Llama al modelo AssignmentModel
+const CareerModel = require('../models/careerModel');
 
 const getAllAssignmentsController = async (req, res) => {
   const assignments = await AssignmentModel.find({}); // Todos las materias de la DB
@@ -13,7 +14,15 @@ const getAssignmentByIdController = async (req, res) => {
   return assignment;
 };
 
+const getAssignmentsByCareerController = async (req, res) => {
+  const { careerName } = req.params;
+  const career = await CareerModel.findOne({ name: careerName }).populate('assignments');
+  if (!career) throw new Error('No se encontró la carrera');
+  return career.assignment
+};
+
 module.exports = {
   getAllAssignmentsController,
   getAssignmentByIdController,
+  getAssignmentsByCareerController,
 };

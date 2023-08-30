@@ -66,10 +66,9 @@ const getTeacherByIdHandler = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
-
 module.exports = {
   getAllTeachersHandler,
   teacherLoginHandler,
   registerTeacherHandler,
-  getTeacherByIdHandler,
+  getTeacherByIdHandler
 };
