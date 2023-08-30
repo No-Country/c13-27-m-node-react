@@ -27,25 +27,31 @@ const CarreerForm = () => {
         const res = await fetch('http://localhost:3001/careers/allCareers');
         const carreersData = await res.json();
         setCarreers(carreersData);
+        console.log(carreersData);
       } catch (error) {
         console.error('Error fetching Carrers:', error);
       }
     };
     getCarrers();
+  }, []);
 
-    const getUser = async () => {
+  useEffect(() => {
+    const getUser = () => {
       try {
         const id = localStorage.getItem('userId');
-        const res = await fetch(`http://localhost:3001/students/${id}`);
-        const userList = await res.json();
-        setUser(userList);
-        console.log(user);
+        console.log(id);
+        fetch(`http://localhost:3001/students/${id}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setUser(data);
+            console.log('user', user);
+          });
       } catch (error) {
         console.error('Error fetching Users:', error);
       }
     };
     getUser();
-  }, []);
+  }, [selectedCarrer]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -57,8 +63,17 @@ const CarreerForm = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (selectedCarrer) {
+      /* TODO */
+      /*       const url = 'url';
+
+      const res = await fetch(url, {
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        body: JSON.stringify({}),
+      }); */
       router.push('/seleccion-materias');
       console.log(selectedCarrer);
+      console.log(user);
     }
   };
 
