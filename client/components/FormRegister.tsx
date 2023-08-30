@@ -103,6 +103,12 @@ export const FormRegister = () => {
         check: registerForm.userRol,
       }),
     });
+
+    if (res.ok) {
+      const data = await res.json();
+      localStorage.setItem('userId', data._id);
+      console.log(data);
+    }
   };
 
   const handleRoute = () => {

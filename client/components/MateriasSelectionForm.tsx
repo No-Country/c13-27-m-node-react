@@ -42,8 +42,13 @@ const MateriasSelectionForm = () => {
     }
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    router.push('/login');
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className={styles.materiasMainContainer}>
         {assignments.map((assignment: Assignment) => (
           <article

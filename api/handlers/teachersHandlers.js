@@ -51,7 +51,7 @@ const registerTeacherHandler = async (req, res) => {
     const response = await registerTeacherController(newTeacher);
     //valido que el profesor se haya guardado correctamente en la DB
     if (!response) throw new Error('No se pudo registrar el usuario');
-    res.send(newTeacher);
+    res.send(response);
   } catch (error) {
     res.status(500).json(error.message);
   }
@@ -66,10 +66,9 @@ const getTeacherByIdHandler = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
-
 module.exports = {
   getAllTeachersHandler,
   teacherLoginHandler,
   registerTeacherHandler,
-  getTeacherByIdHandler,
+  getTeacherByIdHandler
 };
