@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
+const session = require('express-session');
 
 // Configuración de cors
 app.use(cors());
@@ -12,7 +13,7 @@ const routes = require('./routes/index');
 // Traigo variables de entorno
 require('dotenv').config();
 const PORT = process.env.PORT;
- 
+
 //Conexion a MongoAtlas DB (.env)  VS  conexion a DB local
 const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/educapp';
 mongoose.connect(dbUrl);
@@ -22,6 +23,16 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('Base de datos conectada');
 });
+
+//Configuración de sesión
+const sessionConfig = {
+  name: 'session',
+  secret: 'secreto', // Si se utiliza, cambiar por variable de entorno
+  resave: false,
+  saveUninitialized: false,
+};
+
+app.use(session(sessionConfig));
 
 // Middlewares
 app.use(express.json());

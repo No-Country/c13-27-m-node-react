@@ -4,8 +4,13 @@ import styles from '../styles/formlogin.module.scss';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
+import alumno from '../public/assets/alumno.png';
+import teacher from '../public/assets/profesor.jpg';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../redux/slice';
 
 const FormLogin = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -42,7 +47,7 @@ const FormLogin = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            email: allData.email,
+            dni: allData.dni,
             password: allData.password,
             check: allData.checked,
           }),
@@ -50,8 +55,14 @@ const FormLogin = () => {
 
         if (response.ok) {
           const responseData = await response.json();
-
           console.log(responseData);
+          dispatch(
+            loginUser({
+              dni: allData.dni,
+              password: allData.password,
+              userRol: allData.checked,
+            })
+          );
         } else {
           console.error('Error connecting to the backend');
         }
@@ -78,27 +89,43 @@ const FormLogin = () => {
       {view1 && (
         <div className={styles.container1}>
           <div>
-            <h2>Seleccione</h2>
+            <h2>Usted esta ingresando como...</h2>
             <form onSubmit={handleSubmit(onSubmitView1)}>
               <div className={styles.containerview1}>
-                <div>
-                  <label htmlFor="">Alumno</label>
-                  <input
-                    className={styles.input1}
-                    type="radio"
-                    value="student"
-                    {...register('check')}
-                  />
+                <div className={styles.inputs1}>
+                  <label
+                    htmlFor="student"
+                    className={styles.label1}>
+                    <Image
+                      src={alumno}
+                      alt="alumno"
+                    />
+                    <input
+                      type="radio"
+                      value="student"
+                      {...register('check')}
+                      id="student"
+                      className={styles.hiddenradio}
+                    />
+                    <h3>Alumno</h3>
+                  </label>
 
-                  <label htmlFor="">Profesor</label>
-                  <input
-                    className={styles.input1}
-                    type="radio"
-                    value="teacher"
-                    {...register('check', {
-                      required: 'El rol es requerido',
-                    })}
-                  />
+                  <label
+                    htmlFor="teacher"
+                    className={styles.label1}>
+                    <Image
+                      src={teacher}
+                      alt="profesor"
+                    />
+                    <input
+                      type="radio"
+                      value="teacher"
+                      {...register('check')}
+                      id="teacher"
+                      className={styles.hiddenradio}
+                    />
+                    <h3>Profesor</h3>
+                  </label>
                 </div>
 
                 <div>
@@ -111,12 +138,6 @@ const FormLogin = () => {
               </div>
             </form>
           </div>
-          {/* <Image
-            src="/client/public/assets/profesor.svg"
-            alt="student"
-            width={100}
-            height={100}
-          /> */}
         </div>
       )}
 
@@ -127,7 +148,9 @@ const FormLogin = () => {
             className={styles.formContainer}>
             <div className={styles.containerbox}>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="dni">
+                <label
+                  className={styles.label}
+                  htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -152,7 +175,9 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="password">
+                <label
+                  className={styles.label}
+                  htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -170,7 +195,9 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a href="" className={styles.forgottext}>
+                <a
+                  href=""
+                  className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>

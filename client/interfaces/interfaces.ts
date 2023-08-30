@@ -1,4 +1,5 @@
 export interface UserRegister {
+  id?: string;
   userRol: 'student' | 'teacher';
   firstname: string;
   lastname: string;
@@ -7,4 +8,6 @@ export interface UserRegister {
   password: string;
   passwordConfirm: string;
   termsandconditions: boolean;
+  carreer: string;
+  assignments: string[];
 }

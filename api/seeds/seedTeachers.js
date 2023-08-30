@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Teacher = require('../models/teacherModel');
+const { createHash } = require('../utils/hashPassword');
+
 require('dotenv').config(); //Variables de entorno para MongoDB
 
 //Conexión a DB
@@ -15,7 +17,7 @@ db.once('open', () => {
 const newTeacher = new Teacher({
   firstName: 'Ernesto',
   lastName: 'Batista',
-  password: '123456',
+  password: createHash('123456'),
   email: 'batista@hotmail.com',
   dni: '25000000',
   dob: 10 / 12 / 1970,

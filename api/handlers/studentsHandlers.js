@@ -5,6 +5,11 @@ const {
   getStudentByIdController,
 } = require('../controllers/studentsController');
 
+const {
+  loginSchema,
+  registrySchema,
+} = require('../utils/validations/usersValidations');
+
 const getAllStudentsHandler = async (req, res) => {
   let { page, limit } = req.query;
   page = parseInt(page);
@@ -19,8 +24,12 @@ const getAllStudentsHandler = async (req, res) => {
 
 const studentLoginHandler = async (req, res) => {
   const { dni, password, check } = req.body;
+  const { error } = loginSchema.validate(req.body);
+  if (error) throw new Error(error);
   try {
     const login = await studentLoginController(dni, password, check);
+    req.session.dni = dni; // Guardo el dni para usar en la sesión
+    req.session.role = check; // Guardo el rol para usar en la sesión
     res.send(login);
   } catch (error) {
     res.status(500).json(error.message);
@@ -29,7 +38,8 @@ const studentLoginHandler = async (req, res) => {
 
 const registerStudentHandler = async (req, res) => {
   const { firstName, lastName, password, email, dni } = req.body;
-
+  const { error } = registrySchema.validate(req.body);
+  if (error) throw new Error(error);
   const newStudent = {
     firstName,
     lastName,
@@ -41,7 +51,7 @@ const registerStudentHandler = async (req, res) => {
     const response = await registerStudentController(newStudent);
     //valido que el estudiante se haya guardado correctamente en la DB
     if (!response) throw new Error('No se pudo registrar el usuario');
-    res.json('Usted se registró correctamente');
+    res.send(response);
   } catch (error) {
     res.status(500).json(error.message);
   }
