@@ -4,6 +4,8 @@ import { HaderPaginaAlumno } from '../../components/HaderPaginaAlumno';
 import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import FooterPerfilAlumno from '../../components/FooterPerfilAlumno';
+
 
 const StudentProfile = () => {
   const router = useRouter();
@@ -18,6 +20,9 @@ const StudentProfile = () => {
   return (
     <>
       <HaderPaginaAlumno />
+
+
+      <FooterPerfilAlumno/>
       <main></main>
     </>
   );
