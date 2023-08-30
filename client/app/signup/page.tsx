@@ -12,7 +12,7 @@ const Signup = () => {
         <Image
           className={styles.registerImage}
           src={registroImg}
-          objectFit={'cover'}
+          priority={false}
           alt="register"></Image>
       </aside>
     </main>
