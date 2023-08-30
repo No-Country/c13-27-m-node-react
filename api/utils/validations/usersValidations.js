@@ -34,10 +34,10 @@ const registrySchema = joi
       .pattern(new RegExp(/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/))
       .required(),
     password: joi.string().required(),
-    passwordConfirm: joi.ref('password'),
+    // passwordConfirm: joi.ref('password'),
   })
-  .with('password', 'repeat_password')
-  .alias('passwordConfirm', 'repeat_password')
+  // .with('password', 'repeat_password')
+  // .alias('passwordConfirm', 'repeat_password')
   .messages({
     required: 'El campo {key} es obligatorio',
     min: 'El campo {key} debe tener al menos {min} caracteres',
