@@ -11,14 +11,15 @@ interface Carreer {
   name: string;
 }
 
-/* interface DNI {
-  dni: string;
-}
- */
+const initialCarrer: Carreer = {
+  _id: '',
+  name: '',
+};
+
 const CarreerForm = () => {
   const router = useRouter();
   const [carreers, setCarreers] = useState<Carreer[]>([]);
-  const [selectedCarrer, setSelectedCarreer] = useState<string>('');
+  const [selectedCarrer, setSelectedCarreer] = useState<Carreer>(initialCarrer);
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -39,7 +40,6 @@ const CarreerForm = () => {
     const getUser = () => {
       try {
         const id = localStorage.getItem('userId');
-        console.log(id);
         fetch(`http://localhost:3001/students/${id}`)
           .then((res) => res.json())
           .then((data) => {
@@ -54,11 +54,20 @@ const CarreerForm = () => {
   }, [selectedCarrer]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+    const { value, id } = event.target;
     if (value) {
-      setSelectedCarreer(value);
+      setSelectedCarreer({
+        name: value,
+        _id: id,
+      });
     }
   };
+
+  useEffect(() => {
+    if (selectedCarrer._id) {
+      localStorage.setItem('carrerId', selectedCarrer._id);
+    }
+  }, [selectedCarrer]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -96,6 +105,7 @@ const CarreerForm = () => {
                 name="carreer"
                 className={styles.input}
                 value={carreer.name}
+                id={carreer._id}
                 onChange={handleChange}
               />
               <Image

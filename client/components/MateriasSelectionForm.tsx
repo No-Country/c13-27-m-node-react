@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 interface Assignment {
   _id: string;
   name: string;
+  schedule: string;
+  classroom: string;
 }
 
 const MateriasSelectionForm = () => {
@@ -14,22 +16,30 @@ const MateriasSelectionForm = () => {
 
   const [assignments, setAssignments] = useState([]);
   const [selectedAssignments, setSelectedAssignments] = useState<string[]>([]);
+  const [carrerId, setCarrerId] = useState<string | null>(null);
 
   useEffect(() => {
-    const getAssignments = async () => {
-      try {
-        const res = await fetch(
-          'http://localhost:3001/assignments/allAssignments'
-        );
-        const assignmentsData = await res.json();
-        setAssignments(assignmentsData);
-        console.log(assignments);
-      } catch (error) {
-        console.error('Error fetching Assignments:', error);
-      }
-    };
-    getAssignments();
+    const storedCarrerId = localStorage.getItem('carrerId'); // Recuperar el carrerId
+    setCarrerId(storedCarrerId); // Actualizar el estado con el carrerId
   }, []);
+
+  useEffect(() => {
+    console.log(carrerId);
+
+    if (carrerId) {
+      const getAssignments = async () => {
+        try {
+          const res = await fetch(`http://localhost:3001/careers/${carrerId}`);
+          const carrerData = await res.json();
+          setAssignments(carrerData.assignments);
+          console.log(assignments);
+        } catch (error) {
+          console.error('Error fetching Assignments:', error);
+        }
+      };
+      getAssignments();
+    }
+  }, [carrerId]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = event.target;
@@ -64,8 +74,8 @@ const MateriasSelectionForm = () => {
             <div className={styles.infoContainerMateria}>
               <h2 className={styles.titleMateria}>{assignment.name}</h2>
               <div className={styles.infoMateria}>
-                <p>8:00 - 9:30 AM </p>
-                <p>Aula 3F </p>
+                <p>{assignment.schedule}</p>
+                <p>{assignment.classroom}</p>
               </div>
             </div>
           </article>
