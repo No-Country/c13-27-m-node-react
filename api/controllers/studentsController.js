@@ -63,9 +63,24 @@ const getStudentByIdController = async (id) => {
   return student;
 };
 
+const studentSelectionController = async (id, career, assignments) => {
+  const student = await StudentModel.findByIdAndUpdate(
+    id,
+    { career, assignments },
+    { new: true } // Devuelvo el documento actualizado
+  );
+
+  if (!student) {
+    return res.status(404).json({ message: 'Estudiante no encontrado' });
+  }
+
+  return student;
+};
+
 module.exports = {
   getAllStudentsController,
   studentLoginController,
   registerStudentController,
   getStudentByIdController,
+  studentSelectionController,
 };
