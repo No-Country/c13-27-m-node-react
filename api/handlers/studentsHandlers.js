@@ -5,6 +5,11 @@ const {
   getStudentByIdController,
 } = require('../controllers/studentsController');
 
+const {
+  loginSchema,
+  registrySchema,
+} = require('../utils/validations/usersValidations');
+
 const getAllStudentsHandler = async (req, res) => {
   let { page, limit } = req.query;
   page = parseInt(page);
@@ -19,6 +24,8 @@ const getAllStudentsHandler = async (req, res) => {
 
 const studentLoginHandler = async (req, res) => {
   const { dni, password, check } = req.body;
+  const { error } = loginSchema.validate(req.body);
+  if (error) throw new Error(error);
   try {
     const login = await studentLoginController(dni, password, check);
     req.session.dni = dni; // Guardo el dni para usar en la sesión
@@ -31,7 +38,8 @@ const studentLoginHandler = async (req, res) => {
 
 const registerStudentHandler = async (req, res) => {
   const { firstName, lastName, password, email, dni } = req.body;
-
+  const { error } = registrySchema.validate(req.body);
+  if (error) throw new Error(error);
   const newStudent = {
     firstName,
     lastName,
