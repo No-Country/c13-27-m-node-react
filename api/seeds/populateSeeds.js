@@ -24,7 +24,7 @@ const populateDB = async () => {
 
   // Insertar Materias en Carreras
   careers[0].assignments.push(assignments[0]._id, assignments[1]._id);
-  careers[1].assignments.push(assignments[2]._id, assignments[2]._id);
+  careers[1].assignments.push(assignments[2]._id, assignments[3]._id);
   // Insertar Estudiantes en Carreras
   careers[0].students.push(students[0]._id);
   careers[1].students.push(students[1]._id);
