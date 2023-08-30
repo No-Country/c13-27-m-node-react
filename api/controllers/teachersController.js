@@ -53,7 +53,9 @@ const registerTeacherController = async (newTeacher) => {
   //guardo el nuevo profesor en la DB
   const response = await TeacherModel.create(newTeacher);
 
-  return response;
+  const teacher = await TeacherModel.findOne({ dni: newTeacher.dni });
+
+  return teacher;
 };
 
 const getTeacherByIdController = async () => {

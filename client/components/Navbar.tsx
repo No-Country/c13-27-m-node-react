@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useSelector } from 'react-redux';
 import type { RootState } from '../redux/store';
 
 const Navbar = () => {
@@ -21,12 +21,11 @@ const Navbar = () => {
           />
         </div>
       </Link>
-
       <ul className={styles.ulNav}>
         {userLogged && (
           <li>
             <Link
-              href="/"
+              href="/home"
               className={styles.itemNav}>
               Home
             </Link>
