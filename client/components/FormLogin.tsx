@@ -89,17 +89,17 @@ const FormLogin = () => {
       {view1 && (
         <div className={styles.container1}>
           <div>
-            <h2>Usted esta ingresando como...</h2>
+            <div className={styles.titlecontainer}>
+              <h2>Usted esta ingresando como...</h2>
+            </div>
             <form onSubmit={handleSubmit(onSubmitView1)}>
               <div className={styles.containerview1}>
                 <div className={styles.inputs1}>
-                  <label
-                    htmlFor="student"
-                    className={styles.label1}>
-                    <Image
-                      src={alumno}
-                      alt="alumno"
-                    />
+                  <label htmlFor="student" className={styles.label1}>
+                    <div>
+                      <Image src={alumno} alt="alumno" />
+                      <h3>Alumno</h3>
+                    </div>
                     <input
                       type="radio"
                       value="student"
@@ -107,16 +107,17 @@ const FormLogin = () => {
                       id="student"
                       className={styles.hiddenradio}
                     />
-                    <h3>Alumno</h3>
                   </label>
 
-                  <label
-                    htmlFor="teacher"
-                    className={styles.label1}>
-                    <Image
-                      src={teacher}
-                      alt="profesor"
-                    />
+                  <label htmlFor="teacher" className={styles.label1}>
+                    <div>
+                      <Image
+                        className={styles.photo}
+                        src={teacher}
+                        alt="profesor"
+                      />
+                      <h3>Profesor</h3>
+                    </div>
                     <input
                       type="radio"
                       value="teacher"
@@ -124,14 +125,16 @@ const FormLogin = () => {
                       id="teacher"
                       className={styles.hiddenradio}
                     />
-                    <h3>Profesor</h3>
                   </label>
                 </div>
 
-                <div>
+                <div className={styles.buttoncontainer1}>
                   <input
                     type="submit"
                     value="Siguiente"
+                    className={`${styles.submitbutton1} ${
+                      !isDirty || !isValid ? styles.disabledbutton1 : ''
+                    }`}
                     disabled={!isDirty || !isValid}
                   />
                 </div>
@@ -148,9 +151,7 @@ const FormLogin = () => {
             className={styles.formContainer}>
             <div className={styles.containerbox}>
               <div className={styles.inputbox}>
-                <label
-                  className={styles.label}
-                  htmlFor="dni">
+                <label className={styles.label} htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -175,9 +176,7 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label
-                  className={styles.label}
-                  htmlFor="password">
+                <label className={styles.label} htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -195,9 +194,7 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a
-                  href=""
-                  className={styles.forgottext}>
+                <a href="" className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>

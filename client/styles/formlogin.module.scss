@@ -29,18 +29,39 @@
 }
 .inputs1 {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 .input1 {
   margin: 5rem;
 }
 
+.titlecontainer {
+  text-align: center;
+}
+
+.photo {
+  margin-left: 10rem;
+}
+// .label1 {
+//   display: flex;
+//   justify-content: space-around;
+//   cursor: pointer;
+//   margin: 10px;
+// }
+
+////
 .label1 {
-  position: relative;
-  display: inline-block;
   cursor: pointer;
-  margin: 10px;
+}
+
+.label1 > div {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.label1 .photo {
+  margin-left: 18rem;
 }
 
 .hiddenradio {
@@ -49,6 +70,38 @@
   width: 0;
   height: 0;
 }
+
+.buttoncontainer1 {
+  display: flex;
+  justify-content: center;
+}
+
+.submitbutton1 {
+  text-transform: uppercase;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  color: $background;
+  background-color: $text1;
+  transition: background-color 0.3s ease-in;
+}
+
+.submitbutton1:hover {
+  background-color: $background;
+  color: $text1;
+  border: 1px solid $text1;
+  font-weight: 700;
+}
+.disabledbutton1 {
+  background-color: gray;
+}
+
+.disabledbutton1:hover {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
 // view 2
 .containerbox {
   margin: 10rem 0;
