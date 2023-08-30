@@ -66,8 +66,8 @@ export const Horarios = () => {
         {daysOfWeek.map((day, index) => (
           <button
             key={index}
-            className={`${styles['day-button']} ${
-              selectedDay === index ? styles['selected'] : ''
+            className={`${styles.daybutton} ${
+              selectedDay === index ? styles.selected : ''
             }`}
             onClick={() => handleDayClick(index)}>
             {day.name[0]}
@@ -75,13 +75,13 @@ export const Horarios = () => {
         ))}
       </div>
       {selectedDay !== null && (
-        <div className={styles['infocontent']}>
+        <div className={styles.infocontent}>
           <h2>{daysOfWeek[selectedDay].name}</h2>
-          <div className={styles['course-cards']}>
+          <div className={styles.coursecards}>
             {daysOfWeek[selectedDay].courses.map((course, index) => (
-              <div key={index} className={styles['course-card']}>
-                <h3>{course.subject}</h3>
-                <p>Horario: {course.schedule}</p>
+              <div key={index} className={styles.coursecard}>
+                <h3 className={styles.subject}>{course.subject}</h3>
+                <p className={styles.time}>Horario: {course.schedule}</p>
               </div>
             ))}
           </div>
