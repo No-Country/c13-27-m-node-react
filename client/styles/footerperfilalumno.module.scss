@@ -53,13 +53,32 @@
     padding-top: 0.5rem;
 }
 // ESTILOS "EXAMENES PARCIALES Y FINALES" 
-.containerAllExams {
-    align-items: center;
+.containerBox {
     display: flex;
-    // justify-content: center;
+    justify-content: center;
+}
+.box {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px; 
     width: 1120px;
     height: 254px;
-    margin-bottom: 6rem;
+    border-radius: 15px;
     border: 1px solid $text2;
-    border-radius: 20px;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    // justify-content: space-between;
+    padding: 10px; 
+}
+.subtitle {
+    margin: 0; 
+    font-weight: 500;
+    font-size: 24px;
+}
+.p {
+    font-size: 24px;
 }
