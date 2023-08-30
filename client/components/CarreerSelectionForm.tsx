@@ -4,16 +4,22 @@ import styles from '../styles/carreerselection.module.scss';
 import Image from 'next/image';
 import fotoCarrera from '../public/assets/Vector.png';
 import { useRouter } from 'next/navigation';
+import { UserRegister } from '../interfaces/interfaces';
 
 interface Carreer {
   _id: string;
   name: string;
 }
 
+/* interface DNI {
+  dni: string;
+}
+ */
 const CarreerForm = () => {
   const router = useRouter();
-  const [carreers, setCarreers] = useState([]);
-  const [selectedCarrer, setSelectedCarreer] = useState('');
+  const [carreers, setCarreers] = useState<Carreer[]>([]);
+  const [selectedCarrer, setSelectedCarreer] = useState<string>('');
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const getCarrers = async () => {
@@ -21,12 +27,31 @@ const CarreerForm = () => {
         const res = await fetch('http://localhost:3001/careers/allCareers');
         const carreersData = await res.json();
         setCarreers(carreersData);
+        console.log(carreersData);
       } catch (error) {
         console.error('Error fetching Carrers:', error);
       }
     };
     getCarrers();
   }, []);
+
+  useEffect(() => {
+    const getUser = () => {
+      try {
+        const id = localStorage.getItem('userId');
+        console.log(id);
+        fetch(`http://localhost:3001/students/${id}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setUser(data);
+            console.log('user', user);
+          });
+      } catch (error) {
+        console.error('Error fetching Users:', error);
+      }
+    };
+    getUser();
+  }, [selectedCarrer]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -38,8 +63,17 @@ const CarreerForm = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (selectedCarrer) {
+      /* TODO */
+      /*       const url = 'url';
+
+      const res = await fetch(url, {
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        body: JSON.stringify({}),
+      }); */
       router.push('/seleccion-materias');
       console.log(selectedCarrer);
+      console.log(user);
     }
   };
 
