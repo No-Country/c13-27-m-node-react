@@ -73,7 +73,7 @@ const studentSelectionHandler = async (req, res) => {
   const { career, assignments } = req.body;
 
   try {
-    const response = await studentSelectionController(id, carrer, assignments);
+    const response = await studentSelectionController(id, career, assignments);
     res.send(response);
   } catch (error) {
     res.status(500).json(error.mesage);
