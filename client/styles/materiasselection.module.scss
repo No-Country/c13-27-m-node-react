@@ -78,3 +78,10 @@
   border: 1px solid $text1;
   font-weight: 700;
 }
+
+.btnSubmit:disabled {
+  background-color: $placeholder;
+  color: $background;
+  border: 1px solid $text1;
+  font-weight: 400;
+}
