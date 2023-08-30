@@ -5,7 +5,7 @@ import { RootState } from '../../redux/store';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import FooterPerfilAlumno from '../../components/FooterPerfilAlumno';
-
+import { Horarios } from '../../components/Horarios';
 
 const StudentProfile = () => {
   const router = useRouter();
@@ -21,8 +21,8 @@ const StudentProfile = () => {
     <>
       <HaderPaginaAlumno />
 
-
-      <FooterPerfilAlumno/>
+      <Horarios />
+      <FooterPerfilAlumno />
       <main></main>
     </>
   );
