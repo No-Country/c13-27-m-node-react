@@ -1,4 +1,5 @@
 @import './variables.scss';
+
 .mainlogin {
   display: flex;
   justify-content: space-between;
@@ -24,44 +25,23 @@
 
 // View 1
 
-.container1 {
-  display: flex;
-}
 .inputs1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.input1 {
-  margin: 5rem;
-}
 
 .titlecontainer {
   text-align: center;
+  margin: 3rem 0rem;
 }
 
-.photo {
-  margin-left: 10rem;
-}
-// .label1 {
-//   display: flex;
-//   justify-content: space-around;
-//   cursor: pointer;
-//   margin: 10px;
-// }
-
-////
 .label1 {
   cursor: pointer;
 }
 
-.label1 > div {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.label1 .photo {
-  margin-left: 18rem;
+.separator {
+  width: 15rem;
 }
 
 .hiddenradio {
@@ -87,12 +67,6 @@
   transition: background-color 0.3s ease-in;
 }
 
-.submitbutton1:hover {
-  background-color: $background;
-  color: $text1;
-  border: 1px solid $text1;
-  font-weight: 700;
-}
 .disabledbutton1 {
   background-color: gray;
 }
@@ -100,6 +74,17 @@
 .disabledbutton1:hover {
   background-color: gray;
   cursor: not-allowed;
+}
+
+// .infocontainer {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+.subtitle1 {
+  margin-top: 1rem;
+  text-align: center;
 }
 
 // view 2
@@ -142,15 +127,9 @@
   cursor: pointer;
   color: $background;
   background-color: $text1;
-  transition: background-color 0.3s ease-in;
+  transition: background-color 0.7s ease-in-out;
 }
 
-.btn:hover {
-  background-color: $background;
-  color: $text1;
-  border: 1px solid $text1;
-  font-weight: 700;
-}
 .disabledbutton {
   background-color: gray;
 }
@@ -172,9 +151,6 @@
 .forgotpassword a:hover {
   text-decoration: underline;
 }
-
-// .registerlink {
-// }
 
 .registerlink a {
   color: #626262;

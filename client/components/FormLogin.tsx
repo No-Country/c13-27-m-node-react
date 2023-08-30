@@ -87,60 +87,58 @@ const FormLogin = () => {
   return (
     <>
       {view1 && (
-        <div className={styles.container1}>
-          <div>
-            <div className={styles.titlecontainer}>
-              <h2>Usted esta ingresando como...</h2>
-            </div>
-            <form onSubmit={handleSubmit(onSubmitView1)}>
-              <div className={styles.containerview1}>
-                <div className={styles.inputs1}>
-                  <label htmlFor="student" className={styles.label1}>
-                    <div>
-                      <Image src={alumno} alt="alumno" />
-                      <h3>Alumno</h3>
-                    </div>
-                    <input
-                      type="radio"
-                      value="student"
-                      {...register('check')}
-                      id="student"
-                      className={styles.hiddenradio}
-                    />
-                  </label>
-
-                  <label htmlFor="teacher" className={styles.label1}>
-                    <div>
-                      <Image
-                        className={styles.photo}
-                        src={teacher}
-                        alt="profesor"
-                      />
-                      <h3>Profesor</h3>
-                    </div>
-                    <input
-                      type="radio"
-                      value="teacher"
-                      {...register('check')}
-                      id="teacher"
-                      className={styles.hiddenradio}
-                    />
-                  </label>
-                </div>
-
-                <div className={styles.buttoncontainer1}>
-                  <input
-                    type="submit"
-                    value="Siguiente"
-                    className={`${styles.submitbutton1} ${
-                      !isDirty || !isValid ? styles.disabledbutton1 : ''
-                    }`}
-                    disabled={!isDirty || !isValid}
-                  />
-                </div>
-              </div>
-            </form>
+        <div>
+          <div className={styles.titlecontainer}>
+            <h2>Usted esta ingresando como...</h2>
           </div>
+          <form onSubmit={handleSubmit(onSubmitView1)}>
+            <div className={styles.containerview1}>
+              <div className={styles.inputs1}>
+                <label htmlFor="student" className={styles.label1}>
+                  <div className={styles.infocontainer}>
+                    <Image src={alumno} alt="alumno" />
+                    <h3 className={styles.subtitle1}>Alumno</h3>
+                  </div>
+                  <input
+                    type="radio"
+                    value="student"
+                    {...register('check')}
+                    id="student"
+                    className={styles.hiddenradio}
+                  />
+                </label>
+                <div className={styles.separator}></div>
+                <label htmlFor="teacher" className={styles.label1}>
+                  <div className={styles.infocontainer}>
+                    <Image
+                      className={styles.photo}
+                      src={teacher}
+                      alt="profesor"
+                    />
+                    <h3 className={styles.subtitle1}>Profesor</h3>
+                  </div>
+                  <input
+                    type="radio"
+                    value="teacher"
+                    {...register('check')}
+                    id="teacher"
+                    className={styles.hiddenradio}
+                  />
+                </label>
+              </div>
+
+              <div className={styles.buttoncontainer1}>
+                <input
+                  type="submit"
+                  value="Siguiente"
+                  className={`${styles.submitbutton1} ${
+                    !isDirty || !isValid ? styles.disabledbutton1 : ''
+                  }`}
+                  disabled={!isDirty || !isValid}
+                />
+              </div>
+            </div>
+          </form>
         </div>
       )}
 
@@ -210,7 +208,9 @@ const FormLogin = () => {
                 <Link href="/home">
                   <input
                     type="button"
-                    className={styles.btn}
+                    className={`${styles.btn} ${
+                      !isDirty || !isValid ? styles.disabledbutton : ''
+                    }`}
                     value="Iniciar sesión"
                     disabled={!isDirty || !isValid}
                     onClick={() => onSubmitView2(watch())}
