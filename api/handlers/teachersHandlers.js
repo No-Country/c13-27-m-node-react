@@ -21,6 +21,8 @@ const teacherLoginHandler = async (req, res) => {
   const { dni, password, check } = req.body;
   try {
     const login = await teacherLoginController(dni, password, check);
+    req.session.dni = dni; // Guardo el dni para usar en la sesión
+    req.session.role = check; // Guardo el rol para usar en la sesión
     res.send(login);
   } catch (error) {
     res.status(500).json(error.message);

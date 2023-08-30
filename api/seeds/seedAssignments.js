@@ -23,6 +23,9 @@ const newAssignment = new Assignment({
     },
   ],
   students: ['64e3ed3b13ce0a444343a978'],
+  days: ['Viernes', 'Jueves'],
+  schedule: '2:00 PM a 4:00 PM',
+  classroom: 'Aula 3F',
 });
 const newAssignment2 = new Assignment({
   name: 'Física',
@@ -32,9 +35,12 @@ const newAssignment2 = new Assignment({
       time: '09:00 AM',
       duration: 120,
       type: 'Parcial',
-    }
+    },
   ],
   students: ['64e3ed3b13ce0a444343a978'],
+  days: ['Lunes', 'Miércoles', 'Viernes'],
+  schedule: '8:00 AM a 9:00 AM',
+  classroom: 'Aula 5A',
 });
 const newAssignment3 = new Assignment({
   name: 'Ciencia Política',
@@ -47,6 +53,9 @@ const newAssignment3 = new Assignment({
     },
   ],
   students: ['64e658c0c2088908dd408c51'],
+  days: ['Martes', 'Jueves'],
+  schedule: '10:00 AM a 12:00 AM',
+  classroom: 'Aula 4E',
 });
 const newAssignment4 = new Assignment({
   name: 'Derecho Penal',
@@ -59,6 +68,9 @@ const newAssignment4 = new Assignment({
     },
   ],
   students: ['64e658c0c2088908dd408c51'],
+  days: ['Lunes', 'Miércoles'],
+  schedule: '8:00 AM a 10:00 AM',
+  classroom: 'Aula 3G',
 });
 
 const seedDB = async () => {
