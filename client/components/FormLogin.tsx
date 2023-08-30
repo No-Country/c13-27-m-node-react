@@ -72,6 +72,12 @@ const FormLogin = () => {
     }
   };
 
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleRadioClick = (option: any) => {
+    setSelectedOption(option);
+  };
+
   const [view1, setView1] = useState(true);
   const [view2, setView2] = useState(false);
 
@@ -94,7 +100,12 @@ const FormLogin = () => {
           <form onSubmit={handleSubmit(onSubmitView1)}>
             <div className={styles.containerview1}>
               <div className={styles.inputs1}>
-                <label htmlFor="student" className={styles.label1}>
+                <label
+                  htmlFor="student"
+                  className={`${styles.label1} ${
+                    selectedOption === 'student' ? styles.selected : ''
+                  }`}
+                  onClick={() => handleRadioClick('student')}>
                   <div className={styles.infocontainer}>
                     <Image src={alumno} alt="alumno" />
                     <h3 className={styles.subtitle1}>Alumno</h3>
@@ -108,7 +119,12 @@ const FormLogin = () => {
                   />
                 </label>
                 <div className={styles.separator}></div>
-                <label htmlFor="teacher" className={styles.label1}>
+                <label
+                  htmlFor="teacher"
+                  className={`${styles.label1} ${
+                    selectedOption === 'teacher' ? styles.selected : ''
+                  }`}
+                  onClick={() => handleRadioClick('teacher')}>
                   <div className={styles.infocontainer}>
                     <Image
                       className={styles.photo}

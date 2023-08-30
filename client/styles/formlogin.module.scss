@@ -55,6 +55,9 @@
   display: flex;
   justify-content: center;
 }
+.selected {
+  text-decoration: underline;
+}
 
 .submitbutton1 {
   text-transform: uppercase;
