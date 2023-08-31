@@ -8,7 +8,9 @@ const getAllCareersController = async (req, res) => {
 
 const getCareerByIdController = async (req, res) => {
   const { id } = req.params;
-  const careers = await CareerModel.findById(id).populate('students');
+  const careers = await CareerModel.findById(id)
+    .populate('students')
+    .populate('assignments');
   if (!careers) throw new Error('No hay información disponible');
   return careers;
 };

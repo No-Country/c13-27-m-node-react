@@ -1,45 +1,109 @@
 @import './variables.scss';
+
 .mainlogin {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  column-gap: 6rem;
-  padding-right: 0rem;
-  padding-block: 0rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .loginimagecontainer {
-  grid-column: 7/13;
+  flex: 1;
   display: flex;
   justify-content: flex-end;
-  // width: 100%;
+  align-items: center;
 }
 
 .loginimage {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 .formcontainer {
-  grid-column: 1/6;
-  display: flex;
-  flex-direction: column;
-  padding-top: 2rem;
+  flex: 1;
+  padding: 20px;
 }
 
+// View 1
+
+.inputs1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titlecontainer {
+  text-align: center;
+  margin: 3rem 0rem;
+}
+
+.label1 {
+  cursor: pointer;
+}
+
+.separator {
+  width: 15rem;
+}
+
+.hiddenradio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.buttoncontainer1 {
+  display: flex;
+  justify-content: center;
+}
+.selected {
+  text-decoration: underline;
+}
+
+.submitbutton1 {
+  text-transform: uppercase;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  color: $background;
+  background-color: $text1;
+  transition: background-color 0.3s ease-in;
+}
+
+.disabledbutton1 {
+  background-color: gray;
+}
+
+.disabledbutton1:hover {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+// .infocontainer {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+.subtitle1 {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+// view 2
 .containerbox {
-  margin: 0.5rem 0;
+  margin: 10rem 0;
 }
 
 .label {
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   font-weight: 700;
   color: $text2;
 }
 
 .inputbox {
   height: 1rem;
-  margin: 1rem 0rem;
+  margin: 5.2rem 0rem;
 }
 
 .input {
@@ -66,15 +130,9 @@
   cursor: pointer;
   color: $background;
   background-color: $text1;
-  transition: background-color 0.3s ease-in;
+  transition: background-color 0.7s ease-in-out;
 }
 
-.btn:hover {
-  background-color: $background;
-  color: $text1;
-  border: 1px solid $text1;
-  font-weight: 700;
-}
 .disabledbutton {
   background-color: gray;
 }
@@ -96,9 +154,6 @@
 .forgotpassword a:hover {
   text-decoration: underline;
 }
-
-// .registerlink {
-// }
 
 .registerlink a {
   color: #626262;

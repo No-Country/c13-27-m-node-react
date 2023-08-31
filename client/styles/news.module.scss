@@ -1,0 +1,16 @@
+@import 'variables.scss';
+
+// ESTILOS GLOBALES DE EVENTOS Y NOTICIAS 
+.container {
+    display: flex;
+    justify-content: center;
+}
+.divContainer {
+    font-size: 24px;
+    width: 1118px;
+    margin: 6rem 0rem;
+}
+.containerTitles,
+.p {
+    margin-bottom: 1.5rem;
+}

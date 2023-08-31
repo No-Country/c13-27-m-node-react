@@ -28,9 +28,18 @@ const AssignmentSchema = new Schema({
       },
     }),
   ],
+  days: {
+    type: [String],
+  },
+  schedule: {
+    type: String,
+  },
+  classroom: {
+    type: String,
+  },
 });
 
 const AssignmentModel = mongoose.model('Assignment', AssignmentSchema);
 module.exports = AssignmentModel;
 
-/* modelo carrera: nombre materia alumnos cuales carreras hay: (ENUM) 4 carreras */
+

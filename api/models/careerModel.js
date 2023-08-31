@@ -34,4 +34,3 @@ const CareerSchema = new Schema({
 const CareerModel = mongoose.model('Career', CareerSchema);
 module.exports = CareerModel;
 
-/* modelo carrera: nombre materia alumnos cuales carreras hay: (ENUM) 4 carreras */

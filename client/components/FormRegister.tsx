@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { UserRegister } from '../interfaces/interfaces';
 
 const initialForm: UserRegister = {
+  id: '',
   userRol: 'student',
   firstname: '',
   lastname: '',
@@ -13,6 +14,8 @@ const initialForm: UserRegister = {
   password: '',
   passwordConfirm: '',
   termsandconditions: false,
+  carreer: '',
+  assignments: [],
 };
 
 export const FormRegister = () => {
@@ -100,14 +103,17 @@ export const FormRegister = () => {
         check: registerForm.userRol,
       }),
     });
-    const data = await res.json();
-    console.log(error);
-    console.log(data);
+
+    if (res.ok) {
+      const data = await res.json();
+      localStorage.setItem('userId', data._id);
+      console.log(data);
+    }
   };
 
   const handleRoute = () => {
     if (Object.keys(error).length === 0) {
-      router.push('/login');
+      router.push('/seleccion-carrera');
     } else {
       return;
     }

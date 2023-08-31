@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "seed": "node seeds/seedAssignments && node seeds/seedCareers && node seeds/seedTeachers && node seeds/seedStudents",
+    "seed": "node seeds/seedAssignments && node seeds/seedCareers && node seeds/seedTeachers && node seeds/seedStudents && node seeds/populateSeeds",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,6 +17,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "joi": "^17.10.0",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.3",
     "mongoose-paginate-v2": "^1.7.31"
