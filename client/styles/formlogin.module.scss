@@ -1,29 +1,12 @@
 @import './variables.scss';
 
-.mainlogin {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.loginimagecontainer {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.loginimage {
-  max-width: 100%;
-  height: auto;
-}
-
-.formcontainer {
-  flex: 1;
-  padding: 20px;
-}
-
 // View 1
+
+.optionscontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .inputs1 {
   display: flex;
@@ -79,18 +62,29 @@
   cursor: not-allowed;
 }
 
-// .infocontainer {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// }
-
 .subtitle1 {
   margin-top: 1rem;
   text-align: center;
 }
 
 // view 2
+.view2container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rightImage {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.imageContainer {
+  float: right;
+  margin-left: 1rem;
+}
+
 .containerbox {
   margin: 10rem 0;
 }
