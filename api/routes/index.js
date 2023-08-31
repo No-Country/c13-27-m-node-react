@@ -8,6 +8,7 @@ const assignmentsRoutes = require('./assignmentsRoutes');
 const careersRoutes = require('./careersRoutes');
 const homePageRoutes = require('./homePageRoutes');
 const profileRoutes = require('./profileRoutes');
+const uploadsRoutes = require('./uploadsRoutes');
 
 // Middlewares
 app.use('/students', studentsRoutes);
@@ -16,5 +17,6 @@ app.use('/assignments', assignmentsRoutes);
 app.use('/careers', careersRoutes);
 app.use('/homePage', homePageRoutes);
 app.use('/profile', profileRoutes);
+app.use('/upload', uploadsRoutes);
 
 module.exports = app;
