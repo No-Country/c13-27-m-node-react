@@ -2,7 +2,7 @@ import styles from '../styles/headerperfilalumno.module.scss';
 import avatar from '../public/assets/perfil-alumno.png';
 import Image from 'next/image';
 
-export const HaderPaginaAlumno = () => {
+export const HeaderPerfil = () => {
   return (
     <section className={styles.headerContainer}>
       <article className={styles.headerGradient}></article>
