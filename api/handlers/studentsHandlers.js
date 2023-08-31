@@ -29,8 +29,10 @@ const studentLoginHandler = async (req, res) => {
   if (error) throw new Error(error);
   try {
     const login = await studentLoginController(dni, password, check);
-    req.session.dni = dni; // Guardo el dni para usar en la sesión
-    req.session.role = check; // Guardo el rol para usar en la sesión
+    req.session.user = {
+      dni,
+      role: check,
+    }; // guardo el usuario logueado en la sesion
     res.send(login);
   } catch (error) {
     res.status(500).json(error.message);
