@@ -17,6 +17,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Ruta para subir archivos PDF
-app.post('/upload', upload.single('pdfFile'), (req, res) => {
+app.post('/', upload.single('pdfFile'), (req, res) => {
   res.json({ message: 'Archivo subido exitosamente' });
 });
+
+module.exports = app;
