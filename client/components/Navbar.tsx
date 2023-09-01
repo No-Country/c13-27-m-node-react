@@ -2,9 +2,11 @@
 import Link from 'next/link';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
-import type { RootState } from '../redux/store';
+import { useAppContext } from '../context/userContext';
 
 const Navbar = () => {
+  const { isLogged } = useAppContext();
+
   return (
     <nav className={styles.navBar}>
       <Link href="/">
@@ -19,14 +21,15 @@ const Navbar = () => {
         </div>
       </Link>
       <ul className={styles.ulNav}>
-        <li>
-          <Link
-            href="/home"
-            className={styles.itemNav}>
-            Home
-          </Link>
-        </li>
-
+        {isLogged && (
+          <li>
+            <Link
+              href="/home"
+              className={styles.itemNav}>
+              Home
+            </Link>
+          </li>
+        )}
         <li>
           <Link
             href="/ayuda"
@@ -41,13 +44,15 @@ const Navbar = () => {
             Información
           </Link>
         </li>
-        <li>
-          <Link
-            href="/perfil-alumno"
-            className={styles.itemNav}>
-            Perfil
-          </Link>
-        </li>
+        {isLogged && (
+          <li>
+            <Link
+              href="/perfil-alumno"
+              className={styles.itemNav}>
+              Perfil
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );
