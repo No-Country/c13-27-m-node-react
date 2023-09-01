@@ -3,9 +3,15 @@ import Link from 'next/link';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
 import { useAppContext } from '../context/userContext';
+import { initialUser } from '../context/userContext';
 
 const Navbar = () => {
-  const { isLogged } = useAppContext();
+  const { isLogged, setIsLogged, setUserRegister } = useAppContext();
+
+  const handleLogOut = () => {
+    setIsLogged(false);
+    setUserRegister(initialUser);
+  };
 
   return (
     <nav className={styles.navBar}>
@@ -50,6 +56,16 @@ const Navbar = () => {
               href="/perfil-alumno"
               className={styles.itemNav}>
               Perfil
+            </Link>
+          </li>
+        )}
+        {isLogged && (
+          <li>
+            <Link
+              href="/"
+              className={styles.itemNav}
+              onClick={handleLogOut}>
+              Cerrar Sesión
             </Link>
           </li>
         )}

@@ -1,6 +1,6 @@
 'use client';
 import React, { createContext, useContext, useState } from 'react';
-import { UserLogin, UserRegister } from '../interfaces/interfaces';
+import { UserRegister } from '../interfaces/interfaces';
 
 interface AppContextType {
   userRegister: UserRegister;
@@ -9,24 +9,18 @@ interface AppContextType {
   setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const initialUser: UserRegister = {
+export const initialUser: UserRegister = {
   id: '',
   userRol: 'student',
-  firstname: '',
-  lastname: '',
+  firstName: '',
+  lastName: '',
   dni: '',
   email: '',
   password: '',
   passwordConfirm: '',
   termsandconditions: false,
-  carreer: '',
+  career: '',
   assignments: [],
-};
-
-const initialUserLogged: UserLogin = {
-  dni: '',
-  password: '',
-  userRol: 'student',
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -44,6 +38,8 @@ export const useAppContext = () => {
 export function AppProvider({ children }: React.PropsWithChildren<{}>) {
   const [userRegister, setUserRegister] = useState<UserRegister>(initialUser);
   const [isLogged, setIsLogged] = useState<boolean>(false);
+
+  console.log('context', userRegister);
 
   const contextValue: AppContextType = {
     userRegister,

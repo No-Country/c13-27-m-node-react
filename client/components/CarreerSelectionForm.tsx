@@ -69,7 +69,7 @@ const CarreerForm = () => {
 
       if (res.ok) {
         const data = await res.json();
-        if (userRegister.carreer) {
+        if (userRegister.career) {
           setUserRegister(data);
         }
         console.log('Usuario guardado en selección de Carrera', data);

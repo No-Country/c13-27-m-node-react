@@ -16,9 +16,9 @@ export const FormRegister = () => {
   useEffect(() => {
     if (
       userRegister.dni !== '' &&
-      userRegister.firstname !== '' &&
+      userRegister.firstName !== '' &&
       userRegister.email !== '' &&
-      userRegister.lastname !== '' &&
+      userRegister.lastName !== '' &&
       userRegister.password !== '' &&
       userRegister.passwordConfirm !== '' &&
       userRegister.termsandconditions !== false
@@ -82,8 +82,8 @@ export const FormRegister = () => {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify({
-        firstName: userRegister.firstname,
-        lastName: userRegister.lastname,
+        firstName: userRegister.firstName,
+        lastName: userRegister.lastName,
         email: userRegister.email,
         password: userRegister.password,
         dni: userRegister.dni,
@@ -121,7 +121,7 @@ export const FormRegister = () => {
       </label>
       <input
         className={`${styles.input} ${
-          error.firstname ? styles.inputError : ''
+          error.firstName ? styles.inputError : ''
         }`}
         placeholder="Nombre"
         type="text"
@@ -134,7 +134,7 @@ export const FormRegister = () => {
         Apellido
       </label>
       <input
-        className={`${styles.input} ${error.lastname ? styles.inputError : ''}`}
+        className={`${styles.input} ${error.lastName ? styles.inputError : ''}`}
         placeholder="Apellido"
         type="text"
         name="lastname"
