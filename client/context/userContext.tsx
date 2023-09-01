@@ -5,8 +5,6 @@ import { UserLogin, UserRegister } from '../interfaces/interfaces';
 interface AppContextType {
   userRegister: UserRegister;
   setUserRegister: React.Dispatch<React.SetStateAction<UserRegister>>;
-  loggedUser: UserLogin;
-  setLoggedUser: React.Dispatch<React.SetStateAction<UserLogin>>;
   isLogged: boolean;
   setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -45,14 +43,11 @@ export const useAppContext = () => {
 
 export function AppProvider({ children }: React.PropsWithChildren<{}>) {
   const [userRegister, setUserRegister] = useState<UserRegister>(initialUser);
-  const [loggedUser, setLoggedUser] = useState<UserLogin>(initialUserLogged);
   const [isLogged, setIsLogged] = useState<boolean>(false);
 
   const contextValue: AppContextType = {
     userRegister,
     setUserRegister,
-    loggedUser,
-    setLoggedUser,
     isLogged,
     setIsLogged,
   };

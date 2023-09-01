@@ -1,5 +1,5 @@
 'use client';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import styles from '../styles/formlogin.module.scss';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -7,8 +7,11 @@ import Image from 'next/image';
 import alumno from '../public/assets/alumno.png';
 import teacher from '../public/assets/profesor.jpg';
 import login from '../public/assets/login.png';
+import { useAppContext } from '../context/userContext';
 
 const FormLogin = () => {
+  const { setIsLogged, setUserRegister, userRegister } = useAppContext();
+
   const {
     register,
     handleSubmit,
@@ -19,6 +22,9 @@ const FormLogin = () => {
   });
 
   const [view1Data, setView1Data] = useState({});
+  const [selectedOption, setSelectedOption] = useState('');
+  const [view1, setView1] = useState(true);
+  const [view2, setView2] = useState(false);
 
   const onSubmitView1 = (data: any) => {
     setView1Data(data.checked);
@@ -28,13 +34,11 @@ const FormLogin = () => {
 
   const onSubmitView2 = async (data: any) => {
     const allData = { ...view1Data, ...data };
-    console.log(allData);
-
     try {
       let endpoint = '';
-      if (allData.checked === 'student') {
+      if (allData.check === 'student') {
         endpoint = 'http://localhost:3001/students/studentsLogin';
-      } else if (allData.checked === 'teacher') {
+      } else if (allData.check === 'teacher') {
         endpoint = 'http://localhost:3001/teachers/teachersLogin';
       }
 
@@ -47,13 +51,16 @@ const FormLogin = () => {
           body: JSON.stringify({
             dni: allData.dni,
             password: allData.password,
-            check: allData.checked,
+            check: allData.check,
           }),
         });
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log(responseData);
+          setIsLogged(true);
+          if (responseData) {
+            setUserRegister(responseData);
+          }
         } else {
           console.error('Error connecting to the backend');
         }
@@ -63,14 +70,9 @@ const FormLogin = () => {
     }
   };
 
-  const [selectedOption, setSelectedOption] = useState('');
-
   const handleRadioClick = (option: any) => {
     setSelectedOption(option);
   };
-
-  const [view1, setView1] = useState(true);
-  const [view2, setView2] = useState(false);
 
   // const handleView = () => {
   //   setView1(false);
