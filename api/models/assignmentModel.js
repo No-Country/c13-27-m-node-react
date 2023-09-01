@@ -37,9 +37,13 @@ const AssignmentSchema = new Schema({
   classroom: {
     type: String,
   },
+  links: {
+    type: [String],
+  },
+  fileNames: {
+    type: [String],
+  },
 });
 
 const AssignmentModel = mongoose.model('Assignment', AssignmentSchema);
 module.exports = AssignmentModel;
-
-
