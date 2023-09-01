@@ -1,30 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
 import styles from '../styles/materiasselection.module.scss';
-import Image from 'next/image';
-import { UserRegister } from '../interfaces/interfaces';
+import { Assignment } from '../interfaces/interfaces';
 import { useRouter } from 'next/navigation';
-
-interface Assignment {
-  _id: string;
-  name: string;
-  schedule: string;
-  classroom: string;
-}
-
-const initialUser: UserRegister = {
-  id: '',
-  userRol: 'student',
-  firstname: '',
-  lastname: '',
-  dni: '',
-  email: '',
-  password: '',
-  passwordConfirm: '',
-  termsandconditions: false,
-  carreer: '',
-  assignments: [],
-};
+import { useAppContext } from '../context/userContext';
 
 const MateriasSelectionForm = () => {
   const router = useRouter();
@@ -32,17 +11,15 @@ const MateriasSelectionForm = () => {
   const [assignments, setAssignments] = useState([]);
   const [selectedAssignments, setSelectedAssignments] = useState<string[]>([]);
   const [carrerId, setCarrerId] = useState<string | null>(null);
-  const [user, setUser] = useState<UserRegister>(initialUser);
+  const { userRegister, setUserRegister } = useAppContext();
   const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
 
   useEffect(() => {
-    const storedCarrerId = localStorage.getItem('carrerId'); // Recuperar el carrerId
-    setCarrerId(storedCarrerId); // Actualizar el estado con el carrerId
+    const storedCarrerId = localStorage.getItem('carrerId');
+    setCarrerId(storedCarrerId);
   }, []);
 
   useEffect(() => {
-    console.log(carrerId);
-
     if (carrerId) {
       const getAssignments = async () => {
         try {
@@ -56,23 +33,6 @@ const MateriasSelectionForm = () => {
       };
       getAssignments();
     }
-  }, [carrerId]);
-
-  useEffect(() => {
-    const getUser = () => {
-      try {
-        const id = localStorage.getItem('userId');
-        fetch(`http://localhost:3001/students/${id}`)
-          .then((res) => res.json())
-          .then((data) => {
-            setUser(data);
-            console.log('user', user);
-          });
-      } catch (error) {
-        console.error('Error fetching Users:', error);
-      }
-    };
-    getUser();
   }, [carrerId]);
 
   useEffect(() => {
@@ -97,17 +57,19 @@ const MateriasSelectionForm = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (selectedAssignments.length > 0) {
-      const id = localStorage.getItem('userId');
-      const url = `http://www.localhost:3001/students/careerSelection/${id}`;
-      fetch(url, {
-        headers: { 'Content-Type': 'application/json' },
-        method: 'PUT',
-        body: JSON.stringify({
-          ...user,
-          assignments: selectedAssignments,
-        }),
-      });
-      router.push('/login');
+      if (userRegister.id) {
+        const id = userRegister.id;
+        const url = `http://www.localhost:3001/students/careerSelection/${id}`;
+        fetch(url, {
+          headers: { 'Content-Type': 'application/json' },
+          method: 'PUT',
+          body: JSON.stringify({
+            ...userRegister,
+            assignments: selectedAssignments,
+          }),
+        });
+        router.push('/login');
+      }
     }
   };
 
