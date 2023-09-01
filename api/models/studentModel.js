@@ -34,10 +34,13 @@ const StudentSchema = new Schema({
     type: String,
     // required: true,
   },
-  assignments: {
-    type: [String],
-    // required: true,
-  },
+  assignments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Assignment',
+      // required: true,
+    },
+  ],
   career: {
     type: String,
     // required: true,

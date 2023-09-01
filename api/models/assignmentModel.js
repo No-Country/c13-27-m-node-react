@@ -26,6 +26,15 @@ const AssignmentSchema = new Schema({
         type: String,
         enum: ['Parcial', 'Final'],
       },
+      grades: [
+        {
+          student: {
+            type: Schema.Types.ObjectId,
+            ref: 'Student',
+          },
+          grade: Number, // or any data structure for grades
+        },
+      ],
     }),
   ],
   days: {
