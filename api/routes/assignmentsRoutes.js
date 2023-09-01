@@ -6,10 +6,12 @@ const {
   getAllAssignmentsHandler,
   getAssignmentByIdHandler,
   getAssignmentsByCareerHandler,
+  updateAssignmentsLinksHandler,
 } = require('../handlers/assignmentsHandlers');
 
 router.get('/allAssignments', getAllAssignmentsHandler); // Ruta para obtener todos las materias (ver como integrar con alumnos y profesores)
 router.get('/:id', getAssignmentByIdHandler); // Ruta para obtener una materia usando el ID
 router.get('/careers/:careerName/assignments', getAssignmentsByCareerHandler);
+router.put('/:id/uploadLinks', updateAssignmentsLinksHandler);
 
 module.exports = router;
