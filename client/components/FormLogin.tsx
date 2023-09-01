@@ -7,11 +7,8 @@ import Image from 'next/image';
 import alumno from '../public/assets/alumno.png';
 import teacher from '../public/assets/profesor.jpg';
 import login from '../public/assets/login.png';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/slice';
 
 const FormLogin = () => {
-  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -57,13 +54,6 @@ const FormLogin = () => {
         if (response.ok) {
           const responseData = await response.json();
           console.log(responseData);
-          dispatch(
-            loginUser({
-              dni: allData.dni,
-              password: allData.password,
-              userRol: allData.checked,
-            })
-          );
         } else {
           console.error('Error connecting to the backend');
         }
