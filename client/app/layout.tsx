@@ -2,7 +2,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/global.scss';
 import { Inter } from 'next/font/google';
-import Providers from './_app';
+/* import Providers from './_app'; */
+import { AppProvider } from '../context/userContext';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,11 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
+        <AppProvider>
           <Navbar />
           {children}
-          <Footer />
-        </Providers>
+        </AppProvider>
+        <Footer />
       </body>
     </html>
   );

@@ -1,26 +1,13 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useAppContext } from '../context/userContext';
 import styles from '../styles/formregister.module.scss';
 import { useRouter } from 'next/navigation';
 import { UserRegister } from '../interfaces/interfaces';
 
-const initialForm: UserRegister = {
-  id: '',
-  userRol: 'student',
-  firstname: '',
-  lastname: '',
-  dni: '',
-  email: '',
-  password: '',
-  passwordConfirm: '',
-  termsandconditions: false,
-  carreer: '',
-  assignments: [],
-};
-
 export const FormRegister = () => {
   const router = useRouter();
-  const [registerForm, setRegisterForm] = useState<UserRegister>(initialForm);
+  const { userRegister, setUserRegister } = useAppContext();
   const [error, setError] = useState<
     Partial<Record<keyof UserRegister, string>>
   >({});
@@ -28,13 +15,13 @@ export const FormRegister = () => {
 
   useEffect(() => {
     if (
-      registerForm.dni !== '' &&
-      registerForm.firstname !== '' &&
-      registerForm.email !== '' &&
-      registerForm.lastname !== '' &&
-      registerForm.password !== '' &&
-      registerForm.passwordConfirm !== '' &&
-      registerForm.termsandconditions !== false
+      userRegister.dni !== '' &&
+      userRegister.firstname !== '' &&
+      userRegister.email !== '' &&
+      userRegister.lastname !== '' &&
+      userRegister.password !== '' &&
+      userRegister.passwordConfirm !== '' &&
+      userRegister.termsandconditions !== false
     ) {
       if (Object.keys(error).length === 0) {
         setSubmitDisabled(true);
@@ -42,7 +29,7 @@ export const FormRegister = () => {
         setSubmitDisabled(false);
       }
     }
-  }, [error, registerForm]);
+  }, [error, userRegister]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
@@ -69,15 +56,15 @@ export const FormRegister = () => {
     if (name === 'password' && !value) {
       newErrors.password = 'Debes elegir una contraseña';
     }
-    if (name === 'passwordConfirm' && value !== registerForm.password) {
+    if (name === 'passwordConfirm' && value !== userRegister.password) {
       newErrors.passwordConfirm = 'Las contraseñas no coinciden';
     }
     if (name === 'termsandconditions' && !checked) {
       newErrors.termsandconditions = 'Debes aceptar los términos y condiciones';
     }
 
-    setRegisterForm({
-      ...registerForm,
+    setUserRegister({
+      ...userRegister,
       [name]: inputValue,
     });
     setError(newErrors);
@@ -87,7 +74,7 @@ export const FormRegister = () => {
     event.preventDefault();
 
     const url =
-      registerForm.userRol === 'student'
+      userRegister.userRol === 'student'
         ? 'http://localhost:3001/students/registerStudent'
         : 'http://localhost:3001/teachers/registerTeacher';
 
@@ -95,19 +82,23 @@ export const FormRegister = () => {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify({
-        firstName: registerForm.firstname,
-        lastName: registerForm.lastname,
-        email: registerForm.email,
-        password: registerForm.password,
-        dni: registerForm.dni,
-        check: registerForm.userRol,
+        firstName: userRegister.firstname,
+        lastName: userRegister.lastname,
+        email: userRegister.email,
+        password: userRegister.password,
+        dni: userRegister.dni,
+        check: userRegister.userRol,
       }),
     });
 
     if (res.ok) {
       const data = await res.json();
-      localStorage.setItem('userId', data._id);
-      console.log(data);
+      if (data._id) {
+        setUserRegister({
+          ...userRegister,
+          id: data._id,
+        });
+      }
     }
   };
 
