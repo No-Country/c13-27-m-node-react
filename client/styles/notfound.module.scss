@@ -4,12 +4,15 @@
 .containerTitles {
     display: flex;
     flex-direction: column;
-    margin: 14rem 10rem 0rem 0rem;
+    // background-color: blanchedalmond;
+    margin-top: 7rem;
+    // margin: 7rem 0rem 0rem 3rem;
 }
 .containerImg {
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
+    // background-color: aquamarine;
 }
 .error {
     text-align: center;
@@ -20,6 +23,15 @@
     text-align: center;
 }
 .p {
-    font-size: 12px;
+    font-size: 32px;
     margin-top: 2rem;
+    font-weight: 500;
+}
+.link {
+    text-align: center;
+    margin-top: 2rem;
+    color: $secondary-color;
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: 500;
 }
