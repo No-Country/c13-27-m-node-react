@@ -16,9 +16,11 @@ const getAssignmentByIdController = async (req, res) => {
 
 const getAssignmentsByCareerController = async (req, res) => {
   const { careerName } = req.params;
-  const career = await CareerModel.findOne({ name: careerName }).populate('assignments');
+  const career = await CareerModel.findOne({ name: careerName }).populate(
+    'assignments'
+  );
   if (!career) throw new Error('No se encontró la carrera');
-  return career.assignment
+  return career.assignment;
 };
 
 module.exports = {

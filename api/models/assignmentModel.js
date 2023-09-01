@@ -39,7 +39,9 @@ const AssignmentSchema = new Schema({
   },
 });
 
+AssignmentSchema.methods.getTotalClasses = function () {
+  return this.days.length * 4 * 4; // Clases x 4 semanas   x 4 meses
+};
+
 const AssignmentModel = mongoose.model('Assignment', AssignmentSchema);
 module.exports = AssignmentModel;
-
-
