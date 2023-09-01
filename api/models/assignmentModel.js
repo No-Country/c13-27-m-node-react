@@ -46,6 +46,12 @@ const AssignmentSchema = new Schema({
   classroom: {
     type: String,
   },
+  links: {
+    type: [String],
+  },
+  fileNames: {
+    type: [String],
+  },
 });
 
 AssignmentSchema.methods.getTotalClasses = function () {

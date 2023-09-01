@@ -23,8 +23,16 @@ const getAssignmentsByCareerController = async (req, res) => {
   return career.assignment;
 };
 
+const updateAssignmentsLinksController = async (id, newLinks) => {
+  if (newLinks.length === 0) throw new Error('No se enviaron links');
+  await AssignmentModel.updateOne({ _id: id }, { $set: { links: newLinks } });
+  const assignment = await AssignmentModel.findOne({ _id: id });
+  return assignment;
+};
+
 module.exports = {
   getAllAssignmentsController,
   getAssignmentByIdController,
   getAssignmentsByCareerController,
+  updateAssignmentsLinksController,
 };

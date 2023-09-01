@@ -2,11 +2,16 @@
 import Link from 'next/link';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../redux/store';
+import { useAppContext } from '../context/userContext';
+import { initialUser } from '../context/userContext';
 
 const Navbar = () => {
-  const userLogged = useSelector((state: RootState) => state.user.loggedIn);
+  const { isLogged, setIsLogged, setUserRegister } = useAppContext();
+
+  const handleLogOut = () => {
+    setIsLogged(false);
+    setUserRegister(initialUser);
+  };
 
   return (
     <nav className={styles.navBar}>
@@ -22,7 +27,7 @@ const Navbar = () => {
         </div>
       </Link>
       <ul className={styles.ulNav}>
-        {userLogged && (
+        {isLogged && (
           <li>
             <Link
               href="/home"
@@ -45,12 +50,22 @@ const Navbar = () => {
             Información
           </Link>
         </li>
-        {userLogged && (
+        {isLogged && (
           <li>
             <Link
               href="/perfil-alumno"
               className={styles.itemNav}>
               Perfil
+            </Link>
+          </li>
+        )}
+        {isLogged && (
+          <li>
+            <Link
+              href="/"
+              className={styles.itemNav}
+              onClick={handleLogOut}>
+              Cerrar Sesión
             </Link>
           </li>
         )}

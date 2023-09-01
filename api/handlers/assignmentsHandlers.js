@@ -1,7 +1,8 @@
 const {
   getAllAssignmentsController,
   getAssignmentByIdController,
-  getAssignmentsByCareerController
+  getAssignmentsByCareerController,
+  updateAssignmentsLinksController,
 } = require('../controllers/assignmentsController');
 
 const getAllAssignmentsHandler = async (req, res) => {
@@ -31,4 +32,20 @@ const getAssignmentsByCareerHandler = async (req, res) => {
   }
 };
 
-module.exports = { getAllAssignmentsHandler, getAssignmentByIdHandler, getAssignmentsByCareerHandler };
+const updateAssignmentsLinksHandler = async (req, res) => {
+  const { id } = req.params;
+  const { links } = req.body;
+  try {
+    const assignments = await updateAssignmentsLinksController(id, links);
+    res.send(assignments);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  getAllAssignmentsHandler,
+  getAssignmentByIdHandler,
+  getAssignmentsByCareerHandler,
+  updateAssignmentsLinksHandler,
+};

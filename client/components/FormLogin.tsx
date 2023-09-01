@@ -1,5 +1,5 @@
 'use client';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import styles from '../styles/formlogin.module.scss';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -7,11 +7,11 @@ import Image from 'next/image';
 import alumno from '../public/assets/alumno.png';
 import teacher from '../public/assets/profesor.jpg';
 import login from '../public/assets/login.png';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/slice';
+import { useAppContext } from '../context/userContext';
 
 const FormLogin = () => {
-  const dispatch = useDispatch();
+  const { setIsLogged, setUserRegister } = useAppContext();
+
   const {
     register,
     handleSubmit,
@@ -22,6 +22,9 @@ const FormLogin = () => {
   });
 
   const [view1Data, setView1Data] = useState({});
+  const [selectedOption, setSelectedOption] = useState('');
+  const [view1, setView1] = useState(true);
+  const [view2, setView2] = useState(false);
 
   const onSubmitView1 = (data: any) => {
     setView1Data(data.checked);
@@ -31,13 +34,11 @@ const FormLogin = () => {
 
   const onSubmitView2 = async (data: any) => {
     const allData = { ...view1Data, ...data };
-    console.log(allData);
-
     try {
       let endpoint = '';
-      if (allData.checked === 'student') {
+      if (allData.check === 'student') {
         endpoint = 'http://localhost:3001/students/studentsLogin';
-      } else if (allData.checked === 'teacher') {
+      } else if (allData.check === 'teacher') {
         endpoint = 'http://localhost:3001/teachers/teachersLogin';
       }
 
@@ -50,20 +51,16 @@ const FormLogin = () => {
           body: JSON.stringify({
             dni: allData.dni,
             password: allData.password,
-            check: allData.checked,
+            check: allData.check,
           }),
         });
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log(responseData);
-          dispatch(
-            loginUser({
-              dni: allData.dni,
-              password: allData.password,
-              userRol: allData.checked,
-            })
-          );
+          setIsLogged(true);
+          if (responseData) {
+            setUserRegister(responseData);
+          }
         } else {
           console.error('Error connecting to the backend');
         }
@@ -73,14 +70,9 @@ const FormLogin = () => {
     }
   };
 
-  const [selectedOption, setSelectedOption] = useState('');
-
   const handleRadioClick = (option: any) => {
     setSelectedOption(option);
   };
-
-  const [view1, setView1] = useState(true);
-  const [view2, setView2] = useState(false);
 
   // const handleView = () => {
   //   setView1(false);
@@ -109,7 +101,10 @@ const FormLogin = () => {
                     }`}
                     onClick={() => handleRadioClick('student')}>
                     <div className={styles.infocontainer}>
-                      <Image src={alumno} alt="alumno" />
+                      <Image
+                        src={alumno}
+                        alt="alumno"
+                      />
                       <h3 className={styles.subtitle1}>Alumno</h3>
                     </div>
                     <input
@@ -168,7 +163,9 @@ const FormLogin = () => {
             className={styles.formContainer}>
             <div className={styles.containerbox}>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="dni">
+                <label
+                  className={styles.label}
+                  htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -193,7 +190,9 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="password">
+                <label
+                  className={styles.label}
+                  htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -211,7 +210,9 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a href="" className={styles.forgottext}>
+                <a
+                  href=""
+                  className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>
@@ -239,7 +240,11 @@ const FormLogin = () => {
             </div>
           </form>
           <div className={styles.imageContainer}>
-            <Image src={login} alt="Imagen" className={styles.rightImage} />
+            <Image
+              src={login}
+              alt="Imagen"
+              className={styles.rightImage}
+            />
           </div>
         </div>
       )}

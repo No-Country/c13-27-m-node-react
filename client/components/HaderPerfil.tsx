@@ -1,8 +1,11 @@
 import styles from '../styles/headerperfilalumno.module.scss';
 import avatar from '../public/assets/perfil-alumno.png';
 import Image from 'next/image';
+import { useAppContext } from '../context/userContext';
 
 export const HeaderPerfil = () => {
+  const { userRegister } = useAppContext();
+
   return (
     <section className={styles.headerContainer}>
       <article className={styles.headerGradient}></article>
@@ -15,9 +18,11 @@ export const HeaderPerfil = () => {
           />
         </div>
         <div className={styles.userInformation}>
-          <p>Nombre: Juan Pérez</p>
-          <p>E-mail: juanperez@mail.com</p>
-          <p>Carrera: Enfermería</p>
+          <p className={styles.name}>
+            {userRegister.firstName} {userRegister.lastName}
+          </p>
+          <p>{userRegister.email}</p>
+          <p>{userRegister.career}</p>
         </div>
       </article>
     </section>
