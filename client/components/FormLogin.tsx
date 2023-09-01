@@ -6,8 +6,12 @@ import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import alumno from '../public/assets/alumno.png';
 import teacher from '../public/assets/profesor.jpg';
+import login from '../public/assets/login.png';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../redux/slice';
 
 const FormLogin = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -53,6 +57,13 @@ const FormLogin = () => {
         if (response.ok) {
           const responseData = await response.json();
           console.log(responseData);
+          dispatch(
+            loginUser({
+              dni: allData.dni,
+              password: allData.password,
+              userRol: allData.checked,
+            })
+          );
         } else {
           console.error('Error connecting to the backend');
         }
@@ -83,76 +94,78 @@ const FormLogin = () => {
   return (
     <>
       {view1 && (
-        <div>
+        <div className={styles.containerfv}>
           <div className={styles.titlecontainer}>
             <h2>Usted esta ingresando como...</h2>
           </div>
-          <form onSubmit={handleSubmit(onSubmitView1)}>
-            <div className={styles.containerview1}>
-              <div className={styles.inputs1}>
-                <label
-                  htmlFor="student"
-                  className={`${styles.label1} ${
-                    selectedOption === 'student' ? styles.selected : ''
-                  }`}
-                  onClick={() => handleRadioClick('student')}>
-                  <div className={styles.infocontainer}>
-                    <Image
-                      src={alumno}
-                      alt="alumno"
+          <div className={styles.optionscontainer}>
+            <form onSubmit={handleSubmit(onSubmitView1)}>
+              <div className={styles.containerview1}>
+                <div className={styles.inputs1}>
+                  <label
+                    htmlFor="student"
+                    className={`${styles.label1} ${
+                      selectedOption === 'student' ? styles.selected : ''
+                    }`}
+                    onClick={() => handleRadioClick('student')}>
+                    <div className={styles.infocontainer}>
+                      <Image
+                        src={alumno}
+                        alt="alumno"
+                      />
+                      <h3 className={styles.subtitle1}>Alumno</h3>
+                    </div>
+                    <input
+                      type="radio"
+                      value="student"
+                      {...register('check')}
+                      id="student"
+                      className={styles.hiddenradio}
                     />
-                    <h3 className={styles.subtitle1}>Alumno</h3>
-                  </div>
-                  <input
-                    type="radio"
-                    value="student"
-                    {...register('check')}
-                    id="student"
-                    className={styles.hiddenradio}
-                  />
-                </label>
-                <div className={styles.separator}></div>
-                <label
-                  htmlFor="teacher"
-                  className={`${styles.label1} ${
-                    selectedOption === 'teacher' ? styles.selected : ''
-                  }`}
-                  onClick={() => handleRadioClick('teacher')}>
-                  <div className={styles.infocontainer}>
-                    <Image
-                      className={styles.photo}
-                      src={teacher}
-                      alt="profesor"
+                  </label>
+                  <div className={styles.separator}></div>
+                  <label
+                    htmlFor="teacher"
+                    className={`${styles.label1} ${
+                      selectedOption === 'teacher' ? styles.selected : ''
+                    }`}
+                    onClick={() => handleRadioClick('teacher')}>
+                    <div className={styles.infocontainer}>
+                      <Image
+                        className={styles.photo}
+                        src={teacher}
+                        alt="profesor"
+                      />
+                      <h3 className={styles.subtitle1}>Profesor</h3>
+                    </div>
+                    <input
+                      type="radio"
+                      value="teacher"
+                      {...register('check')}
+                      id="teacher"
+                      className={styles.hiddenradio}
                     />
-                    <h3 className={styles.subtitle1}>Profesor</h3>
-                  </div>
-                  <input
-                    type="radio"
-                    value="teacher"
-                    {...register('check')}
-                    id="teacher"
-                    className={styles.hiddenradio}
-                  />
-                </label>
-              </div>
+                  </label>
+                </div>
 
-              <div className={styles.buttoncontainer1}>
-                <input
-                  type="submit"
-                  value="Siguiente"
-                  className={`${styles.submitbutton1} ${
-                    !isDirty || !isValid ? styles.disabledbutton1 : ''
-                  }`}
-                  disabled={!isDirty || !isValid}
-                />
+                <div className={styles.buttoncontainer1}>
+                  <input
+                    type="submit"
+                    value="Siguiente"
+                    className={`${styles.submitbutton1} ${
+                      !isDirty || !isValid ? styles.disabledbutton1 : ''
+                    }`}
+                    disabled={!isDirty || !isValid}
+                  />
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       )}
 
       {view2 && (
-        <div>
+        <div className={styles.view2container}>
           <form
             onSubmit={handleSubmit(onSubmitView2)}
             className={styles.formContainer}>
@@ -234,6 +247,13 @@ const FormLogin = () => {
               </div>
             </div>
           </form>
+          <div className={styles.imageContainer}>
+            <Image
+              src={login}
+              alt="Imagen"
+              className={styles.rightImage}
+            />
+          </div>
         </div>
       )}
     </>
