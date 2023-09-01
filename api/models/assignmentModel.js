@@ -26,6 +26,15 @@ const AssignmentSchema = new Schema({
         type: String,
         enum: ['Parcial', 'Final'],
       },
+      grades: [
+        {
+          student: {
+            type: Schema.Types.ObjectId,
+            ref: 'Student',
+          },
+          grade: Number, // or any data structure for grades
+        },
+      ],
     }),
   ],
   days: {
@@ -44,6 +53,10 @@ const AssignmentSchema = new Schema({
     type: [String],
   },
 });
+
+AssignmentSchema.methods.getTotalClasses = function () {
+  return this.days.length * 4 * 4; // Clases x 4 semanas   x 4 meses
+};
 
 const AssignmentModel = mongoose.model('Assignment', AssignmentSchema);
 module.exports = AssignmentModel;

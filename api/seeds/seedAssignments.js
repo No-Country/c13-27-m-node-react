@@ -16,10 +16,22 @@ const newAssignment = new Assignment({
   name: 'Matemática',
   exams: [
     {
-      date: new Date('2023-10-05'),
+      date: new Date('2023-06-05'),
       time: '10:30 AM',
       duration: 180,
       type: 'Parcial',
+    },
+    {
+      date: new Date('2023-07-05'),
+      time: '10:30 AM',
+      duration: 180,
+      type: 'Parcial',
+    },
+    {
+      date: new Date('2023-10-05'),
+      time: '10:30 AM',
+      duration: 220,
+      type: 'Final',
     },
   ],
   students: [
@@ -33,10 +45,22 @@ const newAssignment2 = new Assignment({
   name: 'Física',
   exams: [
     {
+      date: new Date('2023-08-01'),
+      time: '09:00 AM',
+      duration: 90,
+      type: 'Parcial',
+    },
+    {
       date: new Date('2023-09-01'),
       time: '09:00 AM',
-      duration: 120,
+      duration: 90,
       type: 'Parcial',
+    },
+    {
+      date: new Date('2023-10-01'),
+      time: '09:00 AM',
+      duration: 120,
+      type: 'Final',
     },
   ],
   students: [
@@ -50,9 +74,21 @@ const newAssignment3 = new Assignment({
   name: 'Ciencia Política',
   exams: [
     {
-      date: new Date('2023-09-15'),
+      date: new Date('2023-06-10'),
       time: '02:00 PM',
       duration: 90,
+      type: 'Parcial',
+    },
+    {
+      date: new Date('2023-08-25'),
+      time: '02:00 PM',
+      duration: 90,
+      type: 'Parcial',
+    },
+    {
+      date: new Date('2023-09-15'),
+      time: '02:00 PM',
+      duration: 130,
       type: 'Final',
     },
   ],
@@ -67,10 +103,22 @@ const newAssignment4 = new Assignment({
   name: 'Derecho Penal',
   exams: [
     {
-      date: new Date('2023-10-05'),
+      date: new Date('2023-05-05'),
+      time: '10:30 AM',
+      duration: 120,
+      type: 'Parcial',
+    },
+    {
+      date: new Date('2023-08-23'),
+      time: '10:30 AM',
+      duration: 120,
+      type: 'Parcial',
+    },
+    {
+      date: new Date('2023-10-15'),
       time: '10:30 AM',
       duration: 180,
-      type: 'Parcial',
+      type: 'Final',
     },
   ],
   students: [
