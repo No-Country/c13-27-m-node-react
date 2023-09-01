@@ -10,7 +10,7 @@ import login from '../public/assets/login.png';
 import { useAppContext } from '../context/userContext';
 
 const FormLogin = () => {
-  const { setIsLogged, setUserRegister, userRegister } = useAppContext();
+  const { setIsLogged, setUserRegister } = useAppContext();
 
   const {
     register,
