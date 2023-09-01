@@ -47,6 +47,27 @@ const StudentSchema = new Schema({
   },
 });
 
+// Método para obtener todos los examenes del estudiante
+StudentSchema.methods.getExamsGrades = function () {
+  const studentId = this._id;
+  const assignmentGrades = [];
+
+  for (let assignment of this.assignments) {
+    for (let exam of assignment.exams) {
+      for (let examsCompleted of exam.grades) {
+        if (studentId.equals(examsCompleted.student)) {
+          assignmentGrades.push({
+            assignment: assignment.name,
+            examType: exam.type,
+            grade: examsCompleted.grade,
+          });
+        }
+      }
+    }
+  }
+  return assignmentGrades;
+};
+
 StudentSchema.plugin(mongoosePaginate);
 
 const StudentModel = mongoose.model('Student', StudentSchema);
