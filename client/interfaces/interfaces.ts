@@ -23,3 +23,10 @@ export interface Carreer {
   _id: string;
   name: string;
 }
+
+export interface Assignments {
+  _id: string;
+  name: string;
+  days: string[];
+  schedule: string;
+}
