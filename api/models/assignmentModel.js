@@ -13,8 +13,11 @@ const AssignmentSchema = new Schema({
   },
   students: [
     {
-      type: Schema.Types.ObjectId, //Conecta con modelo Student
-      ref: 'Student',
+      student: {
+        type: Schema.Types.ObjectId, //Conecta con modelo Student
+        ref: 'Student',
+      },
+      missedClasses: Number, // Inasistencias - Profesor read+write, estudiante read
     },
   ],
   exams: [
@@ -32,7 +35,7 @@ const AssignmentSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Student',
           },
-          grade: Number, // or any data structure for grades
+          grade: Number,
         },
       ],
     }),
@@ -53,10 +56,6 @@ const AssignmentSchema = new Schema({
     type: [String],
   },
 });
-
-AssignmentSchema.methods.getTotalClasses = function () {
-  return this.days.length * 4 * 4; // Clases x 4 semanas   x 4 meses
-};
 
 const AssignmentModel = mongoose.model('Assignment', AssignmentSchema);
 module.exports = AssignmentModel;
