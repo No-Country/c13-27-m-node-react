@@ -10,8 +10,8 @@ interface AppContextType {
 }
 
 export const initialUser: UserRegister = {
-  id: '',
-  userRol: 'student',
+  _id: '',
+  check: 'student',
   firstName: '',
   lastName: '',
   dni: '',

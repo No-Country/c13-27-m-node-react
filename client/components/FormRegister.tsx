@@ -68,15 +68,13 @@ export const FormRegister = () => {
       [name]: inputValue,
     });
     setError(newErrors);
-
-    console.log(userRegister);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const url =
-      userRegister.userRol === 'student'
+      userRegister.check === 'student'
         ? 'http://localhost:3001/students/registerStudent'
         : 'http://localhost:3001/teachers/registerTeacher';
 
@@ -89,7 +87,7 @@ export const FormRegister = () => {
         email: userRegister.email,
         password: userRegister.password,
         dni: userRegister.dni,
-        check: userRegister.userRol,
+        check: userRegister.check,
       }),
     });
 
@@ -99,7 +97,7 @@ export const FormRegister = () => {
       if (data._id) {
         setUserRegister({
           ...userRegister,
-          id: data._id,
+          _id: data._id,
         });
       }
     }
