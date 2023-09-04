@@ -39,8 +39,6 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
   const [userRegister, setUserRegister] = useState<UserRegister>(initialUser);
   const [isLogged, setIsLogged] = useState<boolean>(false);
 
-  console.log('context', userRegister);
-
   const contextValue: AppContextType = {
     userRegister,
     setUserRegister,

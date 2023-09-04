@@ -68,6 +68,8 @@ export const FormRegister = () => {
       [name]: inputValue,
     });
     setError(newErrors);
+
+    console.log(userRegister);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -87,12 +89,13 @@ export const FormRegister = () => {
         email: userRegister.email,
         password: userRegister.password,
         dni: userRegister.dni,
-        check: userRegister.userRol,
+        userRol: userRegister.userRol,
       }),
     });
 
     if (res.ok) {
       const data = await res.json();
+      console.log(data);
       if (data._id) {
         setUserRegister({
           ...userRegister,
@@ -115,7 +118,7 @@ export const FormRegister = () => {
       onSubmit={handleSubmit}
       className={styles.formContainer}>
       <label
-        htmlFor="firstname"
+        htmlFor="firstName"
         className={styles.label}>
         Nombre
       </label>
@@ -125,11 +128,11 @@ export const FormRegister = () => {
         }`}
         placeholder="Nombre"
         type="text"
-        name="firstname"
+        name="firstName"
         onChange={handleChange}
       />
       <label
-        htmlFor="lastname"
+        htmlFor="lastName"
         className={styles.label}>
         Apellido
       </label>
@@ -137,7 +140,7 @@ export const FormRegister = () => {
         className={`${styles.input} ${error.lastName ? styles.inputError : ''}`}
         placeholder="Apellido"
         type="text"
-        name="lastname"
+        name="lastName"
         onChange={handleChange}
       />
       <label
