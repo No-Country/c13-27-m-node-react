@@ -115,7 +115,7 @@ export const FormRegister = () => {
       onSubmit={handleSubmit}
       className={styles.formContainer}>
       <label
-        htmlFor="firstname"
+        htmlFor="firstName"
         className={styles.label}>
         Nombre
       </label>
@@ -125,11 +125,11 @@ export const FormRegister = () => {
         }`}
         placeholder="Nombre"
         type="text"
-        name="firstname"
+        name="firstName"
         onChange={handleChange}
       />
       <label
-        htmlFor="lastname"
+        htmlFor="lastName"
         className={styles.label}>
         Apellido
       </label>
@@ -137,7 +137,7 @@ export const FormRegister = () => {
         className={`${styles.input} ${error.lastName ? styles.inputError : ''}`}
         placeholder="Apellido"
         type="text"
-        name="lastname"
+        name="lastName"
         onChange={handleChange}
       />
       <label
