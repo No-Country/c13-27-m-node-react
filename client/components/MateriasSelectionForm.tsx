@@ -23,7 +23,9 @@ const MateriasSelectionForm = () => {
     if (carrerId) {
       const getAssignments = async () => {
         try {
-          const res = await fetch(`http://localhost:3001/careers/${carrerId}`);
+          const res = await fetch(
+            `https://educapp-server-80o9.onrender.com/careers/${carrerId}`
+          );
           const carrerData = await res.json();
           setAssignments(carrerData.assignments);
           console.log(assignments);
@@ -59,7 +61,7 @@ const MateriasSelectionForm = () => {
     if (selectedAssignments.length > 0) {
       if (userRegister.id) {
         const id = userRegister.id;
-        const url = `http://www.localhost:3001/students/careerSelection/${id}`;
+        const url = `https://educapp-server-80o9.onrender.com/students/careerSelection/${id}`;
         fetch(url, {
           headers: { 'Content-Type': 'application/json' },
           method: 'PUT',
