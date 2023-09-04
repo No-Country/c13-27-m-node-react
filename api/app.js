@@ -5,14 +5,17 @@ const cors = require('cors');
 const session = require('express-session');
 
 // Configuración de cors
-const corsOptions = {
-  origin: 'https://educapp-two.vercel.app',
-};
-
-app.use(cors(corsOptions));
-
-// Aplica el middleware CORS con las opciones personalizadas
-app.use(cors(corsOptions));
+app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
 
 // Importo el índex de rutas
 const routes = require('./routes/index');
