@@ -89,7 +89,7 @@ export const FormRegister = () => {
         email: userRegister.email,
         password: userRegister.password,
         dni: userRegister.dni,
-        userRol: userRegister.userRol,
+        check: userRegister.userRol,
       }),
     });
 
