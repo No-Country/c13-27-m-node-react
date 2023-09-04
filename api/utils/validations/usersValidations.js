@@ -35,7 +35,7 @@ const registrySchema = joi
       .pattern(new RegExp(/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/))
       .required(),
     password: joi.string().required(),
-    check: joi.string().required(),
+    check: joi.string()
     // passwordConfirm: joi.ref('password'),
   })
   // .with('password', 'repeat_password')
