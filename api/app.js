@@ -5,19 +5,11 @@ const cors = require('cors');
 const session = require('express-session');
 
 // Configuración de cors
-// Configura una lista blanca de URLs permitidas
-const whitelist = ['https://educapp-server-80o9.onrender.com'];
-
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Verifica si la URL de origen está en la lista blanca
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Acceso no permitido por CORS'));
-    }
-  },
+  origin: 'https://educapp-two.vercel.app',
 };
+
+app.use(cors(corsOptions));
 
 // Aplica el middleware CORS con las opciones personalizadas
 app.use(cors(corsOptions));
