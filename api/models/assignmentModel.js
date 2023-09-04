@@ -13,8 +13,11 @@ const AssignmentSchema = new Schema({
   },
   students: [
     {
-      type: Schema.Types.ObjectId, //Conecta con modelo Student
-      ref: 'Student',
+      student: {
+        type: Schema.Types.ObjectId, //Conecta con modelo Student
+        ref: 'Student',
+      },
+      missedClasses: Number, // Inasistencias - Profesor read+write, estudiante read
     },
   ],
   exams: [
@@ -26,6 +29,15 @@ const AssignmentSchema = new Schema({
         type: String,
         enum: ['Parcial', 'Final'],
       },
+      grades: [
+        {
+          student: {
+            type: Schema.Types.ObjectId,
+            ref: 'Student',
+          },
+          grade: Number,
+        },
+      ],
     }),
   ],
   days: {
@@ -37,9 +49,13 @@ const AssignmentSchema = new Schema({
   classroom: {
     type: String,
   },
+  links: {
+    type: [String],
+  },
+  fileNames: {
+    type: [String],
+  },
 });
 
 const AssignmentModel = mongoose.model('Assignment', AssignmentSchema);
 module.exports = AssignmentModel;
-
-

@@ -64,7 +64,8 @@ const getStudentByIdHandler = async (req, res) => {
   const { id } = req.params;
   try {
     const student = await getStudentByIdController(id);
-    res.send(student);
+    const assignmentDataForStudent = student.getGradesAndAttendance();
+    res.send({ student, assignmentDataForStudent });
   } catch (error) {
     res.status(500).json(error.message);
   }

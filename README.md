@@ -33,6 +33,7 @@ obj (students OR teachers)
 | POST | Inicia sesión, pide: (email, password, check)                          | http://localhost:PORT/students/studentsLogin   |
 | GET  | Busca un estudiante por ID, devuelve el objeto                         | http://localhost:PORT/students/:id             |
 | POST | Ruta para registro de un estudiante. Devuelve un mensaje (string) de éxito o error. Le llega la información en el body como objeto JSON          | http://localhost:PORT/students/registerStudent |
+| PUT  | Ruta para selección de carrera y materias. Devuelve un objeto con el perfil actualizado. Recibe el id del alumno por param y la carrera y las materias por body | students/careerSelection/:id |
 
 **Student Schema**
 
@@ -106,3 +107,7 @@ obj (students OR teachers)
 | teachers | [Object ID] | NO        | ["64e658c0c2088908dd408c51"]                             |
 | students | [Object ID] | NO        | ["64e658c0c2088908dd408c51","64e658c0c2088908dd408c52" ] |
 | exams    | [String]    | NO        | ["Algoritmos","Integrales","Funciones"]                  |
+
+## Uploads
+**Uploads Routes**
+**Uploads Schema**

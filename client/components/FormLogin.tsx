@@ -1,16 +1,17 @@
 'use client';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import styles from '../styles/formlogin.module.scss';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import alumno from '../public/assets/alumno.png';
 import teacher from '../public/assets/profesor.jpg';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/slice';
+import login from '../public/assets/login.png';
+import { useAppContext } from '../context/userContext';
 
 const FormLogin = () => {
-  const dispatch = useDispatch();
+  const { setIsLogged, setUserRegister } = useAppContext();
+
   const {
     register,
     handleSubmit,
@@ -21,6 +22,9 @@ const FormLogin = () => {
   });
 
   const [view1Data, setView1Data] = useState({});
+  const [selectedOption, setSelectedOption] = useState('');
+  const [view1, setView1] = useState(true);
+  const [view2, setView2] = useState(false);
 
   const onSubmitView1 = (data: any) => {
     setView1Data(data.checked);
@@ -30,13 +34,11 @@ const FormLogin = () => {
 
   const onSubmitView2 = async (data: any) => {
     const allData = { ...view1Data, ...data };
-    console.log(allData);
-
     try {
       let endpoint = '';
-      if (allData.checked === 'student') {
+      if (allData.check === 'student') {
         endpoint = 'http://localhost:3001/students/studentsLogin';
-      } else if (allData.checked === 'teacher') {
+      } else if (allData.check === 'teacher') {
         endpoint = 'http://localhost:3001/teachers/teachersLogin';
       }
 
@@ -49,20 +51,16 @@ const FormLogin = () => {
           body: JSON.stringify({
             dni: allData.dni,
             password: allData.password,
-            check: allData.checked,
+            check: allData.check,
           }),
         });
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log(responseData);
-          dispatch(
-            loginUser({
-              dni: allData.dni,
-              password: allData.password,
-              userRol: allData.checked,
-            })
-          );
+          setIsLogged(true);
+          if (responseData) {
+            setUserRegister(responseData);
+          }
         } else {
           console.error('Error connecting to the backend');
         }
@@ -72,14 +70,9 @@ const FormLogin = () => {
     }
   };
 
-  const [selectedOption, setSelectedOption] = useState('');
-
   const handleRadioClick = (option: any) => {
     setSelectedOption(option);
   };
-
-  const [view1, setView1] = useState(true);
-  const [view2, setView2] = useState(false);
 
   // const handleView = () => {
   //   setView1(false);
@@ -93,79 +86,86 @@ const FormLogin = () => {
   return (
     <>
       {view1 && (
-        <div>
+        <div className={styles.containerfv}>
           <div className={styles.titlecontainer}>
             <h2>Usted esta ingresando como...</h2>
           </div>
-          <form onSubmit={handleSubmit(onSubmitView1)}>
-            <div className={styles.containerview1}>
-              <div className={styles.inputs1}>
-                <label
-                  htmlFor="student"
-                  className={`${styles.label1} ${
-                    selectedOption === 'student' ? styles.selected : ''
-                  }`}
-                  onClick={() => handleRadioClick('student')}>
-                  <div className={styles.infocontainer}>
-                    <Image src={alumno} alt="alumno" />
-                    <h3 className={styles.subtitle1}>Alumno</h3>
-                  </div>
-                  <input
-                    type="radio"
-                    value="student"
-                    {...register('check')}
-                    id="student"
-                    className={styles.hiddenradio}
-                  />
-                </label>
-                <div className={styles.separator}></div>
-                <label
-                  htmlFor="teacher"
-                  className={`${styles.label1} ${
-                    selectedOption === 'teacher' ? styles.selected : ''
-                  }`}
-                  onClick={() => handleRadioClick('teacher')}>
-                  <div className={styles.infocontainer}>
-                    <Image
-                      className={styles.photo}
-                      src={teacher}
-                      alt="profesor"
+          <div className={styles.optionscontainer}>
+            <form onSubmit={handleSubmit(onSubmitView1)}>
+              <div className={styles.containerview1}>
+                <div className={styles.inputs1}>
+                  <label
+                    htmlFor="student"
+                    className={`${styles.label1} ${
+                      selectedOption === 'student' ? styles.selected : ''
+                    }`}
+                    onClick={() => handleRadioClick('student')}>
+                    <div className={styles.infocontainer}>
+                      <Image
+                        src={alumno}
+                        alt="alumno"
+                      />
+                      <h3 className={styles.subtitle1}>Alumno</h3>
+                    </div>
+                    <input
+                      type="radio"
+                      value="student"
+                      {...register('check')}
+                      id="student"
+                      className={styles.hiddenradio}
                     />
-                    <h3 className={styles.subtitle1}>Profesor</h3>
-                  </div>
-                  <input
-                    type="radio"
-                    value="teacher"
-                    {...register('check')}
-                    id="teacher"
-                    className={styles.hiddenradio}
-                  />
-                </label>
-              </div>
+                  </label>
+                  <div className={styles.separator}></div>
+                  <label
+                    htmlFor="teacher"
+                    className={`${styles.label1} ${
+                      selectedOption === 'teacher' ? styles.selected : ''
+                    }`}
+                    onClick={() => handleRadioClick('teacher')}>
+                    <div className={styles.infocontainer}>
+                      <Image
+                        className={styles.photo}
+                        src={teacher}
+                        alt="profesor"
+                      />
+                      <h3 className={styles.subtitle1}>Profesor</h3>
+                    </div>
+                    <input
+                      type="radio"
+                      value="teacher"
+                      {...register('check')}
+                      id="teacher"
+                      className={styles.hiddenradio}
+                    />
+                  </label>
+                </div>
 
-              <div className={styles.buttoncontainer1}>
-                <input
-                  type="submit"
-                  value="Siguiente"
-                  className={`${styles.submitbutton1} ${
-                    !isDirty || !isValid ? styles.disabledbutton1 : ''
-                  }`}
-                  disabled={!isDirty || !isValid}
-                />
+                <div className={styles.buttoncontainer1}>
+                  <input
+                    type="submit"
+                    value="Siguiente"
+                    className={`${styles.submitbutton1} ${
+                      !isDirty || !isValid ? styles.disabledbutton1 : ''
+                    }`}
+                    disabled={!isDirty || !isValid}
+                  />
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       )}
 
       {view2 && (
-        <div>
+        <div className={styles.view2container}>
           <form
             onSubmit={handleSubmit(onSubmitView2)}
             className={styles.formContainer}>
             <div className={styles.containerbox}>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="dni">
+                <label
+                  className={styles.label}
+                  htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -190,7 +190,9 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="password">
+                <label
+                  className={styles.label}
+                  htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -208,7 +210,9 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a href="" className={styles.forgottext}>
+                <a
+                  href=""
+                  className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>
@@ -235,6 +239,13 @@ const FormLogin = () => {
               </div>
             </div>
           </form>
+          <div className={styles.imageContainer}>
+            <Image
+              src={login}
+              alt="Imagen"
+              className={styles.rightImage}
+            />
+          </div>
         </div>
       )}
     </>

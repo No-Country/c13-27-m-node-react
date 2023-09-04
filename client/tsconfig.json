@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     "redux/store.ts",
     "redux/slice.ts"
-  ],
+, "app/not-found.tsx"  ],
   "exclude": ["node_modules"]
 }

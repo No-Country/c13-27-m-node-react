@@ -1,20 +1,18 @@
 'use client';
 import { HeaderPerfil } from '../../components/HaderPerfil';
+import FooterPerfilAlumno from '../../components/FooterPerfil';
 import { Horarios } from '../../components/Horarios';
-import FooterPerfil from '../../components/FooterPerfil';
-import EventosPerfil from '../../components/EventosPerfil';
 
-const StudentProfile = () => {
+const ProfessorProfile = () => {
   return (
     <>
       <HeaderPerfil />
       <main>
         <Horarios />
-        <EventosPerfil />
-        <FooterPerfil />
+        <FooterPerfilAlumno />
       </main>
     </>
   );
 };
 
-export default StudentProfile;
+export default ProfessorProfile;

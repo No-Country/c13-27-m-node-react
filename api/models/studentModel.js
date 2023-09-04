@@ -34,15 +34,48 @@ const StudentSchema = new Schema({
     type: String,
     // required: true,
   },
-  assignments: {
-    type: [String],
-    // required: true,
-  },
+  assignments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Assignment',
+      // required: true,
+    },
+  ],
   career: {
     type: String,
     // required: true,
   },
 });
+
+// Método para obtener todos los examenes del estudiante
+StudentSchema.methods.getGradesAndAttendance = function () {
+  const studentId = this._id;
+  const assignmentsData = [];
+
+  for (let assignment of this.assignments) {
+    let assignmentToPush = {
+      name: assignment.name,
+      totalClasses: assignment.days.length * 4 * 4,
+      missedClasses: assignment.students.find((student) =>
+        student.equals(studentId)
+      ).missedClasses,
+      exams: [],
+    };
+    for (let exam of assignment.exams) {
+      for (let examsCompleted of exam.grades) {
+        if (studentId.equals(examsCompleted.student)) {
+          assignmentToPush.exams.push({
+            examType: exam.type,
+            grade: examsCompleted.grade,
+          });
+        }
+      }
+    }
+
+    assignmentsData.push(assignmentToPush);
+  }
+  return assignmentsData;
+};
 
 StudentSchema.plugin(mongoosePaginate);
 

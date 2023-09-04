@@ -39,6 +39,17 @@ const populateDB = async () => {
   assignments[2].students.push(students[1]._id);
   assignments[3].students.push(students[1]._id);
 
+  //Agrego notas de examenes e inasistencias
+  for (let assignment of assignments) {
+    assignment.students[0].missedClasses = Math.round(Math.random() * 10);
+    for (let exam of assignment.exams) {
+      exam.grades.push({
+        student: assignment.students[0],
+        grade: Math.round(Math.random() * 10),
+      });
+    }
+  }
+
   // Guardo todas las DB
   for (const career of careers) {
     await career.save();

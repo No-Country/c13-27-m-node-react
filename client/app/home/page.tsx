@@ -10,24 +10,24 @@ const Home = () => {
 
       <div className={styles.containerImages}>
         <div className={styles.imageGrid}>
-          <Link href="/noticia-escritura">
+          <Link href="/home/noticia-escritura">
             <img src="../assets/noticias-eventos2.png" alt="" />
           </Link>
-          <Link href="noticia-atomo">
+          <Link href="/home/noticia-atomo">
             <img src="../assets/noticias-eventos1.png" alt="" />
           </Link>
-          <Link href="evento-posgrado">
+          <Link href="/home/evento-posgrado">
             <img src="../assets/noticias-eventos3.png" alt="" />
           </Link>
         </div>
         <div className={styles.imageGridBottom}>
-          <Link href="noticia-lentes">
+          <Link href="/home/noticia-lentes">
             <img src="../assets/noticias-eventos4.png" alt="" />
           </Link>
-          <Link href="evento-dia-estudiante">
+          <Link href="/home/evento-dia-estudiante">
             <img src="../assets/noticias-eventos5.png" alt="" />
           </Link>
-          <Link href="noticia-robotica">
+          <Link href="/home/noticia-robotica">
             <img src="../assets/noticias-eventos6.png" alt="" />
           </Link>
         </div>
