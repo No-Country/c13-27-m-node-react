@@ -105,3 +105,7 @@ obj (students OR teachers)
 | teachers | [Object ID] | NO        | ["64e658c0c2088908dd408c51"]                             |
 | students | [Object ID] | NO        | ["64e658c0c2088908dd408c51","64e658c0c2088908dd408c52" ] |
 | exams    | [String]    | NO        | ["Algoritmos","Integrales","Funciones"]                  |
+
+## Uploads
+**Uploads Routes**
+**Uploads Schema**
