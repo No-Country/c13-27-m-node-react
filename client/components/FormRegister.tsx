@@ -43,9 +43,9 @@ export const FormRegister = () => {
     if (!value) {
       newErrors[name as keyof UserRegister] = 'Campo obligatorio';
     } else {
-      if (name === 'firstname' && !regexName.test(value)) {
+      if (name === 'firstName' && !regexName.test(value)) {
         newErrors[name] = 'Inválido';
-      } else if (name === 'lastname' && !regexName.test(value)) {
+      } else if (name === 'lastName' && !regexName.test(value)) {
         newErrors[name] = 'Inválido';
       } else if (name === 'dni' && !regexDni.test(value) && name.length >= 5) {
         newErrors[name] = 'Inválido';
