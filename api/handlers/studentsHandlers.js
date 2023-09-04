@@ -41,6 +41,7 @@ const studentLoginHandler = async (req, res) => {
 
 const registerStudentHandler = async (req, res) => {
   const { firstName, lastName, password, email, dni } = req.body;
+  console.log('Registro de estudiantes: ' + firstName);
   const { error } = registrySchema.validate(req.body);
   if (error) throw new Error(error);
   const newStudent = {
