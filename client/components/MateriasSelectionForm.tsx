@@ -32,6 +32,7 @@ const MateriasSelectionForm = () => {
       };
       getAssignments();
     }
+    console.log('Así recibe la selección de materias', userRegister);
   }, [careerId]);
 
   useEffect(() => {
@@ -59,7 +60,9 @@ const MateriasSelectionForm = () => {
       console.log(selectedAssignments);
       if (userRegister._id) {
         const id = userRegister._id;
+        console.log(id);
         const url = `http://www.localhost:3001/students/careerSelection/${id}`;
+        console.log(url);
         const res = await fetch(url, {
           headers: { 'Content-Type': 'application/json' },
           method: 'PUT',
@@ -75,7 +78,7 @@ const MateriasSelectionForm = () => {
             assignments: selectedAssignments,
           }),
         });
-
+        console.log(res);
         if (res.ok) {
           router.push('/login');
         }

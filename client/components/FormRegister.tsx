@@ -67,12 +67,14 @@ export const FormRegister = () => {
       ...userRegister,
       [name]: inputValue,
     });
+
+    console.log(userRegister);
     setError(newErrors);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    console.log(userRegister.check);
     const url =
       userRegister.check === 'student'
         ? 'http://localhost:3001/students/registerStudent'
@@ -195,13 +197,13 @@ export const FormRegister = () => {
         <input
           className={styles.checkbox}
           type="radio"
-          name="userRol"
+          name="check"
           value="student"
           onChange={handleChange}
           defaultChecked={true}
         />
         <label
-          htmlFor="userRol"
+          htmlFor="check"
           className={styles.checkboxLabel}>
           Soy Alumno
         </label>
@@ -210,12 +212,12 @@ export const FormRegister = () => {
         <input
           className={styles.checkbox}
           type="radio"
-          name="userRol"
+          name="check"
           value="teacher"
           onChange={handleChange}
         />
         <label
-          htmlFor="userRol"
+          htmlFor="check"
           className={styles.checkboxLabel}>
           Soy Profesor
         </label>
