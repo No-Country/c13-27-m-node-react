@@ -21,18 +21,41 @@ const MateriasSelectionForm = () => {
 
   useEffect(() => {
     if (careerId) {
+      if (userRegister.check === 'student') {
+        const getAssignments = async () => {
+          try {
+            const res = await fetch(
+              `http://localhost:3001/careers/${careerId}`
+            );
+            const careerData = await res.json();
+            setAssignments(careerData.assignments);
+          } catch (error) {
+            console.error('Error fetching Assignments:', error);
+          }
+        };
+        getAssignments();
+      }
+    }
+  }, [careerId]);
+
+  useEffect(() => {
+    if (userRegister.check === 'teacher') {
+      console.log(userRegister.check);
       const getAssignments = async () => {
         try {
-          const res = await fetch(`http://localhost:3001/careers/${careerId}`);
+          const res = await fetch(
+            `http://localhost:3001/assignments/allAssignments`
+          );
           const careerData = await res.json();
-          setAssignments(careerData.assignments);
+          setAssignments(careerData);
+          console.log(assignments);
         } catch (error) {
           console.error('Error fetching Assignments:', error);
         }
       };
       getAssignments();
     }
-  }, [careerId]);
+  }, [userRegister]);
 
   useEffect(() => {
     if (selectedAssignments.length !== 0) {
@@ -58,7 +81,10 @@ const MateriasSelectionForm = () => {
     if (selectedAssignments.length > 0) {
       if (userRegister._id) {
         const id = userRegister._id;
-        const url = `http://localhost:3001/students/careerSelection/${id}`;
+        const url =
+          userRegister.check === 'student'
+            ? `http://localhost:3001/students/careerSelection/${id}`
+            : `http://localhost:3001/teachers/assignmentsSelection/${id}`;
         const res = await fetch(url, {
           headers: { 'Content-Type': 'application/json' },
           method: 'PUT',
