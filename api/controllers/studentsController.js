@@ -1,4 +1,5 @@
 const StudentModel = require('../models/studentModel'); // Llama al modelo StudentModel
+const AssignmentModel = require('../models/assignmentModel'); // Llama al modelo assignmentModel
 const { createHash, validPassword } = require('../utils/hashPassword'); // Llama a la funcion createHash
 
 const getAllStudentsController = async (page, limit) => {
@@ -68,6 +69,12 @@ const studentSelectionController = async (id, career, assignments) => {
     id,
     { career, assignments },
     { new: true } // Devuelvo el documento actualizado
+  );
+
+  // Pusheo el nuevo estudiante al listado de estudiantes de las materias que cursa
+  await AssignmentModel.updateMany(
+    { _id: { $in: assignments } },
+    { $addToSet: { students: { _id: id } } } // Addtoset para que no se repita si ya existe
   );
 
   if (!student) {

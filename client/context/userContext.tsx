@@ -10,8 +10,8 @@ interface AppContextType {
 }
 
 export const initialUser: UserRegister = {
-  id: '',
-  userRol: 'student',
+  _id: '',
+  check: 'student',
   firstName: '',
   lastName: '',
   dni: '',
@@ -39,14 +39,13 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
   const [userRegister, setUserRegister] = useState<UserRegister>(initialUser);
   const [isLogged, setIsLogged] = useState<boolean>(false);
 
-  // console.log('context', userRegister);
-
   const contextValue: AppContextType = {
     userRegister,
     setUserRegister,
     isLogged,
     setIsLogged,
   };
+
   return (
     <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
