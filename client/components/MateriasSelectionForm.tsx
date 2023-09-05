@@ -58,7 +58,10 @@ const MateriasSelectionForm = () => {
     if (selectedAssignments.length > 0) {
       if (userRegister._id) {
         const id = userRegister._id;
-        const url = `http://localhost:3001/students/careerSelection/${id}`;
+        const url =
+          userRegister.check === 'student'
+            ? `http://localhost:3001/students/careerSelection/${id}`
+            : `http://localhost:3001/teachers/assignmentsSelection/${id}`;
         const res = await fetch(url, {
           headers: { 'Content-Type': 'application/json' },
           method: 'PUT',
