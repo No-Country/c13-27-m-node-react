@@ -7,9 +7,11 @@ import Image from 'next/image';
 import alumno from '../public/assets/alumno.png';
 import teacher from '../public/assets/profesor.jpg';
 import login from '../public/assets/login.png';
+import { useRouter } from 'next/navigation';
 import { useAppContext } from '../context/userContext';
 
 const FormLogin = () => {
+  const router = useRouter();
   const { setIsLogged, setUserRegister } = useAppContext();
 
   const {
@@ -61,6 +63,11 @@ const FormLogin = () => {
           if (responseData) {
             setUserRegister(responseData);
           }
+          if (allData.check === 'student') {
+            router.push('/perfil-alumno');
+          } else if (allData.check === 'teacher') {
+            router.push('/perfil-profesor');
+          }
         } else {
           console.error('Error connecting to the backend');
         }
@@ -69,6 +76,9 @@ const FormLogin = () => {
       console.error('An error occurred:', error);
     }
   };
+
+  // const token = localStorage.getItem('token');
+  // if (token) return router.push('../app/perfil-alumno');
 
   const handleRadioClick = (option: any) => {
     setSelectedOption(option);
@@ -101,10 +111,7 @@ const FormLogin = () => {
                     }`}
                     onClick={() => handleRadioClick('student')}>
                     <div className={styles.infocontainer}>
-                      <Image
-                        src={alumno}
-                        alt="alumno"
-                      />
+                      <Image src={alumno} alt="alumno" />
                       <h3 className={styles.subtitle1}>Alumno</h3>
                     </div>
                     <input
@@ -163,9 +170,7 @@ const FormLogin = () => {
             className={styles.formContainer}>
             <div className={styles.containerbox}>
               <div className={styles.inputbox}>
-                <label
-                  className={styles.label}
-                  htmlFor="dni">
+                <label className={styles.label} htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -190,9 +195,7 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label
-                  className={styles.label}
-                  htmlFor="password">
+                <label className={styles.label} htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -210,9 +213,7 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a
-                  href=""
-                  className={styles.forgottext}>
+                <a href="" className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>
@@ -225,26 +226,20 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.btncontainer}>
-                <Link href="/home">
-                  <input
-                    type="button"
-                    className={`${styles.btn} ${
-                      !isDirty || !isValid ? styles.disabledbutton : ''
-                    }`}
-                    value="Iniciar sesión"
-                    disabled={!isDirty || !isValid}
-                    onClick={() => onSubmitView2(watch())}
-                  />
-                </Link>
+                <input
+                  type="button"
+                  className={`${styles.btn} ${
+                    !isDirty || !isValid ? styles.disabledbutton : ''
+                  }`}
+                  value="Iniciar sesión"
+                  disabled={!isDirty || !isValid}
+                  onClick={() => onSubmitView2(watch())}
+                />
               </div>
             </div>
           </form>
           <div className={styles.imageContainer}>
-            <Image
-              src={login}
-              alt="Imagen"
-              className={styles.rightImage}
-            />
+            <Image src={login} alt="Imagen" className={styles.rightImage} />
           </div>
         </div>
       )}
