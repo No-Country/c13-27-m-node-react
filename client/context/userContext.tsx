@@ -45,6 +45,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     isLogged,
     setIsLogged,
   };
+
   return (
     <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );

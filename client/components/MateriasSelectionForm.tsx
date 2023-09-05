@@ -11,7 +11,7 @@ const MateriasSelectionForm = () => {
   const [assignments, setAssignments] = useState([]);
   const [selectedAssignments, setSelectedAssignments] = useState<string[]>([]);
   const [careerId, setCareerId] = useState<string | null>(null);
-  const { userRegister } = useAppContext();
+  const { userRegister, setUserRegister } = useAppContext();
   const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -32,7 +32,6 @@ const MateriasSelectionForm = () => {
       };
       getAssignments();
     }
-    console.log('Así recibe la selección de materias', userRegister);
   }, [careerId]);
 
   useEffect(() => {
@@ -57,29 +56,21 @@ const MateriasSelectionForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (selectedAssignments.length > 0) {
-      console.log(selectedAssignments);
       if (userRegister._id) {
         const id = userRegister._id;
-        console.log(id);
-        const url = `http://www.localhost:3001/students/careerSelection/${id}`;
-        console.log(url);
+        const url = `http://localhost:3001/students/careerSelection/${id}`;
         const res = await fetch(url, {
           headers: { 'Content-Type': 'application/json' },
           method: 'PUT',
           body: JSON.stringify({
             _id: userRegister._id,
-            firstName: userRegister.firstName,
-            lastName: userRegister.lastName,
-            email: userRegister.email,
-            password: userRegister.password,
-            dni: userRegister.dni,
-            check: userRegister.check,
             career: userRegister.career,
             assignments: selectedAssignments,
           }),
         });
-        console.log(res);
         if (res.ok) {
+          const data = await res.json();
+          setUserRegister({ ...data, assignments: selectedAssignments });
           router.push('/login');
         }
       }

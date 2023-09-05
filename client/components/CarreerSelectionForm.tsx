@@ -56,8 +56,7 @@ const careerForm = () => {
     event.preventDefault();
     if (selectedcareer && userRegister._id) {
       const id = userRegister._id;
-      console.log(id);
-      const url = `http://www.localhost:3001/students/careerSelection/${id}`;
+      const url = `http://localhost:3001/students/careerSelection/${id}`;
       const res = await fetch(url, {
         headers: { 'Content-Type': 'application/json' },
         method: 'PUT',
@@ -72,12 +71,9 @@ const careerForm = () => {
           career: selectedcareer.name,
         }),
       });
-      console.log(res.ok);
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
         setUserRegister({ ...data, career: selectedcareer.name });
-        console.log('Usuario guardado en selección de careera', data);
         router.push('/seleccion-materias');
       }
     }

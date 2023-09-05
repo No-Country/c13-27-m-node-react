@@ -67,14 +67,11 @@ export const FormRegister = () => {
       ...userRegister,
       [name]: inputValue,
     });
-
-    console.log(userRegister);
     setError(newErrors);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(userRegister.check);
     const url =
       userRegister.check === 'student'
         ? 'http://localhost:3001/students/registerStudent'
@@ -95,7 +92,6 @@ export const FormRegister = () => {
 
     if (res.ok) {
       const data = await res.json();
-      console.log(data);
       if (data._id) {
         setUserRegister({
           ...userRegister,
@@ -200,7 +196,6 @@ export const FormRegister = () => {
           name="check"
           value="student"
           onChange={handleChange}
-          defaultChecked={true}
         />
         <label
           htmlFor="check"

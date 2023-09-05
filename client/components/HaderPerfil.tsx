@@ -14,7 +14,7 @@ export const HeaderPerfil = () => {
           <Image
             src={avatar}
             alt="avatar"
-            objectFit="contain"
+            className={styles.avatar}
           />
         </div>
         <div className={styles.userInformation}>
