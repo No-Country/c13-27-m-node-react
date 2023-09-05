@@ -82,8 +82,6 @@ const studentSelectionHandler = async (req, res) => {
       name: { $in: assignments },
     }).distinct('_id');
 
-    console.log('asdasd', assignmentObjectIds.students);
-
     const response = await studentSelectionController(
       id,
       career,
