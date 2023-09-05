@@ -1,5 +1,6 @@
 import styles from '../styles/footerperfilalumno.module.scss';
 import { useState } from 'react';
+import { Alumni_Sans_Inline_One } from 'next/font/google';
 
 
 interface Exam {
@@ -17,7 +18,9 @@ const EventosPerfil = () => {
   //   setShowEvents(!showEvents);
   // };
 
-  
+
+
+  // const id = userRegister._id
       
 
   // onClick={handleShowEvents};
@@ -96,3 +99,14 @@ export default EventosPerfil;
         </div>
       )} */
   }
+
+
+// post upload id para cargarr material desde el Alumno
+// 
+//   GET: /upload (pasar assignment por body) ===> devuelve las clases en pdf de esa materia
+
+// tare alumno... 
+// GET: /upload/:id (pasar assignment por body) ===> Devuelve las entregas de un alumno en particular
+
+// tarea profesor ... 
+// GET: /upload/tasks (pasar assignment por body)  ======> devuelve todas las entregas de las materias (para el profesor)
