@@ -1,0 +1,27 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  width: 30rem;
+  cursor: pointer;
+  border: 0.1rem dashed gray;
+  border-radius: 0.1rem;
+}
+.input {
+  display: none; /* Esto ocultará el elemento sin desactivar la interacción */
+}
+// .upload {
+//   margin: 1rem 0;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 1rem 1.2rem;
+//   border-radius: 1rem;
+//   background-color: beige;
+// }
+
+// .uploadspan {
+//   display: flex;
+// }
