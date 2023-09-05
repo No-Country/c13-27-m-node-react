@@ -58,6 +58,8 @@ obj (students OR teachers)
 | POST | Inicia sesión, pide: (email, password, check)                         | http://localhost:PORT/teachers/teachersLogin   |
 | GET  | Devuelve un profesor a través del ID                                  | http://localhost:PORT/teachers/:id             |
 | POST | Ruta para registro de un profesor. Devuelve un mensaje (string) de éxito o error. Le llega la información en el body como objeto JSON         | http://localhost:PORT/teachers/registerTeacher |
+| PUT  | Ruta para selección de materias. Devuelve un objeto con el perfil actualizado. Recibe el id del profesor por param y las materias por body | teachers/assignmentsSelection/:id |
+
 
 **Teacher Schema**
 
