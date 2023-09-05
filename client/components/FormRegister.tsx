@@ -72,9 +72,8 @@ export const FormRegister = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const url =
-      userRegister.userRol === 'student'
+      userRegister.check === 'student'
         ? 'http://localhost:3001/students/registerStudent'
         : 'http://localhost:3001/teachers/registerTeacher';
 
@@ -87,7 +86,7 @@ export const FormRegister = () => {
         email: userRegister.email,
         password: userRegister.password,
         dni: userRegister.dni,
-        check: userRegister.userRol,
+        check: userRegister.check,
       }),
     });
 
@@ -96,7 +95,7 @@ export const FormRegister = () => {
       if (data._id) {
         setUserRegister({
           ...userRegister,
-          id: data._id,
+          _id: data._id,
         });
       }
     }
@@ -194,13 +193,12 @@ export const FormRegister = () => {
         <input
           className={styles.checkbox}
           type="radio"
-          name="userRol"
+          name="check"
           value="student"
           onChange={handleChange}
-          defaultChecked={true}
         />
         <label
-          htmlFor="userRol"
+          htmlFor="check"
           className={styles.checkboxLabel}>
           Soy Alumno
         </label>
@@ -209,12 +207,12 @@ export const FormRegister = () => {
         <input
           className={styles.checkbox}
           type="radio"
-          name="userRol"
+          name="check"
           value="teacher"
           onChange={handleChange}
         />
         <label
-          htmlFor="userRol"
+          htmlFor="check"
           className={styles.checkboxLabel}>
           Soy Profesor
         </label>

@@ -58,8 +58,7 @@ const registerTeacherController = async (newTeacher) => {
   return teacher;
 };
 
-const getTeacherByIdController = async () => {
-  const { id } = req.params;
+const getTeacherByIdController = async (id) => {
   try {
     const teacher = await TeacherModel.findById(id);
     if (!teacher) throw new Error('No hay información disponible');

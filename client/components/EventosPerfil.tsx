@@ -1,7 +1,7 @@
+import { useAppContext } from '../context/userContext';
 import styles from '../styles/footerperfilalumno.module.scss';
 import { useState } from 'react';
 import { Alumni_Sans_Inline_One } from 'next/font/google';
-
 
 interface Exam {
   _id: string;
@@ -12,7 +12,7 @@ interface Exam {
 const EventosPerfil = () => {
   // const [showEvents, setShowEvents] = useState<boolean>(false);
   const [eventData, setEventData] = useState<Exam[]>([]);
-
+  const { userRegister } = useAppContext();
 
   // const handleShowEvents = () => {
   //   setShowEvents(!showEvents);
@@ -32,18 +32,20 @@ const EventosPerfil = () => {
       </div>
 
       {/* {showEvents && eventData.length > 0 && ( */}
-        <div className={styles.containerAllEvents}>
-          {eventData?.map((exam) => (
-            <div className={styles.boxContainer} key={exam._id}>
-              <div className={styles.divisionDate}>
-                <p className={styles.date}> {exam.date} </p>
-              </div>
-              <div className={styles.divisionSubject}>
-                <p className={styles.subject}> {exam.type} </p>
-              </div>
+      <div className={styles.containerAllEvents}>
+        {eventData?.map((exam) => (
+          <div
+            className={styles.boxContainer}
+            key={exam._id}>
+            <div className={styles.divisionDate}>
+              <p className={styles.date}> {exam.date} </p>
             </div>
-          ))}
-        </div>
+            <div className={styles.divisionSubject}>
+              <p className={styles.subject}> {exam.type} </p>
+            </div>
+          </div>
+        ))}
+      </div>
       {/* )} */}
     </section>
   );
@@ -51,11 +53,8 @@ const EventosPerfil = () => {
 
 export default EventosPerfil;
 
-
-
-
-  {
-    /* {showEvents && (
+{
+  /* {showEvents && (
         <div className={styles.containerAllEvents}>
           <div className={styles.boxContainer}>
             <div className={styles.divisionDate}>
