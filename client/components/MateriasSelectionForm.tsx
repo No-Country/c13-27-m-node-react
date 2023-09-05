@@ -21,18 +21,41 @@ const MateriasSelectionForm = () => {
 
   useEffect(() => {
     if (careerId) {
+      if (userRegister.check === 'student') {
+        const getAssignments = async () => {
+          try {
+            const res = await fetch(
+              `http://localhost:3001/careers/${careerId}`
+            );
+            const careerData = await res.json();
+            setAssignments(careerData.assignments);
+          } catch (error) {
+            console.error('Error fetching Assignments:', error);
+          }
+        };
+        getAssignments();
+      }
+    }
+  }, [careerId]);
+
+  useEffect(() => {
+    if (userRegister.check === 'teacher') {
+      console.log(userRegister.check);
       const getAssignments = async () => {
         try {
-          const res = await fetch(`http://localhost:3001/careers/${careerId}`);
+          const res = await fetch(
+            `http://localhost:3001/assignments/allAssignments`
+          );
           const careerData = await res.json();
-          setAssignments(careerData.assignments);
+          setAssignments(careerData);
+          console.log(assignments);
         } catch (error) {
           console.error('Error fetching Assignments:', error);
         }
       };
       getAssignments();
     }
-  }, [careerId]);
+  }, [userRegister]);
 
   useEffect(() => {
     if (selectedAssignments.length !== 0) {
