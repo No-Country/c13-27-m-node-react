@@ -1,5 +1,5 @@
 import styles from '../styles/footerperfilalumno.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 
 interface Exam {
@@ -17,24 +17,8 @@ const EventosPerfil = () => {
   //   setShowEvents(!showEvents);
   // };
 
-  useEffect(() => {
-    const getExamById = async () => {
-      try {
-        const res = await fetch(
-          `http://localhost:3001/assignments/AllAssignments`
-        );
-        const data = await res.json();
-        setEventData(data[0].exams);
-        // console.log(data);
-        // console.log(data.exams);
-
-        //  console.log(eventData);
-      } catch (error) {
-        console.log('Error fetching exam data', error);
-      }
-    };
-    getExamById();
-  }, []);
+  
+      
 
   // onClick={handleShowEvents};
   return (

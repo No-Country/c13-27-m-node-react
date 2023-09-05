@@ -25,11 +25,11 @@ const FooterPerfil = () => {
         );
         const data = await res.json();
         const transformedData = data.map((subject: GradeData) => {
-          const parcial1 = subject.exams[0]?.grades[0]?.grade || 0;
+          const parcial1 = subject.exams[0]?.grades[0]?.grade || "-";
           
-          const parcial2 = subject.exams[1]?.grades[0]?.grade || 0;
+          const parcial2 = subject.exams[1]?.grades[0]?.grade || "-";
 
-          const final = subject.exams[2]?.grades[0]?.grade || 0;
+          const final = subject.exams[2]?.grades[0]?.grade || "-";
 
           return {
             name: subject.name,
