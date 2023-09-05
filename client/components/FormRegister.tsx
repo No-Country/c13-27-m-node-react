@@ -103,7 +103,11 @@ export const FormRegister = () => {
 
   const handleRoute = () => {
     if (Object.keys(error).length === 0) {
-      router.push('/seleccion-carrera');
+      if (userRegister.check === 'student') {
+        router.push('/seleccion-carrera');
+      } else {
+        router.push('/seleccion-materias');
+      }
     } else {
       return;
     }
