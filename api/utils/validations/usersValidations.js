@@ -8,7 +8,7 @@ const loginSchema = joi
       .min(5)
       .required(),
     password: joi.string().required(),
-    check: joi.string().required(),
+    check: joi.string()
   })
   .messages({
     required: 'El campo {key} es obligatorio',
