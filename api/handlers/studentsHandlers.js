@@ -77,14 +77,14 @@ const getStudentByIdHandler = async (req, res) => {
 const studentSelectionHandler = async (req, res) => {
   const { id } = req.params;
   const { career, assignments } = req.body;
-  // Uso los nombres de materias para buscar su ID
-  const assignmentObjectIds = await AssignmentModel.find({
-    name: { $in: assignments },
-  }).distinct('_id');
-
-  console.log(assignmentObjectIds);
-
   try {
+    // Uso los nombres de materias para buscar su ID
+    const assignmentObjectIds = await AssignmentModel.find({
+      name: { $in: assignments },
+    }).distinct('_id');
+
+    console.log('asdasd', assignmentObjectIds.students);
+
     const response = await studentSelectionController(
       id,
       career,

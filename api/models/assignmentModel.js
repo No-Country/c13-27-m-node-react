@@ -17,7 +17,11 @@ const AssignmentSchema = new Schema({
         type: Schema.Types.ObjectId, //Conecta con modelo Student
         ref: 'Student',
       },
-      missedClasses: Number, // Inasistencias - Profesor read+write, estudiante read
+      missedClasses: {
+        // Inasistencias - Profesor read+write, estudiante read
+        type: Number,
+        default: 0,
+      },
     },
   ],
   exams: [
