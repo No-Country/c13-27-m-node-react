@@ -1,6 +1,7 @@
 import { useAppContext } from '../context/userContext';
 import styles from '../styles/footerperfilalumno.module.scss';
 import { useState } from 'react';
+import { Alumni_Sans_Inline_One } from 'next/font/google';
 
 interface Exam {
   _id: string;
@@ -16,6 +17,11 @@ const EventosPerfil = () => {
   // const handleShowEvents = () => {
   //   setShowEvents(!showEvents);
   // };
+
+
+
+  // const id = userRegister._id
+      
 
   // onClick={handleShowEvents};
   return (
@@ -91,4 +97,6 @@ export default EventosPerfil;
           </div>
         </div>
       )} */
-}
+  }
+
+
