@@ -24,27 +24,30 @@ const AssignmentSchema = new Schema({
       },
     },
   ],
-  exams: [
+  events: [
     new Schema({
       date: Date,
       time: String,
       duration: Number,
       type: {
         type: String,
-        enum: ['Parcial', 'Final'],
+        enum: ['Parcial', 'Final', 'Entrega'],
       },
-      grades: [
+      eventDetails: [
         {
           student: {
             type: Schema.Types.ObjectId,
             ref: 'Student',
           },
           grade: Number,
+          file: String, // Archivo con el TP en caso de 'entrega'
+          comments: String, // Comentarios del profesor
         },
       ],
     }),
   ],
   days: {
+    // De aca se puede sacar la data para CLASES
     type: [String],
   },
   schedule: {

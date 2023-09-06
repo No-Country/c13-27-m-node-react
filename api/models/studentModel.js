@@ -47,7 +47,7 @@ const StudentSchema = new Schema({
   },
 });
 
-// Método para obtener todos los examenes del estudiante
+// Método para obtener todos los eventos del estudiante
 StudentSchema.methods.getGradesAndAttendance = function () {
   const studentId = this._id;
   const assignmentsData = [];
@@ -59,15 +59,24 @@ StudentSchema.methods.getGradesAndAttendance = function () {
       missedClasses: assignment.students.find((student) =>
         student.equals(studentId)
       ).missedClasses,
-      exams: [],
+      events: [],
     };
-    for (let exam of assignment.exams) {
-      for (let examsCompleted of exam.grades) {
-        if (studentId.equals(examsCompleted.student)) {
-          assignmentToPush.exams.push({
-            examType: exam.type,
-            grade: examsCompleted.grade,
-          });
+    for (let event of assignment.events) {
+      for (let eventsCompleted of event.eventDetails) {
+        if (studentId.equals(eventsCompleted.student)) {
+          if (event.type === 'Entrega') {
+            assignmentToPush.events.push({
+              eventType: event.type,
+              grade: eventsCompleted.grade,
+              file: eventsCompleted.file || '',
+              comments: eventsCompleted.comments || '',
+            });
+          } else {
+            assignmentToPush.events.push({
+              eventType: event.type,
+              grade: eventsCompleted.grade,
+            });
+          }
         }
       }
     }

@@ -41,12 +41,21 @@ const populateDB = async () => {
 
   //Agrego notas de examenes e inasistencias
   for (let assignment of assignments) {
-    assignment.students[0].missedClasses = Math.round(Math.random() * 10);
-    for (let exam of assignment.exams) {
-      exam.grades.push({
-        student: assignment.students[0],
-        grade: Math.round(Math.random() * 10),
-      });
+    assignment.students[0].missedClasses = Math.round(Math.random() * 10); // Inasistencias
+    for (let event of assignment.events) {
+      if (event.type === 'Entrega') {
+        event.eventDetails.push({
+          student: assignment.students[0],
+          grade: Math.round(Math.random() * 10), // Calificacion
+          file: 'TP1.pdf',
+          comments: 'Trata de mejorar tu prosa, muchacho.',
+        });
+      } else {
+        event.eventDetails.push({
+          student: assignment.students[0],
+          grade: Math.round(Math.random() * 10), // Calificacion
+        });
+      }
     }
   }
 
