@@ -25,6 +25,23 @@
     font-weight: 400;
 }
 .containerComent {
-    background-color: aquamarine;
-    
+    border-bottom: 1px solid $text2; 
+    width: 1100px;
 }
+.containerComent.active {
+    border-bottom: none
+}
+.inputComent {
+    width: 1100px;
+    height: 5rem;
+    outline: none;
+}
+.sendComent {
+    font-family: 'Roboto';
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 20px;
+    border: 1px solid $text2;
+    padding: 0.4rem;
+    background-color: $background;
+}   
