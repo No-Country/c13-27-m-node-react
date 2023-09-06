@@ -1,11 +1,22 @@
-import { MaterialEstudio } from '../../../components/MaterialEstudio';
+import Asistencias from '../../../components/Asistencias';
+import { MateriaProfesor } from '../../../components/MateriaProfesor';
+import Image from 'next/image';
+import rectangle from '../../../public/assets/rectangle.png';
+import styles from '../../../styles/materialestudio.module.scss';
 
 const MateriasProfesor = () => {
   return (
-    <main>
-      <h1>Materias Profesor</h1>
-      <MaterialEstudio />
-    </main>
+    <>
+      <Image
+        className={styles.gradient}
+        src={rectangle}
+        alt="rectangle"
+      />
+      <main>
+        <h1>NOMBRE MATERIA</h1>
+        <MateriaProfesor />
+      </main>
+    </>
   );
 };
 
