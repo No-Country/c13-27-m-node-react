@@ -4,6 +4,7 @@ import rectange from '../../../public/assets/rectangle.png';
 import localFont from 'next/font/local';
 import styles from '../../../styles/materialestudio.module.scss';
 import Asistencias from '../../../components/Asistencias';
+import UserList from '../../../components/UserList';
 
 const Roboto = localFont({ src: '../../../public/fonts/Roboto-Regular.ttf' });
 
@@ -17,8 +18,15 @@ const MateriasAlumno = () => {
       />
       <main className={Roboto.className}>
         <h1>NOMBRE MATERIA</h1>
-        <MateriaAlumno />
-        <Asistencias />
+        <div className={styles.grid}>
+          <div className={styles.gridLeft}>
+            <MateriaAlumno />
+            <Asistencias />
+          </div>
+          <div className={styles.gridRigth}>
+            <UserList />
+          </div>
+        </div>
       </main>
     </>
   );
