@@ -43,7 +43,6 @@ app.post('/', upload.single('pdfFile'), async (req, res) => {
       'Archivo PDF subido exitosamente y nombre guardado en la materia.'
     );
   } catch (error) {
-    console.error(error);
     res
       .status(500)
       .send('Error al guardar el nombre del archivo en la materia.');
@@ -62,12 +61,11 @@ app.get('/allClasses', async (req, res) => {
     }
 
     const files = assignment.fileNames.map((fileName) => ({
-      fileName
+      fileName,
     }));
 
     res.send(files);
   } catch (error) {
-    console.error(error);
     res.status(500).send(error.message);
   }
 });
@@ -79,6 +77,5 @@ app.get('/downloadFile/:fileName', (req, res) => {
   res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
   res.sendFile(filePath);
 });
-
 
 module.exports = app;
