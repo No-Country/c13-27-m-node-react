@@ -22,9 +22,11 @@ const careerForm = () => {
   useEffect(() => {
     const getcareers = async () => {
       try {
-        const res = await fetch('http://localhost:3001/careers/allCareers');
-        const careersData = await res.json();
-        setCareers(careersData);
+        const res = await fetch(
+          'https://educapp-server-80o9.onrender.com/careers/allCareers'
+        );
+        const carreersData = await res.json();
+        setCarreers(carreersData);
       } catch (error) {
         console.error('Error fetching careers:', error);
       }
@@ -54,9 +56,10 @@ const careerForm = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (selectedcareer && userRegister._id) {
-      const id = userRegister._id;
-      const url = `http://localhost:3001/students/careerSelection/${id}`;
+    if (selectedCarrer && userRegister.id) {
+      const id = userRegister.id;
+      console.log(id);
+      const url = `https://educapp-server-80o9.onrender.com/students/careerSelection/${id}`;
       const res = await fetch(url, {
         headers: { 'Content-Type': 'application/json' },
         method: 'PUT',

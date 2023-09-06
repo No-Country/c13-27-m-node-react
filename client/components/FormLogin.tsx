@@ -53,9 +53,9 @@ const FormLogin = () => {
     try {
       let endpoint = '';
       if (allData.check === 'student') {
-        endpoint = 'http://localhost:3001/students/studentsLogin';
+        endpoint = 'https://educapp-server-80o9.onrender.com/students/studentsLogin';
       } else if (allData.check === 'teacher') {
-        endpoint = 'http://localhost:3001/teachers/teachersLogin';
+        endpoint = 'https://educapp-server-80o9.onrender.com/teachers/teachersLogin';
       }
 
       if (endpoint) {
