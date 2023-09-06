@@ -1,5 +1,6 @@
 import styles from '../styles/footerperfilalumno.module.scss';
 import { useEffect, useState } from 'react';
+import mainRoute from '../route';
 
 interface GradeData {
   _id: string;
@@ -20,16 +21,14 @@ const FooterPerfil = () => {
   useEffect(() => {
     const getExamsAndGrades = async () => {
       try {
-        const res = await fetch(
-          'http://localhost:3001/assignments/AllAssignments'
-        );
+        const res = await fetch(`${mainRoute}/assignments/AllAssignments`);
         const data = await res.json();
         const transformedData = data.map((subject: GradeData) => {
-          const parcial1 = subject.exams[0]?.grades[0]?.grade || "-";
-          
-          const parcial2 = subject.exams[1]?.grades[0]?.grade || "-";
+          const parcial1 = subject.exams[0]?.grades[0]?.grade || '-';
 
-          const final = subject.exams[2]?.grades[0]?.grade || "-";
+          const parcial2 = subject.exams[1]?.grades[0]?.grade || '-';
+
+          const final = subject.exams[2]?.grades[0]?.grade || '-';
 
           return {
             name: subject.name,
@@ -53,7 +52,9 @@ const FooterPerfil = () => {
         <div className={styles.column}>
           <h2 className={styles.subtitle}> Materia </h2>
           {grades.map((subject, index) => (
-            <p key={index} className={styles.p}>
+            <p
+              key={index}
+              className={styles.p}>
               {subject.name}
             </p>
           ))}
@@ -61,7 +62,9 @@ const FooterPerfil = () => {
         <div className={styles.column}>
           <h2 className={styles.subtitle}> Primer Parcial </h2>
           {grades.map((subject, index) => (
-            <p key={index} className={styles.p}>
+            <p
+              key={index}
+              className={styles.p}>
               {subject.parcial1}
             </p>
           ))}
@@ -69,7 +72,9 @@ const FooterPerfil = () => {
         <div className={styles.column}>
           <h2 className={styles.subtitle}> Segundo Parcial </h2>
           {grades.map((subject, index) => (
-            <p key={index} className={styles.p}>
+            <p
+              key={index}
+              className={styles.p}>
               {subject.parcial2}
             </p>
           ))}
@@ -77,7 +82,9 @@ const FooterPerfil = () => {
         <div className={styles.column}>
           <h2 className={styles.subtitle}> Final </h2>
           {grades.map((subject, index) => (
-            <p key={index} className={styles.p}>
+            <p
+              key={index}
+              className={styles.p}>
               {subject.final}
             </p>
           ))}
@@ -89,6 +96,5 @@ const FooterPerfil = () => {
 
 export default FooterPerfil;
 
-
-  // subject.exams.find((exam) => exam.type === 'Parcial')?.grades[0]
-            //   ?.grade || 0;
+// subject.exams.find((exam) => exam.type === 'Parcial')?.grades[0]
+//   ?.grade || 0;
