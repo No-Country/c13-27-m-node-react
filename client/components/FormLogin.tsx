@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useAppContext } from '../context/userContext';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import mainRoute from '../route';
 
 const FormLogin = () => {
   const router = useRouter();
@@ -53,9 +54,9 @@ const FormLogin = () => {
     try {
       let endpoint = '';
       if (allData.check === 'student') {
-        endpoint = 'http://localhost:3001/students/studentsLogin';
+        endpoint = `${mainRoute}/students/studentsLogin`;
       } else if (allData.check === 'teacher') {
-        endpoint = 'http://localhost:3001/teachers/teachersLogin';
+        endpoint = `${mainRoute}/teachers/teachersLogin`;
       }
 
       if (endpoint) {
