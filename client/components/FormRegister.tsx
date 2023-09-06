@@ -73,10 +73,9 @@ export const FormRegister = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const url =
-
       userRegister.check === 'student'
-        ? 'http://localhost:3001/students/registerStudent'
-        : 'http://localhost:3001/teachers/registerTeacher';
+        ? 'https://educapp-server-80o9.onrender.com/students/registerStudent'
+        : 'https://educapp-server-80o9.onrender.com/teachers/registerTeacher';
 
 
     const res = await fetch(url, {
