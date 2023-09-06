@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { MaterialEstudio } from '../../../components/MaterialEstudio';
+import { MateriaAlumno } from '../../../components/MateriaAlumno';
 import rectange from '../../../public/assets/rectangle.png';
 import localFont from 'next/font/local';
 import styles from '../../../styles/materialestudio.module.scss';
@@ -17,7 +17,7 @@ const MateriasAlumno = () => {
       />
       <main className={Roboto.className}>
         <h1>NOMBRE MATERIA</h1>
-        <MaterialEstudio />
+        <MateriaAlumno />
         <Asistencias />
       </main>
     </>

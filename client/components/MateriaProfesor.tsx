@@ -3,8 +3,9 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import pdfIcon from '../public/assets/pdf-icon.svg';
 import styles from '../styles/materialestudio.module.scss';
+import Link from 'next/link';
 
-export const MaterialEstudio = () => {
+export const MateriaProfesor = () => {
   /*   useEffect(() => {
     const getAssigmentData = async () => {
       const res = await fetch(
@@ -32,7 +33,9 @@ export const MaterialEstudio = () => {
           <p>{pdf}</p>
         </article>
       ))}
-      <button className={styles.btnEntregar}>Entregar Trabajo</button>
+      <Link href="/perfil-profesor/tareas">
+        <button className={styles.btnEntregar}>Entregar Trabajo</button>
+      </Link>
     </section>
   );
 };

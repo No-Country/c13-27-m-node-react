@@ -5,6 +5,10 @@ const Asistencias = () => {
   const asistencias = 5;
   const asistenciasPorcentaje = (asistencias * 100) / cantidadDeClases;
 
+  const customStyle = {
+    '--porcentaje': `${asistenciasPorcentaje}%`,
+  } as React.CSSProperties;
+
   return (
     <section className={styles.asistenciasContainer}>
       <article className={styles.asistenciasInfo}>
@@ -15,7 +19,7 @@ const Asistencias = () => {
       </article>
       <aside
         className={styles.asistenciasGraph}
-        style={{ '--porcentaje': `${asistenciasPorcentaje}` }}>
+        style={customStyle}>
         <svg
           width="10rem"
           height="10rem">
