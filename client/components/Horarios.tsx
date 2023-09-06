@@ -27,7 +27,7 @@ export const Horarios = () => {
   ];
 
   useEffect(() => {
-    fetch('http://localhost:3001/assignments/allAssignments')
+    fetch('https://educapp-server-80o9.onrender.com/assignments/allAssignments')
       .then((response) => response.json())
       .then((data) => setAssignments(data))
       .catch((error) => console.error('Error al obtener datos:', error));
