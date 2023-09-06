@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const mongoose = require('mongoose'); // Asegúrate de importar tu modelo de Mongoose aquí
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -24,30 +24,56 @@ app.post('/', upload.single('pdfFile'), async (req, res) => {
     if (!req.file) {
       throw new Error('Debes seleccionar un archivo PDF.');
     }
-    // Actualiza el documento de Mongoose con el nombre del archivo PDF
+
     const fileName = `${Date.now()}_${req.file.originalname}`;
 
-    // Encuentra la asignación por su ID y agrega el nombre del archivo a la matriz de fileNames
+    // Encuentra la materia por su ID y agrega el nombre del archivo a la matriz de fileNames
     const assignment = await mongoose
       .model('Assignment')
       .findById(assignmentId);
 
     if (!assignment) {
-      return res.status(404).send('Asignación no encontrada.');
+      return res.status(404).send('Materia no encontrada.');
     }
 
-    assignment.fileNames.push(fileName);
+    assignment.fileNames.push(fileName); // Actualiza el documento de Mongoose con el nombre del archivo PDF
     await assignment.save();
 
     res.send(
-      'Archivo PDF subido exitosamente y nombre guardado en la asignación.'
+      'Archivo PDF subido exitosamente y nombre guardado en la materia.'
     );
   } catch (error) {
-    console.error(error);
     res
       .status(500)
-      .send('Error al guardar el nombre del archivo en la asignación.');
+      .send('Error al guardar el nombre del archivo en la materia.');
   }
+});
+
+app.get('/allClasses', async (req, res) => {
+  const { assignmentId } = req.query;
+  try {
+    const assignment = await mongoose
+      .model('Assignment')
+      .findById(assignmentId);
+
+    if (!assignment) {
+      throw new Error('Materia no encontrada.');
+    }
+
+    const files = assignment.fileNames.map((fileName) => fileName);
+
+    res.send(files);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+app.get('/downloadFile/:fileName', (req, res) => {
+  const fileName = req.params.fileName;
+  const filePath = path.join(__dirname, '../uploads', fileName);
+
+  res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+  res.sendFile(filePath);
 });
 
 module.exports = app;
