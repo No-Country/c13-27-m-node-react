@@ -1,11 +1,10 @@
 const express = require('express');
-
 const multer = require('multer');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const app = express();
 
-// Configuración de Multer para almacenar los archivos en la carpeta 'uploads'
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads');
@@ -19,12 +18,54 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Configuración de la ruta para subir archivos
-app.post('/', upload.single('pdfFile'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).send('Debes seleccionar un archivo PDF.');
-  }
+app.post('/', upload.single('pdfFile'), async (req, res) => {
+  const { assignmentId } = req.body;
+  try {
+    if (!req.file) {
+      throw new Error('Debes seleccionar un archivo PDF.');
+    }
 
-  res.send('Archivo PDF subido exitosamente.');
+    const fileName = `${Date.now()}_${req.file.originalname}`;
+
+    // Encuentra la materia por su ID y agrega el nombre del archivo a la matriz de fileNames
+    const assignment = await mongoose
+      .model('Assignment')
+      .findById(assignmentId);
+
+    if (!assignment) {
+      return res.status(404).send('Materia no encontrada.');
+    }
+
+    assignment.fileNames.push(fileName); // Actualiza el documento de Mongoose con el nombre del archivo PDF
+    await assignment.save();
+
+    res.send(
+      'Archivo PDF subido exitosamente y nombre guardado en la materia.'
+    );
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .send('Error al guardar el nombre del archivo en la materia.');
+  }
+});
+
+app.get('/allClasses', async (req, res) => {  // Ruta para obtener todas las clases de una materia
+  const { assignmentId } = req.query;
+  try {
+    const assignment = await mongoose
+      .model('Assignment')
+      .findById(assignmentId);
+
+    if (!assignment) {
+      throw new Error('Materia no encontrada.');
+    }
+
+    res.send(assignment.fileNames);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.message);
+  }
 });
 
 module.exports = app;

@@ -44,10 +44,12 @@ const MateriasSelectionForm = () => {
       const getAssignments = async () => {
         try {
           const res = await fetch(
-            `http://localhost:3001/assignments/allAssignments`
+
+            `https://educapp-server-80o9.onrender.com/assignments/allAssignments`
           );
           const careerData = await res.json();
           setAssignments(careerData);
+
           console.log(assignments);
         } catch (error) {
           console.error('Error fetching Assignments:', error);
@@ -79,13 +81,15 @@ const MateriasSelectionForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (selectedAssignments.length > 0) {
+
       if (userRegister._id) {
         const id = userRegister._id;
         const url =
           userRegister.check === 'student'
-            ? `http://localhost:3001/students/careerSelection/${id}`
-            : `http://localhost:3001/teachers/assignmentsSelection/${id}`;
+            ? `https://educapp-server-80o9.onrender.com/students/careerSelection/${id}`
+            : `https://educapp-server-80o9.onrender.com/teachers/assignmentsSelection/${id}`;
         const res = await fetch(url, {
+
           headers: { 'Content-Type': 'application/json' },
           method: 'PUT',
           body: JSON.stringify({
