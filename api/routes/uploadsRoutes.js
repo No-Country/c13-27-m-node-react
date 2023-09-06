@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const mongoose = require('mongoose'); // Asegúrate de importar tu modelo de Mongoose aquí
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.post('/', upload.single('pdfFile'), async (req, res) => {
     if (!req.file) {
       throw new Error('Debes seleccionar un archivo PDF.');
     }
-    // Actualiza el documento de Mongoose con el nombre del archivo PDF
+
     const fileName = `${Date.now()}_${req.file.originalname}`;
 
     // Encuentra la asignación por su ID y agrega el nombre del archivo a la matriz de fileNames
@@ -36,7 +36,7 @@ app.post('/', upload.single('pdfFile'), async (req, res) => {
       return res.status(404).send('Asignación no encontrada.');
     }
 
-    assignment.fileNames.push(fileName);
+    assignment.fileNames.push(fileName); // Actualiza el documento de Mongoose con el nombre del archivo PDF
     await assignment.save();
 
     res.send(
