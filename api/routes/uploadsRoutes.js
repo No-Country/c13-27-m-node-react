@@ -27,26 +27,26 @@ app.post('/', upload.single('pdfFile'), async (req, res) => {
 
     const fileName = `${Date.now()}_${req.file.originalname}`;
 
-    // Encuentra la asignación por su ID y agrega el nombre del archivo a la matriz de fileNames
+    // Encuentra la materia por su ID y agrega el nombre del archivo a la matriz de fileNames
     const assignment = await mongoose
       .model('Assignment')
       .findById(assignmentId);
 
     if (!assignment) {
-      return res.status(404).send('Asignación no encontrada.');
+      return res.status(404).send('Materia no encontrada.');
     }
 
     assignment.fileNames.push(fileName); // Actualiza el documento de Mongoose con el nombre del archivo PDF
     await assignment.save();
 
     res.send(
-      'Archivo PDF subido exitosamente y nombre guardado en la asignación.'
+      'Archivo PDF subido exitosamente y nombre guardado en la materia.'
     );
   } catch (error) {
     console.error(error);
     res
       .status(500)
-      .send('Error al guardar el nombre del archivo en la asignación.');
+      .send('Error al guardar el nombre del archivo en la materia.');
   }
 });
 
