@@ -10,6 +10,7 @@ export interface UserRegister {
   termsandconditions: boolean;
   career: string | null;
   assignments: string[] | null;
+  career_id?: string;
 }
 
 export interface Assignment {

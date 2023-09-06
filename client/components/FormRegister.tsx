@@ -90,15 +90,13 @@ export const FormRegister = () => {
         check: userRegister.check,
       }),
     });
-
-    console.log(res);
-
     if (res.ok) {
       const data = await res.json();
       if (data._id) {
         setUserRegister({
           ...userRegister,
           _id: data._id,
+          check: userRegister.check,
         });
       }
     }

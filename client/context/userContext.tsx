@@ -21,6 +21,7 @@ export const initialUser: UserRegister = {
   termsandconditions: false,
   career: '',
   assignments: [],
+  career_id: '',
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -45,6 +46,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     isLogged,
     setIsLogged,
   };
+
   return (
     <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );

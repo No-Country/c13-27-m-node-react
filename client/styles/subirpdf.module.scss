@@ -1,0 +1,52 @@
+@import './variables.scss';
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // width: 100%;
+  padding: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  width: 80rem;
+  cursor: pointer;
+  border: 0.1rem dashed gray;
+  border-radius: 0.1rem;
+}
+.input {
+  display: none;
+}
+
+.containerupload {
+  display: flex;
+}
+.upload {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  background-color: beige;
+}
+
+.uploadspan {
+  display: flex;
+}
+
+.btn {
+  text-transform: uppercase;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  color: $background;
+  background-color: $text1;
+  transition: background-color 0.7s ease-in-out;
+}
