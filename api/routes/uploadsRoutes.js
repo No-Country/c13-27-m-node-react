@@ -60,9 +60,7 @@ app.get('/allClasses', async (req, res) => {
       throw new Error('Materia no encontrada.');
     }
 
-    const files = assignment.fileNames.map((fileName) => ({
-      fileName,
-    }));
+    const files = assignment.fileNames.map((fileName) => fileName);
 
     res.send(files);
   } catch (error) {
