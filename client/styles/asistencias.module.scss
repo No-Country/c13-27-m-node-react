@@ -1,0 +1,51 @@
+@import './variables.scss';
+
+.asistenciasContainer {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 28rem;
+  height: 13rem;
+  border: 1px solid $text2;
+  padding: 1rem;
+}
+.asistenciasInfo {
+  padding: 0 0.5rem;
+}
+.asistenciasTitle {
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.asistenciasQty {
+  font-size: 2.5rem;
+}
+
+.circle {
+  fill: none;
+  stroke: $secondary-color;
+  opacity: 0.5;
+  stroke-width: 32;
+  stroke-dasharray: 100 100;
+  transform: rotate(-90deg);
+  transform-origin: 50%;
+}
+
+.circleBack {
+  fill: none;
+  stroke: $secondary-color;
+  stroke-width: 32;
+  stroke-dasharray: 0 100;
+  transform: rotate(-90deg);
+  transform-origin: 50%;
+  animation: fillCircle 0.5s linear forwards;
+}
+
+@keyframes fillCircle {
+  to {
+    stroke-dasharray: var(--porcentaje) 100;
+  }
+}

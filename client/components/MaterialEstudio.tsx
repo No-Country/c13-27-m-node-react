@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import pdfIcon from '../public/assets/pdf-icon.svg';
+import styles from '../styles/materialestudio.module.scss';
 
 export const MaterialEstudio = () => {
   /*   useEffect(() => {
@@ -18,9 +19,12 @@ export const MaterialEstudio = () => {
   const pdfs = ['Titulo 1', 'Título 2', 'Título 3'];
 
   return (
-    <section>
+    <section className={styles.mainContainer}>
+      <h2 className={styles.materialTitle}>Material de estudio</h2>
       {pdfs.map((pdf, index) => (
-        <article key={index}>
+        <article
+          key={index}
+          className={styles.materialContainer}>
           <Image
             src={pdfIcon}
             alt="pdf icon"
@@ -28,6 +32,7 @@ export const MaterialEstudio = () => {
           <p>{pdf}</p>
         </article>
       ))}
+      <button className={styles.btnEntregar}>Entregar Trabajo</button>
     </section>
   );
 };
