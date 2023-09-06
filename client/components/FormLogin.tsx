@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/formlogin.module.scss';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -9,6 +9,8 @@ import teacher from '../public/assets/profesor.jpg';
 import login from '../public/assets/login.png';
 import { useRouter } from 'next/navigation';
 import { useAppContext } from '../context/userContext';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FormLogin = () => {
   const router = useRouter();
@@ -34,14 +36,26 @@ const FormLogin = () => {
     setView2(!view2);
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const userType = localStorage.getItem('userType');
+
+    if (token) {
+      setIsLogged(true);
+      router.push(
+        userType === 'student' ? '/perfil-alumno' : '/perfil-profesor'
+      );
+    }
+  }, []);
+
   const onSubmitView2 = async (data: any) => {
     const allData = { ...view1Data, ...data };
     try {
       let endpoint = '';
       if (allData.check === 'student') {
-        endpoint = 'http://localhost:3001/students/studentsLogin';
+        endpoint = 'https://educapp-server-80o9.onrender.com/students/studentsLogin';
       } else if (allData.check === 'teacher') {
-        endpoint = 'http://localhost:3001/teachers/teachersLogin';
+        endpoint = 'https://educapp-server-80o9.onrender.com/teachers/teachersLogin';
       }
 
       if (endpoint) {
@@ -57,41 +71,37 @@ const FormLogin = () => {
           }),
         });
 
-        if (response.ok) {
+        if (response.status === 200) {
           const responseData = await response.json();
           setIsLogged(true);
-          if (responseData) {
-            setUserRegister(responseData);
-          }
+          setUserRegister(responseData);
+          localStorage.setItem('token', responseData.token);
+          localStorage.setItem('userType', allData.check);
+
           if (allData.check === 'student') {
-            router.push('/perfil-alumno');
+            toast.success('Bienvenido Estudiante!');
+            setTimeout(() => {
+              router.push('/perfil-alumno');
+            }, 2500);
           } else if (allData.check === 'teacher') {
-            router.push('/perfil-profesor');
+            toast.success('Bienvenido Profesor!');
+            setTimeout(() => {
+              router.push('/perfil-profesor');
+            }, 2500);
           }
         } else {
-          console.error('Error connecting to the backend');
+          toast.error('Error al iniciar sesión. Por favor intente de nuevo.');
         }
       }
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.log('An error occurred:', error);
+      toast.error('Error al iniciar sesión. Por favor intente de nuevo.');
     }
   };
-
-  // const token = localStorage.getItem('token');
-  // if (token) return router.push('../app/perfil-alumno');
 
   const handleRadioClick = (option: any) => {
     setSelectedOption(option);
   };
-
-  // const handleView = () => {
-  //   setView1(false);
-  //   setView2(true);
-  // };
-
-  //   /*       const url = './home';
-  //   window.location.href = url; */
-  // }
 
   return (
     <>
