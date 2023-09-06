@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session');
+// Importo el índex de rutas
+const routes = require('./routes/index');
 
 // Configuración de cors
 app.use(cors());
@@ -16,9 +18,6 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-
-// Importo el índex de rutas
-const routes = require('./routes/index');
 
 // Traigo variables de entorno
 require('dotenv').config();

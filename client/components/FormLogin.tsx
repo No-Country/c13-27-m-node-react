@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../styles/formlogin.module.scss';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -7,9 +7,13 @@ import Image from 'next/image';
 import alumno from '../public/assets/alumno.png';
 import teacher from '../public/assets/profesor.jpg';
 import login from '../public/assets/login.png';
+import { useRouter } from 'next/navigation';
 import { useAppContext } from '../context/userContext';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FormLogin = () => {
+  const router = useRouter();
   const { setIsLogged, setUserRegister } = useAppContext();
 
   const {
@@ -31,6 +35,18 @@ const FormLogin = () => {
     setView1(!view1);
     setView2(!view2);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const userType = localStorage.getItem('userType');
+
+    if (token) {
+      setIsLogged(true);
+      router.push(
+        userType === 'student' ? '/perfil-alumno' : '/perfil-profesor'
+      );
+    }
+  }, []);
 
   const onSubmitView2 = async (data: any) => {
     const allData = { ...view1Data, ...data };
@@ -55,33 +71,37 @@ const FormLogin = () => {
           }),
         });
 
-        if (response.ok) {
+        if (response.status === 200) {
           const responseData = await response.json();
           setIsLogged(true);
-          if (responseData) {
-            setUserRegister(responseData);
+          setUserRegister(responseData);
+          localStorage.setItem('token', responseData.token);
+          localStorage.setItem('userType', allData.check);
+
+          if (allData.check === 'student') {
+            toast.success('Bienvenido Estudiante!');
+            setTimeout(() => {
+              router.push('/perfil-alumno');
+            }, 2500);
+          } else if (allData.check === 'teacher') {
+            toast.success('Bienvenido Profesor!');
+            setTimeout(() => {
+              router.push('/perfil-profesor');
+            }, 2500);
           }
         } else {
-          console.error('Error connecting to the backend');
+          toast.error('Error al iniciar sesión. Por favor intente de nuevo.');
         }
       }
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.log('An error occurred:', error);
+      toast.error('Error al iniciar sesión. Por favor intente de nuevo.');
     }
   };
 
   const handleRadioClick = (option: any) => {
     setSelectedOption(option);
   };
-
-  // const handleView = () => {
-  //   setView1(false);
-  //   setView2(true);
-  // };
-
-  //   /*       const url = './home';
-  //   window.location.href = url; */
-  // }
 
   return (
     <>
@@ -101,10 +121,7 @@ const FormLogin = () => {
                     }`}
                     onClick={() => handleRadioClick('student')}>
                     <div className={styles.infocontainer}>
-                      <Image
-                        src={alumno}
-                        alt="alumno"
-                      />
+                      <Image src={alumno} alt="alumno" />
                       <h3 className={styles.subtitle1}>Alumno</h3>
                     </div>
                     <input
@@ -163,9 +180,7 @@ const FormLogin = () => {
             className={styles.formContainer}>
             <div className={styles.containerbox}>
               <div className={styles.inputbox}>
-                <label
-                  className={styles.label}
-                  htmlFor="dni">
+                <label className={styles.label} htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -190,9 +205,7 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label
-                  className={styles.label}
-                  htmlFor="password">
+                <label className={styles.label} htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -210,9 +223,7 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a
-                  href=""
-                  className={styles.forgottext}>
+                <a href="" className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>
@@ -225,26 +236,20 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.btncontainer}>
-                <Link href="/home">
-                  <input
-                    type="button"
-                    className={`${styles.btn} ${
-                      !isDirty || !isValid ? styles.disabledbutton : ''
-                    }`}
-                    value="Iniciar sesión"
-                    disabled={!isDirty || !isValid}
-                    onClick={() => onSubmitView2(watch())}
-                  />
-                </Link>
+                <input
+                  type="button"
+                  className={`${styles.btn} ${
+                    !isDirty || !isValid ? styles.disabledbutton : ''
+                  }`}
+                  value="Iniciar sesión"
+                  disabled={!isDirty || !isValid}
+                  onClick={() => onSubmitView2(watch())}
+                />
               </div>
             </div>
           </form>
           <div className={styles.imageContainer}>
-            <Image
-              src={login}
-              alt="Imagen"
-              className={styles.rightImage}
-            />
+            <Image src={login} alt="Imagen" className={styles.rightImage} />
           </div>
         </div>
       )}

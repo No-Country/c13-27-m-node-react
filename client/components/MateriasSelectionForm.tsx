@@ -10,24 +10,46 @@ const MateriasSelectionForm = () => {
 
   const [assignments, setAssignments] = useState([]);
   const [selectedAssignments, setSelectedAssignments] = useState<string[]>([]);
-  const [carrerId, setCarrerId] = useState<string | null>(null);
+  const [careerId, setCareerId] = useState<string | null>(null);
   const { userRegister, setUserRegister } = useAppContext();
   const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
 
   useEffect(() => {
-    const storedCarrerId = localStorage.getItem('carrerId');
-    setCarrerId(storedCarrerId);
+    const storedcareerId = localStorage.getItem('careerId');
+    setCareerId(storedcareerId);
   }, []);
 
   useEffect(() => {
-    if (carrerId) {
+    if (careerId) {
+      if (userRegister.check === 'student') {
+        const getAssignments = async () => {
+          try {
+            const res = await fetch(
+              `http://localhost:3001/careers/${careerId}`
+            );
+            const careerData = await res.json();
+            setAssignments(careerData.assignments);
+          } catch (error) {
+            console.error('Error fetching Assignments:', error);
+          }
+        };
+        getAssignments();
+      }
+    }
+  }, [careerId]);
+
+  useEffect(() => {
+    if (userRegister.check === 'teacher') {
+      console.log(userRegister.check);
       const getAssignments = async () => {
         try {
           const res = await fetch(
-            `https://educapp-server-80o9.onrender.com/careers/${carrerId}`
+
+            `https://educapp-server-80o9.onrender.com/assignments/allAssignments`
           );
-          const carrerData = await res.json();
-          setAssignments(carrerData.assignments);
+          const careerData = await res.json();
+          setAssignments(careerData);
+
           console.log(assignments);
         } catch (error) {
           console.error('Error fetching Assignments:', error);
@@ -35,7 +57,7 @@ const MateriasSelectionForm = () => {
       };
       getAssignments();
     }
-  }, [carrerId]);
+  }, [userRegister]);
 
   useEffect(() => {
     if (selectedAssignments.length !== 0) {
@@ -56,21 +78,31 @@ const MateriasSelectionForm = () => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (selectedAssignments.length > 0) {
-      if (userRegister.id) {
-        const id = userRegister.id;
-        const url = `https://educapp-server-80o9.onrender.com/students/careerSelection/${id}`;
-        fetch(url, {
+
+      if (userRegister._id) {
+        const id = userRegister._id;
+        const url =
+          userRegister.check === 'student'
+            ? `https://educapp-server-80o9.onrender.com/students/careerSelection/${id}`
+            : `https://educapp-server-80o9.onrender.com/teachers/assignmentsSelection/${id}`;
+        const res = await fetch(url, {
+
           headers: { 'Content-Type': 'application/json' },
           method: 'PUT',
           body: JSON.stringify({
-            ...userRegister,
+            _id: userRegister._id,
+            career: userRegister.career,
             assignments: selectedAssignments,
           }),
         });
-        router.push('/login');
+        if (res.ok) {
+          const data = await res.json();
+          setUserRegister({ ...data, assignments: selectedAssignments });
+          router.push('/login');
+        }
       }
     }
   };

@@ -1,6 +1,6 @@
 export interface UserRegister {
-  id?: string;
-  userRol: 'student' | 'teacher';
+  _id?: string;
+  check: 'student' | 'teacher';
   firstName: string;
   lastName: string;
   dni: string;
@@ -19,7 +19,7 @@ export interface Assignment {
   classroom: string;
 }
 
-export interface Carreer {
+export interface Career {
   _id: string;
   name: string;
 }

@@ -2,25 +2,25 @@
 import { useEffect, useState } from 'react';
 import styles from '../styles/carreerselection.module.scss';
 import Image from 'next/image';
-import fotoCarrera from '../public/assets/Vector.png';
+import fotocareera from '../public/assets/Vector.png';
 import { useRouter } from 'next/navigation';
 import { useAppContext } from '../context/userContext';
-import { Carreer } from '../interfaces/interfaces';
+import { Career } from '../interfaces/interfaces';
 
-const initialCarrer: Carreer = {
+const initialCareer: Career = {
   _id: '',
   name: '',
 };
 
-const CarreerForm = () => {
+const careerForm = () => {
   const router = useRouter();
-  const [carreers, setCarreers] = useState<Carreer[]>([]);
-  const [selectedCarrer, setSelectedCarreer] = useState<Carreer>(initialCarrer);
+  const [careers, setCareers] = useState<Career[]>([]);
+  const [selectedcareer, setSelectedcareer] = useState<Career>(initialCareer);
   const { userRegister, setUserRegister } = useAppContext();
   const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
 
   useEffect(() => {
-    const getCarrers = async () => {
+    const getcareers = async () => {
       try {
         const res = await fetch(
           'https://educapp-server-80o9.onrender.com/careers/allCareers'
@@ -28,28 +28,28 @@ const CarreerForm = () => {
         const carreersData = await res.json();
         setCarreers(carreersData);
       } catch (error) {
-        console.error('Error fetching Carrers:', error);
+        console.error('Error fetching careers:', error);
       }
     };
-    getCarrers();
+    getcareers();
   }, []);
 
   useEffect(() => {
-    if (selectedCarrer._id) {
-      localStorage.setItem('carrerId', selectedCarrer._id);
+    if (selectedcareer._id) {
+      localStorage.setItem('careerId', selectedcareer._id);
     }
-  }, [selectedCarrer]);
+  }, [selectedcareer]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = event.target;
     if (value) {
-      setSelectedCarreer({
+      setSelectedcareer({
         name: value,
         _id: id,
       });
     }
 
-    if (selectedCarrer.name === '') {
+    if (selectedcareer.name === '') {
       setSubmitDisabled(true);
     }
   };
@@ -64,19 +64,21 @@ const CarreerForm = () => {
         headers: { 'Content-Type': 'application/json' },
         method: 'PUT',
         body: JSON.stringify({
-          ...userRegister,
-          career: selectedCarrer.name,
+          _id: userRegister._id,
+          firstName: userRegister.firstName,
+          lastName: userRegister.lastName,
+          email: userRegister.email,
+          password: userRegister.password,
+          dni: userRegister.dni,
+          check: userRegister.check,
+          career: selectedcareer.name,
         }),
       });
-
       if (res.ok) {
         const data = await res.json();
-        if (userRegister.career) {
-          setUserRegister(data);
-        }
-        console.log('Usuario guardado en selección de Carrera', data);
+        setUserRegister({ ...data, career: selectedcareer.name });
+        router.push('/seleccion-materias');
       }
-      router.push('/seleccion-materias');
     }
   };
 
@@ -84,31 +86,31 @@ const CarreerForm = () => {
     <form
       className={styles.formContainer}
       onSubmit={handleSubmit}>
-      <div className={styles.carreerMainContainer}>
-        {carreers.map((carreer: Carreer) => (
+      <div className={styles.careerMainContainer}>
+        {careers.map((career: Career) => (
           <div
-            className={styles.carreerContainer}
-            key={carreer._id}>
-            <article className={styles.carreerSelectorContainer}>
+            className={styles.careerContainer}
+            key={career._id}>
+            <article className={styles.careerSelectorContainer}>
               <label
-                htmlFor="carreer"
+                htmlFor="career"
                 className={styles.label}
               />
               <input
                 type="radio"
-                name="carreer"
+                name="career"
                 className={styles.input}
-                value={carreer.name}
-                id={carreer._id}
+                value={career.name}
+                id={career._id}
                 onChange={handleChange}
               />
               <Image
-                className={styles.carrerImg}
-                src={fotoCarrera}
-                alt={`Carrera de ${carreer.name}`}
+                className={styles.careerImg}
+                src={fotocareera}
+                alt={`careera de ${career.name}`}
               />
             </article>
-            <p>{carreer.name}</p>
+            <p>{career.name}</p>
           </div>
         ))}
       </div>
@@ -124,4 +126,4 @@ const CarreerForm = () => {
   );
 };
 
-export default CarreerForm;
+export default careerForm;

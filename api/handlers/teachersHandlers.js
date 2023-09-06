@@ -1,8 +1,11 @@
+const AssignmentModel = require('../models/assignmentModel'); // Llama al modelo AssignmentModel
+
 const {
   getAllTeachersController,
   teacherLoginController,
   registerTeacherController,
   getTeacherByIdController,
+  teacherSelectionController,
 } = require('../controllers/teachersController');
 
 const {
@@ -68,9 +71,28 @@ const getTeacherByIdHandler = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
+
+const teacherSelectionHandler = async (req, res) => {
+  const { id } = req.params;
+  const { assignments } = req.body;
+  try {
+    // Uso los nombres de materias para buscar su ID
+    const assignmentObjectIds = await AssignmentModel.find({
+      name: { $in: assignments },
+    }).distinct('_id');
+    console.log(assignmentObjectIds);
+
+    const response = await teacherSelectionController(id, assignmentObjectIds);
+    res.send(response);
+  } catch (error) {
+    res.status(500).json(error.mesage);
+  }
+};
+
 module.exports = {
   getAllTeachersHandler,
   teacherLoginHandler,
   registerTeacherHandler,
   getTeacherByIdHandler,
+  teacherSelectionHandler,
 };

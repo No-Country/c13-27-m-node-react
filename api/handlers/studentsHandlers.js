@@ -1,3 +1,5 @@
+const AssignmentModel = require('../models/assignmentModel'); // Llama al modelo AssignmentModel
+
 const {
   getAllStudentsController,
   studentLoginController,
@@ -41,7 +43,6 @@ const studentLoginHandler = async (req, res) => {
 
 const registerStudentHandler = async (req, res) => {
   const { firstName, lastName, password, email, dni } = req.body;
-  console.log('Registro de estudiantes: ' + firstName);
   const { error } = registrySchema.validate(req.body);
   if (error) throw new Error(error);
   const newStudent = {
@@ -75,9 +76,17 @@ const getStudentByIdHandler = async (req, res) => {
 const studentSelectionHandler = async (req, res) => {
   const { id } = req.params;
   const { career, assignments } = req.body;
-
   try {
-    const response = await studentSelectionController(id, career, assignments);
+    // Uso los nombres de materias para buscar su ID
+    const assignmentObjectIds = await AssignmentModel.find({
+      name: { $in: assignments },
+    }).distinct('_id');
+
+    const response = await studentSelectionController(
+      id,
+      career,
+      assignmentObjectIds
+    );
     res.send(response);
   } catch (error) {
     res.status(500).json(error.mesage);

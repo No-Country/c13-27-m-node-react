@@ -72,11 +72,12 @@ export const FormRegister = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const url =
-      userRegister.userRol === 'student'
-        ? 'https://educapp-server-80o9.onrender.com/students/registerStudent'
-        : 'https://educapp-server-80o9.onrender.com/teachers/registerTeacher';
+
+      userRegister.check === 'student'
+        ? 'http://localhost:3001/students/registerStudent'
+        : 'http://localhost:3001/teachers/registerTeacher';
+
 
     const res = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },
@@ -87,7 +88,7 @@ export const FormRegister = () => {
         email: userRegister.email,
         password: userRegister.password,
         dni: userRegister.dni,
-        check: userRegister.userRol,
+        check: userRegister.check,
       }),
     });
 
@@ -98,7 +99,7 @@ export const FormRegister = () => {
       if (data._id) {
         setUserRegister({
           ...userRegister,
-          id: data._id,
+          _id: data._id,
         });
       }
     }
@@ -106,7 +107,11 @@ export const FormRegister = () => {
 
   const handleRoute = () => {
     if (Object.keys(error).length === 0) {
-      router.push('/seleccion-carrera');
+      if (userRegister.check === 'student') {
+        router.push('/seleccion-carrera');
+      } else {
+        router.push('/seleccion-materias');
+      }
     } else {
       return;
     }
@@ -182,12 +187,14 @@ export const FormRegister = () => {
         <input
           className={styles.checkbox}
           type="radio"
-          name="userRol"
+          name="check"
           value="student"
           onChange={handleChange}
-          defaultChecked={true}
         />
-        <label htmlFor="userRol" className={styles.checkboxLabel}>
+
+        <label
+          htmlFor="check"
+          className={styles.checkboxLabel}>
           Soy Alumno
         </label>
       </div>
@@ -195,11 +202,15 @@ export const FormRegister = () => {
         <input
           className={styles.checkbox}
           type="radio"
-          name="userRol"
+          name="check"
           value="teacher"
           onChange={handleChange}
         />
-        <label htmlFor="userRol" className={styles.checkboxLabel}>
+
+        <label
+          htmlFor="check"
+          className={styles.checkboxLabel}>
+
           Soy Profesor
         </label>
       </div>

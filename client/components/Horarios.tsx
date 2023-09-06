@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import styles from '../styles/horarios.module.scss';
 import { Assignments } from '../interfaces/interfaces';
+import Link from 'next/link';
 
 export const Horarios = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(0);
@@ -55,12 +56,14 @@ export const Horarios = () => {
 
               if (daysArray.includes(daysOfWeek[selectedDay].name)) {
                 return (
-                  <div key={assignment._id} className={styles.coursecard}>
-                    <h3 className={styles.subject}>{assignment.name}</h3>
-                    <p className={styles.time}>
-                      Horario: {assignment.schedule}
-                    </p>
-                  </div>
+                  <Link className={styles.link} href="/perfil-alumno/materias">
+                    <div key={assignment._id} className={styles.coursecard}>
+                      <h3 className={styles.subject}>{assignment.name}</h3>
+                      <p className={styles.time}>
+                        Horario: {assignment.schedule}
+                      </p>
+                    </div>
+                  </Link>
                 );
               }
               return null;
