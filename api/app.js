@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session');
+const path = require('path');
 
 // Configuración de cors
 app.use(cors());
@@ -47,8 +48,10 @@ app.use(session(sessionConfig));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', routes);
+app.use('/upload', express.static(path.join(__dirname, 'uploads')));
 
 // Inicio el servidor
 app.listen(PORT, () => {
+  console.log(path.join(__dirname, 'uploads'));
   console.log(`Servidor iniciado en puerto ${PORT}`);
 });
