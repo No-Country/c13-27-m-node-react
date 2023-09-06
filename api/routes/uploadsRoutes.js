@@ -50,4 +50,22 @@ app.post('/', upload.single('pdfFile'), async (req, res) => {
   }
 });
 
+app.get('/allClasses', async (req, res) => {  // Ruta para obtener todas las clases de una materia
+  const { assignmentId } = req.query;
+  try {
+    const assignment = await mongoose
+      .model('Assignment')
+      .findById(assignmentId);
+
+    if (!assignment) {
+      throw new Error('Materia no encontrada.');
+    }
+
+    res.send(assignment.fileNames);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error.message);
+  }
+});
+
 module.exports = app;
