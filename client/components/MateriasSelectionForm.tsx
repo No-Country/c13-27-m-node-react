@@ -4,6 +4,7 @@ import styles from '../styles/materiasselection.module.scss';
 import { Assignment } from '../interfaces/interfaces';
 import { useRouter } from 'next/navigation';
 import { useAppContext } from '../context/userContext';
+import mainRoute from '../route';
 
 const MateriasSelectionForm = () => {
   const router = useRouter();
@@ -20,37 +21,13 @@ const MateriasSelectionForm = () => {
   }, []);
 
   useEffect(() => {
-    if (careerId) {
-      if (userRegister.check === 'student') {
-        const getAssignments = async () => {
-          try {
-            const res = await fetch(
-              `http://localhost:3001/careers/${careerId}`
-            );
-            const careerData = await res.json();
-            setAssignments(careerData.assignments);
-          } catch (error) {
-            console.error('Error fetching Assignments:', error);
-          }
-        };
-        getAssignments();
-      }
-    }
-  }, [careerId]);
-
-  useEffect(() => {
     if (userRegister.check === 'teacher') {
       console.log(userRegister.check);
       const getAssignments = async () => {
         try {
-          const res = await fetch(
-
-            `https://educapp-server-80o9.onrender.com/assignments/allAssignments`
-          );
+          const res = await fetch(`${mainRoute}/assignments/allAssignments`);
           const careerData = await res.json();
           setAssignments(careerData);
-
-          console.log(assignments);
         } catch (error) {
           console.error('Error fetching Assignments:', error);
         }
@@ -60,12 +37,28 @@ const MateriasSelectionForm = () => {
   }, [userRegister]);
 
   useEffect(() => {
+    if (userRegister.check === 'student' && careerId) {
+      const getAssignments = async () => {
+        try {
+          const res = await fetch(`${mainRoute}/careers/${careerId}`);
+          const careerData = await res.json();
+          setAssignments(careerData.assignments);
+          console.log(assignments);
+        } catch (error) {
+          console.error('Error fetching Assignments:', error);
+        }
+      };
+      getAssignments();
+    }
+  }, [careerId, userRegister]);
+
+  useEffect(() => {
     if (selectedAssignments.length !== 0) {
       setSubmitDisabled(true);
     } else {
       setSubmitDisabled(false);
     }
-  });
+  }, [selectedAssignments]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -81,15 +74,13 @@ const MateriasSelectionForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (selectedAssignments.length > 0) {
-
       if (userRegister._id) {
         const id = userRegister._id;
         const url =
           userRegister.check === 'student'
-            ? `https://educapp-server-80o9.onrender.com/students/careerSelection/${id}`
-            : `https://educapp-server-80o9.onrender.com/teachers/assignmentsSelection/${id}`;
+            ? `${mainRoute}/students/careerSelection/${id}`
+            : `${mainRoute}/teachers/assignmentsSelection/${id}`;
         const res = await fetch(url, {
-
           headers: { 'Content-Type': 'application/json' },
           method: 'PUT',
           body: JSON.stringify({
@@ -110,26 +101,27 @@ const MateriasSelectionForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.materiasMainContainer}>
-        {assignments.map((assignment: Assignment) => (
-          <article
-            key={assignment._id}
-            className={styles.materiasContainer}>
-            <input
-              type="checkbox"
-              className={styles.input}
-              name={assignment.name}
-              value={assignment.name}
-              onChange={handleChange}
-            />
-            <div className={styles.infoContainerMateria}>
-              <h2 className={styles.titleMateria}>{assignment.name}</h2>
-              <div className={styles.infoMateria}>
-                <p>{assignment.schedule}</p>
-                <p>{assignment.classroom}</p>
+        {assignments.length > 0 &&
+          assignments.map((assignment: Assignment) => (
+            <article
+              key={assignment._id}
+              className={styles.materiasContainer}>
+              <input
+                type="checkbox"
+                className={styles.input}
+                name={assignment.name}
+                value={assignment.name}
+                onChange={handleChange}
+              />
+              <div className={styles.infoContainerMateria}>
+                <h2 className={styles.titleMateria}>{assignment.name}</h2>
+                <div className={styles.infoMateria}>
+                  <p>{assignment.schedule}</p>
+                  <p>{assignment.classroom}</p>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
       </div>
       <div className={styles.btnSubmitContainer}>
         <input
