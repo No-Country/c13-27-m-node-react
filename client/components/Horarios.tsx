@@ -57,12 +57,8 @@ export const Horarios = () => {
 
               if (daysArray.includes(daysOfWeek[selectedDay].name)) {
                 return (
-                  <Link
-                    className={styles.link}
-                    href="/perfil-alumno/materias">
-                    <div
-                      key={assignment._id}
-                      className={styles.coursecard}>
+                  <Link className={styles.link} href="/perfil-alumno/materias">
+                    <div key={assignment._id} className={styles.coursecard}>
                       <h3 className={styles.subject}>{assignment.name}</h3>
                       <p className={styles.time}>
                         Horario: {assignment.schedule}

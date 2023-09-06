@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useRef } from 'react';
 import styles from '../styles/subirpdf.module.scss';
 import { MdDelete, MdFileUpload } from 'react-icons/md';
+import { useRouter } from 'next/router';
 
 export const Subirpdf = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -31,30 +32,32 @@ export const Subirpdf = () => {
   };
 
   const handleUploadClick = async () => {
+    const router = useRouter();
+    const assignmentId = router.query.assignmentId;
     if (!file) {
       alert('Selecciona un archivo antes de subir');
       return;
     }
+    const formData = new FormData();
+    formData.append('pdfFile', file);
+    formData.append('assignmentId', assignmentId as string);
 
-    // const formData = new FormData();
-    // formData.append('pdfFile', file);
+    try {
+      const response = await fetch('http://localhost:3001/upload', {
+        method: 'POST',
+        body: formData,
+      });
 
-    // try {
-    //   const response = await fetch('http://localhost:3001/', {
-    //     method: 'POST',
-    //     body: formData,
-    //   });
-
-    //   if (response.ok) {
-    //     alert('Archivo subido con éxito');
-    //   } else {
-    //     const responseData = await response.json();
-    //     alert(`Error: ${responseData.message || 'Error al subir el archivo'}`);
-    //   }
-    // } catch (error) {
-    //   console.log('Error subiendo el archivo:', error);
-    //   alert('Error al subir el archivo.');
-    // }
+      if (response.ok) {
+        alert('Archivo subido con éxito');
+      } else {
+        const responseData = await response.json();
+        alert(`Error: ${responseData.message || 'Error al subir el archivo'}`);
+      }
+    } catch (error) {
+      console.log('Error subiendo el archivo:', error);
+      alert('Error al subir el archivo.');
+    }
   };
 
   return (
