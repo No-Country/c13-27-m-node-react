@@ -100,12 +100,3 @@ export default EventosPerfil;
   }
 
 
-// post upload id para cargarr material desde el Alumno
-// 
-//   GET: /upload (pasar assignment por body) ===> devuelve las clases en pdf de esa materia
-
-// tare alumno... 
-// GET: /upload/:id (pasar assignment por body) ===> Devuelve las entregas de un alumno en particular
-
-// tarea profesor ... 
-// GET: /upload/tasks (pasar assignment por body)  ======> devuelve todas las entregas de las materias (para el profesor)
