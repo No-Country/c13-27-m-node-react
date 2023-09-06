@@ -22,9 +22,7 @@ const careerForm = () => {
   useEffect(() => {
     const getcareers = async () => {
       try {
-        const res = await fetch(
-          'https://educapp-server-80o9.onrender.com/careers/allCareers'
-        );
+        const res = await fetch('http://localhost:3001/careers/allCareers');
         const carreersData = await res.json();
         setCareers(carreersData);
       } catch (error) {
@@ -59,7 +57,7 @@ const careerForm = () => {
     if (selectedcareer && userRegister._id) {
       const id = userRegister._id;
       console.log(id);
-      const url = `https://educapp-server-80o9.onrender.com/students/careerSelection/${id}`;
+      const url = `http://localhost:3001/students/careerSelection/${id}`;
       const res = await fetch(url, {
         headers: { 'Content-Type': 'application/json' },
         method: 'PUT',

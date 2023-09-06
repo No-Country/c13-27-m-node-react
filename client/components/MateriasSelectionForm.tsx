@@ -20,32 +20,12 @@ const MateriasSelectionForm = () => {
   }, []);
 
   useEffect(() => {
-    if (careerId) {
-      if (userRegister.check === 'student') {
-        const getAssignments = async () => {
-          try {
-            const res = await fetch(
-              `http://localhost:3001/careers/${careerId}`
-            );
-            const careerData = await res.json();
-            setAssignments(careerData.assignments);
-          } catch (error) {
-            console.error('Error fetching Assignments:', error);
-          }
-        };
-        getAssignments();
-      }
-    }
-  }, [careerId]);
-
-  useEffect(() => {
     if (userRegister.check === 'teacher') {
       console.log(userRegister.check);
       const getAssignments = async () => {
         try {
           const res = await fetch(
-
-            `https://educapp-server-80o9.onrender.com/assignments/allAssignments`
+            `http://localhost:3001/assignments/allAssignments`
           );
           const careerData = await res.json();
           setAssignments(careerData);
@@ -56,8 +36,19 @@ const MateriasSelectionForm = () => {
         }
       };
       getAssignments();
+    } else if (userRegister.check === 'student' && careerId) {
+      const getAssignments = async () => {
+        try {
+          const res = await fetch(`http://localhost:3001/careers/${careerId}`);
+          const careerData = await res.json();
+          setAssignments(careerData.assignments);
+        } catch (error) {
+          console.error('Error fetching Assignments:', error);
+        }
+      };
+      getAssignments();
     }
-  }, [userRegister]);
+  }, [userRegister, careerId]);
 
   useEffect(() => {
     if (selectedAssignments.length !== 0) {
@@ -65,7 +56,7 @@ const MateriasSelectionForm = () => {
     } else {
       setSubmitDisabled(false);
     }
-  });
+  }, [selectedAssignments]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -81,15 +72,13 @@ const MateriasSelectionForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (selectedAssignments.length > 0) {
-
       if (userRegister._id) {
         const id = userRegister._id;
         const url =
           userRegister.check === 'student'
-            ? `https://educapp-server-80o9.onrender.com/students/careerSelection/${id}`
-            : `https://educapp-server-80o9.onrender.com/teachers/assignmentsSelection/${id}`;
+            ? `http://localhost:3001/students/careerSelection/${id}`
+            : `http://localhost:3001/teachers/assignmentsSelection/${id}`;
         const res = await fetch(url, {
-
           headers: { 'Content-Type': 'application/json' },
           method: 'PUT',
           body: JSON.stringify({
