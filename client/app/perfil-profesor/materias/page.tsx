@@ -1,4 +1,3 @@
-import Asistencias from '../../../components/Asistencias';
 import { MateriaProfesor } from '../../../components/MateriaProfesor';
 import Image from 'next/image';
 import rectangle from '../../../public/assets/rectangle.png';
