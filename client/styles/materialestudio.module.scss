@@ -56,6 +56,9 @@
 
 .gridLeft {
   width: 70%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 .gridRigth {
   width: 30%;
