@@ -31,3 +31,16 @@ export interface Assignments {
   days: string[];
   schedule: string;
 }
+
+export interface Assignment {
+  _id: string;
+  nombre: string;
+  events: Event[];
+  type: string;
+}
+
+export interface Exam {
+  _id: string;
+  date: string;
+  type: string;
+}

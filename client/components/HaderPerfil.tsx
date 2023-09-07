@@ -6,6 +6,8 @@ import { useAppContext } from '../context/userContext';
 export const HeaderPerfil = () => {
   const { userRegister } = useAppContext();
 
+  
+
   return (
     <section className={styles.headerContainer}>
       <article className={styles.headerGradient}></article>
