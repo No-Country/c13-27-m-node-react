@@ -4,6 +4,7 @@ import rectangle from '../../../public/assets/rectangle.png';
 import styles from '../../../styles/materialestudio.module.scss';
 import UserList from '../../../components/UserList';
 import { SubirpdfProfesor } from '../../../components/SubirpdProfesor';
+import Link from 'next/link';
 
 const MateriasProfesor = () => {
   return (
@@ -19,6 +20,11 @@ const MateriasProfesor = () => {
           <div className={styles.gridLeft}>
             <MateriaProfesor />
             <SubirpdfProfesor />
+            <Link
+              href="/perfil-profesor/tareas"
+              className={styles.btnVerEntregas}>
+              <button className={styles.btnEntregar}>Ver entregas</button>
+            </Link>
           </div>
           <div className={styles.gridRigth}>
             <UserList />
