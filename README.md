@@ -2,6 +2,8 @@
 
 ![App Screenshot](https://cdn.discordapp.com/attachments/1140652155380961373/1149397427820974081/image.png)
 
+**Educapp** fue diseñada para brindar un espacio moderno e intuitivo en el cual estudiantes y profesores podrán gestionar con facilidad su vida académica, permitiendo organizar horarios, agregar y descargar material de estudio, así como llevar un registro eficiente de calificaciones y asistencias.
+
 
 ## Demo
 
