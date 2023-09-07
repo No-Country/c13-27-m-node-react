@@ -25,7 +25,7 @@ https://educapp-two.vercel.app/
 
 ## Stack Tecnológico
 
-|               |                                                              |
+| Rama          | Tecnologías                                                  |
 | :------------ | :----------------------------------------------------------- |
 | UX/UI         | ![Figma][figma]                                              |
 | Front End     | ![Next JS][nextjs] ![React][react] ![TypeScript][typescript] |
