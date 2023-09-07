@@ -25,14 +25,13 @@ https://educapp-two.vercel.app/
 
 ## Stack Tecnológico
 
-![Vercel][vercel]
-![Figma][figma]
-![Next JS][nextjs]
-![React][react]
-![TypeScript][typescript]
-![NodeJS][node]
-![Express.js][express]
-![MongoDB][mongodb]
+|               |                                                              |
+| :------------ | :----------------------------------------------------------- |
+| UX/UI         | ![Figma][figma]                                              |
+| Front End     | ![Next JS][nextjs] ![React][react] ![TypeScript][typescript] |
+| Back End      | ![NodeJS][node] ![Express.js][express]                       |
+| Base de datos | ![MongoDB][mongodb]                                          |
+| Deployment    | ![Vercel][vercel]                                            |
 
 [behance]: https://img.shields.io/badge/Behance-1769ff?style=for-the-badge&logo=behance&logoColor=white
 [linkedin]: https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white
