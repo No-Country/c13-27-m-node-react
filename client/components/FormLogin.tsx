@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useAppContext } from '../context/userContext';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import mainRoute from '../route';
 
 const FormLogin = () => {
   const router = useRouter();
@@ -36,26 +37,14 @@ const FormLogin = () => {
     setView2(!view2);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userType = localStorage.getItem('userType');
-
-    if (token) {
-      setIsLogged(true);
-      router.push(
-        userType === 'student' ? '/perfil-alumno' : '/perfil-profesor'
-      );
-    }
-  }, []);
-
   const onSubmitView2 = async (data: any) => {
     const allData = { ...view1Data, ...data };
     try {
       let endpoint = '';
       if (allData.check === 'student') {
-        endpoint = 'https://educapp-server-80o9.onrender.com/students/studentsLogin';
+        endpoint = `${mainRoute}/students/studentsLogin`;
       } else if (allData.check === 'teacher') {
-        endpoint = 'https://educapp-server-80o9.onrender.com/teachers/teachersLogin';
+        endpoint = `${mainRoute}/teachers/teachersLogin`;
       }
 
       if (endpoint) {

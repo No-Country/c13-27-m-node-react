@@ -1,6 +1,6 @@
 'use client';
 import { HeaderPerfil } from '../../components/HaderPerfil';
-import { Horarios } from '../../components/Horarios';
+import { Horariosprofesor } from '../../components/HorariosProfesor';
 import EventosPerfil from '../../components/EventosPerfil';
 
 const ProfessorProfile = () => {
@@ -8,7 +8,7 @@ const ProfessorProfile = () => {
     <>
       <HeaderPerfil />
       <main>
-        <Horarios />
+        <Horariosprofesor />
         <EventosPerfil />
       </main>
     </>

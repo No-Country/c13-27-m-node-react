@@ -43,14 +43,13 @@ app.post('/', upload.single('pdfFile'), async (req, res) => {
       'Archivo PDF subido exitosamente y nombre guardado en la materia.'
     );
   } catch (error) {
-    console.error(error);
     res
       .status(500)
       .send('Error al guardar el nombre del archivo en la materia.');
   }
 });
 
-app.get('/allClasses', async (req, res) => {  // Ruta para obtener todas las clases de una materia
+app.get('/allClasses', async (req, res) => {
   const { assignmentId } = req.query;
   try {
     const assignment = await mongoose
@@ -61,11 +60,20 @@ app.get('/allClasses', async (req, res) => {  // Ruta para obtener todas las cla
       throw new Error('Materia no encontrada.');
     }
 
-    res.send(assignment.fileNames);
+    const files = assignment.fileNames.map((fileName) => fileName);
+
+    res.send(files);
   } catch (error) {
-    console.error(error);
     res.status(500).send(error.message);
   }
+});
+
+app.get('/downloadFile/:fileName', (req, res) => {
+  const fileName = req.params.fileName;
+  const filePath = path.join(__dirname, '../uploads', fileName);
+
+  res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+  res.sendFile(filePath);
 });
 
 module.exports = app;

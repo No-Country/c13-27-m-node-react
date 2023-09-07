@@ -14,7 +14,7 @@ db.once('open', () => {
 // Crea una nueva materia
 const newAssignment = new Assignment({
   name: 'Matemática',
-  exams: [
+  events: [
     {
       date: new Date('2023-06-05'),
       time: '10:30 AM',
@@ -33,6 +33,14 @@ const newAssignment = new Assignment({
       duration: 220,
       type: 'Final',
     },
+    {
+      date: new Date('2023-07-19'),
+      type: 'Entrega',
+    },
+    {
+      date: new Date('2023-08-15'),
+      type: 'Entrega',
+    },
   ],
   students: [
     //  '64e3ed3b13ce0a444343a978'
@@ -43,7 +51,7 @@ const newAssignment = new Assignment({
 });
 const newAssignment2 = new Assignment({
   name: 'Física',
-  exams: [
+  events: [
     {
       date: new Date('2023-08-01'),
       time: '09:00 AM',
@@ -62,6 +70,14 @@ const newAssignment2 = new Assignment({
       duration: 120,
       type: 'Final',
     },
+    {
+      date: new Date('2023-07-19'),
+      type: 'Entrega',
+    },
+    {
+      date: new Date('2023-08-15'),
+      type: 'Entrega',
+    },
   ],
   students: [
     //  '64e3ed3b13ce0a444343a978'
@@ -72,7 +88,7 @@ const newAssignment2 = new Assignment({
 });
 const newAssignment3 = new Assignment({
   name: 'Ciencia Política',
-  exams: [
+  events: [
     {
       date: new Date('2023-06-10'),
       time: '02:00 PM',
@@ -91,6 +107,14 @@ const newAssignment3 = new Assignment({
       duration: 130,
       type: 'Final',
     },
+    {
+      date: new Date('2023-07-19'),
+      type: 'Entrega',
+    },
+    {
+      date: new Date('2023-08-15'),
+      type: 'Entrega',
+    },
   ],
   students: [
     //  '64e658c0c2088908dd408c51'
@@ -101,7 +125,7 @@ const newAssignment3 = new Assignment({
 });
 const newAssignment4 = new Assignment({
   name: 'Derecho Penal',
-  exams: [
+  events: [
     {
       date: new Date('2023-05-05'),
       time: '10:30 AM',
@@ -119,6 +143,14 @@ const newAssignment4 = new Assignment({
       time: '10:30 AM',
       duration: 180,
       type: 'Final',
+    },
+    {
+      date: new Date('2023-07-19'),
+      type: 'Entrega',
+    },
+    {
+      date: new Date('2023-08-15'),
+      type: 'Entrega',
     },
   ],
   students: [

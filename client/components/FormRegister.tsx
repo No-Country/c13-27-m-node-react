@@ -4,6 +4,7 @@ import { useAppContext } from '../context/userContext';
 import styles from '../styles/formregister.module.scss';
 import { useRouter } from 'next/navigation';
 import { UserRegister } from '../interfaces/interfaces';
+import mainRoute from '../route';
 
 export const FormRegister = () => {
   const router = useRouter();
@@ -74,9 +75,8 @@ export const FormRegister = () => {
     event.preventDefault();
     const url =
       userRegister.check === 'student'
-        ? 'https://educapp-server-80o9.onrender.com/students/registerStudent'
-        : 'https://educapp-server-80o9.onrender.com/teachers/registerTeacher';
-
+        ? `${mainRoute}/students/registerStudent`
+        : `${mainRoute}/teachers/registerTeacher`;
 
     const res = await fetch(url, {
       headers: { 'Content-Type': 'application/json' },
@@ -90,15 +90,13 @@ export const FormRegister = () => {
         check: userRegister.check,
       }),
     });
-
-    console.log(res)
-
     if (res.ok) {
       const data = await res.json();
       if (data._id) {
         setUserRegister({
           ...userRegister,
           _id: data._id,
+          check: userRegister.check,
         });
       }
     }
@@ -117,8 +115,12 @@ export const FormRegister = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.formContainer}>
-      <label htmlFor="firstName" className={styles.label}>
+    <form
+      onSubmit={handleSubmit}
+      className={styles.formContainer}>
+      <label
+        htmlFor="firstName"
+        className={styles.label}>
         Nombre
       </label>
       <input
@@ -130,7 +132,9 @@ export const FormRegister = () => {
         name="firstName"
         onChange={handleChange}
       />
-      <label htmlFor="lastName" className={styles.label}>
+      <label
+        htmlFor="lastName"
+        className={styles.label}>
         Apellido
       </label>
       <input
@@ -140,7 +144,9 @@ export const FormRegister = () => {
         name="lastName"
         onChange={handleChange}
       />
-      <label className={styles.label} htmlFor="dni">
+      <label
+        className={styles.label}
+        htmlFor="dni">
         Nro. de Documento
       </label>
       <input
@@ -150,7 +156,9 @@ export const FormRegister = () => {
         name="dni"
         onChange={handleChange}
       />
-      <label htmlFor="email" className={styles.label}>
+      <label
+        htmlFor="email"
+        className={styles.label}>
         E-mail
       </label>
       <input
@@ -160,7 +168,9 @@ export const FormRegister = () => {
         name="email"
         onChange={handleChange}
       />
-      <label htmlFor="password" className={styles.label}>
+      <label
+        htmlFor="password"
+        className={styles.label}>
         Contraseña
       </label>
       <input
@@ -170,7 +180,9 @@ export const FormRegister = () => {
         name="password"
         onChange={handleChange}
       />
-      <label htmlFor="passwordConfirm" className={styles.label}>
+      <label
+        htmlFor="passwordConfirm"
+        className={styles.label}>
         Confirmar Contraseña
       </label>
       <input
@@ -209,7 +221,6 @@ export const FormRegister = () => {
         <label
           htmlFor="check"
           className={styles.checkboxLabel}>
-
           Soy Profesor
         </label>
       </div>
@@ -221,7 +232,9 @@ export const FormRegister = () => {
           name="termsandconditions"
           onChange={handleChange}
         />
-        <label htmlFor="termsandconditions" className={styles.checkboxLabel}>
+        <label
+          htmlFor="termsandconditions"
+          className={styles.checkboxLabel}>
           Acepto términos y condiciones
         </label>
       </div>

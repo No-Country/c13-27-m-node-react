@@ -5,7 +5,7 @@ import { Assignments } from '../interfaces/interfaces';
 import Link from 'next/link';
 import mainRoute from '../route';
 
-export const Horarios = () => {
+export const Horariosprofesor = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(0);
   const [assignments, setAssignments] = useState<Assignments[]>([]);
 
@@ -59,10 +59,8 @@ export const Horarios = () => {
                 return (
                   <Link
                     className={styles.link}
-                    href="/perfil-alumno/materias">
-                    <div
-                      key={assignment._id}
-                      className={styles.coursecard}>
+                    href="/perfil-profesor/materias">
+                    <div key={assignment._id} className={styles.coursecard}>
                       <h3 className={styles.subject}>{assignment.name}</h3>
                       <p className={styles.time}>
                         Horario: {assignment.schedule}

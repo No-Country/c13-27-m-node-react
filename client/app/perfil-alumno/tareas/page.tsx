@@ -1,7 +1,11 @@
+import { Subirpdf } from '../../../components/Subirpdf';
+import TareasAlumnoComponent from '../../../components/TareasAlumno';
+
 const TareasAlumno = () => {
   return (
     <main>
-      <h1>Tareas Alumno</h1>
+      <TareasAlumnoComponent />
+      <Subirpdf />
     </main>
   );
 };
