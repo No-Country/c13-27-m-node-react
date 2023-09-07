@@ -51,8 +51,8 @@ const EventosPerfil = () => {
           {eventData?.slice(0, 4).map((event) => (
             <div className={styles.boxContainer} key={event._id}>
               <div className={styles.divisionDate}>
-                <p className={styles.date}> {formatDate(event.date)} </p>
-                <p className={styles.number}> {formatingDate(event.date)} </p>
+                <p className={styles.date}> {formatMonth(event.date)} </p>
+                <p className={styles.number}> {formatDate(event.date)} </p>
               </div>
 
               <div className={styles.divisionSubject}>
@@ -69,7 +69,7 @@ const EventosPerfil = () => {
 export default EventosPerfil;
 
 // Función para formatear las fechas en la sección eventos - mes
-function formatDate(dateString: string) {
+function formatMonth(dateString: string) {
   const options: Intl.DateTimeFormatOptions = {
     month: 'long',
   };
@@ -77,7 +77,7 @@ function formatDate(dateString: string) {
   return date.toLocaleDateString(undefined, options);
 };
 // Función para formatear las fechas en la sección eventos - día
-function formatingDate(dateString: string) {
+function formatDate(dateString: string) {
   const options: Intl.DateTimeFormatOptions = {
     day: 'numeric',
   };
