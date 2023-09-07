@@ -30,9 +30,44 @@ const updateAssignmentsLinksController = async (id, newLinks) => {
   return assignment;
 };
 
+const createCommentController = async (idAssignment, idStudent, comment) => {
+  const assignment = await AssignmentModel.findOne({ _id: idAssignment });
+  if (!assignment) throw new Error('No se pudo encontrar la materia');
+  if (!comment) throw new Error('No se envio ningun comentario');
+
+  for (let event of assignment.events) {
+    if (event.type === 'Entrega') {
+      if (event.eventDetails[0].student._id.toString() === idStudent) {
+        event.eventDetails[0].comments = comment;
+        await assignment.save();
+      }
+    }
+  }
+
+  return comment;
+};
+
+const getEventsByIdController = async (idAssignment, idStudent) => {
+  const assignment = await AssignmentModel.findOne({ _id: idAssignment });
+  if (!assignment) throw new Error('No se pudo encontrar la materia');
+  let entregas = [];
+
+  for (let event of assignment.events) {
+    if (event.type === 'Entrega') {
+      if (event.eventDetails[0].student._id.toString() === idStudent) {
+        entregas.push(event);
+      }
+    }
+  }
+
+  return entregas;
+};
+
 module.exports = {
   getAllAssignmentsController,
   getAssignmentByIdController,
   getAssignmentsByCareerController,
   updateAssignmentsLinksController,
+  createCommentController,
+  getEventsByIdController,
 };

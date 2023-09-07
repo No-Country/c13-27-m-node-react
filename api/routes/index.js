@@ -19,4 +19,9 @@ app.use('/homePage', homePageRoutes);
 app.use('/profile', profileRoutes);
 app.use('/upload', uploadsRoutes);
 
+// Middleware para redireccionar al usuario a la pagina not found 404
+app.use(async (req, res) => {
+  res.redirect('http://localhost:3000/not-found');
+});
+
 module.exports = app;
