@@ -48,6 +48,15 @@
 .containerupload {
   display: flex;
 }
+
+.titleCargarMaterial {
+  align-self: flex-start;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
 .upload {
   margin: 1rem 0;
   display: flex;

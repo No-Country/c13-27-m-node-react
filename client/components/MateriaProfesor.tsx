@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import pdfIcon from '../public/assets/pdf-icon.svg';
 import styles from '../styles/materialestudio.module.scss';
-import Link from 'next/link';
 
 export const MateriaProfesor = () => {
   /*   useEffect(() => {
@@ -33,9 +32,6 @@ export const MateriaProfesor = () => {
           <p>{pdf}</p>
         </article>
       ))}
-      <Link href="/perfil-profesor/tareas">
-        <button className={styles.btnEntregar}>Ver entregas</button>
-      </Link>
     </section>
   );
 };
