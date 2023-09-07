@@ -34,7 +34,7 @@ export const MateriaProfesor = () => {
         </article>
       ))}
       <Link href="/perfil-profesor/tareas">
-        <button className={styles.btnEntregar}>Entregar Trabajo</button>
+        <button className={styles.btnEntregar}>Ver entregas</button>
       </Link>
     </section>
   );
