@@ -3,6 +3,8 @@ const {
   getAssignmentByIdController,
   getAssignmentsByCareerController,
   updateAssignmentsLinksController,
+  createCommentController,
+  getEventsByIdController,
 } = require('../controllers/assignmentsController');
 
 const getAllAssignmentsHandler = async (req, res) => {
@@ -43,9 +45,32 @@ const updateAssignmentsLinksHandler = async (req, res) => {
   }
 };
 
+const createCommentHandler = async (req, res) => {
+  const { aid, sid } = req.params;
+  const { comment } = req.body;
+  try {
+    const response = await createCommentController(aid, sid, comment);
+    res.json(response);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+const getEventsByIdHandler = async (req, res) => {
+  const { aid, sid } = req.params;
+  try {
+    const comment = await getEventsByIdController(aid, sid);
+    res.json(comment);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getAllAssignmentsHandler,
   getAssignmentByIdHandler,
   getAssignmentsByCareerHandler,
   updateAssignmentsLinksHandler,
+  createCommentHandler,
+  getEventsByIdHandler,
 };
