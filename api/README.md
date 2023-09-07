@@ -112,4 +112,6 @@ obj (students OR teachers)
 
 ## Uploads
 **Uploads Routes**
-**Uploads Schema**
+- POST /upload que recibe el pdf y assignmentId (por body) y devuelve un mensaje de error o éxito.
+- GET /upload/allClasses que recibe assignmentId por query y devuelve un array de strings con los nombres de los PDFs subidos a esa materia.
+- GET /upload/downloadFile/:fileName que recibe fileName por param y les manda el archivo PDF con ese nombre para descargar
