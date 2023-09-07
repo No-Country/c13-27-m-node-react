@@ -1,112 +1,87 @@
 import { useAppContext } from '../context/userContext';
 import styles from '../styles/footerperfilalumno.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import mainRoute from '../route';
+import { Assignment, Exam } from '../interfaces/interfaces';
 
-interface Exam {
-  _id: string;
-  date: string;
-  type: string;
-}
 
 const EventosPerfil = () => {
   const [showEvents, setShowEvents] = useState<boolean>(false);
   const [eventData, setEventData] = useState<Exam[]>([]);
   const { userRegister } = useAppContext();
+  const id = userRegister._id;
+
+  useEffect(() => {
+    const getEventsOnPerfil = async () => {
+      try {
+        const res = await fetch(`${mainRoute}/students/${id}`);
+        const data = await res.json();
+
+        if (data.student) {
+          const eventData = data.student.assignments.map(
+            (assignament: Assignment) => assignament.events
+          );
+          const flatEventData = eventData.flat();
+          setEventData(flatEventData);
+        
+        }
+      } catch (error) {
+        console.log('Error recibiendo eventos del perfil', error);
+      }
+    };
+    getEventsOnPerfil();
+  }, []);
+
 
   const handleShowEvents = () => {
     setShowEvents(!showEvents);
   };
-  
+
   return (
-    <section>
+    <div>
       <div className={styles.containerBtnTitle}>
-        <button className={styles.btn} onClick={handleShowEvents}>+</button>
+        <button className={styles.btn} onClick={handleShowEvents}>
+          +
+        </button>
         <h1 className={styles.titleFooter}> EVENTOS ESPECIALES </h1>
       </div>
 
- {showEvents && (
+      {showEvents && (
         <div className={styles.containerAllEvents}>
-          <div className={styles.boxContainer}>
-            <div className={styles.divisionDate}>
-              <p className={styles.date}> Miercoles </p>
-              <p className={styles.number}> 25 </p>
-            </div>
-            <div className={styles.divisionSubject}>
-              <p className={styles.subject}> Examen Biología </p>
-            </div>
-          </div>
+          {eventData?.slice(0, 4).map((event) => (
+            <div className={styles.boxContainer} key={event._id}>
+              <div className={styles.divisionDate}>
+                <p className={styles.date}> {formatDate(event.date)} </p>
+                <p className={styles.number}> {formatingDate(event.date)} </p>
+              </div>
 
-          <div className={styles.boxContainer}>
-            <div className={styles.divisionDate}>
-              <p className={styles.date}> Jueves </p>
-              <p className={styles.number}> 01 </p>
+              <div className={styles.divisionSubject}>
+                <p className={styles.subject}> {event.type} </p>
+              </div>
             </div>
-            <div className={styles.divisionSubject}>
-              <p className={styles.subject}> Entrega TP Anato </p>
-            </div>
-          </div>
-
-          <div className={styles.boxContainer}>
-            <div className={styles.divisionDate}>
-              <p className={styles.date}> Miercoles </p>
-              <p className={styles.number}> 25 </p>
-            </div>
-            <div className={styles.divisionSubject}>
-              <p className={styles.subject}> Examen Biología </p>
-            </div>
-          </div>
-
-          <div className={styles.boxContainer}>
-            <div className={styles.divisionDate}>
-              <p className={styles.date}> Jueves </p>
-              <p className={styles.number}> 01 </p>
-            </div>
-            <div className={styles.divisionSubject}>
-              <p className={styles.subject}> Entrega TP Histo </p>
-            </div>
-          </div>
+          ))}
         </div>
-     
-  
-      
-      
-  )} 
-  {/* </div> */}
-    </section>
+      )}
+    </div>
   );
 };
 
 export default EventosPerfil;
 
+// Función para formatear las fechas en la sección eventos - mes
+function formatDate(dateString: string) {
+  const options: Intl.DateTimeFormatOptions = {
+    month: 'long',
+  };
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, options);
+};
+// Función para formatear las fechas en la sección eventos - día
+function formatingDate(dateString: string) {
+  const options: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+  };
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, options);
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// CODIGO A USARSE CUANDO SEA CREADA LA RUTA PARA HACER DE FORMA DINAMICA:
-  // {/* {showEvents && eventData.length > 0 && ( */}
-  //     <div className={styles.containerAllEvents}>
-  //       {eventData?.map((exam) => (
-  //         <div
-  //           className={styles.boxContainer}
-  //           key={exam._id}>
-  //           <div className={styles.divisionDate}>
-  //             <p className={styles.date}> {exam.date} </p>
-  //           </div>
-  //           <div className={styles.divisionSubject}>
-  //             <p className={styles.subject}> {exam.type} </p>
-  //           </div>
-  //         </div>
-  //       ))}
-
-    // const id = userRegister._id
