@@ -6,7 +6,7 @@ const {
   updateAssignmentsLinksController,
   createCommentController,
   getEventsByIdController,
-} = require('../controllers/assignmentsController');
+} = require("../controllers/assignmentsController");
 
 const getAllAssignmentsHandler = async (req, res) => {
   try {
@@ -47,10 +47,10 @@ const updateAssignmentsLinksHandler = async (req, res) => {
 };
 
 const createCommentHandler = async (req, res) => {
-  const { aid, sid } = req.params;
+  const { id, fileName } = req.params;
   const { comment } = req.body;
   try {
-    const response = await createCommentController(aid, sid, comment);
+    const response = await createCommentController(id, fileName, comment);
     res.json(response);
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -60,8 +60,8 @@ const createCommentHandler = async (req, res) => {
 const getEventsByIdHandler = async (req, res) => {
   const { aid, sid } = req.params;
   try {
-    const comment = await getEventsByIdController(aid, sid);
-    res.json(comment);
+    const events = await getEventsByIdController(aid, sid);
+    res.json(events);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
