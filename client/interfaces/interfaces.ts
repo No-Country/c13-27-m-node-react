@@ -35,7 +35,7 @@ export interface Assignments {
 export interface Assignment {
   _id: string;
   nombre: string;
-  events: Event[];
+  events: string[];
   type: string;
 }
 
@@ -43,4 +43,15 @@ export interface Exam {
   _id: string;
   date: string;
   type: string;
+}
+
+export interface StudentInfo {
+  _id: string;
+  name: string;
+  events: {
+    type: string;
+    eventDetails: {
+      grade: number;
+    }[];
+  }[];
 }

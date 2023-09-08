@@ -1,100 +1,87 @@
+import { useAppContext } from '../context/userContext';
 import styles from '../styles/footerperfilalumno.module.scss';
 import { useEffect, useState } from 'react';
 import mainRoute from '../route';
-
-interface GradeData {
-  _id: string;
-  name: string;
-  exams: {
-    type: string;
-    grades: {
-      grade: number;
-    }[];
-  }[];
-}
+import { StudentInfo } from '../interfaces/interfaces';
 
 const FooterPerfil = () => {
-  const [grades, setGrades] = useState<
-    { name: string; parcial1: number; parcial2: number; final: number }[]
-  >([]);
+  const [infoStudent, setInfoStudent] = useState<StudentInfo[]>([]);
+  const { userRegister } = useAppContext();
+  const id = userRegister._id;
 
   useEffect(() => {
     const getExamsAndGrades = async () => {
       try {
-        const res = await fetch(`${mainRoute}/assignments/AllAssignments`);
+        const res = await fetch(`${mainRoute}/students/${id}`);
         const data = await res.json();
-        const transformedData = data.map((subject: GradeData) => {
-          const parcial1 = subject.exams[0]?.grades[0]?.grade || '-';
-
-          const parcial2 = subject.exams[1]?.grades[0]?.grade || '-';
-
-          const final = subject.exams[2]?.grades[0]?.grade || '-';
-
-          return {
-            name: subject.name,
-            parcial1,
-            parcial2,
-            final,
-          };
-        });
-
-        setGrades(transformedData);
+        setInfoStudent(data.student.assignments);
+        console.log(data.student.assignments);
       } catch (error) {
-        console.log('Error fetching grade data', error);
+        console.log('Error accediendo a notas de examen', error);
       }
     };
     getExamsAndGrades();
   }, []);
 
   return (
-    <section className={styles.containerBox}>
+    <main className={styles.containerBox}>
       <div className={styles.box}>
         <div className={styles.column}>
-          <h2 className={styles.subtitle}> Materia </h2>
-          {grades.map((subject, index) => (
-            <p
-              key={index}
-              className={styles.p}>
-              {subject.name}
-            </p>
+          <h3 className={styles.subtitle}> Materia </h3>
+          {infoStudent.map((subject, index) => (
+            <p className={styles.p}> {subject.name} </p>
           ))}
         </div>
+
         <div className={styles.column}>
-          <h2 className={styles.subtitle}> Primer Parcial </h2>
-          {grades.map((subject, index) => (
-            <p
-              key={index}
-              className={styles.p}>
-              {subject.parcial1}
-            </p>
+          <h3 className={styles.subtitle}> Primer Parcial </h3>
+
+          {infoStudent.map((subject, index) => (
+            <div key={index}>
+              {subject.events.map((event, eventIndex) => (
+                <div key={eventIndex}>
+                  {event.type === 'Parcial' && eventIndex === 0 && (
+                    <p className={styles.p}> {event.eventDetails[0].grade} </p>
+                  )}
+                </div>
+              ))}
+            </div>
           ))}
         </div>
+
         <div className={styles.column}>
-          <h2 className={styles.subtitle}> Segundo Parcial </h2>
-          {grades.map((subject, index) => (
-            <p
-              key={index}
-              className={styles.p}>
-              {subject.parcial2}
-            </p>
+          <h3 className={styles.subtitle}>Segundo parcial </h3>
+
+          {infoStudent.map((subject, index) => (
+            <div key={index}>
+              {subject.events.map((event, eventIndex) => (
+                <div key={eventIndex}>
+                  {event.type === 'Parcial' && eventIndex === 1 && (
+                    <p className={styles.p}> {event.eventDetails[0].grade} </p>
+                  )}
+                </div>
+              ))}
+            </div>
           ))}
         </div>
+
         <div className={styles.column}>
-          <h2 className={styles.subtitle}> Final </h2>
-          {grades.map((subject, index) => (
-            <p
-              key={index}
-              className={styles.p}>
-              {subject.final}
-            </p>
+          <h3 className={styles.subtitle}> Final </h3>
+          {infoStudent.map((subject, index) => (
+            <div key={index}>
+              {subject.events.map((event, eventIndex) => (
+                <div key={eventIndex}>
+                  {event.type === 'Final' && (
+                    <p className={styles.p}> {event.eventDetails[0].grade} </p>
+                  )}
+                </div>
+              ))}
+            </div>
           ))}
         </div>
       </div>
-    </section>
+    </main>
   );
 };
 
 export default FooterPerfil;
-
-// subject.exams.find((exam) => exam.type === 'Parcial')?.grades[0]
-//   ?.grade || 0;
