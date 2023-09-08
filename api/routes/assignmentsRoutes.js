@@ -6,6 +6,7 @@ const {
   getAllAssignmentsHandler,
   getAssignmentByIdHandler,
   getAssignmentsByCareerHandler,
+  getEntregasByIdHandler,
   updateAssignmentsLinksHandler,
   createCommentHandler,
   getEventsByIdHandler,
@@ -13,6 +14,7 @@ const {
 
 router.get('/allAssignments', getAllAssignmentsHandler); // Ruta para obtener todos las materias (ver como integrar con alumnos y profesores)
 router.get('/:id', getAssignmentByIdHandler); // Ruta para obtener una materia usando el ID
+router.get('/:id/entregas', getEntregasByIdHandler); // Ruta para obtener una materia usando el ID
 router.get('/careers/:careerName/assignments', getAssignmentsByCareerHandler);
 router.put('/:id/uploadLinks', updateAssignmentsLinksHandler);
 router.post('/:aid/comments/:sid', createCommentHandler);

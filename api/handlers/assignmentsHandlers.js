@@ -2,6 +2,7 @@ const {
   getAllAssignmentsController,
   getAssignmentByIdController,
   getAssignmentsByCareerController,
+  getEntregasByIdController,
   updateAssignmentsLinksController,
   createCommentController,
   getEventsByIdController,
@@ -66,6 +67,15 @@ const getEventsByIdHandler = async (req, res) => {
   }
 };
 
+const getEntregasByIdHandler = async (req, res) => {
+  try {
+    const entregas = await getEntregasByIdController(req);
+    res.send(entregas);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 module.exports = {
   getAllAssignmentsHandler,
   getAssignmentByIdHandler,
@@ -73,4 +83,5 @@ module.exports = {
   updateAssignmentsLinksHandler,
   createCommentHandler,
   getEventsByIdHandler,
+  getEntregasByIdHandler,
 };

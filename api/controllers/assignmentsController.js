@@ -14,6 +14,21 @@ const getAssignmentByIdController = async (req, res) => {
   return assignment;
 };
 
+const getEntregasByIdController = async (req, res) => {
+  const { id } = req.params;
+  const assignment = await AssignmentModel.findById(id).populate('students');
+  if (!assignment) throw new Error('No se pudo encontrar la materia');
+  const entregas = [];
+  for (evento of assignment.events) {
+    if (evento.type === 'Entrega') {
+      entregas.push(evento);
+    }
+  }
+  console.log(entregas);
+
+  return entregas;
+};
+
 const getAssignmentsByCareerController = async (req, res) => {
   const { careerName } = req.params;
   const career = await CareerModel.findOne({ name: careerName }).populate(
@@ -67,6 +82,7 @@ module.exports = {
   getAllAssignmentsController,
   getAssignmentByIdController,
   getAssignmentsByCareerController,
+  getEntregasByIdController,
   updateAssignmentsLinksController,
   createCommentController,
   getEventsByIdController,
