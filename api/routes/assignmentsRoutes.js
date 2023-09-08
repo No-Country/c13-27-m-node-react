@@ -17,7 +17,7 @@ router.get('/:id', getAssignmentByIdHandler); // Ruta para obtener una materia u
 router.get('/:id/entregas', getEntregasByIdHandler); // Ruta para obtener una materia usando el ID
 router.get('/careers/:careerName/assignments', getAssignmentsByCareerHandler);
 router.put('/:id/uploadLinks', updateAssignmentsLinksHandler);
-router.post('/:aid/comments/:sid', createCommentHandler);
-router.get('/:aid/comments/:sid', getEventsByIdHandler);
+router.post('/:id/comments/:fileName', createCommentHandler);
+router.get('/:aid/events/:sid', getEventsByIdHandler);
 
 module.exports = router;
