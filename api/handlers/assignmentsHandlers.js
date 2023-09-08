@@ -6,7 +6,7 @@ const {
   updateAssignmentsLinksController,
   createCommentController,
   getEventsByIdController,
-} = require("../controllers/assignmentsController");
+} = require('../controllers/assignmentsController');
 
 const getAllAssignmentsHandler = async (req, res) => {
   try {

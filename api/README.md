@@ -99,6 +99,8 @@ obj (students OR teachers)
 | ---- | ------------------------------------------------- | ------------------------------------------------ |
 | GET  | Devuelve todas los materias como array de objetos | http://localhost:PORT/assignments/allAssignments |
 | GET  | Devuelve una materia a través del ID              | http://localhost:PORT/assignments/:id            |
+| POST  | Devuelve el comentario nuevo o "No se encontro esa entrega" | http://localhost:PORT/assignments/:id/comments/:fileName |
+| GET  | Devuelve un array con todos los eventos de ese alumno o un array vacio si no se encontro           | http://localhost:PORT/assignments/:aid/events/:sid            |
 
 **Assignment Schema**
 
