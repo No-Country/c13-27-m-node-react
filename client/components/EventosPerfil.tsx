@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import mainRoute from '../route';
 import { Assignment, Exam } from '../interfaces/interfaces';
 
-
 const EventosPerfil = () => {
   const [showEvents, setShowEvents] = useState<boolean>(false);
   const [eventData, setEventData] = useState<Exam[]>([]);
@@ -31,7 +30,6 @@ const EventosPerfil = () => {
     };
     getEventsOnPerfil();
   }, []);
-
 
   const handleShowEvents = () => {
     setShowEvents(!showEvents);
