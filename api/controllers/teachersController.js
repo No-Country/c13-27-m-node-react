@@ -63,9 +63,9 @@ const getTeacherByIdController = async (id) => {
     const teacher = await TeacherModel.findById(id);
     if (!teacher) throw new Error('No hay información disponible');
 
-    res.send(teacher);
+    return teacher;
   } catch (error) {
-    res.status(500).json(error.message);
+    throw new Error(error.message);
   }
 };
 
@@ -77,7 +77,7 @@ const teacherSelectionController = async (id, assignments) => {
   );
 
   if (!teacher) {
-    return res.status(404).json({ message: 'Profesor no encontrado' });
+    throw new Error('Profesor no encontrado');
   }
 
   return teacher;

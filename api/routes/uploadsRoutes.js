@@ -112,5 +112,4 @@ app.post('/entrega', upload.single('pdfFile'), async (req, res) => {
 
 module.exports = app;
 
-// 64f114562c93f6fc252c4059 --- ID de materia
-// 64f114572d0e8ba29ea92edf --- ID de estudiante
+// Falta ruta de todas las entregas de un estudiante
