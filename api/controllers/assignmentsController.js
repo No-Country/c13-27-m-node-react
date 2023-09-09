@@ -56,7 +56,7 @@ const createCommentController = async (idAssignment, fileName, comment) => {
       if (event.eventDetails[0].file === fileName) {
         event.eventDetails[0].comments = comment;
         await assignment.save();
-        response = event.eventDetails[0].comments;
+        response = event;
       }
     }
   }

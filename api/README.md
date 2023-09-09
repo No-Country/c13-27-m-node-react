@@ -106,10 +106,9 @@
 | GET  | Devuelve todas los materias como array de objetos                                                       | http://localhost:PORT/assignments/allAssignments         |
 | GET  | Devuelve una materia a través del ID                                                                    | http://localhost:PORT/assignments/:id                    |
 | GET  | Devuelve todas las entregas de la materia a través del ID                                               | http://localhost:PORT/assignments/:id/entregas           |
-| POST | Devuelve el comentario nuevo o "No se encontro esa entrega"                                             | http://localhost:PORT/assignments/:id/comments/:fileName |
 | GET  | Devuelve un array con todos los eventos de ese alumno o un array vacio si no se encontro                | http://localhost:PORT/assignments/:aid/events/:sid       |
 | PUT  | Recibe un ID por parametro y strings de links por body, devuelve la materia actualizada                 | http://localhost:PORT/:id/uploadLinks                    |
-| POST | Recibe ID de materia + filename por parametro junto con comment por body, devuelve el comentario creado | http://localhost:PORT/:id/comments/:fileName             |
+| POST | Recibe ID de materia + filename por parametro junto con comment por body, devuelve la entrega con el comentario nuevo | http://localhost:PORT/:id/comments/:fileName             |
 
 **Assignment Schema**
 
