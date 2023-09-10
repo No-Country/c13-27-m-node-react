@@ -13,6 +13,8 @@ const CareerSchema = new Schema({
         'Medicina',
         'Psicología',
         'Literatura',
+        'Biología',
+        'Administración de Empresas',
       ],
       message: 'No existe la carrera {VALUE}',
     },
@@ -33,4 +35,3 @@ const CareerSchema = new Schema({
 
 const CareerModel = mongoose.model('Career', CareerSchema);
 module.exports = CareerModel;
-
