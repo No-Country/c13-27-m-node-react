@@ -7,7 +7,7 @@ import Link from 'next/link';
 import mainRoute from '../route';
 
 export const Horarios = () => {
-  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const [selectedDay, setSelectedDay] = useState<number | null>(0);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const { userRegister } = useAppContext();
   const id = userRegister._id;
@@ -38,7 +38,9 @@ export const Horarios = () => {
         }
         return response.json();
       })
-      .then((data) => setAssignments(data || []))
+      .then((data) => {
+        setAssignments(data.student.assignments);
+      })
       .catch((error) => console.error('Error:', error));
   }, [id]);
 
