@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import mainRoute from '../route';
 import { AssignmentEvents, Exam } from '../interfaces/interfaces';
 
-// AssignamentEvents
 
-const EventosPerfil = () => {
+
+const EventosPerfilAlumno = () => {
   const [showEvents, setShowEvents] = useState<boolean>(false);
   const [eventData, setEventData] = useState<Exam[]>([]);
   const { userRegister } = useAppContext();
@@ -72,7 +72,7 @@ const EventosPerfil = () => {
   );
 };
 
-export default EventosPerfil;
+export default EventosPerfilAlumno;
 
 // Función para formatear las fechas en la sección eventos - mes
 function formatMonth(dateString: string) {
