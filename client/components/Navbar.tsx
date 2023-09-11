@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const userRegisterString = localStorage.getItem('userRegister');
   const userCheck = userRegisterString
-    ? JSON.parse(userRegisterString).allData.check
+    ? JSON.parse(userRegisterString).check
     : '';
 
   console.log(userCheck);

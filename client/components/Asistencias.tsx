@@ -1,6 +1,38 @@
 import styles from '../styles/asistencias.module.scss';
+import { useParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { Assignment } from '../interfaces/interfaces';
+import { useAppContext } from '../context/userContext';
+const initialAssignment = {
+  name: '',
+  _id: '',
+  schedule: '',
+  classroom: '',
+  days: [],
+};
 
 const Asistencias = () => {
+  const [assignment, setAssignment] = useState<Assignment>(initialAssignment);
+  const assignment_id = useParams();
+  console.log(assignment_id.assignment);
+  const { userRegister } = useAppContext();
+
+  useEffect(() => {
+    const getAssigmentData = async () => {
+      const url = `http://localhost:3001/assignments/${assignment_id.assignment}`;
+      console.log(url);
+      const res = await fetch(url);
+      const data = await res.json();
+      setAssignment(data);
+      console.log(data);
+    };
+    getAssigmentData();
+  }, []);
+
+  useEffect(() => {
+    console.log(userRegister);
+  }, [userRegister]);
+
   const cantidadDeClases = 20;
   const asistencias = 5;
   const asistenciasPorcentaje = (asistencias * 100) / cantidadDeClases;

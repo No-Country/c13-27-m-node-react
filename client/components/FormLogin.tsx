@@ -69,7 +69,7 @@ const FormLogin = () => {
           localStorage.setItem('userType', allData.check);
           localStorage.setItem(
             'userRegister',
-            JSON.stringify({ responseData, allData })
+            JSON.stringify({ ...responseData, check: allData.check })
           );
 
           if (allData.check === 'student') {
