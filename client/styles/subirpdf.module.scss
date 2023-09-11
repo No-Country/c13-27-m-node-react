@@ -8,6 +8,28 @@
   padding: 1rem;
 }
 
+.containerProfesor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.formProfesor {
+  margin-left: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15rem;
+  width: 46rem;
+  cursor: pointer;
+  border: 0.1rem dashed gray;
+  border-radius: 0.1rem;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -26,6 +48,15 @@
 .containerupload {
   display: flex;
 }
+
+.titleCargarMaterial {
+  align-self: flex-start;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
 .upload {
   margin: 1rem 0;
   display: flex;

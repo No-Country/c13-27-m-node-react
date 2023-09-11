@@ -14,10 +14,16 @@ export interface UserRegister {
 }
 
 export interface Assignment {
-  _id: string;
+  _id: any;
   name: string;
   schedule: string;
   classroom: string;
+  days: string[];
+  students?: string[];
+  links?: string[];
+  filesNames?: string[];
+  events?: string[];
+  exams?: Exam;
 }
 
 export interface Career {
@@ -25,9 +31,34 @@ export interface Career {
   name: string;
 }
 
-export interface Assignments {
+export interface AssignmentEvents {
+  _id: string;
+  nombre: string;
+  events: string[];
+  type: string;
+}
+
+export interface Exam {
+  _id: string;
+  date: string;
+  type: string;
+  duration?: number;
+  grades?: Grades;
+}
+
+interface Grades {
+  student: string;
+  grade: number;
+  _id: string;
+}
+
+export interface StudentInfo {
   _id: string;
   name: string;
-  days: string[];
-  schedule: string;
+  events: {
+    type: string;
+    eventDetails: {
+      grade: number;
+    }[];
+  }[];
 }

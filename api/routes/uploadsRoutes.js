@@ -39,9 +39,7 @@ app.post('/', upload.single('pdfFile'), async (req, res) => {
     assignment.fileNames.push(fileName); // Actualiza el documento de Mongoose con el nombre del archivo PDF
     await assignment.save();
 
-    res.send(
-      'Archivo PDF subido exitosamente y nombre guardado en la materia.'
-    );
+    res.send(fileName);
   } catch (error) {
     res
       .status(500)
@@ -76,4 +74,42 @@ app.get('/downloadFile/:fileName', (req, res) => {
   res.sendFile(filePath);
 });
 
+app.post('/entrega', upload.single('pdfFile'), async (req, res) => {
+  const { assignmentId, studentId } = req.body;
+  try {
+    if (!req.file) {
+      throw new Error('Debes seleccionar un archivo PDF.');
+    }
+
+    const assignment = await mongoose
+      .model('Assignment')
+      .findById(assignmentId);
+
+    if (!assignment) {
+      return res.status(404).send('Materia no encontrada.');
+    }
+
+    const fileName = `${Date.now()}_${req.file.originalname}`;
+
+    assignment.events.push({
+      date: Date.now(),
+      type: 'Entrega',
+      eventDetails: [
+        {
+          student: studentId,
+          file: fileName,
+        },
+      ],
+    });
+
+    await assignment.save();
+
+    res.send(fileName);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
 module.exports = app;
+
+// Falta ruta de todas las entregas de un estudiante

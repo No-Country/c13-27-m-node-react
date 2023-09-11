@@ -37,18 +37,6 @@ const FormLogin = () => {
     setView2(!view2);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userType = localStorage.getItem('userType');
-
-    if (token) {
-      setIsLogged(true);
-      router.push(
-        userType === 'student' ? '/perfil-alumno' : '/perfil-profesor'
-      );
-    }
-  }, []);
-
   const onSubmitView2 = async (data: any) => {
     const allData = { ...view1Data, ...data };
     try {
@@ -76,6 +64,7 @@ const FormLogin = () => {
           const responseData = await response.json();
           setIsLogged(true);
           setUserRegister(responseData);
+          console.log(responseData);
           localStorage.setItem('token', responseData.token);
           localStorage.setItem('userType', allData.check);
 

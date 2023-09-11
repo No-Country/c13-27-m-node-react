@@ -47,3 +47,40 @@
   height: 10rem;
   object-fit: cover;
 }
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.gridLeft {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.gridRigth {
+  width: 30%;
+}
+.ul {
+  padding: 0;
+  border-top: 1px solid black;
+}
+
+.li {
+  list-style: none;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.foroTitle {
+  padding-left: 1rem;
+}
+
+.btnVerEntregas {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}

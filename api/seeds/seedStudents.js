@@ -24,10 +24,7 @@ const newStudent = new Student({
   dni: '35000000',
   dob: 10 / 12 / 1990,
   address: 'Jujuy 1234',
-  assignments: [
-    // '64e3ee47f320e0e862986c40', // Matematica
-    // '64e3ee47f320e0e862986c41', // Fisica
-  ],
+  assignments: [],
   career: 'Ingeniería',
 });
 const newStudent1 = new Student({
@@ -38,11 +35,52 @@ const newStudent1 = new Student({
   dni: '37000000',
   dob: 8 / 2 / 1998,
   address: 'Salta 123',
-  assignments: [
-    // '64e657d99817b684985962bb', // Ciencia Política
-    // '64e657d99817b684985962bc', // Derecho Penal
-  ],
+  assignments: [],
   career: 'Derecho',
+});
+const newStudent2 = new Student({
+  firstName: 'Al',
+  lastName: 'Pacino Gutierrez',
+  password: createHash('999999'),
+  email: 'pachi@hotmail.com',
+  dni: '31000000',
+  dob: 8 / 2 / 1978,
+  address: 'Miranda 123',
+  assignments: [],
+  career: 'Psicología',
+});
+const newStudent3 = new Student({
+  firstName: 'Trevor',
+  lastName: 'Reguito',
+  password: createHash('999999'),
+  email: 'borre@gmail.com',
+  dni: '39000000',
+  dob: 8 / 2 / 1988,
+  address: 'Rivadavia 1',
+  assignments: [],
+  career: 'Biología',
+});
+const newStudent4 = new Student({
+  firstName: 'Logan',
+  lastName: 'Lobizón',
+  password: createHash('999999'),
+  email: 'wolf@hotmail.com',
+  dni: '34000000',
+  dob: 8 / 11 / 1994,
+  address: 'Nogoyá 500',
+  assignments: [],
+  career: 'Medicina',
+});
+const newStudent5 = new Student({
+  firstName: 'Mauro',
+  lastName: 'Casas',
+  password: createHash('999999'),
+  email: 'wmcasas@hotmail.com',
+  dni: '24000000',
+  dob: 8 / 11 / 1999,
+  address: 'Suipacha 666',
+  assignments: [],
+  career: 'Administración de Empresas',
 });
 
 // Manipulate DB
@@ -51,6 +89,10 @@ const seedDB = async () => {
   await Student.deleteMany({});
   await newStudent.save();
   await newStudent1.save();
+  await newStudent2.save();
+  await newStudent3.save();
+  await newStudent4.save();
+  await newStudent5.save();
 };
 
 //Run the seed function, then close after done

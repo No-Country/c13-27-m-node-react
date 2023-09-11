@@ -14,6 +14,21 @@ const getAssignmentByIdController = async (req, res) => {
   return assignment;
 };
 
+const getEntregasByIdController = async (req, res) => {
+  const { id } = req.params;
+  const assignment = await AssignmentModel.findById(id).populate('students');
+  if (!assignment) throw new Error('No se pudo encontrar la materia');
+  const entregas = [];
+  for (evento of assignment.events) {
+    if (evento.type === 'Entrega') {
+      entregas.push(evento);
+    }
+  }
+  console.log(entregas);
+
+  return entregas;
+};
+
 const getAssignmentsByCareerController = async (req, res) => {
   const { careerName } = req.params;
   const career = await CareerModel.findOne({ name: careerName }).populate(
@@ -30,9 +45,44 @@ const updateAssignmentsLinksController = async (id, newLinks) => {
   return assignment;
 };
 
+const createCommentController = async (idAssignment, fileName, comment) => {
+  const assignment = await AssignmentModel.findOne({ _id: idAssignment });
+  if (!assignment) throw new Error('No se pudo encontrar la materia');
+  if (!comment) throw new Error('No se envio ningun comentario');
+  let response = 'No se encontro esa entrega';
+
+  for (let event of assignment.events) {
+    if (event.type === 'Entrega') {
+      if (event.eventDetails[0].file === fileName) {
+        event.eventDetails[0].comments = comment;
+        await assignment.save();
+        response = event;
+      }
+    }
+  }
+
+  return response;
+};
+
+const getEventsByIdController = async (idAssignment, idStudent) => {
+  const assignment = await AssignmentModel.findOne({ _id: idAssignment });
+  if (!assignment) throw new Error('No se pudo encontrar la materia');
+  let events = [];
+
+  for (let event of assignment.events) {
+    if (event.eventDetails[0].student._id.toString() === idStudent)
+      events.push(event);
+  }
+
+  return events;
+};
+
 module.exports = {
   getAllAssignmentsController,
   getAssignmentByIdController,
   getAssignmentsByCareerController,
+  getEntregasByIdController,
   updateAssignmentsLinksController,
+  createCommentController,
+  getEventsByIdController,
 };

@@ -1,0 +1,23 @@
+@import './variables.scss';
+
+.summary {
+  list-style: none;
+  background-image: url('../public//assets/arrow.svg');
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding-right: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $text1;
+}
+
+.answer {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border-top: 1px solid $text2;
+  font-size: 1rem;
+  color: $text2;
+}
