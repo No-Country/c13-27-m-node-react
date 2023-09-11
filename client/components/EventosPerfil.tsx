@@ -2,7 +2,7 @@ import { useAppContext } from '../context/userContext';
 import styles from '../styles/footerperfilalumno.module.scss';
 import { useEffect, useState } from 'react';
 import mainRoute from '../route';
-import { Assignment, Exam } from '../interfaces/interfaces';
+import { AssignmentEvents, Exam } from '../interfaces/interfaces';
 
 // AssignamentEvents
 
@@ -20,11 +20,10 @@ const EventosPerfil = () => {
 
         if (data.student) {
           const eventData = data.student.assignments.map(
-            (assignament: Assignment) => assignament.events
+            (assignament: AssignmentEvents) => assignament.events
           );
           const flatEventData = eventData.flat();
           setEventData(flatEventData);
-        
         }
       } catch (error) {
         console.log('Error recibiendo eventos del perfil', error);
@@ -43,7 +42,9 @@ const EventosPerfil = () => {
   return (
     <div>
       <div className={styles.containerBtnTitle}>
-        <button className={styles.btn} onClick={handleShowEvents}>
+        <button
+          className={styles.btn}
+          onClick={handleShowEvents}>
           +
         </button>
         <h1 className={styles.titleFooter}> EVENTOS ESPECIALES </h1>
@@ -52,7 +53,9 @@ const EventosPerfil = () => {
       {showEvents && (
         <div className={styles.containerAllEvents}>
           {eventData?.slice(0, 4).map((event) => (
-            <div className={styles.boxContainer} key={event._id}>
+            <div
+              className={styles.boxContainer}
+              key={event._id}>
               <div className={styles.divisionDate}>
                 <p className={styles.date}> {formatMonth(event.date)} </p>
                 <p className={styles.number}> {formatDate(event.date)} </p>
@@ -78,7 +81,7 @@ function formatMonth(dateString: string) {
   };
   const date = new Date(dateString);
   return date.toLocaleDateString(undefined, options);
-};
+}
 // Función para formatear las fechas en la sección eventos - día
 function formatDate(dateString: string) {
   const options: Intl.DateTimeFormatOptions = {
@@ -86,5 +89,4 @@ function formatDate(dateString: string) {
   };
   const date = new Date(dateString);
   return date.toLocaleDateString(undefined, options);
-};
-
+}

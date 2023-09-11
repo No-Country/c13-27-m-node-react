@@ -1,12 +1,15 @@
+'use client';
 import Image from 'next/image';
-import { MateriaAlumno } from '../../../components/MateriaAlumno';
-import rectange from '../../../public/assets/rectangle.png';
+import { MateriaAlumno } from '../../../../components/MateriaAlumno';
+import rectange from '../../../../public/assets/rectangle.png';
 import localFont from 'next/font/local';
-import styles from '../../../styles/materialestudio.module.scss';
-import Asistencias from '../../../components/Asistencias';
-import UserList from '../../../components/UserList';
+import styles from '../../../../styles/materialestudio.module.scss';
+import Asistencias from '../../../../components/Asistencias';
+import UserList from '../../../../components/UserList';
 
-const Roboto = localFont({ src: '../../../public/fonts/Roboto-Regular.ttf' });
+const Roboto = localFont({
+  src: '../../../../public/fonts/Roboto-Regular.ttf',
+});
 
 const MateriasAlumno = () => {
   return (
@@ -17,7 +20,6 @@ const MateriasAlumno = () => {
         alt="rectangle"
       />
       <main className={Roboto.className}>
-        <h1>NOMBRE MATERIA</h1>
         <div className={styles.grid}>
           <div className={styles.gridLeft}>
             <MateriaAlumno />
