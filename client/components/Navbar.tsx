@@ -15,6 +15,13 @@ const Navbar = () => {
     localStorage.clear();
   };
 
+  const userRegisterString = localStorage.getItem('userRegister');
+  const userCheck = userRegisterString
+    ? JSON.parse(userRegisterString).allData.check
+    : '';
+
+  console.log(userCheck);
+
   return (
     <nav className={styles.navBar}>
       <Link href="/">
@@ -49,9 +56,7 @@ const Navbar = () => {
           <li>
             <Link
               href={
-                userRegister.check === 'student'
-                  ? '/perfil-alumno'
-                  : '/perfil-profesor'
+                userCheck === 'student' ? '/perfil-alumno' : '/perfil-profesor'
               }
               className={styles.itemNav}>
               Perfil

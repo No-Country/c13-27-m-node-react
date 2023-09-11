@@ -15,7 +15,7 @@ import mainRoute from '../route';
 
 const FormLogin = () => {
   const router = useRouter();
-  const { setIsLogged, setUserRegister } = useAppContext();
+  const { setIsLogged, setUserRegister, userRegister } = useAppContext();
 
   const {
     register,
@@ -67,7 +67,10 @@ const FormLogin = () => {
           console.log(responseData);
           localStorage.setItem('token', responseData.token);
           localStorage.setItem('userType', allData.check);
-          localStorage.setItem('userRegister', JSON.stringify(responseData));
+          localStorage.setItem(
+            'userRegister',
+            JSON.stringify({ responseData, allData })
+          );
 
           if (allData.check === 'student') {
             toast.success('Bienvenido Estudiante!');
