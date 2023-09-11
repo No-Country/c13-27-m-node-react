@@ -77,3 +77,9 @@ export default TareasProfesorComponent;
 
 // tarea profesor ...
 // GET: /upload/tasks (pasar assignment por body)  ======> devuelve todas las entregas de las materias (para el profesor)
+
+// --------------------------------------
+// - GET /upload/allClasses : recibe assignmentId por query y devuelve los nombres de los archivos de esa materia (con ese nombre luego pueden descargarlo)
+
+// - GET /upload/downloadFile/:fileName : recibe fileName por params y devuelve el archivo (se descarga)
+
