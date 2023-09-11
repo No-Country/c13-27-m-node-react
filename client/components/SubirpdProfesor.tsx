@@ -3,12 +3,16 @@ import React from 'react';
 import { useState, useRef } from 'react';
 import styles from '../styles/subirpdf.module.scss';
 import { MdDelete, MdFileUpload } from 'react-icons/md';
+import { useAppContext } from '../context/userContext';
+import { useParams } from 'next/navigation';
 
 export const SubirpdfProfesor = () => {
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState('No seleccionado');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
+  const assignmentId = useParams();
+  const { userRegister } = useAppContext();
+  const id = userRegister._id;
   const handleFileInputClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -36,25 +40,42 @@ export const SubirpdfProfesor = () => {
       return;
     }
 
-    // const formData = new FormData();
-    // formData.append('pdfFile', file);
+    if (!id) {
+      alert('ID del estudiante no definido');
+      return;
+    }
 
-    // try {
-    //   const response = await fetch('http://localhost:3001/', {
-    //     method: 'POST',
-    //     body: formData,
-    //   });
+    if (Array.isArray(assignmentId)) {
+      alert('ID de asignación no válido');
+      return;
+    }
 
-    //   if (response.ok) {
-    //     alert('Archivo subido con éxito');
-    //   } else {
-    //     const responseData = await response.json();
-    //     alert(`Error: ${responseData.message || 'Error al subir el archivo'}`);
-    //   }
-    // } catch (error) {
-    //   console.log('Error subiendo el archivo:', error);
-    //   alert('Error al subir el archivo.');
-    // }
+    if (!assignmentId || !assignmentId.assignment) {
+      alert('ID de la asignación no definido');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('pdfFile', file);
+    formData.append('studentId', id);
+    formData.append('assignmentId', assignmentId.assignment);
+    console.log(assignmentId);
+
+    try {
+      const response = await fetch('http://localhost:3001/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      if (response.ok) {
+        alert('Archivo subido con éxito');
+      } else {
+        const responseData = await response.json();
+        alert(`Error: ${responseData.message || 'Error al subir el archivo'}`);
+      }
+    } catch (error) {
+      console.log('Error subiendo el archivo:', error);
+      alert('Error al subir el archivo.');
+    }
   };
 
   return (
@@ -89,9 +110,7 @@ export const SubirpdfProfesor = () => {
         </span>
       </section>
 
-      <button
-        className={styles.btn}
-        onClick={handleUploadClick}>
+      <button className={styles.btn} onClick={handleUploadClick}>
         Subir Archivo
       </button>
     </div>
