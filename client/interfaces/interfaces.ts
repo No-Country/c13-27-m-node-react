@@ -11,6 +11,7 @@ export interface UserRegister {
   career: string | null;
   assignments: string[] | null;
   career_id?: string;
+  assignmentDataForStudent?: string[];
 }
 
 export interface Assignment {

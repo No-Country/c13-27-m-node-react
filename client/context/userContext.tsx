@@ -22,6 +22,7 @@ export const initialUser: UserRegister = {
   career: '',
   assignments: [],
   career_id: '',
+  assignmentDataForStudent: [],
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
