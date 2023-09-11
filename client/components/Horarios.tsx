@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import styles from '../styles/horarios.module.scss';
-import { Assignments } from '../interfaces/interfaces';
+import { Assignment } from '../interfaces/interfaces';
 import Link from 'next/link';
 import mainRoute from '../route';
 
 export const Horarios = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(0);
-  const [assignments, setAssignments] = useState<Assignments[]>([]);
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
 
   const daysOfWeek = [
     {
@@ -59,7 +59,10 @@ export const Horarios = () => {
                 return (
                   <Link
                     className={styles.link}
-                    href="/perfil-alumno/materias">
+                    href="/perfil-alumno/materias/[assignment]"
+                    as={`/perfil-alumno/materias/${encodeURIComponent(
+                      assignment._id
+                    )}`}>
                     <div
                       key={assignment._id}
                       className={styles.coursecard}>

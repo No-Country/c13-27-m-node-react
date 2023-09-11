@@ -1,4 +1,4 @@
-import TareasProfesorComponent from '../../../components/TareasProfesor';
+import TareasProfesorComponent from '../../../../components/TareasProfesor';
 
 const TareasProfesor = () => {
   return (

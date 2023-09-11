@@ -1,5 +1,5 @@
-import { Subirpdf } from '../../../components/Subirpdf';
-import TareasAlumnoComponent from '../../../components/TareasAlumno';
+import { Subirpdf } from '../../../../components/Subirpdf';
+import TareasAlumnoComponent from '../../../../components/TareasAlumno';
 
 const TareasAlumno = () => {
   return (

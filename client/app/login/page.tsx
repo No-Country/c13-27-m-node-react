@@ -7,7 +7,6 @@ const Login = () => {
   return (
     <main>
       <FormLogin />
-
       <aside className={styles.loginimagecontainer}></aside>
       <ToastContainer />
     </main>
