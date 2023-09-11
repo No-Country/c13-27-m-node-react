@@ -2,7 +2,7 @@
 import { HeaderPerfil } from '../../components/HaderPerfil';
 import { Horarios } from '../../components/Horarios';
 import FooterPerfil from '../../components/FooterPerfil';
-import EventosPerfil from '../../components/EventosPerfil';
+import EventosPerfilAlumno from '../../components/EventosPerfilAlumno';
 
 const StudentProfile = () => {
   return (
@@ -10,7 +10,7 @@ const StudentProfile = () => {
       <HeaderPerfil />
       <main>
         <Horarios />
-        <EventosPerfil />
+        <EventosPerfilAlumno />
         <FooterPerfil />
       </main>
     </>
