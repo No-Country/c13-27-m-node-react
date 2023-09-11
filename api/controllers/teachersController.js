@@ -60,7 +60,7 @@ const registerTeacherController = async (newTeacher) => {
 
 const getTeacherByIdController = async (id) => {
   try {
-    const teacher = await TeacherModel.findById(id);
+    const teacher = await TeacherModel.findById(id).populate('assignments');
     if (!teacher) throw new Error('No hay información disponible');
 
     return teacher;
