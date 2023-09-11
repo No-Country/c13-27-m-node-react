@@ -1,7 +1,13 @@
+'use client';
+import { useAppContext } from '../context/userContext';
 import styles from '../styles/tareas.module.scss';
 import Image from 'next/image';
 
 const TareasAlumnoComponent = () => {
+  const { userRegister } = useAppContext();
+
+  console.log(userRegister);
+
   return (
     <div>
       <h1 className={styles.title}> Tus trabajos </h1>

@@ -64,6 +64,7 @@ const FormLogin = () => {
           const responseData = await response.json();
           setIsLogged(true);
           setUserRegister(responseData);
+          console.log(responseData);
           localStorage.setItem('token', responseData.token);
           localStorage.setItem('userType', allData.check);
 
@@ -110,7 +111,10 @@ const FormLogin = () => {
                     }`}
                     onClick={() => handleRadioClick('student')}>
                     <div className={styles.infocontainer}>
-                      <Image src={alumno} alt="alumno" />
+                      <Image
+                        src={alumno}
+                        alt="alumno"
+                      />
                       <h3 className={styles.subtitle1}>Alumno</h3>
                     </div>
                     <input
@@ -169,7 +173,9 @@ const FormLogin = () => {
             className={styles.formContainer}>
             <div className={styles.containerbox}>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="dni">
+                <label
+                  className={styles.label}
+                  htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -194,7 +200,9 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="password">
+                <label
+                  className={styles.label}
+                  htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -212,7 +220,9 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a href="" className={styles.forgottext}>
+                <a
+                  href=""
+                  className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>
@@ -238,7 +248,11 @@ const FormLogin = () => {
             </div>
           </form>
           <div className={styles.imageContainer}>
-            <Image src={login} alt="Imagen" className={styles.rightImage} />
+            <Image
+              src={login}
+              alt="Imagen"
+              className={styles.rightImage}
+            />
           </div>
         </div>
       )}
