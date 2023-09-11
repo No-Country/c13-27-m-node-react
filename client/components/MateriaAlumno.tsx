@@ -36,9 +36,8 @@ export const MateriaAlumno = () => {
 
   return (
     <section className={styles.mainContainer}>
-      <h2 className={styles.materialTitle}>
-        Material de estudio {assignment.name}
-      </h2>
+      <h1>{assignment.name}</h1>
+      <h2 className={styles.materialTitle}>Material de estudio</h2>
       {pdfs.map((pdf, index) => (
         <article
           key={index}
