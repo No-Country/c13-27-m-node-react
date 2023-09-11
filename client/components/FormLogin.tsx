@@ -67,6 +67,7 @@ const FormLogin = () => {
           console.log(responseData);
           localStorage.setItem('token', responseData.token);
           localStorage.setItem('userType', allData.check);
+          localStorage.setItem('userRegister', JSON.stringify(responseData));
 
           if (allData.check === 'student') {
             toast.success('Bienvenido Estudiante!');

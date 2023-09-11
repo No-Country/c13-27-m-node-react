@@ -6,11 +6,13 @@ import { useAppContext } from '../context/userContext';
 import { initialUser } from '../context/userContext';
 
 const Navbar = () => {
-  const { isLogged, setIsLogged, setUserRegister } = useAppContext();
+  const { isLogged, setIsLogged, setUserRegister, userRegister } =
+    useAppContext();
 
   const handleLogOut = () => {
     setIsLogged(false);
     setUserRegister(initialUser);
+    localStorage.clear();
   };
 
   return (
@@ -43,17 +45,14 @@ const Navbar = () => {
             Ayuda
           </Link>
         </li>
-        <li>
-          <Link
-            href="/info"
-            className={styles.itemNav}>
-            Información
-          </Link>
-        </li>
         {isLogged && (
           <li>
             <Link
-              href="/perfil-alumno"
+              href={
+                userRegister.check === 'student'
+                  ? '/perfil-alumno'
+                  : '/perfil-profesor'
+              }
               className={styles.itemNav}>
               Perfil
             </Link>
