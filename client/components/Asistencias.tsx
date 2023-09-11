@@ -3,6 +3,8 @@ import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Assignment } from '../interfaces/interfaces';
 import { useAppContext } from '../context/userContext';
+import mainRoute from '../route';
+
 const initialAssignment = {
   name: '',
   _id: '',
@@ -11,34 +13,75 @@ const initialAssignment = {
   days: [],
 };
 
+interface AssignmentDataForStudent {
+  name: string;
+  totalClasses: number;
+  missedClasses: number;
+  events: string[];
+}
+
+const initialAssignmentDataForStudent = {
+  name: '',
+  totalClasses: 0,
+  missedClasses: 0,
+  events: [],
+};
+
 const Asistencias = () => {
-  const [assignment, setAssignment] = useState<Assignment>(initialAssignment);
+  const [assignmentData, setAssignmentData] =
+    useState<Assignment>(initialAssignment);
+  const [matchingAssignment, setMatchingAssignment] =
+    useState<AssignmentDataForStudent>(initialAssignmentDataForStudent);
   const assignment_id = useParams();
-  console.log(assignment_id.assignment);
   const { userRegister } = useAppContext();
+  const [cantidadDeClases, setCantidadDeClases] = useState<number>(0);
+  const [asistencias, setAsistencias] = useState<number>(0);
+  const [asistenciasPorcentaje, setAsistenciasPorcentaje] = useState<number>(0);
 
   useEffect(() => {
-    const getAssigmentData = async () => {
-      const url = `http://localhost:3001/assignments/${assignment_id.assignment}`;
-      console.log(url);
-      const res = await fetch(url);
-      const data = await res.json();
-      setAssignment(data);
-      console.log(data);
+    const fetchData = async () => {
+      try {
+        const assignmentResponse = await fetch(
+          `${mainRoute}/assignments/${assignment_id.assignment}`
+        );
+        const assignmentData = await assignmentResponse.json();
+
+        const studentResponse = await fetch(
+          `${mainRoute}/students/${userRegister._id}`
+        );
+        const studentData = await studentResponse.json();
+
+        const match = studentData.assignmentDataForStudent.find(
+          (assignment: Assignment) => assignment.name === assignmentData.name
+        );
+
+        setAssignmentData(assignmentData);
+        setMatchingAssignment(match);
+
+        console.log(assignmentData);
+        console.log(match);
+      } catch (error) {
+        console.error(error);
+      }
     };
-    getAssigmentData();
+
+    fetchData();
   }, []);
 
   useEffect(() => {
-    console.log(userRegister);
-  }, [userRegister]);
+    console.log(matchingAssignment);
+    setCantidadDeClases(matchingAssignment.totalClasses);
+    setAsistencias(
+      matchingAssignment.totalClasses - matchingAssignment.missedClasses
+    );
+  }, [matchingAssignment]);
 
-  const cantidadDeClases = 20;
-  const asistencias = 5;
-  const asistenciasPorcentaje = (asistencias * 100) / cantidadDeClases;
+  useEffect(() => {
+    setAsistenciasPorcentaje((asistencias * 100) / cantidadDeClases);
+  }, [asistencias, cantidadDeClases]);
 
   const customStyle = {
-    '--porcentaje': `${asistenciasPorcentaje}%`,
+    '--porcentaje': `${asistenciasPorcentaje}`,
   } as React.CSSProperties;
 
   return (
