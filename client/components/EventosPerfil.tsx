@@ -36,7 +36,7 @@ const EventosPerfil = () => {
     setShowEvents(!showEvents);
   };
 
-  console.log(eventData);
+  // console.log(eventData);
   
 
   return (

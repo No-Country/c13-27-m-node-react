@@ -62,3 +62,12 @@ export interface StudentInfo {
     }[];
   }[];
 }
+
+export interface StudentExamInfo {
+  _id: string;
+  name: string;
+  events: {
+    eventType: string;
+    grade: number | string;
+  }[];
+}
