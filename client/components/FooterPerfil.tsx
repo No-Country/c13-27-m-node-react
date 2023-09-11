@@ -15,13 +15,15 @@ const FooterPerfil = () => {
         const res = await fetch(`${mainRoute}/students/${id}`);
         const data = await res.json();
         setInfoStudent(data.student.assignments);
-        console.log(data.student.assignments);
       } catch (error) {
         console.log('Error accediendo a notas de examen', error);
       }
     };
     getExamsAndGrades();
   }, []);
+
+
+
 
   return (
     <main className={styles.containerBox}>
@@ -35,7 +37,6 @@ const FooterPerfil = () => {
 
         <div className={styles.column}>
           <h3 className={styles.subtitle}> Primer Parcial </h3>
-
           {infoStudent.map((subject, index) => (
             <div key={index}>
               {subject.events.map((event, eventIndex) => (
@@ -51,7 +52,6 @@ const FooterPerfil = () => {
 
         <div className={styles.column}>
           <h3 className={styles.subtitle}>Segundo parcial </h3>
-
           {infoStudent.map((subject, index) => (
             <div key={index}>
               {subject.events.map((event, eventIndex) => (
