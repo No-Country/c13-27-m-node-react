@@ -96,7 +96,7 @@ app.post('/entrega', upload.single('pdfFile'), async (req, res) => {
     const fileName = `${date}_${req.file.originalname}`;
 
     assignment.events.push({
-      date: date,
+      date: Date.now(),
       type: 'Entrega',
       eventDetails: [
         {
