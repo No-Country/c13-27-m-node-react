@@ -43,7 +43,6 @@ const MateriasProfesor = () => {
         alt="rectangle"
       />
       <main>
-        <h1>{assignment.name}</h1>
         <div className={styles.grid}>
           <div className={styles.gridLeft}>
             <MateriaProfesor />
