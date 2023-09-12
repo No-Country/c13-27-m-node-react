@@ -134,7 +134,7 @@
 | TIPO | DETALLES                                                                                                                      | RUTA                                                |
 | ---- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
 | POST | Recibe assignmentId por body un archivo pdf . Devuelve el nombre generado del archivo en el servidor.                         | http://localhost:PORT/upload                        |
-| GET  | Recibe assignmentId por query y devuelve los nombres de los archivos de esa materia (con ese nombre luego pueden descargarlo) | http://localhost:PORT/upload/allClasses             |
+| GET  | Recibe assignmentId por query y devuelve los nombres de los archivos de esa materia (con ese nombre luego pueden descargarlo) | http://localhost:PORT/upload/allClasses?assignmentId=(:id)             |
 | GET  | Recibe fileName por params y devuelve el archivo (se descarga)                                                                | http://localhost:PORT/upload/downloadFile/:fileName |
 | POST | Recibe assignmentId y studentId por body y devuelve el nombre generado del archivo en el servidor                             | http://localhost:PORT/upload/entrega                |
 
