@@ -15,12 +15,12 @@ const Navbar = () => {
     localStorage.clear();
   };
 
-  const userRegisterString = localStorage.getItem('userRegister');
-  const userCheck = userRegisterString
-    ? JSON.parse(userRegisterString).check
-    : '';
-
-  console.log(userCheck);
+  let userRegisterString;
+  let userCheck;
+  if (typeof window !== 'undefined') {
+    userRegisterString = localStorage.getItem('userRegister');
+    userCheck = userRegisterString ? JSON.parse(userRegisterString).check : '';
+  }
 
   return (
     <nav className={styles.navBar}>
