@@ -22,7 +22,7 @@ const FooterPerfil = () => {
     getExamsAndGrades();
   }, []);
 
-  console.log(infoStudent);
+
 
   return (
     <main className={styles.containerBox}>

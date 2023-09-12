@@ -2,9 +2,30 @@
 import { useAppContext } from '../context/userContext';
 import styles from '../styles/tareas.module.scss';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import mainRoute from '../route';
+import { useParams } from 'next/navigation';
 
 const TareasAlumnoComponent = () => {
   const { userRegister } = useAppContext();
+  const studentId = userRegister._id;
+  const assignment_id = useParams();
+  const assignmentId = assignment_id.assignment;
+
+  useEffect(() => {
+    const getPdfStudent = async () => {
+      try {
+        const res = await fetch(
+          `${mainRoute}/assignments/${assignmentId}/events/${studentId}`
+        );
+        const data = res.json();
+        console.log(data);
+      } catch (error) {
+        console.log('Error fetch obteniendo pdfs del estudante', error);
+      }
+    };
+    getPdfStudent();
+  }, []);
 
   return (
     <div>
@@ -33,3 +54,12 @@ const TareasAlumnoComponent = () => {
 };
 
 export default TareasAlumnoComponent;
+
+// PARA PROFESOR
+// assignments/:id/entregas
+
+// PARA ALUMNO - ACA TMB PUEDE VER LOS COMENTARIOS
+// assignments/:aid materia/events/:id estudiante
+
+// ENVIAR COMENTARIOS DE PROFE A ALUMNOS
+// http://localhost:PORT/:id/comments/:fileName
