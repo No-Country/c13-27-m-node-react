@@ -1,22 +1,41 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import pdfIcon from '../public/assets/pdf-icon.svg';
 import styles from '../styles/materialestudio.module.scss';
+import mainRoute from '../route';
+import { useParams } from 'next/navigation';
+import { Assignment } from '../interfaces/interfaces';
+import { initialAssignment } from './MateriaAlumno';
 
 export const MateriaProfesor = () => {
-  /*   useEffect(() => {
+  const [assignment, setAssignment] = useState<Assignment>(initialAssignment);
+  const [pdfs, setPdfs] = useState([]);
+  const assignment_id = useParams();
+
+  useEffect(() => {
     const getAssigmentData = async () => {
-      const res = await fetch(
-        'http://localhost:3001/upload/64f734cb524040c5839ba60f'
-      );
+      const url = `${mainRoute}/assignments/${assignment_id.assignment}`;
+      console.log(url);
+      const res = await fetch(url);
       const data = await res.json();
+      setAssignment(data);
       console.log(data);
     };
     getAssigmentData();
-  }, []); */
+  }, []);
 
-  const pdfs = ['Titulo 1', 'Título 2', 'Título 3'];
+  useEffect(() => {
+    const getPdfs = async () => {
+      const url = `${mainRoute}/upload/allClasses?assignmentId=${assignment_id.assignment}`;
+      console.log(url);
+      const res = await fetch(url);
+      const data = await res.json();
+      setPdfs(data);
+      console.log(data);
+    };
+    getPdfs();
+  }, []);
 
   return (
     <section className={styles.mainContainer}>
