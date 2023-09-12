@@ -239,7 +239,14 @@ const FormLogin = () => {
             </div>
           </form>
           <div className={styles.imageContainer}>
-            <Image src={login} alt="Imagen" className={styles.rightImage} />
+            <Image
+              src={login}
+              alt="Imagen"
+              width={500}
+              height={300}
+              objectFit="cover"
+              className={styles.rightImage}
+            />
           </div>
         </div>
       )}
