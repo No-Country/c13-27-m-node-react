@@ -6,6 +6,7 @@ import styles from '../styles/materialestudio.module.scss';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Assignment } from '../interfaces/interfaces';
+import mainRoute from '../route';
 
 const initialAssignment = {
   name: '',
@@ -17,12 +18,12 @@ const initialAssignment = {
 
 export const MateriaAlumno = () => {
   const [assignment, setAssignment] = useState<Assignment>(initialAssignment);
+  const [pdfs, setPdfs] = useState([]);
   const assignment_id = useParams();
-  console.log(assignment_id.assignment);
 
   useEffect(() => {
     const getAssigmentData = async () => {
-      const url = `http://localhost:3001/assignments/${assignment_id.assignment}`;
+      const url = `${mainRoute}/assignments/${assignment_id.assignment}`;
       console.log(url);
       const res = await fetch(url);
       const data = await res.json();
@@ -32,15 +33,31 @@ export const MateriaAlumno = () => {
     getAssigmentData();
   }, []);
 
-  const pdfs = ['Titulo 1', 'Título 2', 'Título 3'];
+  useEffect(() => {
+    const getPdfs = async () => {
+      const url = `${mainRoute}/upload/allClasses?assignmentId=${assignment_id.assignment}`;
+      console.log(url);
+      const res = await fetch(url);
+      const data = await res.json();
+      setPdfs(data);
+      console.log(data);
+    };
+    getPdfs();
+  }, []);
+
+  const handleDownload = async (id: string) => {
+    const url = `${mainRoute}/upload/downloadFile/${id}`;
+    /*  */
+  };
 
   return (
     <section className={styles.mainContainer}>
       <h1>{assignment.name}</h1>
       <h2 className={styles.materialTitle}>Material de estudio</h2>
-      {pdfs.map((pdf, index) => (
+      {pdfs.map((pdf) => (
         <article
-          key={index}
+          key={pdf}
+          id={pdf}
           className={styles.materialContainer}>
           <Image
             src={pdfIcon}
