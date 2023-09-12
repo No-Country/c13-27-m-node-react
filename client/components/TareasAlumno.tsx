@@ -12,9 +12,6 @@ const TareasAlumnoComponent = () => {
   const assignment_id = useParams();
   const assignmentId = assignment_id.assignment;
 
-
-
-
 useEffect(() => {
   const getPdfStudent = async  () => {
     try {
@@ -34,11 +31,7 @@ useEffect(() => {
 }, []);
 
 
-
-
-  
-
-  return (
+ return (
     <div>
       <h1 className={styles.title}> Tus trabajos </h1>
       <div className={styles.containerPfd}>

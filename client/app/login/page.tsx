@@ -3,9 +3,9 @@ import styles from '../../styles/formlogin.module.scss';
 
 const Login = () => {
   return (
-    <main>
+    <main className={styles.mainContainer}>
       <FormLogin />
-      <aside className={styles.loginimagecontainer}></aside>
+      {/*       <aside className={styles.loginimagecontainer}></aside> */}
     </main>
   );
 };

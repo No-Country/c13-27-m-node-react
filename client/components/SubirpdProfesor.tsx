@@ -110,7 +110,9 @@ export const SubirpdfProfesor = () => {
         </span>
       </section>
 
-      <button className={styles.btn} onClick={handleUploadClick}>
+      <button
+        className={styles.btn}
+        onClick={handleUploadClick}>
         Subir Archivo
       </button>
     </div>
