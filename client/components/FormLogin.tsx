@@ -1,21 +1,21 @@
 'use client';
-import { useState, useEffect } from 'react';
-import styles from '../styles/formlogin.module.scss';
+import { useState } from 'react';
 import Link from 'next/link';
+import styles from '../styles/formlogin.module.scss';
 import { useForm } from 'react-hook-form';
-import Image from 'next/image';
-import alumno from '../public/assets/alumno.png';
-import teacher from '../public/assets/profesor.jpg';
-import login from '../public/assets/login.png';
 import { useRouter } from 'next/navigation';
 import { useAppContext } from '../context/userContext';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import mainRoute from '../route';
+import Image from 'next/image';
+import alumno from '../public/assets/alumno.png';
+import teacher from '../public/assets/profesor.jpg';
+import login from '../public/assets/login.png';
 
 const FormLogin = () => {
   const router = useRouter();
-  const { setIsLogged, setUserRegister, userRegister } = useAppContext();
+  const { setIsLogged, setUserRegister } = useAppContext();
 
   const {
     register,
