@@ -19,6 +19,7 @@ export const initialAssignment = {
 export const MateriaAlumno = () => {
   const [assignment, setAssignment] = useState<Assignment>(initialAssignment);
   const [pdfs, setPdfs] = useState([]);
+  const [urlDownload, setUrlDownload] = useState<string>('');
   const assignment_id = useParams();
 
   useEffect(() => {
@@ -45,13 +46,10 @@ export const MateriaAlumno = () => {
     getPdfs();
   }, []);
 
-  const handleDownload = async (id: string) => {
+  const handleDownloadRoute = async (id: string) => {
     console.log(id);
     const url = `${mainRoute}/upload/downloadFile/${id}`;
-    console.log(url);
-    const res = await fetch(url);
-    const download = await res.json();
-    /* const data = await res.json(); */
+    setUrlDownload(url);
   };
 
   return (
@@ -59,16 +57,20 @@ export const MateriaAlumno = () => {
       <h1>{assignment.name}</h1>
       <h2 className={styles.materialTitle}>Material de estudio</h2>
       {pdfs.map((pdf) => (
-        <article
+        <Link
+          className={styles.link}
           key={pdf}
-          className={styles.materialContainer}
-          onClick={() => handleDownload(pdf)}>
-          <Image
-            src={pdfIcon}
-            alt="pdf icon"
-          />
-          <p>{pdf}</p>
-        </article>
+          href={urlDownload}>
+          <article
+            className={styles.materialContainer}
+            onClick={() => handleDownloadRoute(pdf)}>
+            <Image
+              src={pdfIcon}
+              alt="pdf icon"
+            />
+            <p>{pdf}</p>
+          </article>
+        </Link>
       ))}
       <Link
         className={styles.link}
