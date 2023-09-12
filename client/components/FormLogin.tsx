@@ -64,7 +64,6 @@ const FormLogin = () => {
           const responseData = await response.json();
           setIsLogged(true);
           setUserRegister(responseData);
-          console.log(responseData);
           localStorage.setItem('token', responseData.token);
           localStorage.setItem('userType', allData.check);
           localStorage.setItem(
@@ -84,7 +83,6 @@ const FormLogin = () => {
         }
       }
     } catch (error) {
-      console.log('An error occurred:', error);
       toast.error('Error al iniciar sesión. Por favor intente de nuevo.');
     }
   };
