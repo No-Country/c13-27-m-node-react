@@ -8,11 +8,15 @@ import { useParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+interface Params {
+  assignment: string;
+}
+
 export const SubirpdfProfesor = () => {
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState('No seleccionado');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const assignmentId = useParams();
+  const assignmentId = useParams() as unknown as Params;
   const { userRegister } = useAppContext();
   const id = userRegister._id;
   const handleFileInputClick = () => {
