@@ -68,10 +68,16 @@
 }
 
 // view 2
+.loginimagecontainer {
+  width: 100%;
+  height: 100%;
+}
+
 .view2container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 60vh;
 }
 
 .rightImage {
@@ -83,6 +89,8 @@
 .imageContainer {
   float: right;
   margin-left: 1rem;
+  height: 100%;
+  position: relative;
 }
 
 .containerbox {
