@@ -6,8 +6,7 @@ import { useAppContext } from '../context/userContext';
 import { initialUser } from '../context/userContext';
 
 const Navbar = () => {
-  const { isLogged, setIsLogged, setUserRegister, userRegister } =
-    useAppContext();
+  const { isLogged, setIsLogged, setUserRegister } = useAppContext();
 
   const handleLogOut = () => {
     setIsLogged(false);

@@ -10,7 +10,9 @@ const storage = multer.diskStorage({
     cb(null, 'uploads');
   },
   filename: (req, file, cb) => {
-    const fileName = `${Date.now()}_${file.originalname}`;
+    const fileName = `${new Date().getFullYear()}_${new Date().getMonth()}_${new Date().getDate()}_${new Date().getHours()}_${new Date().getMinutes()}_${
+      file.originalname
+    }`;
     cb(null, fileName);
   },
 });
@@ -25,7 +27,9 @@ app.post('/', upload.single('pdfFile'), async (req, res) => {
       throw new Error('Debes seleccionar un archivo PDF.');
     }
 
-    const fileName = `${Date.now()}_${req.file.originalname}`;
+    const fileName = `${new Date().getFullYear()}_${new Date().getMonth()}_${new Date().getDate()}_${new Date().getHours()}_${new Date().getMinutes()}_${
+      req.file.originalname
+    }`;
 
     // Encuentra la materia por su ID y agrega el nombre del archivo a la matriz de fileNames
     const assignment = await mongoose
@@ -88,11 +92,11 @@ app.post('/entrega', upload.single('pdfFile'), async (req, res) => {
     if (!assignment) {
       return res.status(404).send('Materia no encontrada.');
     }
-
-    const fileName = `${Date.now()}_${req.file.originalname}`;
+    const date = `${new Date().getFullYear()}_${new Date().getMonth()}_${new Date().getDate()}_${new Date().getHours()}_${new Date().getMinutes()}`;
+    const fileName = `${date}_${req.file.originalname}`;
 
     assignment.events.push({
-      date: Date.now(),
+      date: date,
       type: 'Entrega',
       eventDetails: [
         {

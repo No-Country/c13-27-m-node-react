@@ -8,7 +8,7 @@ import { useParams } from 'next/navigation';
 import { Assignment } from '../interfaces/interfaces';
 import mainRoute from '../route';
 
-const initialAssignment = {
+export const initialAssignment = {
   name: '',
   _id: '',
   schedule: '',
@@ -46,8 +46,12 @@ export const MateriaAlumno = () => {
   }, []);
 
   const handleDownload = async (id: string) => {
+    console.log(id);
     const url = `${mainRoute}/upload/downloadFile/${id}`;
-    /*  */
+    console.log(url);
+    const res = await fetch(url);
+    const download = await res.json();
+    /* const data = await res.json(); */
   };
 
   return (
@@ -57,8 +61,8 @@ export const MateriaAlumno = () => {
       {pdfs.map((pdf) => (
         <article
           key={pdf}
-          id={pdf}
-          className={styles.materialContainer}>
+          className={styles.materialContainer}
+          onClick={() => handleDownload(pdf)}>
           <Image
             src={pdfIcon}
             alt="pdf icon"
