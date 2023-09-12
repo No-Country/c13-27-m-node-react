@@ -39,7 +39,6 @@ export const Horariosprofesor = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setAssignments(data.assignments);
       })
       .catch((error) => console.error('Error:', error));
@@ -70,6 +69,7 @@ export const Horariosprofesor = () => {
                 if (daysArray.includes(daysOfWeek[selectedDay].name)) {
                   return (
                     <Link
+                      key={assignment._id}
                       className={styles.link}
                       href="/perfil-profesor/materias/[assignment]"
                       as={`/perfil-profesor/materias/${encodeURIComponent(
