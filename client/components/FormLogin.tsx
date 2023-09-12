@@ -109,7 +109,10 @@ const FormLogin = () => {
                     }`}
                     onClick={() => handleRadioClick('student')}>
                     <div className={styles.infocontainer}>
-                      <Image src={alumno} alt="alumno" />
+                      <Image
+                        src={alumno}
+                        alt="alumno"
+                      />
                       <h3 className={styles.subtitle1}>Alumno</h3>
                     </div>
                     <input
@@ -166,9 +169,11 @@ const FormLogin = () => {
           <form
             onSubmit={handleSubmit(onSubmitView2)}
             className={styles.formContainer}>
-            <div className={styles.containerbox}>
+            <div>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="dni">
+                <label
+                  className={styles.label}
+                  htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -193,7 +198,9 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="password">
+                <label
+                  className={styles.label}
+                  htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -211,7 +218,9 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a href="" className={styles.forgottext}>
+                <a
+                  href=""
+                  className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>
@@ -240,9 +249,6 @@ const FormLogin = () => {
             <Image
               src={login}
               alt="Imagen"
-              width={500}
-              height={300}
-              objectFit="cover"
               className={styles.rightImage}
             />
           </div>

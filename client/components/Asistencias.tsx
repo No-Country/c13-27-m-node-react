@@ -54,12 +54,8 @@ const Asistencias = () => {
         const match = studentData.assignmentDataForStudent.find(
           (assignment: Assignment) => assignment.name === assignmentData.name
         );
-
         setAssignmentData(assignmentData);
         setMatchingAssignment(match);
-
-        console.log(assignmentData);
-        console.log(match);
       } catch (error) {
         console.error(error);
       }
@@ -69,7 +65,6 @@ const Asistencias = () => {
   }, []);
 
   useEffect(() => {
-    console.log(matchingAssignment);
     setCantidadDeClases(matchingAssignment.totalClasses);
     setAsistencias(
       matchingAssignment.totalClasses - matchingAssignment.missedClasses

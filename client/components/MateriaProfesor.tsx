@@ -36,7 +36,6 @@ export const MateriaProfesor = () => {
   }, []);
 
   const handleDownloadRoute = async (id: string) => {
-    console.log(id);
     const url = `${mainRoute}/upload/downloadFile/${id}`;
     setUrlDownload(url);
   };

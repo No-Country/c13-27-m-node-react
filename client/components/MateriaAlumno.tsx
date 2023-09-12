@@ -25,11 +25,9 @@ export const MateriaAlumno = () => {
   useEffect(() => {
     const getAssigmentData = async () => {
       const url = `${mainRoute}/assignments/${assignment_id.assignment}`;
-      console.log(url);
       const res = await fetch(url);
       const data = await res.json();
       setAssignment(data);
-      console.log(data);
     };
     getAssigmentData();
   }, []);
@@ -37,17 +35,14 @@ export const MateriaAlumno = () => {
   useEffect(() => {
     const getPdfs = async () => {
       const url = `${mainRoute}/upload/allClasses?assignmentId=${assignment_id.assignment}`;
-      console.log(url);
       const res = await fetch(url);
       const data = await res.json();
       setPdfs(data);
-      console.log(data);
     };
     getPdfs();
   }, []);
 
   const handleDownloadRoute = async (id: string) => {
-    console.log(id);
     const url = `${mainRoute}/upload/downloadFile/${id}`;
     setUrlDownload(url);
   };
