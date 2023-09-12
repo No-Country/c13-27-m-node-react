@@ -1,9 +1,9 @@
-
-import React from 'react';
+'use client';
 import { Inter } from 'next/font/google';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useAppContext } from '../context/userContext';
 
 export const metadata = {
   title: 'Plataforma Universitaria',
@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 const page = () => {
-
+  const { isLogged } = useAppContext();
 
   return (
     <div className={styles.container}>
@@ -25,17 +25,16 @@ const page = () => {
         </div>
 
         <div className={styles.containerButtons}>
-          <Link href="/signup">
-            <button className={styles.registerButton}>
-              REGISTRO
-            </button>
-          </Link>
-
-          <Link href="/login">
-            <button className={styles.loginButton}>
-              INGRESAR
-            </button>
-          </Link>
+          {!isLogged && (
+            <>
+              <Link href="/signup">
+                <button className={styles.registerButton}>REGISTRO</button>
+              </Link>
+              <Link href="/login">
+                <button className={styles.loginButton}>INGRESAR</button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
 
