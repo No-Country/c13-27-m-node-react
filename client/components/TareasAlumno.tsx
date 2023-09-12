@@ -12,26 +12,22 @@ const TareasAlumnoComponent = () => {
   const assignment_id = useParams();
   const assignmentId = assignment_id.assignment;
 
-useEffect(() => {
-  const getPdfStudent = async  () => {
-    try {
-      const res = await fetch(
-        `${mainRoute}/assignments/${assignmentId}/events/${studentId}`
-      );
-      const data = res.json();
-      console.log(data);
-      
-    } catch (error) {
-      console.log('Error fetch obteniendo pdfs del estudante', error);
-      
-    }
-  } 
+  useEffect(() => {
+    const getPdfStudent = async () => {
+      try {
+        const res = await fetch(
+          `${mainRoute}/assignments/${assignmentId}/events/${studentId}`
+        );
+        const data = res.json();
+        console.log(data);
+      } catch (error) {
+        console.log('Error fetch obteniendo pdfs del estudante', error);
+      }
+    };
+    getPdfStudent();
+  }, []);
 
-  getPdfStudent();
-}, []);
-
-
- return (
+  return (
     <div>
       <h1 className={styles.title}> Tus trabajos </h1>
       <div className={styles.containerPfd}>
@@ -58,8 +54,6 @@ useEffect(() => {
 };
 
 export default TareasAlumnoComponent;
-
-
 
 // PARA PROFESOR
 // assignments/:id/entregas
