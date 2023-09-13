@@ -29,7 +29,7 @@ const UserList = () => {
 
   return (
     <section>
-      <h2 className={styles.foroTitle}>Foro de la Clase</h2>
+      <h2 className={styles.foroTitle}>Listado de Alumnos</h2>
       <article>
         <ul className={styles.ul}>
           {userList.map((user: UserRegister) => (

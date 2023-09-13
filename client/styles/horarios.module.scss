@@ -48,22 +48,37 @@
 }
 
 .coursecard {
-  background-color: #f0f0f0;
-  border-radius: 8px;
+  background-color: $background;
+  border-radius: 2px;
+  border: 1px solid $text2;
   width: 15rem;
   height: 8rem;
-  padding: 2rem;
+  padding-top: 1rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subjectContainer {
+  width: 100%;
+  border-bottom: 1px solid $text2;
 }
 
 .subject {
   margin: 0;
   font-size: 1.2rem;
+  padding-inline: 2rem;
+  margin-bottom: 0.5rem;
+  color: $text2;
 }
 
 .time {
   margin: 0.5rem 0;
-  color: #666;
+  color: $text2;
+  text-align: center;
+}
+
+.classroom {
+  text-align: center;
+  color: $text2;
 }
 
 .link {

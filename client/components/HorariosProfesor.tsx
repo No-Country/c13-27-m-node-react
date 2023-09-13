@@ -75,10 +75,17 @@ export const Horariosprofesor = () => {
                       as={`/perfil-profesor/materias/${encodeURIComponent(
                         assignment._id
                       )}`}>
-                      <div key={assignment._id} className={styles.coursecard}>
-                        <h3 className={styles.subject}>{assignment.name}</h3>
+                      <div
+                        key={assignment._id}
+                        className={styles.coursecard}>
+                        <div className={styles.subjectContainer}>
+                          <h3 className={styles.subject}>{assignment.name}</h3>
+                        </div>
                         <p className={styles.time}>
                           Horario: {assignment.schedule}
+                        </p>
+                        <p className={styles.classroom}>
+                          Aula: {assignment.classroom}
                         </p>
                       </div>
                     </Link>
