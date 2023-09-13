@@ -18,8 +18,7 @@ const TareasAlumnoComponent = () => {
         const res = await fetch(
           `${mainRoute}/assignments/${assignmentId}/events/${studentId}`
         );
-        const data = res.json();
-        console.log(data);
+        const data = await res.json();
       } catch (error) {
         console.log('Error fetch obteniendo pdfs del estudante', error);
       }

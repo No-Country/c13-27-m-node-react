@@ -35,18 +35,18 @@ const TareasProfesorComponent = () => {
   // const sendComment = async (eventId: string) => {
   //   try {
   //     const response = await fetch(
-        // `${mainRoute}/assignments/${assignmentId}/comments/${fileNane}`,
-      //   {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
+  //       `${mainRoute}/assignments/${assignmentId}/comments/${eventId}`,
+  //       {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
       //     },
       //     body: JSON.stringify({ coment: comments[eventId] }),
       //   }
       // );
       // if (response.ok) {
       //   console.log('Comentario enviado con éxito para el evento:', eventId);
-  //     } else {
+      // } else {
   //       console.error('Error al enviar el comentario');
   //     }
   //   } catch (error) {
@@ -94,17 +94,17 @@ const TareasProfesorComponent = () => {
                     <p>{eventDetail.file}</p>
                   </Link>
                   <div>
-                    <textarea
+                    {/* <textarea
                       value={comments[eventDetail._id] || ''}
                       onChange={(e) =>
                         handleCommentChange(eventDetail._id, e.target.value)
                       }
                       placeholder="Escribe tu comentario"
                       className={styles.comments}
-                    />
-                    <button onClick={() => sendComment(eventDetail._id)}>
+                    /> */}
+                    {/* <button onClick={() => sendComment(eventDetail._id)}>
                       ENVIAR
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               );
