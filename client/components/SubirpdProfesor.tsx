@@ -79,7 +79,7 @@ export const SubirpdfProfesor = () => {
 
   return (
     <div className={styles.containerProfesor}>
-      <h3 className={styles.titleCargarMaterial}>Cargar material de estudio</h3>
+      <h3 className={styles.titlefirst}>Cargar material de estudio</h3>
       <div className={styles.containerupload}>
         <form
           className={styles.formProfesor}

@@ -80,7 +80,7 @@ export const Subirpdf = () => {
 
   return (
     <div className={styles.container}>
-      <h3>Carga tu archivo aquí</h3>
+      <h3 className={styles.titlefirst}>Carga tu archivo aquí</h3>
       <div className={styles.containerupload}>
         <form className={styles.form} action="" onClick={handleFileInputClick}>
           <input
