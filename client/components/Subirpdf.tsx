@@ -82,7 +82,10 @@ export const Subirpdf = () => {
     <div className={styles.container}>
       <h3 className={styles.titlefirst}>Carga tu archivo aquí</h3>
       <div className={styles.containerupload}>
-        <form className={styles.form} action="" onClick={handleFileInputClick}>
+        <form
+          className={styles.form}
+          action=""
+          onClick={handleFileInputClick}>
           <input
             ref={fileInputRef}
             type="file"
@@ -107,7 +110,9 @@ export const Subirpdf = () => {
         </span>
       </section>
 
-      <button className={styles.btn} onClick={handleUploadClick}>
+      <button
+        className={styles.btn}
+        onClick={handleUploadClick}>
         Subir Archivo
       </button>
     </div>
