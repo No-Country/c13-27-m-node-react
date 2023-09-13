@@ -717,7 +717,7 @@ const newAssignment18 = new Assignment({
 });
 // Recursos Humanos
 const newAssignment19 = new Assignment({
-  name: 'Recusos Humanos',
+  name: 'Recursos Humanos',
   events: [
     {
       date: new Date('2023-05-05'),

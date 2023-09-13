@@ -208,25 +208,62 @@ const populateDB = async () => {
   assignments[25].students.push(students[3]._id);
   assignments[26].students.push(students[3]._id);
 
-  //Agrego notas de examenes e inasistencias
-  for (let assignment of assignments) {
-    assignment.students[0].missedClasses = Math.round(Math.random() * 10); // Inasistencias
-    for (let event of assignment.events) {
-      if (event.type === 'Entrega') {
-        event.eventDetails.push({
-          student: assignment.students[0],
-          grade: Math.round(Math.random() * 10), // Calificacion
-          file: 'TP1.pdf',
-          comments: 'Trata de mejorar tu prosa, muchacho.',
-        });
-      } else {
-        event.eventDetails.push({
-          student: assignment.students[0],
-          grade: Math.round(Math.random() * 10), // Calificacion
-        });
+  // En cada materia...
+  for (let i = 0; i < assignments.length; i++) {
+    // En cada estudiante de esa materia...
+    for (let s = 0; s < assignments[i].students.length; s++) {
+      //Agrego inasistencias
+      assignments[i].students[s].missedClasses = Math.round(Math.random() * 10);
+
+      // Guardo ID y nombre del estudiante
+      let studentId = assignments[i].students[s]._id;
+      let studentFound = students.find((s) => s._id === studentId);
+      let studentName = studentFound.firstName + studentFound.lastName;
+
+      // En cada evento de esa materia...
+      for (let e = 0; e < assignments[i].events.length; e++) {
+        let event = assignments[i].events[e];
+
+        // Si es una entrega...
+        if (event.type === 'Entrega') {
+          // La lleno con info de entrega
+          event.eventDetails.push({
+            student: studentId,
+            grade: Math.round(Math.random() * 10), // Calificacion
+            file: `${studentName}TP1.pdf`,
+            comments: 'Trata de mejorar tu prosa, muchacho.',
+          });
+        } else {
+          //Si no es entrega, solo ID del estudiante y nota
+          event.eventDetails.push({
+            student: studentId,
+            grade: Math.round(Math.random() * 10), // Calificacion
+          });
+        }
       }
     }
   }
+
+  // //Agrego notas de examenes e inasistencias
+  // for (let assignment of assignments) {
+  //   assignment.students[0].missedClasses = Math.round(Math.random() * 10); // Inasistencias
+  //   for (let event of assignment.events) {
+  //     if (event.type === 'Entrega') {
+  //       console.log(assignment.students[0]._id);
+  //       event.eventDetails.push({
+  //         student: assignment.students[0],
+  //         grade: Math.round(Math.random() * 10), // Calificacion
+  //         file: 'TP1.pdf',
+  //         comments: 'Trata de mejorar tu prosa, muchacho.',
+  //       });
+  //     } else {
+  //       event.eventDetails.push({
+  //         student: assignment.students[0],
+  //         grade: Math.round(Math.random() * 10), // Calificacion
+  //       });
+  //     }
+  //   }
+  // }
 
   // Guardo todas las DB
   for (const career of careers) {
