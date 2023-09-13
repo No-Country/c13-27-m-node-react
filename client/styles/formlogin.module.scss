@@ -129,6 +129,11 @@
   color: $placeholder;
 }
 
+.input:focus {
+  outline: 1px solid $text1;
+  border: 1px solid $text1;
+}
+
 .btncontainer {
   display: flex;
   justify-content: center;
