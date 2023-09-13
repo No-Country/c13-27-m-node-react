@@ -5,7 +5,6 @@ const Login = () => {
   return (
     <main className={styles.mainContainer}>
       <FormLogin />
-      {/*       <aside className={styles.loginimagecontainer}></aside> */}
     </main>
   );
 };

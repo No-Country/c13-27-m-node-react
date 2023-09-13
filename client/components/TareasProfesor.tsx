@@ -28,32 +28,34 @@ const TareasProfesorComponent = () => {
   const [data, setData] = useState<Assignment[]>([]);
   const [comments, setComments] = useState<{ [eventId: string]: string }>({});
   const [urlRoute, setUrlRoute] = useState<string>('');
+  const [viewBox, setViewBox] = useState<string | null>(null);
 
   const handleCommentChange = (eventId: string, comment: string) => {
     setComments({ ...comments, [eventId]: comment });
   };
 
-  // const sendComment = async (eventId: string) => {
-  //   try {
-  //     const response = await fetch(
-  //       `${mainRoute}/assignments/${assignmentId}/comments/${eventId}`,
-  //       {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({ coment: comments[eventId] }),
-      //   }
-      // );
-      // if (response.ok) {
-      //   console.log('Comentario enviado con éxito para el evento:', eventId);
-      // } else {
-  //       console.error('Error al enviar el comentario');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error al realizar la solicitud:', error);
-  //   }
-  // };
+  const sendComment = async (eventId: string, file: string) => {
+    try {
+      const response = await fetch(
+        `${mainRoute}/assignments/${assignmentId}/comments/${file}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ comment: comments[eventId] }),
+        }
+      );
+      if (response.ok) {
+        setComments({ ...comments, [eventId]: '' });
+        setViewBox(null);
+      } else {
+        console.error('Error al enviar el comentario');
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud:', error);
+    }
+  };
 
   useEffect(() => {
     const getPdfsForAssignments = async () => {
@@ -63,19 +65,17 @@ const TareasProfesorComponent = () => {
         );
         const responseData = await res.json();
         setData(responseData);
-
-        console.log('Datos de la API:', responseData);
       } catch (error) {
-        console.log('Error en el fetch del pdf', error);
+        console.error('Error en el fetch del pdf', error);
       }
     };
     getPdfsForAssignments();
   }, [assignmentId]);
 
   const handleDownloadPdf = (id: string) => {
-  const url = `${mainRoute}/upload/downloadFile/${id}`;
-  setUrlRoute(url);
-  }
+    const url = `${mainRoute}/upload/downloadFile/${id}`;
+    setUrlRoute(url);
+  };
 
   return (
     <div>
@@ -83,13 +83,14 @@ const TareasProfesorComponent = () => {
       <div className={styles.containerPfd}>
         {Array.isArray(data) &&
           data?.map((assignment) => {
-            console.log('Contenido de data:', data);
-            return assignment.eventDetails.map((eventDetail, index) => {
+            return assignment.eventDetails.map((eventDetail) => {
               return (
-                <div key={eventDetail._id} className={styles.pdfItem}>
+                <div
+                  key={eventDetail._id}
+                  className={styles.pdfItem}>
                   <Link
+                    className={styles.linkContainer}
                     href={urlRoute}
-                    target="_blank"
                     onClick={() => handleDownloadPdf(eventDetail.file)}>
                     <Image
                       src="/assets/pdf-icon.svg"
@@ -97,24 +98,35 @@ const TareasProfesorComponent = () => {
                       width={40}
                       height={40}
                       className={styles.pdfImage}
-                      key={index}
+                      key={eventDetail._id}
                     />
-                    {/* <iframe src="/assets/pdf-icon.svg" frameBorder="0"></iframe> */}
-                    <p>{eventDetail.file}</p>
+                    <p className={styles.pdfTitle}>{eventDetail.file}</p>
                   </Link>
-                  <div>
-                    {/* <textarea
-                      value={comments[eventDetail._id] || ''}
-                      onChange={(e) =>
-                        handleCommentChange(eventDetail._id, e.target.value)
-                      }
-                      placeholder="Escribe tu comentario"
-                      className={styles.comments}
-                    /> */}
-                    {/* <button onClick={() => sendComment(eventDetail._id)}>
-                      ENVIAR
-                    </button> */}
-                  </div>
+                  <p
+                    className={styles.comentariosP}
+                    onClick={() => setViewBox(eventDetail._id)}>
+                    Comentarios
+                  </p>
+                  {viewBox === eventDetail._id && (
+                    <div className={styles.commentsContainer}>
+                      <textarea
+                        rows={5}
+                        value={comments[eventDetail._id] || ''}
+                        onChange={(e) =>
+                          handleCommentChange(eventDetail._id, e.target.value)
+                        }
+                        placeholder="Escribe tu comentario"
+                        className={styles.comments}
+                      />
+                      <button
+                        onClick={() =>
+                          sendComment(eventDetail._id, eventDetail.file)
+                        }
+                        className={styles.btnEnviar}>
+                        ENVIAR
+                      </button>
+                    </div>
+                  )}
                 </div>
               );
             });
