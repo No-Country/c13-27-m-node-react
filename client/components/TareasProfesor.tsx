@@ -49,7 +49,6 @@ const TareasProfesorComponent = () => {
       if (response.ok) {
         setComments({ ...comments, [eventId]: '' });
         setViewBox(null);
-        console.log('Comentario enviado con éxito para el evento:', eventId);
       } else {
         console.error('Error al enviar el comentario');
       }
@@ -66,10 +65,8 @@ const TareasProfesorComponent = () => {
         );
         const responseData = await res.json();
         setData(responseData);
-
-        console.log('Datos de la API:', responseData);
       } catch (error) {
-        console.log('Error en el fetch del pdf', error);
+        console.error('Error en el fetch del pdf', error);
       }
     };
     getPdfsForAssignments();
@@ -86,7 +83,6 @@ const TareasProfesorComponent = () => {
       <div className={styles.containerPfd}>
         {Array.isArray(data) &&
           data?.map((assignment) => {
-            console.log('Contenido de data:', data);
             return assignment.eventDetails.map((eventDetail) => {
               return (
                 <div
