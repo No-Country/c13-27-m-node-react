@@ -24,3 +24,63 @@
 .containerComent {
   background-color: aquamarine;
 }
+
+.pdfItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.linkContainer {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.comentariosP {
+  font-size: 1rem;
+  color: $text2;
+  font-weight: 400;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid $text2;
+}
+
+.comentariosP:hover {
+  font-weight: 600;
+}
+
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.comments {
+  width: 100%;
+  font-family: 'Roboto';
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.btnEnviar {
+  font-family: 'Roboto';
+  background-color: $background;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  border: 1px solid $text2;
+  transition: all 0.3s ease;
+}
+
+.btnEnviar:hover {
+  background-color: $text1;
+  color: $background;
+}
+
+.pdfTitle {
+  color: $text2;
+  font-weight: 400;
+  font-size: 1rem;
+}
