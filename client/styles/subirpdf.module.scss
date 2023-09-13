@@ -8,6 +8,10 @@
   padding: 1rem;
 }
 
+.titlefirst {
+  margin-bottom: 1.4rem;
+}
+
 .containerProfesor {
   display: flex;
   flex-direction: column;
@@ -36,7 +40,7 @@
   justify-content: center;
   align-items: center;
   height: 10rem;
-  width: 80rem;
+  width: 50rem;
   cursor: pointer;
   border: 0.1rem dashed gray;
   border-radius: 0.1rem;
@@ -73,11 +77,15 @@
 
 .btn {
   text-transform: uppercase;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 1rem 1.5rem;
   border-radius: 1rem;
   border: none;
   cursor: pointer;
   color: $background;
   background-color: $text1;
   transition: background-color 0.7s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #002a33;
 }
