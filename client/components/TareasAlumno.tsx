@@ -6,25 +6,19 @@ import { useEffect, useState } from 'react';
 import mainRoute from '../route';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-
-interface Assignment {
-  date: string;
-  type: string;
-  _id: string;
-  eventDetails: {
-    student: string;
-    file: string;
-    _id: string;
-  }[];
-}
+import { AssignmentStudent } from '../interfaces/interfaces';
 
 const TareasAlumnoComponent = () => {
   const { userRegister } = useAppContext();
   const studentId = userRegister._id;
   const assignment_id = useParams();
   const assignmentId = assignment_id.assignment;
-  const [viewerPdf, setViewerPdf] = useState<Assignment[]>([]);
+  const [viewerPdf, setViewerPdf] = useState<AssignmentStudent[]>([]);
   const [urlRoute, setUrlRoute] = useState<string>('');
+  const [showComments, setShowComments] = useState<string | null>(null);
+  const [openComments, setOpenComments] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   useEffect(() => {
     const getPdfStudent = async () => {
@@ -33,7 +27,6 @@ const TareasAlumnoComponent = () => {
           `${mainRoute}/assignments/${assignmentId}/events/${studentId}`
         );
         const data = await res.json();
-        console.log('Datos recibidos:', data);
         setViewerPdf(data);
       } catch (error) {
         console.log('Error fetch obteniendo pdfs del estudante', error);
@@ -41,8 +34,6 @@ const TareasAlumnoComponent = () => {
     };
     getPdfStudent();
   }, [assignmentId, studentId]);
-
-
 
   const handleDownloadPdf = (id: string) => {
     const url = `${mainRoute}/upload/downloadFile/${id}`;
@@ -59,6 +50,7 @@ const TareasAlumnoComponent = () => {
               {assignment.eventDetails.map((detail, detailIndex) => (
                 <div key={detailIndex}>
                   <Link
+                    className={styles.linkContainer}
                     href={urlRoute}
                     target="_blank"
                     onClick={() => handleDownloadPdf(detail.file)}>
@@ -69,8 +61,27 @@ const TareasAlumnoComponent = () => {
                       height={40}
                       className={styles.pdfImage}
                     />
-                    <p>{detail.file}</p>
+                    <p className={styles.pdfTitle}>{detail.file}</p>
                   </Link>
+                  <div className={styles.commentsContainerStudent}>
+                    <p
+                      className={styles.commentsStudent}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        setOpenComments((prevOpenComments) => ({
+                          ...prevOpenComments,
+                          [detail._id]: !prevOpenComments[detail._id],
+                        }));
+                        setShowComments(detail.comments || null);
+                      }}>
+                      Comentarios
+                    </p>
+
+                    {openComments[detail._id] &&
+                      showComments === detail.comments && (
+                        <p>{detail.comments}</p>
+                      )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -82,14 +93,18 @@ const TareasAlumnoComponent = () => {
 
 export default TareasAlumnoComponent;
 
+/* <p
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
 
+                        // ;
+                        setAreCommentsOpen(() => !areCommentsOpen);
+                        // setAreCommentsOpen((prevState) => !prevState);
+                        setShowComments(detail.comments || null);
+                      }}>
+                      Comentarios
+                    </p>
 
-// PARA PROFESOR
-// assignments/:id/entregas
-
-// PARA ALUMNO - ACA TMB PUEDE VER LOS COMENTARIOS
-// assignments/:aid materia/events/:id estudiante
-
-// ENVIAR COMENTARIOS DE PROFE A ALUMNOS
-// http://localhost:PORT/:id/comments/:fileName
-
+                    {showComments === detail.comments && (
+                      <p>{detail.comments}</p>
+                    )} */

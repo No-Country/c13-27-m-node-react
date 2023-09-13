@@ -72,3 +72,15 @@ export interface StudentExamInfo {
     grade: number | string;
   }[];
 }
+
+export interface AssignmentStudent {
+  date: string;
+  type: string;
+  _id: string;
+  eventDetails: {
+    student: string;
+    file: string;
+    _id: string;
+    comments?: string;
+  }[];
+}
