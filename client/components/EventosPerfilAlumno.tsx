@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 import mainRoute from '../route';
 import { AssignmentEvents, Exam } from '../interfaces/interfaces';
 
-
-
 const EventosPerfilAlumno = () => {
   const [showEvents, setShowEvents] = useState<boolean>(false);
   const [eventData, setEventData] = useState<Exam[]>([]);
@@ -35,9 +33,6 @@ const EventosPerfilAlumno = () => {
   const handleShowEvents = () => {
     setShowEvents(!showEvents);
   };
-
-  // console.log(eventData);
-  
 
   return (
     <div>
