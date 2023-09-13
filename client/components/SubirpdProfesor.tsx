@@ -60,7 +60,6 @@ export const SubirpdfProfesor = () => {
     formData.append('pdfFile', file);
     formData.append('studentId', id);
     formData.append('assignmentId', assignmentId.assignment);
-    console.log(assignmentId);
 
     try {
       const response = await fetch('http://localhost:3001/upload', {
@@ -110,9 +109,7 @@ export const SubirpdfProfesor = () => {
         </span>
       </section>
 
-      <button
-        className={styles.btn}
-        onClick={handleUploadClick}>
+      <button className={styles.btn} onClick={handleUploadClick}>
         Subir Archivo
       </button>
     </div>
