@@ -228,7 +228,7 @@ const FormLogin = () => {
               <div className={styles.registerlink}>
                 ¿No tienes cuenta?
                 <Link href="/signup">
-                  <span> Regístrate! </span>
+                  <span> ¡Regístrate! </span>
                 </Link>
               </div>
 
