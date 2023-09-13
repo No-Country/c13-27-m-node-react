@@ -28,7 +28,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "redux/store.ts",
-    "redux/slice.ts"
-, "app/not-found.tsx"  ],
+    "redux/slice.ts",
+    "app/not-found.tsx",
+    "components/MateriaAlumno.jsx"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,15 +1,11 @@
 import FormLogin from '../../components/FormLogin';
 import styles from '../../styles/formlogin.module.scss';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   return (
-    <main>
+    <main className={styles.mainContainer}>
       <FormLogin />
-
-      <aside className={styles.loginimagecontainer}></aside>
-      <ToastContainer />
+      {/*       <aside className={styles.loginimagecontainer}></aside> */}
     </main>
   );
 };

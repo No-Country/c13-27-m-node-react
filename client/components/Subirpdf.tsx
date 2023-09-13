@@ -3,11 +3,22 @@ import React from 'react';
 import { useState, useRef } from 'react';
 import styles from '../styles/subirpdf.module.scss';
 import { MdDelete, MdFileUpload } from 'react-icons/md';
+import { useAppContext } from '../context/userContext';
+import { useParams } from 'next/navigation';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+interface Params {
+  assignment: string;
+}
 
 export const Subirpdf = () => {
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState('No seleccionado');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const assignmentId = useParams() as unknown as Params;
+  const { userRegister } = useAppContext();
+  const id = userRegister._id;
 
   const handleFileInputClick = () => {
     if (fileInputRef.current) {
@@ -32,36 +43,50 @@ export const Subirpdf = () => {
 
   const handleUploadClick = async () => {
     if (!file) {
-      alert('Selecciona un archivo antes de subir');
+      toast.error('Selecciona un archivo antes de subir');
       return;
     }
 
-    // const formData = new FormData();
-    // formData.append('pdfFile', file);
+    if (!id) {
+      toast.error('ID del estudiante no encontrado');
+      return;
+    }
 
-    // try {
-    //   const response = await fetch('http://localhost:3001/', {
-    //     method: 'POST',
-    //     body: formData,
-    //   });
+    if (!assignmentId || !assignmentId.assignment) {
+      toast.error('ID de materia no encontrado');
+      return;
+    }
 
-    //   if (response.ok) {
-    //     alert('Archivo subido con éxito');
-    //   } else {
-    //     const responseData = await response.json();
-    //     alert(`Error: ${responseData.message || 'Error al subir el archivo'}`);
-    //   }
-    // } catch (error) {
-    //   console.log('Error subiendo el archivo:', error);
-    //   alert('Error al subir el archivo.');
-    // }
+    const formData = new FormData();
+    formData.append('pdfFile', file);
+    formData.append('studentId', id);
+    formData.append('assignmentId', assignmentId.assignment);
+    console.log(assignmentId);
+
+    try {
+      const response = await fetch('http://localhost:3001/upload/entrega', {
+        method: 'POST',
+        body: formData,
+      });
+      if (response.ok) {
+        toast.success('Archivo subido con éxito!');
+      } else {
+        const responseData = await response.json();
+        toast.error('Error, por favor vuelve a intentarlo');
+      }
+    } catch (error) {
+      toast.error('Error al subir archivo');
+    }
   };
 
   return (
     <div className={styles.container}>
       <h3>Carga tu archivo aquí</h3>
       <div className={styles.containerupload}>
-        <form className={styles.form} action="" onClick={handleFileInputClick}>
+        <form
+          className={styles.form}
+          action=""
+          onClick={handleFileInputClick}>
           <input
             ref={fileInputRef}
             type="file"
@@ -86,7 +111,9 @@ export const Subirpdf = () => {
         </span>
       </section>
 
-      <button className={styles.btn} onClick={handleUploadClick}>
+      <button
+        className={styles.btn}
+        onClick={handleUploadClick}>
         Subir Archivo
       </button>
     </div>

@@ -14,23 +14,33 @@ db.once('open', () => {
 // Crea una nueva carrera
 const newCareer = new Career({
   name: 'Ingeniería',
-  students: [
-    //  '64e658c0c2088908dd408c50'
-  ],
-  assignments: [
-    // '64ec91d777d39c4e638bc230', // Matematica
-    // '64ec91d777d39c4e638bc232', // Fisica
-  ],
+  students: [],
+  assignments: [],
+});
+const newCareer1 = new Career({
+  name: 'Derecho',
+  students: [],
+  assignments: [],
 });
 const newCareer2 = new Career({
-  name: 'Derecho',
-  students: [
-    //  '64e658c0c2088908dd408c51'
-  ],
-  assignments: [
-    // '64ec91d777d39c4e638bc234', // Ciencia Política
-    //'64ec91d777d39c4e638bc236', // Derecho Penal
-  ],
+  name: 'Psicología',
+  students: [],
+  assignments: [],
+});
+const newCareer3 = new Career({
+  name: 'Biología',
+  students: [],
+  assignments: [],
+});
+const newCareer4 = new Career({
+  name: 'Medicina',
+  students: [],
+  assignments: [],
+});
+const newCareer5 = new Career({
+  name: 'Administración de Empresas',
+  students: [],
+  assignments: [],
 });
 
 const seedDB = async () => {
@@ -38,7 +48,11 @@ const seedDB = async () => {
   await Career.deleteMany({});
   // Popular la DB
   await newCareer.save();
+  await newCareer1.save();
   await newCareer2.save();
+  await newCareer3.save();
+  await newCareer4.save();
+  await newCareer5.save();
 };
 
 //Run the seed function, then close after done
