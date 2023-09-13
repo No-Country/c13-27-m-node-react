@@ -1,13 +1,13 @@
-// 'use client';
+'use client';
 import { Inter } from 'next/font/google';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAppContext } from '../context/userContext';
 
-export const metadata = {
-  title: 'Plataforma Universitaria',
-};
+// export const metadata = {
+//   title: 'Plataforma Universitaria',
+// };
 
 const inter = Inter({
   subsets: ['latin'],
