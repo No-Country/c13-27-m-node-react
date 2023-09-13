@@ -48,6 +48,7 @@ const newAssignment = new Assignment({
   ],
   days: ['Viernes', 'Jueves'],
   schedule: '2:00 PM a 4:00 PM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3F',
 });
 // Física
@@ -84,6 +85,7 @@ const newAssignment2 = new Assignment({
   students: [],
   days: ['Lunes', 'Miércoles', 'Viernes'],
   schedule: '8:00 AM a 9:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 5A',
 });
 // Ciencia Politica
@@ -122,6 +124,7 @@ const newAssignment3 = new Assignment({
   ],
   days: ['Martes', 'Jueves'],
   schedule: '10:00 AM a 12:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 4E',
 });
 // Derecho Penal
@@ -160,6 +163,7 @@ const newAssignment4 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 
@@ -199,6 +203,7 @@ const newAssignment5 = new Assignment({
   ],
   days: ['Martes', 'Jueves'],
   schedule: '10:00 AM a 11:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 
@@ -238,6 +243,7 @@ const newAssignment6 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles', 'Viernes'],
   schedule: '9:30 AM a 11:30 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 5F',
 });
 // Filosofía
@@ -276,6 +282,7 @@ const newAssignment7 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 31G',
 });
 
@@ -315,6 +322,7 @@ const newAssignment8 = new Assignment({
   ],
   days: ['Lunes', 'Martes', 'Miércoles'],
   schedule: '11:00 AM a 12:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 2E',
 });
 // Psicoanálisis
@@ -353,6 +361,7 @@ const newAssignment9 = new Assignment({
   ],
   days: ['Miércoles', 'Viernes'],
   schedule: '10:00 AM a 11:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Neuropsicología
@@ -391,6 +400,7 @@ const newAssignment10 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Pedagogía
@@ -429,6 +439,7 @@ const newAssignment11 = new Assignment({
   ],
   days: ['Martes', 'Miércoles'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Química
@@ -467,6 +478,7 @@ const newAssignment12 = new Assignment({
   ],
   days: ['Lunes', 'Jueves'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Álgebra
@@ -505,6 +517,7 @@ const newAssignment13 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles', 'Viernes'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Geometría
@@ -543,6 +556,7 @@ const newAssignment14 = new Assignment({
   ],
   days: ['Martes', 'Jueves'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Economía
@@ -581,6 +595,7 @@ const newAssignment15 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles', 'Viernes'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Marketing
@@ -619,6 +634,7 @@ const newAssignment16 = new Assignment({
   ],
   days: ['Martes', 'Miércoles'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Gestión
@@ -657,6 +673,7 @@ const newAssignment17 = new Assignment({
   ],
   days: ['Miércoles', 'Jueves'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Contabilidad
@@ -695,6 +712,7 @@ const newAssignment18 = new Assignment({
   ],
   days: ['Lunes'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Recursos Humanos
@@ -733,6 +751,7 @@ const newAssignment19 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles', 'Viernes'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Anatomía
@@ -771,6 +790,7 @@ const newAssignment20 = new Assignment({
   ],
   days: ['Martes', 'Jueves'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Farmacología
@@ -809,6 +829,7 @@ const newAssignment21 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles', 'Viernes'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Bioquímica
@@ -847,6 +868,7 @@ const newAssignment22 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles'],
   schedule: '10:00 AM a 12:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Microbiología
@@ -885,6 +907,7 @@ const newAssignment23 = new Assignment({
   ],
   days: ['Jueves'],
   schedule: '12:00 AM a 02:00 PM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Epidemiología
@@ -923,6 +946,7 @@ const newAssignment24 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles', 'Viernes'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 
@@ -962,6 +986,7 @@ const newAssignment25 = new Assignment({
   ],
   days: ['Martes', 'Jueves'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Zoología
@@ -1000,6 +1025,7 @@ const newAssignment26 = new Assignment({
   ],
   days: ['Lunes', 'Miércoles'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 // Botánica
@@ -1038,6 +1064,7 @@ const newAssignment27 = new Assignment({
   ],
   days: ['Martes', 'Jueves'],
   schedule: '8:00 AM a 10:00 AM',
+  fileNames: ['MaterialTeorico1.pdf', 'MaterialTeorico2.pdf'],
   classroom: 'Aula 3G',
 });
 

@@ -82,6 +82,17 @@ const newStudent5 = new Student({
   assignments: [],
   career: 'Administración de Empresas',
 });
+const newStudent6 = new Student({
+  firstName: 'Felipe',
+  lastName: 'Ramirez',
+  password: createHash('999999'),
+  email: 'felipinho@hotmail.com',
+  dni: '29000000',
+  dob: 8 / 11 / 1999,
+  address: 'Suipacha 665',
+  assignments: [],
+  career: 'Ingeniería',
+});
 
 // Manipulate DB
 const seedDB = async () => {
@@ -93,6 +104,7 @@ const seedDB = async () => {
   await newStudent3.save();
   await newStudent4.save();
   await newStudent5.save();
+  await newStudent6.save();
 };
 
 //Run the seed function, then close after done
