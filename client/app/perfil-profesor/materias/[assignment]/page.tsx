@@ -21,27 +21,20 @@ const initialAssignment = {
 const MateriasProfesor = () => {
   const [assignment, setAssignment] = useState<Assignment>(initialAssignment);
   const assignment_id = useParams();
-  console.log(assignment_id.assignment);
 
   useEffect(() => {
     const getAssigmentData = async () => {
       const url = `http://localhost:3001/assignments/${assignment_id.assignment}`;
-      console.log(url);
       const res = await fetch(url);
       const data = await res.json();
       setAssignment(data);
-      console.log(data);
     };
     getAssigmentData();
   }, []);
 
   return (
     <>
-      <Image
-        className={styles.gradient}
-        src={rectangle}
-        alt="rectangle"
-      />
+      <Image className={styles.gradient} src={rectangle} alt="rectangle" />
       <main>
         <div className={styles.grid}>
           <div className={styles.gridLeft}>
