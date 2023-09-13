@@ -73,12 +73,41 @@ export const FormRegister = () => {
     setError(newErrors);
   };
 
+  const checkIfUserExists = async (dni: any) => {
+    try {
+      let response = await fetch(`${mainRoute}/students/checkUserExists`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dni }),
+      });
+      if (response.ok && (await response.json())) return true;
+
+      response = await fetch(`${mainRoute}/teachers/checkUserExists`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dni }),
+      });
+      if (response.ok && (await response.json())) return true;
+
+      return false;
+    } catch (error) {
+      // console.log('Error', error);
+      return false;
+    }
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const url =
       userRegister.check === 'student'
         ? `${mainRoute}/students/registerStudent`
         : `${mainRoute}/teachers/registerTeacher`;
+
+    const userExists = await checkIfUserExists(userRegister.dni);
+    if (userExists) {
+      toast.error('El usuario ya existe en la base de datos.');
+      return;
+    }
 
     try {
       const res = await fetch(url, {
@@ -93,8 +122,8 @@ export const FormRegister = () => {
           check: userRegister.check,
         }),
       });
+      const data = await res.json();
       if (res.ok) {
-        const data = await res.json();
         if (data._id) {
           setUserRegister({
             ...userRegister,
@@ -104,6 +133,13 @@ export const FormRegister = () => {
           toast.success('Registro exitoso!');
         } else {
           toast.error('El registro no se ha completado correctamente.');
+        }
+      } else {
+        if (data === 'El usuario ya existe') {
+          router.push('/');
+          toast.error('El usuario ya existe en la base de datos.');
+        } else {
+          toast.error('Error desconocido al registrar.');
         }
       }
     } catch (error) {
