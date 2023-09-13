@@ -35,8 +35,6 @@ const EventosPerfilProfesor = () => {
     setShowEvents(!showEvents);
   };
 
-  console.log(eventDataTeacher);
-
   return (
     <div>
       <div className={styles.containerBtnTitle}>
