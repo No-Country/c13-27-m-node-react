@@ -197,10 +197,10 @@ const populateDB = async () => {
   assignments[25].students.push(students[3]._id);
   assignments[26].students.push(students[3]._id);
 
-  console.log('Careers: ', careers);
-  console.log('assignments: ', assignments);
-  console.log('students: ', students);
-  console.log('teachers: ', teachers);
+  // console.log('Careers: ', careers);
+  // console.log('assignments: ', assignments);
+  // console.log('students: ', students);
+  // console.log('teachers: ', teachers);
 
   //Agrego notas de examenes e inasistencias
   for (let assignment of assignments) {
