@@ -1,104 +1,102 @@
 @import 'variables.scss';
 
 .containerBtnTitle {
-    padding-inline: 5rem;
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 6rem;
+  padding-inline: 5rem;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 6rem;
 }
-.btn { 
-    color: $secondary-color;
-    background-color: $primary-color;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 30px;
-    display: flex;
-    align-items: center;
+.btn {
+  color: $secondary-color;
+  background-color: $primary-color;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
 }
 .titleFooter {
-    color: $text2;
-    font-size: 24px;
+  color: $text2;
+  font-size: 24px;
 }
-// ESTILOS "EVENTOS ESPECIALES" 
+// ESTILOS "EVENTOS ESPECIALES"
 .containerAllEvents {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  padding-inline: 5rem;
 }
 .boxContainer {
-    margin-bottom: 5rem;
-    display: flex;
-    height: 135px;
-    width: 256px;
-    
+  margin-bottom: 5rem;
+  display: flex;
+  height: 135px;
+  width: calc(23%);
 }
 .divisionDate {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid $text2;
-    width: 125px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $text2;
+  width: 125px;
 }
 .date {
-    display: flex;
-    justify-content: flex-start;
-    font-size: 24px;
-    font-family: 'Roboto';
-    font-weight: 600;
-    padding: 0.5rem 0rem 0rem 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 24px;
+  font-family: 'Roboto';
+  font-weight: 600;
+  padding: 0.5rem 0rem 0rem 0.5rem;
 }
 .number {
-    font-family: 'Roboto';
-    font-size: 64px;
-    font-weight: 600;
-    color: $secondary-color;
-    padding: 1rem 1.2rem 0.3rem 0.5rem;
+  font-family: 'Roboto';
+  font-size: 64px;
+  font-weight: 600;
+  color: $secondary-color;
+  padding: 1rem 1.2rem 0.3rem 0.5rem;
 }
 .divisionSubject {
-    width: 131px;
-    border-top: 1px solid $text2;
-    border-bottom: 1px solid $text2;
-    border-right: 1px solid $text2;
+  width: 131px;
+  border-top: 1px solid $text2;
+  border-bottom: 1px solid $text2;
+  border-right: 1px solid $text2;
 }
 .subject {
-    font-family: 'Roboto';
-    font-size: 24px;
-    font-weight: 400;
-    text-align: center;
-    padding-top: 0.5rem;
+  font-family: 'Roboto';
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  padding-top: 0.5rem;
 }
-// ESTILOS "EXAMENES PARCIALES Y FINALES" 
+// ESTILOS "EXAMENES PARCIALES Y FINALES"
 .containerBox {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
 }
 .box {
-    display: flex;
-    justify-content: space-around;
-    margin: 10px; 
-    width: 1120px;
-    height: 254px;
-    border-radius: 15px;
-    border: 1px solid $text2;
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+  width: 1120px;
+  height: 254px;
+  border-radius: 15px;
+  border: 1px solid $text2;
 }
 .column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
 }
 .subtitle {
-    margin: 0; 
-    font-weight: 500;
-    font-size: 24px;
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
 }
 .p {
-    font-size: 24px;
+  font-size: 24px;
 }
-
-
