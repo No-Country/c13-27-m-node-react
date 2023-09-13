@@ -22,7 +22,7 @@
 .userInformationContainer {
   height: 6.5rem;
   border: 1px solid $text2;
-  padding-inline: 5rem;
+  padding-inline: 10rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -41,7 +41,7 @@
   width: 10rem;
   border-radius: 50%;
   position: absolute;
-  top: -75%;
+  top: -70%;
 }
 
 .name {
