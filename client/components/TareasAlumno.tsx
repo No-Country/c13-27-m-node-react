@@ -15,6 +15,7 @@ interface Assignment {
     student: string;
     file: string;
     _id: string;
+    comments?: string;
   }[];
 }
 
@@ -25,6 +26,8 @@ const TareasAlumnoComponent = () => {
   const assignmentId = assignment_id.assignment;
   const [viewerPdf, setViewerPdf] = useState<Assignment[]>([]);
   const [urlRoute, setUrlRoute] = useState<string>('');
+  const [showComments, setShowComments] = useState<string | null>(null);
+  const [areCommentsOpen, setAreCommentsOpen] = useState(false);
 
   useEffect(() => {
     const getPdfStudent = async () => {
@@ -33,7 +36,6 @@ const TareasAlumnoComponent = () => {
           `${mainRoute}/assignments/${assignmentId}/events/${studentId}`
         );
         const data = await res.json();
-        console.log('Datos recibidos:', data);
         setViewerPdf(data);
       } catch (error) {
         console.log('Error fetch obteniendo pdfs del estudante', error);
@@ -41,8 +43,6 @@ const TareasAlumnoComponent = () => {
     };
     getPdfStudent();
   }, [assignmentId, studentId]);
-
-
 
   const handleDownloadPdf = (id: string) => {
     const url = `${mainRoute}/upload/downloadFile/${id}`;
@@ -59,6 +59,7 @@ const TareasAlumnoComponent = () => {
               {assignment.eventDetails.map((detail, detailIndex) => (
                 <div key={detailIndex}>
                   <Link
+                    className={styles.linkContainer}
                     href={urlRoute}
                     target="_blank"
                     onClick={() => handleDownloadPdf(detail.file)}>
@@ -69,8 +70,22 @@ const TareasAlumnoComponent = () => {
                       height={40}
                       className={styles.pdfImage}
                     />
-                    <p>{detail.file}</p>
+                    <p className={styles.pdfTitle}>{detail.file}</p>
                   </Link>
+                  <div className={styles.commentsContainerStudent}>
+                    <p
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        setAreCommentsOpen((prevState) => !prevState);
+                        setShowComments(detail.comments || null);
+                      }}>
+                      Comentarios
+                    </p>
+
+                    {showComments === detail.comments && (
+                      <p>{detail.comments}</p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -81,15 +96,3 @@ const TareasAlumnoComponent = () => {
 };
 
 export default TareasAlumnoComponent;
-
-
-
-// PARA PROFESOR
-// assignments/:id/entregas
-
-// PARA ALUMNO - ACA TMB PUEDE VER LOS COMENTARIOS
-// assignments/:aid materia/events/:id estudiante
-
-// ENVIAR COMENTARIOS DE PROFE A ALUMNOS
-// http://localhost:PORT/:id/comments/:fileName
-
