@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 import { Inter } from 'next/font/google';
 import styles from '../styles/page.module.scss';
 import Image from 'next/image';
