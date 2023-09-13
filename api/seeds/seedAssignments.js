@@ -1101,8 +1101,41 @@ const seedDB = async () => {
   await newAssignment27.save();
 };
 
+// Función para ajustar los horarios de las clases en "schedule"
+const adjustScheduleClasses = async () => {
+  const assignments = await Assignment.find();
+
+  console.log(assignments);
+
+  assignments.forEach((assignment) => {
+    const schedule = assignment.schedule;
+
+    // Verificar y ajustar horarios en "schedule"
+    schedule.forEach((classInfo, index) => {
+      const currentClass = classInfo.class;
+      const classStartTime = new Date(classInfo.startTime);
+      const classEndTime = new Date(classInfo.endTime);
+
+      // Puedes realizar aquí las modificaciones necesarias en los horarios
+      // Por ejemplo, puedes agregar 15 minutos al inicio de la clase
+      classStartTime.setMinutes(classStartTime.getMinutes() + 15);
+
+      // Actualizar los valores en el array "schedule"
+      assignment.schedule[index].startTime = classStartTime;
+      assignment.schedule[index].endTime = classEndTime;
+    });
+
+    // Guardar los cambios en la base de datos
+    assignment.save();
+  });
+
+  console.log('Horarios de clases en "schedule" ajustados con éxito.');
+};
+
 //Run the seed function, then close after done
 seedDB().then(() => {
+  // Ejecutamos la función para ajustar los horarios de clases en "schedule"
+  // adjustScheduleClasses();
   console.log('Materias creadas en la DB');
   mongoose.connection.close();
 });

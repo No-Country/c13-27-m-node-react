@@ -7,15 +7,12 @@ import { useState } from 'react';
 import mainRoute from '../route';
 import Link from 'next/link';
 
-// import { ObjectId } from 'mongoose';
-
 interface EventDetail {
   student: string;
   grade?: number;
   file: string;
   comments?: string;
   _id: string;
-  // _id: Object;
 }
 
 interface Assignment {
@@ -29,7 +26,34 @@ const TareasProfesorComponent = () => {
   const assignment_id = useParams();
   const assignmentId = assignment_id.assignment;
   const [data, setData] = useState<Assignment[]>([]);
-  const [comentario, setComentario] = useState('');
+  const [comments, setComments] = useState<{ [eventId: string]: string }>({});
+  const [urlRoute, setUrlRoute] = useState<string>('');
+
+  const handleCommentChange = (eventId: string, comment: string) => {
+    setComments({ ...comments, [eventId]: comment });
+  };
+
+  // const sendComment = async (eventId: string) => {
+  //   try {
+  //     const response = await fetch(
+  //       `${mainRoute}/assignments/${assignmentId}/comments/${eventId}`,
+  //       {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({ coment: comments[eventId] }),
+      //   }
+      // );
+      // if (response.ok) {
+      //   console.log('Comentario enviado con éxito para el evento:', eventId);
+      // } else {
+  //       console.error('Error al enviar el comentario');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error al realizar la solicitud:', error);
+  //   }
+  // };
 
   useEffect(() => {
     const getPdfsForAssignments = async () => {
@@ -48,40 +72,54 @@ const TareasProfesorComponent = () => {
     getPdfsForAssignments();
   }, [assignmentId]);
 
-  console.log(data);
+  const handleDownloadPdf = (id: string) => {
+  const url = `${mainRoute}/upload/downloadFile/${id}`;
+  setUrlRoute(url);
+  }
 
   return (
     <div>
       <h2 className={styles.title}>Trabajos entregados</h2>
       <div className={styles.containerPfd}>
-        {
-        
-          data?.map((assignment) =>
-            assignment.eventDetails.map((eventDetail, index) => (
-              <div key={eventDetail._id} className={styles.pdfItem}>
-                <Link href={eventDetail.file} target="_blank">
-                  <Image
-                    src="/assets/pdf-icon.svg"
-                    alt="icono de un doc pdf"
-                    width={40}
-                    height={40}
-                    className={styles.pdfImage}
-                  />
-                  <p> {eventDetail.file} </p>
-                </Link>
-                <div>
-                  <textarea
-                    value={comentario}
-                    onChange={(e) => setComentario(e.target.value)}
-                    placeholder="Escribe tu comentario"
-                  />
+        {Array.isArray(data) &&
+          data?.map((assignment) => {
+            console.log('Contenido de data:', data);
+            return assignment.eventDetails.map((eventDetail, index) => {
+              return (
+                <div key={eventDetail._id} className={styles.pdfItem}>
+                  <Link
+                    href={urlRoute}
+                    target="_blank"
+                    onClick={() => handleDownloadPdf(eventDetail.file)}>
+                    <Image
+                      src="/assets/pdf-icon.svg"
+                      alt="icono de un doc pdf"
+                      width={40}
+                      height={40}
+                      className={styles.pdfImage}
+                      key={index}
+                    />
+                    {/* <iframe src="/assets/pdf-icon.svg" frameBorder="0"></iframe> */}
+                    <p>{eventDetail.file}</p>
+                  </Link>
+                  <div>
+                    {/* <textarea
+                      value={comments[eventDetail._id] || ''}
+                      onChange={(e) =>
+                        handleCommentChange(eventDetail._id, e.target.value)
+                      }
+                      placeholder="Escribe tu comentario"
+                      className={styles.comments}
+                    /> */}
+                    {/* <button onClick={() => sendComment(eventDetail._id)}>
+                      ENVIAR
+                    </button> */}
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
+              );
+            });
+          })}
       </div>
-
-      
     </div>
   );
 };

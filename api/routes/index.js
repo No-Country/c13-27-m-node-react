@@ -23,7 +23,7 @@ app.use('/', documentationRoutes);
 
 // Middleware para redireccionar al usuario a la pagina not found 404
 app.use(async (req, res) => {
-  res.redirect('https://educapp-two.vercel.app/not-found');
+  res.redirect('https://localhost:3000/not-found');
 });
 
 module.exports = app;
