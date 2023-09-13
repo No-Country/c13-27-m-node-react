@@ -12,15 +12,15 @@
 .containerLogoNav {
   background-color: $background;
   filter: invert(1);
-  margin-left: 1.5rem;
+  margin-left: 2rem;
 }
 .ulNav {
+  margin: 0;
   list-style: none;
-  padding-right: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 6rem;
+  margin-right: 2rem;
   gap: 4rem;
 }
 .itemNav {
