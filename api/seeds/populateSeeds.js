@@ -73,7 +73,7 @@ const populateDB = async () => {
   );
 
   // Insertar Estudiantes en Carreras
-  careers[0].students.push(students[0]._id);
+  careers[0].students.push(students[0]._id, students[6]._id);
   careers[1].students.push(students[1]._id);
   careers[2].students.push(students[2]._id);
   careers[3].students.push(students[3]._id);
@@ -83,6 +83,13 @@ const populateDB = async () => {
   // Insertar Materias en Estudiantes
   //Ingenieria
   students[0].assignments.push(
+    assignments[0]._id,
+    assignments[1]._id,
+    assignments[11]._id,
+    assignments[12]._id,
+    assignments[13]._id
+  );
+  students[6].assignments.push(
     assignments[0]._id,
     assignments[1]._id,
     assignments[11]._id,
@@ -136,11 +143,11 @@ const populateDB = async () => {
     assignments[1]._id,
     assignments[11]._id,
     assignments[12]._id,
-    assignments[13]._id,
-    assignments[18]._id,
-    assignments[14]._id
+    assignments[13]._id
   );
   teachers[1].assignments.push(
+    assignments[18]._id,
+    assignments[14]._id,
     assignments[2]._id,
     assignments[3]._id,
     assignments[4]._id,
@@ -169,8 +176,8 @@ const populateDB = async () => {
   );
 
   // Insertar Estudiantes en Materias
-  assignments[0].students.push(students[0]._id);
-  assignments[1].students.push(students[0]._id);
+  assignments[0].students.push(students[0]._id, students[6]._id);
+  assignments[1].students.push(students[0]._id, students[6]._id);
   assignments[2].students.push(students[1]._id);
   assignments[3].students.push(students[1]._id);
   assignments[4].students.push(students[1]._id);
@@ -180,9 +187,13 @@ const populateDB = async () => {
   assignments[8].students.push(students[2]._id);
   assignments[9].students.push(students[2]._id);
   assignments[10].students.push(students[2]._id);
-  assignments[11].students.push(students[0]._id, students[3]._id);
-  assignments[12].students.push(students[0]._id);
-  assignments[13].students.push(students[0]._id);
+  assignments[11].students.push(
+    students[0]._id,
+    students[6]._id,
+    students[3]._id
+  );
+  assignments[12].students.push(students[0]._id, students[6]._id);
+  assignments[13].students.push(students[0]._id, students[6]._id);
   assignments[14].students.push(students[5]._id);
   assignments[15].students.push(students[5]._id);
   assignments[16].students.push(students[5]._id);
@@ -196,11 +207,6 @@ const populateDB = async () => {
   assignments[24].students.push(students[3]._id);
   assignments[25].students.push(students[3]._id);
   assignments[26].students.push(students[3]._id);
-
-  // console.log('Careers: ', careers);
-  // console.log('assignments: ', assignments);
-  // console.log('students: ', students);
-  // console.log('teachers: ', teachers);
 
   //Agrego notas de examenes e inasistencias
   for (let assignment of assignments) {
