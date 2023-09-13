@@ -6,28 +6,19 @@ import { useEffect, useState } from 'react';
 import mainRoute from '../route';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-
-interface Assignment {
-  date: string;
-  type: string;
-  _id: string;
-  eventDetails: {
-    student: string;
-    file: string;
-    _id: string;
-    comments?: string;
-  }[];
-}
+import { AssignmentStudent } from '../interfaces/interfaces';
 
 const TareasAlumnoComponent = () => {
   const { userRegister } = useAppContext();
   const studentId = userRegister._id;
   const assignment_id = useParams();
   const assignmentId = assignment_id.assignment;
-  const [viewerPdf, setViewerPdf] = useState<Assignment[]>([]);
+  const [viewerPdf, setViewerPdf] = useState<AssignmentStudent[]>([]);
   const [urlRoute, setUrlRoute] = useState<string>('');
   const [showComments, setShowComments] = useState<string | null>(null);
-  const [areCommentsOpen, setAreCommentsOpen] = useState(false);
+  const [openComments, setOpenComments] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   useEffect(() => {
     const getPdfStudent = async () => {
@@ -74,17 +65,22 @@ const TareasAlumnoComponent = () => {
                   </Link>
                   <div className={styles.commentsContainerStudent}>
                     <p
+                      className={styles.commentsStudent}
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        setAreCommentsOpen((prevState) => !prevState);
+                        setOpenComments((prevOpenComments) => ({
+                          ...prevOpenComments,
+                          [detail._id]: !prevOpenComments[detail._id],
+                        }));
                         setShowComments(detail.comments || null);
                       }}>
                       Comentarios
                     </p>
 
-                    {showComments === detail.comments && (
-                      <p>{detail.comments}</p>
-                    )}
+                    {openComments[detail._id] &&
+                      showComments === detail.comments && (
+                        <p>{detail.comments}</p>
+                      )}
                   </div>
                 </div>
               ))}
@@ -96,3 +92,19 @@ const TareasAlumnoComponent = () => {
 };
 
 export default TareasAlumnoComponent;
+
+/* <p
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+
+                        // ;
+                        setAreCommentsOpen(() => !areCommentsOpen);
+                        // setAreCommentsOpen((prevState) => !prevState);
+                        setShowComments(detail.comments || null);
+                      }}>
+                      Comentarios
+                    </p>
+
+                    {showComments === detail.comments && (
+                      <p>{detail.comments}</p>
+                    )} */
