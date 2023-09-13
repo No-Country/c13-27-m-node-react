@@ -65,11 +65,6 @@ const TareasAlumnoComponent = () => {
                   </Link>
                   <div className={styles.commentsContainerStudent}>
                     <p
-                      // className={`${styles.commentsStudent} ${
-                      //   openComments[detail._id]
-                      //     ? styles.commentsStudentHover
-                      //     : ''
-                      // }`}
                       className={styles.comment}
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
@@ -94,11 +89,6 @@ const TareasAlumnoComponent = () => {
                         )}
                       </div>
                     )}
-
-                    {/* {openComments[detail._id] &&
-                      showComments === detail.comments && (
-                        <p>{detail.comments}</p>
-                      )} */}
                   </div>
                 </div>
               ))}
@@ -109,23 +99,4 @@ const TareasAlumnoComponent = () => {
   );
 };
 
-     
-  
-
 export default TareasAlumnoComponent;
-
-/* <p
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => {
-
-                        // ;
-                        setAreCommentsOpen(() => !areCommentsOpen);
-                        // setAreCommentsOpen((prevState) => !prevState);
-                        setShowComments(detail.comments || null);
-                      }}>
-                      Comentarios
-                    </p>
-
-                    {showComments === detail.comments && (
-                      <p>{detail.comments}</p>
-                    )} */

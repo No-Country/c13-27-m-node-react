@@ -8,6 +8,7 @@
     justify-self: flex-start;
     width: 352px;
     border-bottom: 1.4px solid $text2;
+    margin: 0rem 0.3rem;
 }
 .title {
     padding: 0.5rem;
@@ -27,7 +28,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    margin: 1rem;
+    margin: 1rem 0rem;
 }
 .imageGrid img,
 .imageGridBottom img {
