@@ -60,7 +60,6 @@ export const Horarios = () => {
       </div>
       {selectedDay !== null && (
         <div className={styles.infocontent}>
-          <h2>{daysOfWeek[selectedDay].name}</h2>
           <div className={styles.coursecards}>
             {Array.isArray(assignments) &&
               assignments.map((assignment) => {
