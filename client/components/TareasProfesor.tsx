@@ -27,6 +27,7 @@ const TareasProfesorComponent = () => {
   const assignmentId = assignment_id.assignment;
   const [data, setData] = useState<Assignment[]>([]);
   const [comments, setComments] = useState<{ [eventId: string]: string }>({});
+  const [urlRoute, setUrlRoute] = useState<string>('');
 
   const handleCommentChange = (eventId: string, comment: string) => {
     setComments({ ...comments, [eventId]: comment });
@@ -71,6 +72,11 @@ const TareasProfesorComponent = () => {
     getPdfsForAssignments();
   }, [assignmentId]);
 
+  const handleDownloadPdf = (id: string) => {
+  const url = `${mainRoute}/upload/downloadFile/${id}`;
+  setUrlRoute(url);
+  }
+
   return (
     <div>
       <h2 className={styles.title}>Trabajos entregados</h2>
@@ -81,7 +87,10 @@ const TareasProfesorComponent = () => {
             return assignment.eventDetails.map((eventDetail, index) => {
               return (
                 <div key={eventDetail._id} className={styles.pdfItem}>
-                  <Link href={eventDetail.file} target="_blank">
+                  <Link
+                    href={urlRoute}
+                    target="_blank"
+                    onClick={() => handleDownloadPdf(eventDetail.file)}>
                     <Image
                       src="/assets/pdf-icon.svg"
                       alt="icono de un doc pdf"
