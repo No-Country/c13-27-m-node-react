@@ -9,6 +9,7 @@ const careersRoutes = require('./careersRoutes');
 const homePageRoutes = require('./homePageRoutes');
 const profileRoutes = require('./profileRoutes');
 const uploadsRoutes = require('./uploadsRoutes');
+const documentationRoutes = require('./documentationRoutes');
 
 // Middlewares
 app.use('/students', studentsRoutes);
@@ -18,10 +19,11 @@ app.use('/careers', careersRoutes);
 app.use('/homePage', homePageRoutes);
 app.use('/profile', profileRoutes);
 app.use('/upload', uploadsRoutes);
+app.use('/', documentationRoutes);
 
 // Middleware para redireccionar al usuario a la pagina not found 404
 app.use(async (req, res) => {
-  res.redirect('http://localhost:3000/not-found');
+  res.redirect('https://localhost:3000/not-found');
 });
 
 module.exports = app;

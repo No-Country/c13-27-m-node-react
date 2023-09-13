@@ -11,7 +11,15 @@ const Navbar = () => {
   const handleLogOut = () => {
     setIsLogged(false);
     setUserRegister(initialUser);
+    localStorage.clear();
   };
+
+  let userRegisterString;
+  let userCheck;
+  if (typeof window !== 'undefined') {
+    userRegisterString = localStorage.getItem('userRegister');
+    userCheck = userRegisterString ? JSON.parse(userRegisterString).check : '';
+  }
 
   return (
     <nav className={styles.navBar}>
@@ -43,17 +51,12 @@ const Navbar = () => {
             Ayuda
           </Link>
         </li>
-        <li>
-          <Link
-            href="/info"
-            className={styles.itemNav}>
-            Información
-          </Link>
-        </li>
         {isLogged && (
           <li>
             <Link
-              href="/perfil-alumno"
+              href={
+                userCheck === 'student' ? '/perfil-alumno' : '/perfil-profesor'
+              }
               className={styles.itemNav}>
               Perfil
             </Link>

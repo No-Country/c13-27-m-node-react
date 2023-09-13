@@ -1,13 +1,16 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import styles from '../styles/horarios.module.scss';
-import { Assignments } from '../interfaces/interfaces';
+import { Assignment } from '../interfaces/interfaces';
+import { useAppContext } from '../context/userContext';
 import Link from 'next/link';
 import mainRoute from '../route';
 
 export const Horariosprofesor = () => {
   const [selectedDay, setSelectedDay] = useState<number | null>(0);
-  const [assignments, setAssignments] = useState<Assignments[]>([]);
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const { userRegister } = useAppContext();
+  const id = userRegister._id;
 
   const daysOfWeek = [
     {
@@ -28,11 +31,18 @@ export const Horariosprofesor = () => {
   ];
 
   useEffect(() => {
-    fetch(`${mainRoute}/assignments/allAssignments`)
-      .then((response) => response.json())
-      .then((data) => setAssignments(data))
-      .catch((error) => console.error('Error al obtener datos:', error));
-  }, []);
+    fetch(`${mainRoute}/teachers/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Error al obtener datos');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setAssignments(data.assignments);
+      })
+      .catch((error) => console.error('Error:', error));
+  }, [id]);
 
   return (
     <div className={styles.daycontainer}>
@@ -52,25 +62,30 @@ export const Horariosprofesor = () => {
         <div className={styles.infocontent}>
           <h2>{daysOfWeek[selectedDay].name}</h2>
           <div className={styles.coursecards}>
-            {assignments.map((assignment) => {
-              const daysArray = assignment.days;
+            {Array.isArray(assignments) &&
+              assignments.map((assignment) => {
+                const daysArray = assignment.days;
 
-              if (daysArray.includes(daysOfWeek[selectedDay].name)) {
-                return (
-                  <Link
-                    className={styles.link}
-                    href="/perfil-profesor/materias">
-                    <div key={assignment._id} className={styles.coursecard}>
-                      <h3 className={styles.subject}>{assignment.name}</h3>
-                      <p className={styles.time}>
-                        Horario: {assignment.schedule}
-                      </p>
-                    </div>
-                  </Link>
-                );
-              }
-              return null;
-            })}
+                if (daysArray.includes(daysOfWeek[selectedDay].name)) {
+                  return (
+                    <Link
+                      key={assignment._id}
+                      className={styles.link}
+                      href="/perfil-profesor/materias/[assignment]"
+                      as={`/perfil-profesor/materias/${encodeURIComponent(
+                        assignment._id
+                      )}`}>
+                      <div key={assignment._id} className={styles.coursecard}>
+                        <h3 className={styles.subject}>{assignment.name}</h3>
+                        <p className={styles.time}>
+                          Horario: {assignment.schedule}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                }
+                return null;
+              })}
           </div>
         </div>
       )}

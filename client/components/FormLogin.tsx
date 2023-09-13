@@ -1,17 +1,17 @@
 'use client';
-import { useState, useEffect } from 'react';
-import styles from '../styles/formlogin.module.scss';
+import { useState } from 'react';
 import Link from 'next/link';
+import styles from '../styles/formlogin.module.scss';
 import { useForm } from 'react-hook-form';
-import Image from 'next/image';
-import alumno from '../public/assets/alumno.png';
-import teacher from '../public/assets/profesor.jpg';
-import login from '../public/assets/login.png';
 import { useRouter } from 'next/navigation';
 import { useAppContext } from '../context/userContext';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import mainRoute from '../route';
+import Image from 'next/image';
+import alumno from '../public/assets/alumno.png';
+import teacher from '../public/assets/profesor.jpg';
+import login from '../public/assets/login.png';
 
 const FormLogin = () => {
   const router = useRouter();
@@ -66,24 +66,23 @@ const FormLogin = () => {
           setUserRegister(responseData);
           localStorage.setItem('token', responseData.token);
           localStorage.setItem('userType', allData.check);
+          localStorage.setItem(
+            'userRegister',
+            JSON.stringify({ ...responseData, check: allData.check })
+          );
 
           if (allData.check === 'student') {
             toast.success('Bienvenido Estudiante!');
-            setTimeout(() => {
-              router.push('/perfil-alumno');
-            }, 2500);
+            router.push('/perfil-alumno');
           } else if (allData.check === 'teacher') {
             toast.success('Bienvenido Profesor!');
-            setTimeout(() => {
-              router.push('/perfil-profesor');
-            }, 2500);
+            router.push('/perfil-profesor');
           }
         } else {
           toast.error('Error al iniciar sesión. Por favor intente de nuevo.');
         }
       }
     } catch (error) {
-      console.log('An error occurred:', error);
       toast.error('Error al iniciar sesión. Por favor intente de nuevo.');
     }
   };
@@ -110,7 +109,10 @@ const FormLogin = () => {
                     }`}
                     onClick={() => handleRadioClick('student')}>
                     <div className={styles.infocontainer}>
-                      <Image src={alumno} alt="alumno" />
+                      <Image
+                        src={alumno}
+                        alt="alumno"
+                      />
                       <h3 className={styles.subtitle1}>Alumno</h3>
                     </div>
                     <input
@@ -167,9 +169,11 @@ const FormLogin = () => {
           <form
             onSubmit={handleSubmit(onSubmitView2)}
             className={styles.formContainer}>
-            <div className={styles.containerbox}>
+            <div>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="dni">
+                <label
+                  className={styles.label}
+                  htmlFor="dni">
                   DNI
                 </label>
                 <input
@@ -194,7 +198,9 @@ const FormLogin = () => {
                 )}
               </div>
               <div className={styles.inputbox}>
-                <label className={styles.label} htmlFor="password">
+                <label
+                  className={styles.label}
+                  htmlFor="password">
                   Contraseña
                 </label>
                 <input
@@ -212,7 +218,9 @@ const FormLogin = () => {
               </div>
 
               <div className={styles.forgotpassword}>
-                <a href="" className={styles.forgottext}>
+                <a
+                  href=""
+                  className={styles.forgottext}>
                   Olvidé mi contraseña
                 </a>
               </div>
@@ -238,7 +246,11 @@ const FormLogin = () => {
             </div>
           </form>
           <div className={styles.imageContainer}>
-            <Image src={login} alt="Imagen" className={styles.rightImage} />
+            <Image
+              src={login}
+              alt="Imagen"
+              className={styles.rightImage}
+            />
           </div>
         </div>
       )}

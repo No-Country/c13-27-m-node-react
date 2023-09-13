@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { UserRegister } from '../interfaces/interfaces';
 
 interface AppContextType {
@@ -22,6 +22,7 @@ export const initialUser: UserRegister = {
   career: '',
   assignments: [],
   career_id: '',
+  assignmentDataForStudent: [],
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -39,6 +40,19 @@ export const useAppContext = () => {
 export function AppProvider({ children }: React.PropsWithChildren<{}>) {
   const [userRegister, setUserRegister] = useState<UserRegister>(initialUser);
   const [isLogged, setIsLogged] = useState<boolean>(false);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('userRegister');
+
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUserRegister(parsedUser);
+      setIsLogged(true);
+    } else {
+      setUserRegister(initialUser);
+      setIsLogged(false);
+    }
+  }, []);
 
   const contextValue: AppContextType = {
     userRegister,
