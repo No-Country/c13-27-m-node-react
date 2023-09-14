@@ -5,9 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useAppContext } from '../context/userContext';
 
-export const metadata = {
-  title: 'Plataforma Universitaria',
-};
+// export const metadata = {
+//   title: 'Plataforma Universitaria',
+// };
 
 const inter = Inter({
   subsets: ['latin'],
