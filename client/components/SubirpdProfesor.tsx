@@ -6,6 +6,7 @@ import { MdDelete, MdFileUpload } from 'react-icons/md';
 import { useAppContext } from '../context/userContext';
 import { useParams } from 'next/navigation';
 import { toast } from 'react-toastify';
+import mainRoute from '../route';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface Params {
@@ -62,7 +63,7 @@ export const SubirpdfProfesor = () => {
     formData.append('assignmentId', assignmentId.assignment);
 
     try {
-      const response = await fetch('http://localhost:3001/upload', {
+      const response = await fetch(`${mainRoute}/upload`, {
         method: 'POST',
         body: formData,
       });

@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import mainRoute from '../route';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { AssignmentStudent } from '../interfaces/interfaces';
 import { Assignment } from '../interfaces/interfaces';
 
 interface UserEvents {
