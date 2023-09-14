@@ -9,13 +9,6 @@ import Link from 'next/link';
 import { AssignmentStudent } from '../interfaces/interfaces';
 import { Assignment } from '../interfaces/interfaces';
 
-interface AssignmentDataForStudent {
-  name: string;
-  totalClasses: number;
-  missedClasses: number;
-  events: UserEvents[];
-}
-
 interface UserEvents {
   eventType: string;
   grade: number;
@@ -23,47 +16,16 @@ interface UserEvents {
   comments: string;
 }
 
-const initialAssignmentDataForStudent = {
-  name: '',
-  totalClasses: 0,
-  missedClasses: 0,
-  events: [],
-};
-
-const initialAssignment = {
-  name: '',
-  _id: '',
-  schedule: '',
-  classroom: '',
-  days: [],
-};
-
 const TareasAlumnoComponent = () => {
   const { userRegister } = useAppContext();
   const studentId = userRegister._id;
   const assignment_id = useParams();
-  /*   const assignmentId = assignment_id.assignment; */
   const [viewerPdf, setViewerPdf] = useState<UserEvents[]>([]);
   const [urlRoute, setUrlRoute] = useState<string>('');
   const [showComments, setShowComments] = useState<string | null>(null);
   const [openComments, setOpenComments] = useState<{ [key: string]: boolean }>(
     {}
   );
-
-  /*   useEffect(() => {
-    const getPdfStudent = async () => {
-      try {
-        const res = await fetch(
-          `${mainRoute}/assignments/${assignmentId}/events/${studentId}`
-        );
-        const data = await res.json();
-        setViewerPdf(data);
-      } catch (error) {
-        console.log('Error fetch obteniendo pdfs del estudante', error);
-      }
-    };
-    getPdfStudent();
-  }, [assignmentId, studentId]); */
 
   useEffect(() => {
     const fetchData = async () => {
@@ -133,7 +95,6 @@ const TareasAlumnoComponent = () => {
                 }}>
                 Comentarios
               </p>
-
               {openComments[index] && (
                 <div>
                   {showComments === entrega.comments ? (
@@ -148,56 +109,6 @@ const TareasAlumnoComponent = () => {
             </div>
           </div>
         ))}
-        {/* {viewerPdf &&
-          viewerPdf.map((assignment) => (
-            <div key={assignment.name}>
-              {assignment.events.map((detail : UserEvents) => (
-                <div key={detail.}>
-                  <Link
-                    className={styles.linkContainer}
-                    href={urlRoute}
-                    target="_blank"
-                    onClick={() => handleDownloadPdf(detail.file)}>
-                    <Image
-                      src="/assets/pdf-icon.svg"
-                      alt="icono de un doc pdf"
-                      width={40}
-                      height={40}
-                      className={styles.pdfImage}
-                    />
-                    <p className={styles.pdfTitle}>{detail.file}</p>
-                  </Link>
-                  <div className={styles.commentsContainerStudent}>
-                    <p
-                      className={styles.comment}
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => {
-                        setOpenComments((prevOpenComments) => ({
-                          ...prevOpenComments,
-                          [detail._id]: !prevOpenComments[detail._id],
-                        }));
-                        setShowComments(detail.comments || null);
-                      }}>
-                      Comentarios
-                    </p>
-
-                    {openComments[detail._id] && (
-                      <div>
-                        {showComments === detail.comments ? (
-                          <p className={styles.comment}>{detail.comments}</p>
-                        ) : (
-                          <p className={styles.comment}>
-                            Esta entrega aún no recibió comentarios de tu
-                            profesor
-                          </p>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ))} */}
       </div>
     </div>
   );
