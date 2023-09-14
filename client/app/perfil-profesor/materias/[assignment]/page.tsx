@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Assignment } from '../../../../interfaces/interfaces';
 import { useEffect, useState } from 'react';
+import mainRoute from '../../../../route';
 
 const initialAssignment = {
   name: '',
@@ -24,7 +25,7 @@ const MateriasProfesor = () => {
 
   useEffect(() => {
     const getAssigmentData = async () => {
-      const url = `http://localhost:3001/assignments/${assignment_id.assignment}`;
+      const url = `${mainRoute}/assignments/${assignment_id.assignment}`;
       const res = await fetch(url);
       const data = await res.json();
       setAssignment(data);
@@ -34,7 +35,11 @@ const MateriasProfesor = () => {
 
   return (
     <>
-      <Image className={styles.gradient} src={rectangle} alt="rectangle" />
+      <Image
+        className={styles.gradient}
+        src={rectangle}
+        alt="rectangle"
+      />
       <main>
         <div className={styles.grid}>
           <div className={styles.gridLeft}>
