@@ -93,8 +93,8 @@ export const FormRegister = () => {
           check: userRegister.check,
         }),
       });
+      const data = await res.json();
       if (res.ok) {
-        const data = await res.json();
         if (data._id) {
           setUserRegister({
             ...userRegister,
@@ -104,6 +104,13 @@ export const FormRegister = () => {
           toast.success('Registro exitoso!');
         } else {
           toast.error('El registro no se ha completado correctamente.');
+        }
+      } else {
+        if (data === 'El usuario ya existe') {
+          router.push('/');
+          toast.error('El usuario ya existe en la base de datos.');
+        } else {
+          toast.error('Error desconocido al registrar.');
         }
       }
     } catch (error) {

@@ -22,8 +22,6 @@ const FooterPerfil = () => {
     getExamsAndGrades();
   }, []);
 
-
-
   return (
     <main className={styles.containerBox}>
       <div className={styles.box}>

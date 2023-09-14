@@ -79,8 +79,8 @@ export const SubirpdfProfesor = () => {
 
   return (
     <div className={styles.containerProfesor}>
-      <h3 className={styles.titleCargarMaterial}>Cargar material de estudio</h3>
-      <div className={styles.containerupload}>
+      <h3 className={styles.titlefirst}>Cargar material de estudio</h3>
+      <div className={styles.containerUploadProfesor}>
         <form
           className={styles.formProfesor}
           action=""
@@ -109,7 +109,9 @@ export const SubirpdfProfesor = () => {
         </span>
       </section>
 
-      <button className={styles.btn} onClick={handleUploadClick}>
+      <button
+        className={styles.btn}
+        onClick={handleUploadClick}>
         Subir Archivo
       </button>
     </div>
